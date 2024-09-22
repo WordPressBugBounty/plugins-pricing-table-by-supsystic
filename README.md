@@ -1,0 +1,1 @@
+# plugins-pricing-table-by-supsystic
