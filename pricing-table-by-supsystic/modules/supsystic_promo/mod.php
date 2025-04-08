@@ -223,7 +223,7 @@ class supsystic_promoPts extends modulePts {
    }
    public function getMainLink() {
       if (empty($this->_mainLink)) {
-         $this->_mainLink = 'https://supsystic.com/plugins/pricing-table/';
+         $this->_mainLink = 'https://supsystic.com/plugins/pricing-tables/';
       }
       return $this->_mainLink;
    }

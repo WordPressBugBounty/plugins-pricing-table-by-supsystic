@@ -137,7 +137,7 @@
                                 </label>
                                 <?php if(!$isPro){?>
                                     <div style="margin-top: 7px;">
-                                        <a target="_blank" href="https://supsystic.com/plugins/pricing-table/" class="button">Get PRO</a>
+                                        <a target="_blank" href="https://supsystic.com/plugins/pricing-tables/" class="button">Get PRO</a>
                                     </div>
                                 <?php }?>
                         </div>
@@ -345,7 +345,7 @@
 								<span class="ptsImportantText"><?php echo esc_html(__('To enable Toggle option order PRO version. ', PTS_LANG_CODE))?></span>
 							</div>
 						<div style="margin-top: 7px;">
-							<a target="_blank" href="https://supsystic.com/plugins/pricing-table/" class="button">Get PRO</a>
+							<a target="_blank" href="https://supsystic.com/plugins/pricing-tables/" class="button">Get PRO</a>
 						</div>
 						<?php } ?>
 						<?php if(!$isPro):?>
@@ -360,7 +360,7 @@
 									<span class="sup-complete-txt"><?php _e('Enable Switch Toggle', PTS_LANG_CODE)?></span>
 									<span class="sup-reduce-txt"><?php _e('Enable Switch Toggle', PTS_LANG_CODE)?></span>
 									<?php if(!$isPro):?>
-										<span class="ptsProOptMini"><a target="_blank" href="https://supsystic.com/plugins/pricing-table/">PRO option</a></span>
+										<span class="ptsProOptMini"><a target="_blank" href="https://supsystic.com/plugins/pricing-tables/">PRO option</a></span>
 									<?php endif; ?>
 								</label>
 								<i class="fa fa-question supsystic-tooltip" title="<?php echo esc_html(__('Enable Switch Toggle.  You need add at list two options to use switch toggle button functionality!', PTS_LANG_CODE))?>"></i>

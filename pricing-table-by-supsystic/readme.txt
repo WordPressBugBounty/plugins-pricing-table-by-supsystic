@@ -1,16 +1,17 @@
 === Pricing Table by Supsystic ===
 Contributors: supsystic.com
-Donate link: https://supsystic.com/plugins/pricing-table
-Tags: price table, pricing table, price, pricing, table, comparison table, css table, comparison, price gird, pricing gird, pricing box, price chart, price plan, chart, plan
-Tested up to: 6.4
-Stable tag: 1.9.13
+Donate link: https://supsystic.com/plugins/pricing-tables
+Tags: pricing table,comparison table,price chart, price plan, chart
+Tested up to: 6.7
+License: GNU General Public License v2.0 or later
+Stable tag: 1.9.14
 
 Pricing Table generator by Supsystic allows you to create responsive pricing tables or comparison table without any programming skills
 
 == Description ==
 
 Create amazing pricing tables without any programming skills.
-It's possible with [Pricing Table WordPress plugin](https://supsystic.com/plugins/pricing-table?utm_source=wordpress&utm_medium=description&utm_campaign=pricingtable "Pricing Table WordPress plugin") by Supsystic. Choose pricing table template, edit content with [Pricing table builder](https://supsystic.com/feature/pricing-table-builder?utm_source=wordpress&utm_medium=builder&utm_campaign=pricingtable "Pricing Table Builder") and publish on the website.
+It's possible with [Pricing Table WordPress plugin](https://supsystic.com/plugins/pricing-tables?utm_source=wordpress&utm_medium=description&utm_campaign=pricingtable "Pricing Table WordPress plugin") by Supsystic. Choose pricing table template, edit content with [Pricing table builder](https://supsystic.com/feature/pricing-table-builder?utm_source=wordpress&utm_medium=builder&utm_campaign=pricingtable "Pricing Table Builder") and publish on the website.
 
 = Pricing Table Features =
 
@@ -68,7 +69,7 @@ In the pricing table user should carefully examine its portfolio and pick the mo
 
 9. [Comparison Table](https://supsystic.com/comparison-example/ "Comparison Table"). The Comparison Table option offers a feature to create tables for comparing reviews boxes
 
-10. [Responsive Pricing Table](https://supsystic.com/plugins/pricing-table?utm_source=wordpress&utm_medium=screenshotsecond&utm_campaign=pricingtable "Responsive Pricing Table")
+10. [Responsive Pricing Table](https://supsystic.com/plugins/pricing-tables?utm_source=wordpress&utm_medium=screenshotsecond&utm_campaign=pricingtable "Responsive Pricing Table")
 
 == Frequently Asked Questions ==
 
@@ -159,6 +160,11 @@ Responsiveness is one of the standard practice if you want to create a good cust
 Our Pricing Table plugin is a mobile-ready, means that it will render on the devices with different screen size. The [responsive mode](https://supsystic.com/feature/fully-responsive-pricing-table?utm_source=wordpress&utm_medium=responsive&utm_campaign=pricingtable "Responsive mode") is turn on by default, but you can switch off it anytime. Also, plugin provides an opportunity to set a minimum column size.
 
 == Changelog ==
+1.9.14 / 08.04.2025
+ * Fixes UI/UX
+ * Minor Fixes
+ * Fix sitelink for plugin
+
 1.9.13 / 15.03.2024
  * Add sanitize_text_field to label. Security fix
 
@@ -622,7 +628,7 @@ Our Pricing Table plugin is a mobile-ready, means that it will render on the dev
 
 = 1.1.8 / 17.11.2015 =
  * Added Clone table functionality
- * Added tables to PRO - "Comfort", "Dr House", "Server Hosting" - https://supsystic.com/plugins/pricing-table/
+ * Added tables to PRO - "Comfort", "Dr House", "Server Hosting" - https://supsystic.com/plugins/pricing-tables/
  * Small correct cells height calculation
  * Update base Pricing Table Templates names
  * Minor builder issues fix
@@ -630,7 +636,7 @@ Our Pricing Table plugin is a mobile-ready, means that it will render on the dev
 = 1.1.7 / 12.11.2015 =
  * New Pricing Table template - "Bootstrap Light"
  * New Pricing Table template - "7-day trial"
- * New Pricing Table PRO templates - "Big Brother", "Ati", "Triangle Header", "Plans", "Clean", "Veggy", "Product Compare", "Easy Columns" - all is available now in one PRO package here https://supsystic.com/plugins/pricing-table/
+ * New Pricing Table PRO templates - "Big Brother", "Ati", "Triangle Header", "Plans", "Clean", "Veggy", "Product Compare", "Easy Columns" - all is available now in one PRO package here https://supsystic.com/plugins/pricing-tables/
 
 = 1.1.6 / 10.11.2015 =
  * Change template feature - update all parameters from the new template for the table

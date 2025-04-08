@@ -13,3 +13,14 @@
 .ptsDescTriangleTop, div:not(.ptsColDesc) > .ptsDescTriangle {
   background-color: transparent !important;
 }
+.ui-widget-content input[type="checkbox"] {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+.ui-jqgrid-sortable {
+  pointer-events: none;
+  cursor: default;
+}
+.ui-jqgrid-sortable span.s-ico {
+  display:none !important;
+}
