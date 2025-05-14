@@ -130,6 +130,9 @@
 					</div>
 			</div>
 			<div class="half-page half-page-right">
+				<?php if(framePts::_()->getModule('supsystic_promo')->isPro()) {?>
+                <a href="https://supsystic.com/contact-us" target="_blank"><img class="overview-supsystic-img" src="<?php echo PTS_PLUGINS_URL .'/'. PTS_PLUG_NAME;?>/modules/supsystic_promo/img/overview-upgrade.png"></a>
+          <?php }?>
 					<a href="https://supsystic.com/pricing/?utm_source=plugin&utm_campaign=pricing-table" target="_blank"><img class="overview-supsystic-img" src="<?php echo PTS_PLUGINS_URL .'/'. PTS_PLUG_NAME;?>/modules/supsystic_promo/img/overview-01.png"></a>
 					<a href="https://supsystic.com/plugins/plugins-bundle/?utm_source=plugin&utm_campaign=pricing-table" target="_blank"><img class="overview-supsystic-img" src="<?php echo PTS_PLUGINS_URL .'/'. PTS_PLUG_NAME;?>/modules/supsystic_promo/img/overview-02.png"></a>
 					<a href="https://supsystic.com/all-plugins/?utm_source=plugin&utm_campaign=pricing-table" target="_blank"><img style="margin-top:20px;"  class="overview-supsystic-img" src="<?php echo PTS_PLUGINS_URL .'/'. PTS_PLUG_NAME;?>/modules/supsystic_promo/img/overview-03.png"></a>

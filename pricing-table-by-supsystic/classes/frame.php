@@ -84,6 +84,10 @@ class framePts {
    }
    public function init() {
       reqPts::init();
+      add_action('init', array($this, '_delayedInit'), 5);
+   }
+   public function _delayedInit() {
+      reqPts::init();
       $this->_extractTables();
       $this->_extractModules();
       $this->_initModules();

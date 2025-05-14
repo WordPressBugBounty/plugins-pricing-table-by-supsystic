@@ -2,9 +2,9 @@
 Contributors: supsystic.com
 Donate link: https://supsystic.com/plugins/pricing-tables
 Tags: pricing table,comparison table,price chart, price plan, chart
-Tested up to: 6.7
+Tested up to: 6.8
 License: GNU General Public License v2.0 or later
-Stable tag: 1.9.14
+Stable tag: 1.9.15
 
 Pricing Table generator by Supsystic allows you to create responsive pricing tables or comparison table without any programming skills
 
@@ -160,6 +160,12 @@ Responsiveness is one of the standard practice if you want to create a good cust
 Our Pricing Table plugin is a mobile-ready, means that it will render on the devices with different screen size. The [responsive mode](https://supsystic.com/feature/fully-responsive-pricing-table?utm_source=wordpress&utm_medium=responsive&utm_campaign=pricingtable "Responsive mode") is turn on by default, but you can switch off it anytime. Also, plugin provides an opportunity to set a minimum column size.
 
 == Changelog ==
+1.9.16 / 14.05.2025
+ * Minor fixes
+
+ * Add fix for textdomain
+ * Add support WordPress 6.8.1
+
 1.9.14 / 08.04.2025
  * Fixes UI/UX
  * Minor Fixes
