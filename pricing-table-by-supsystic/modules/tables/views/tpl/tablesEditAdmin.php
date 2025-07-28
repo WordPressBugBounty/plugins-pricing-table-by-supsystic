@@ -8,7 +8,7 @@
                     <a class="nav-tab" href="#design" data-href="design"><i class="fa fa-fw fa-eye"></i> Design</a>
                     <a class="nav-tab" href="#toggle" data-href="toggle"><i class="fa fa-fw fa-toggle-on"></i> Toggle</a>
 
-                    <span class="undoButtons">
+                    <span class="undoButtons" style="display:none;">
                         <button id="ptsUndoButton" class="button button-sup-small" disabled title="Undo"><i class="fa fa-undo" aria-hidden="true"></i> Undo</button>
                         <button id="ptsRedoButton" class="button button-sup-small" disabled title="Redo"><i class="fa fa-repeat" aria-hidden="true"></i> Redo</button>
                         <span id="ptsUndoProcess" style="display:none;"><i class="fa fa-spinner fa-spin"></i> Processing...</span>
@@ -486,9 +486,7 @@
 									</div>
 								</div>
 								<?php
-
 								$optionNameInput =  isset($this->table['params']['option_name_input']) ? $this->table['params']['option_name_input']['val'] : '';
-
 								if($optionNameInput){
 									$optionsArray = utilsPts::jsonDecode($optionNameInput);
 									if (empty($optionsArray) || !$optionsArray) {
@@ -532,7 +530,7 @@
 														</div>
 														<div class="checked-state">
 															<label class="sc-checkbox seleceted-options-state">
-																<input type="checkbox" name="selected_options" value="<?php echo $optionsArray['options'];?>" <?php echo $checked; ?>>
+																<input type="radio" name="selected_options" value="<?php echo $optionsArray['options'];?>" <?php echo $checked; ?>>
 																<?php _e('Default selected', PTS_LANG_CODE)?>
 															</label>
 														</div>
@@ -556,7 +554,7 @@
 															</div>
 															<div class="checked-state">
 																<label class="sc-checkbox seleceted-options-state">
-																	<input type="checkbox" name="selected_options" value="<?php echo $optionName;?>" <?php echo $checked; ?>>
+																	<input type="radio" name="selected_options" value="<?php echo $optionName;?>" <?php echo $checked; ?>>
 																	<?php _e('Default selected', PTS_LANG_CODE)?>
 																</label>
 															</div>
@@ -581,7 +579,7 @@
 										</div>
 										<div class="checked-state">
 											<label class="sc-checkbox seleceted-options-state">
-												<input type="checkbox" name="selected_options" value="true">
+												<input type="radio" name="selected_options" value="true">
 												<?php _e('Default selected', PTS_LANG_CODE)?>
 											</label>
 										</div>

@@ -59,22 +59,22 @@ class supsystic_promoPts extends modulePts {
       $currTime = time();
       $day = 24 * 3600;
       if ($startUsage) {
-         $rateMsg = sprintf(__("<h3>Hey, I noticed you just use %s over a week – that’s awesome!</h3><p>Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.</p>", PTS_LANG_CODE) , PTS_WP_PLUGIN_NAME);
-         $rateMsg .= '<p><a href="https://wordpress.org/support/view/plugin-reviews/pricing-table-by-supsystic?rate=5#postform" target="_blank" class="button button-primary" data-statistic-code="done">' . __('Ok, you deserve it', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="later">' . __('Nope, maybe later', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="hide">' . __('I already did', PTS_LANG_CODE) . '</a></p>';
-         $enbPromoLinkMsg = sprintf(__("<h3>More then eleven days with our %s plugin - Congratulations!</h3>", PTS_LANG_CODE) , PTS_WP_PLUGIN_NAME);;
-         $enbPromoLinkMsg .= __('<p>On behalf of the entire <a href="https://supsystic.com/" target="_blank">supsystic.com</a> company I would like to thank you for been with us, and I really hope that our software helped you.</p>', PTS_LANG_CODE);
-         $enbPromoLinkMsg .= __('<p>And today, if you want, - you can help us. This is really simple - you can just add small promo link to our site under your tables. This is small step for you, but a big help for us! Sure, if you don\'t want - just skip this and continue enjoy our software!</p>', PTS_LANG_CODE);
-         $enbPromoLinkMsg .= '<p><a href="#" class="button button-primary" data-statistic-code="done">' . __('Ok, you deserve it', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="later">' . __('Nope, maybe later', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="hide">' . __('Skip', PTS_LANG_CODE) . '</a></p>';
+        //  $rateMsg = sprintf(__("<h3>Hey, I noticed you just use %s over a week – that’s awesome!</h3><p>Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.</p>", PTS_LANG_CODE) , PTS_WP_PLUGIN_NAME);
+        //  $rateMsg .= '<p><a href="https://wordpress.org/support/view/plugin-reviews/pricing-table-by-supsystic?rate=5#postform" target="_blank" class="button button-primary" data-statistic-code="done">' . __('Ok, you deserve it', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="later">' . __('Nope, maybe later', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="hide">' . __('I already did', PTS_LANG_CODE) . '</a></p>';
+        //  $enbPromoLinkMsg = sprintf(__("<h3>More then eleven days with our %s plugin - Congratulations!</h3>", PTS_LANG_CODE) , PTS_WP_PLUGIN_NAME);;
+        //  $enbPromoLinkMsg .= __('<p>On behalf of the entire <a href="https://supsystic.com/" target="_blank">supsystic.com</a> company I would like to thank you for been with us, and I really hope that our software helped you.</p>', PTS_LANG_CODE);
+        //  $enbPromoLinkMsg .= __('<p>And today, if you want, - you can help us. This is really simple - you can just add small promo link to our site under your tables. This is small step for you, but a big help for us! Sure, if you don\'t want - just skip this and continue enjoy our software!</p>', PTS_LANG_CODE);
+        //  $enbPromoLinkMsg .= '<p><a href="#" class="button button-primary" data-statistic-code="done">' . __('Ok, you deserve it', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="later">' . __('Nope, maybe later', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="hide">' . __('Skip', PTS_LANG_CODE) . '</a></p>';
          // $checkOtherPlugins = '<p>' . sprintf(__('Check out <a href="%s" target="_blank" class="button button-primary" data-statistic-code="hide">our other Plugins</a>! Years of experience in WordPress plugins developers made those list unbreakable!', PTS_LANG_CODE) , framePts::_()->getModule('options')->getTabUrl('featured-plugins')) . '</p>';
          $notices = array(
-            'rate_msg' => array(
-               'html' => $rateMsg,
-               'show_after' => 7 * $day
-            ) ,
-            'enb_promo_link_msg' => array(
-               'html' => $enbPromoLinkMsg,
-               'show_after' => 11 * $day
-            ) ,
+            // 'rate_msg' => array(
+            //    'html' => $rateMsg,
+            //    'show_after' => 7 * $day
+            // ) ,
+            // 'enb_promo_link_msg' => array(
+            //    'html' => $enbPromoLinkMsg,
+            //    'show_after' => 11 * $day
+            // ) ,
             // 'check_other_plugs_msg' => array(
             //    'html' => $checkOtherPlugins,
             //    'show_after' => 1 * $day

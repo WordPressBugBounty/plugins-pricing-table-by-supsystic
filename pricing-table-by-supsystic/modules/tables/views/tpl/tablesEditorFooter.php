@@ -103,6 +103,7 @@
 <div id="ptsElMenuImgExl" class="ptsElMenu" style="min-width: 330px;">
 	<div class="ptsElMenuContent">
 		<div class="ptsElMenuMainPanel">
+      <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsImgChangeBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
@@ -110,12 +111,11 @@
 					<i class="glyphicon glyphicon-picture"></i>
 				</label>
 			</div>
-			<div class="ptsElMenuBtnDelimiter"></div>
+			<div class="ptsElMenuBtnDelimiter"></div> 
 			<div class="ptsElMenuBtn ptsImgVideoSetBtn" data-sub-panel-show="video">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'video'))?>
 					<?php _e('Video', PTS_LANG_CODE)?>
-					<i class="fa fa-video-camera ptsOptIconBtn"></i>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
@@ -127,7 +127,6 @@
 			</div>
 			<div class="ptsElMenuBtn ptsTooltipEditBtnShell" data-sub-panel-show="tooltip">
 				<label>
-					<i class="fa fa-info ptsOptIconBtn"></i>
 					<?php _e('Tooltip', PTS_LANG_CODE)?>
 				</label>
 			</div>
@@ -169,6 +168,7 @@
 <div id="ptsElMenuBtnExl" class="ptsElMenu" style="min-width: 160px;">
 	<div class="ptsElMenuContent">
 		<div class="ptsElMenuMainPanel">
+			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsLinkBtn" data-sub-panel-show="link">
 				<label>
 					<i class="glyphicon glyphicon-link"></i>
@@ -178,7 +178,7 @@
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTooltipEditBtnShell" data-sub-panel-show="tooltip">
 				<label>
-					<i class="fa fa-info ptsOptIconBtn"></i>
+					
 					<?php _e('Tooltip', PTS_LANG_CODE)?>
 				</label>
 			</div>
@@ -190,19 +190,20 @@
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
-			<!-- Select Type -->
-			<div class="ptsElMenuBtn ptsTypeTxtBtn" style="padding-right: 5px;">
+			<div class="ptsElMenuBtn ptsTypeTxtBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'txt'))?>
 					<?php _e('Text', PTS_LANG_CODE)?>
 				</label>
 			</div>
-			<div class="ptsElMenuBtn ptsTypeImgBtn" style="padding-right: 5px;">
+      <div class="ptsElMenuBtnDelimiter"></div>
+			<div class="ptsElMenuBtn ptsTypeImgBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
 					<?php _e('Image / Video', PTS_LANG_CODE)?>
 				</label>
 			</div>
+      <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeIconBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'icon'))?>
@@ -248,6 +249,7 @@
 <div id="ptsElMenuImgExl" class="ptsElMenu" style="min-width: 260px;">
 	<div class="ptsElMenuContent">
 		<div class="ptsElMenuMainPanel">
+      <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsImgChangeBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
@@ -260,7 +262,6 @@
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'video'))?>
 					<?php _e('Video', PTS_LANG_CODE)?>
-					<i class="fa fa-video-camera ptsOptIconBtn"></i>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
@@ -313,8 +314,7 @@
 <div id="ptsElMenuTableColExl" class="ptsElMenu" style="min-width: 200px;">
 	<div class="ptsElMenuContent">
 		<div class="ptsElMenuMainPanel">
-<!--			<div class="ptsElMenuMoveHandlerPlace"></div>-->
-<!--			<div class="ptsElMenuBtnDelimiter"></div>-->
+			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn">
 				<?php echo htmlPts::checkbox('enb_fill_color')?>
 			</div>
@@ -370,24 +370,27 @@
 <div id="ptsElMenuTableCellExl" class="ptsElMenu" style="min-width: 270px;">
 	<div class="ptsElMenuContent">
 		<div class="ptsElMenuMainPanel">
-			<div class="ptsElMenuBtn ptsTypeTxtBtn" style="padding-right: 5px;">
+			<div class="ptsElMenuBtn ptsTypeTxtBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'txt'))?>
 					<?php _e('Text', PTS_LANG_CODE)?>
 				</label>
 			</div>
-			<div class="ptsElMenuBtn ptsTypeImgBtn" style="padding-right: 5px;">
+			<div class="ptsElMenuBtnDelimiter"></div>
+			<div class="ptsElMenuBtn ptsTypeImgBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
 					<?php _e('Image / Video', PTS_LANG_CODE)?>
 				</label>
 			</div>
+			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeIconBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'icon'))?>
 					<?php _e('Icon', PTS_LANG_CODE)?>
 				</label>
 			</div>
+			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeButtonBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'btn'))?>
@@ -405,8 +408,8 @@
 <div id="ptsElMenuIconExl" class="ptsElMenu" style="min-width: 290px;">
 	<div class="ptsElMenuContent">
 		<div class="ptsElMenuMainPanel">
+      <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsIconLibBtn" data-sub-panel-show="link">
-				<i class="fa fa-lg fa-pencil ptsOptIconBtn"></i>
 				<?php _e('Change Icon', PTS_LANG_CODE)?>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
@@ -422,7 +425,7 @@
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTooltipEditBtnShell" data-sub-panel-show="tooltip">
 				<label>
-					<i class="fa fa-info ptsOptIconBtn"></i>
+					
 					<?php _e('Tooltip', PTS_LANG_CODE)?>
 				</label>
 			</div>
@@ -465,8 +468,8 @@
 <div id="ptsElMenuTableCellIconExl" class="ptsElMenu" style="min-width: 250px;">
 	<div class="ptsElMenuContent">
 		<div class="ptsElMenuMainPanel">
+      <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsIconLibBtn" data-sub-panel-show="link">
-				<i class="fa fa-lg fa-pencil ptsOptIconBtn"></i>
 				<?php _e('Change Icon', PTS_LANG_CODE)?>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
@@ -489,23 +492,25 @@
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTooltipEditBtnShell" data-sub-panel-show="tooltip">
 				<label>
-					<i class="fa fa-info ptsOptIconBtn"></i>
+					
 					<?php _e('Tooltip', PTS_LANG_CODE)?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
-			<div class="ptsElMenuBtn ptsTypeTxtBtn" style="padding-right: 5px;">
+			<div class="ptsElMenuBtn ptsTypeTxtBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'txt'))?>
 					<?php _e('Text', PTS_LANG_CODE)?>
 				</label>
 			</div>
-			<div class="ptsElMenuBtn ptsTypeImgBtn" style="padding-right: 5px;">
+			<div class="ptsElMenuBtnDelimiter"></div>
+			<div class="ptsElMenuBtn ptsTypeImgBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
 					<?php _e('Image / Video', PTS_LANG_CODE)?>
 				</label>
 			</div>
+			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeButtonBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'btn'))?>
@@ -559,6 +564,7 @@
 <div id="ptsElMenuTableCellImgExl" class="ptsElMenu" style="min-width: 360px;">
 	<div class="ptsElMenuContent">
 		<div class="ptsElMenuMainPanel">
+      <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsImgChangeBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
@@ -576,7 +582,7 @@
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTooltipEditBtnShell" data-sub-panel-show="tooltip">
 				<label>
-					<i class="fa fa-info ptsOptIconBtn"></i>
+					
 					<?php _e('Tooltip', PTS_LANG_CODE)?>
 				</label>
 			</div>
@@ -585,22 +591,23 @@
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'video'))?>
 					<?php _e('Video', PTS_LANG_CODE)?>
-					<i class="fa fa-video-camera ptsOptIconBtn"></i>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
-			<div class="ptsElMenuBtn ptsTypeTxtBtn" style="padding-right: 5px;">
+			<div class="ptsElMenuBtn ptsTypeTxtBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'txt'))?>
 					<?php _e('Text', PTS_LANG_CODE)?>
 				</label>
 			</div>
+      <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeIconBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'icon'))?>
 					<?php _e('Icon', PTS_LANG_CODE)?>
 				</label>
 			</div>
+      <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeButtonBtn">
 				<label>
 					<?php echo htmlPts::radiobutton('type', array('value' => 'btn'))?>
@@ -794,7 +801,7 @@
 <!--Edit Tooltip cell btn-->
 <!--<div id="ptsTooltipEditBtnShellExl" class="ptsTooltipEditBtnShell">
 	<div class="ptsTooltipEditBtn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Edit Tooltip for Cell', PTS_LANG_CODE)?>">
-		<i class="fa fa-info ptsOptIconBtn"></i>
+		
 	</div>
 	<div class="ptsTooltipEditWnd ptsShowSmooth">
 		<textarea name="tooltip"></textarea>

@@ -6,7 +6,7 @@ else if(jQuery.inArray(PTS_DATA.animationSpeed, ['fast', 'slow']) == -1)
     PTS_DATA.animationSpeed = 'fast';
 PTS_DATA.showSubscreenOnCenter = parseInt(PTS_DATA.showSubscreenOnCenter);
 var sdLoaderImgPts = '<img src="'+ PTS_DATA.loader+ '" />';
-var g_ptsAnimationSpeed = 300;
+var g_ptsAnimationSpeed = 0;
 
 jQuery.fn.showLoaderPts = function() {
     return jQuery(this).html( sdLoaderImgPts );

@@ -150,45 +150,95 @@ class tablesViewPts extends viewPts {
          $table['css'] = htmlspecialchars_decode($table['css']);
          $this->assign('table', $table);
       }
+      
+    // FIX OLD TOGGLE OPTIONS FORMAT START
+    if (!empty($table['params']['option_name_input']['val'])) {    
+        $toggleOptionsEncoded = $table['params']['option_name_input']['val'];
+        $toggleOptions = base64_decode($toggleOptionsEncoded);      
+        if (!empty($toggleOptions)) {
+          $toggleOptions = json_decode($toggleOptions, true);
+          $toggleOptions = !empty($toggleOptions['options']) ? $toggleOptions['options'] : [];
+          // Check if it's the old format (no 'key' in options)
+          if (!empty($toggleOptions) && !isset($toggleOptions[0]['key'])) {
+            $newToggleOptions = [];
+            $keyMap = [];
+            // Generate new options with unique keys
+            foreach ($toggleOptions as $index => $togOpt) {
+              $newKey = substr(bin2hex(random_bytes(5)), 0, 9); // Generate 9-char unique key
+              $newTogOpt = [
+                'name' => $togOpt,
+                'key' => $newKey
+              ];
+              $newToggleOptions[] = $newTogOpt;
+              $keyMap[$index] = $newKey; // Map old index to new key
+            }
+            $optionsLength = count($newToggleOptions);
+            $newHtml = $table['html'];
+            // Update ptsSwitchButton attributes
+            for ($i = 0; $i < $optionsLength; $i++) {
+              $oldNumber = $i;
+              $newKey = $keyMap[$i];
+              $oldValue = preg_quote($toggleOptions[$i], '/');
+              // Replace data-number with data-key in ptsSwitchButton
+              $patternButton = '/(<div[^>]*class="[^"]*ptsSwitchButton[^"]*"[^>]*data-number="' . $oldNumber . '"[^>]*)>/i';
+              $replacementButton = '$1 data-key="' . $newKey . '">';
+              $newHtml = preg_replace($patternButton, $replacementButton, $newHtml);            
+              // Replace data-toggle-N with data-toggle-<key>
+              $patternToggle = '/data-toggle-' . $oldNumber . '=/i';
+              $replacementToggle = 'data-toggle-' . $newKey . '=';
+              $newHtml = preg_replace($patternToggle, $replacementToggle, $newHtml);
+              // Replace value="testN" with value="newKey" in switcher elements (select options or radio inputs)
+              $patternValue = '/value="' . $oldValue . '"/i';
+              $replacementValue = 'value="' . $newKey . '"';
+              $newHtml = preg_replace($patternValue, $replacementValue, $newHtml);
+            }          
+            // Update data-selected-number and data-old-number to use keys
+            $selectedOption = !empty($toggleOptions['selected_options']) ? $toggleOptions['selected_options'] : $toggleOptions[0];
+            $selectedKey = null;
+            foreach ($newToggleOptions as $opt) {
+              if ($opt['name'] === $selectedOption) {
+                $selectedKey = $opt['key'];
+                break;
+              }
+            }
+            if (!$selectedKey && !empty($newToggleOptions)) {
+              $selectedKey = $newToggleOptions[0]['key']; // Fallback to first key
+            }          
+            $newHtml = preg_replace('/data-selected-number="\d+"/i', 'data-selected-key="' . $selectedKey . '"', $newHtml);
+            $newHtml = preg_replace('/data-old-number="\d+"/i', 'data-old-key="' . $selectedKey . '"', $newHtml);
+            // Update params with new options format
+            $newParams = $table['params'];
+            $newParams['option_name_input']['val'] = base64_encode(json_encode([
+              'options' => $newToggleOptions,
+              'selected_options' => $selectedKey
+            ]));          
+            // Serialize params for database
+            $newParamsEncoded = base64_encode(serialize($newParams));          
+            global $wpdb;
+            // // Update table in database
+            $wpdb->update(
+              "{$wpdb->prefix}pts_tables",
+              [
+                'params' => $newParamsEncoded,
+                'html' => $newHtml
+              ],
+              ['id' => $table['id']],
+              ['%s', '%s'],
+              ['%d']
+            );          
+            // Update table array for current request
+            $table['params'] = $newParams;
+            $table['html'] = $newHtml;
+            $this->assign('table', $table);
+          }
+        }
+      }
+      // FIX OLD TOGGLE OPTIONS FORMAT END
+
       $this->pushRenderedTable($table);
       $content = parent::getContent('tablesRender');
       $content = htmlspecialchars_decode($content);
-      //Fix for corrupted tables before wp_kses
-      if (stripos($content, 'data-toggle-0=\"{"') !== false || stripos($content, 'data-toggle-1=\"{"') !== false || stripos($content, 'data-toggle-0=\\\\"') !== false || stripos($content, 'data-toggle-1=\\"{"') !== false) {
-        $content = str_replace('style=""', '', $content);
-        $content = str_replace('selected=""', 'selected', $content);
-        $content = str_replace('"" d', '" d', $content);
-        $content = str_replace('=""', '="', $content);
-        $content = str_replace('=\"{"', '=\'{"', $content);
-        $content = str_replace('"}\"', '"}\'', $content);
-        $content = str_replace('="{"', '=\'{"', $content);
-        $content = str_replace('"}"', '"}\'', $content);
-        $content = str_replace('=\\\\"{"', '=\'{"', $content);
-        $content = str_replace('=\\\\\\"{\"', '=\'{"', $content);
-        $content = str_replace('}\\\\\\"', '"}\'', $content);
-        $content = str_replace('\n', '', $content);
-        $content = str_replace('\\', '', $content);
-      }
-
-      $re = '/data-toggle-(.*)=\'(.*)\'/U';
-      $content = preg_replace_callback(
-      $re,
-      function($m) {
-        $newStr = '';
-    		if (json_decode($m[2])) {
-    			$newStr = 'data-toggle-'.$m[1]."='";
-    			$base64DecodedJson = base64_encode($m[2]);
-    			$newStr = $newStr . $base64DecodedJson;
-    			$newStr = $newStr . "'";
-    		}
-    		return $newStr;
-      },
-      $content);
-
-      $content = str_replace("\\'", "'", $content);
-      $content = str_replace('\\"', '"', $content);
-      $content = str_replace('\\\"', '', $content);
-
+      
       $this->_initTwig();
       return $this->_twig->render($content, array(
          'table' => $table,
@@ -257,28 +307,13 @@ class tablesViewPts extends viewPts {
       ));
    }
    public function connectFrontendAssets($tables = array() , $isEditMode = false) {
-      $isDebbug = (bool)reqPts::getVar('is_debbug', 'get');
       $isDebbug = true;
       $isPro = framePts::_()->getModule('supsystic_promo')->isPro();
       framePts::_()->addStyle('animate', $this->getModule()->getModPath() . 'css/animate.css');
-      if ($isDebbug) {
-         framePts::_()->addStyle('frontend.tables', $this->getModule()->getModPath() . 'css/frontend.tables.css');
-      } else {
-         framePts::_()->addStyle('frontend.tables', $this->getModule()->getModPath() . 'css/frontend.tables.min.css');
-      }
+      framePts::_()->addStyle('frontend.tables', $this->getModule()->getModPath() . 'css/frontend.tables.css');
       framePts::_()->getModule('templates')->loadFontAwesome();
       framePts::_()->getModule('templates')->loadTooltipster();
-      if ($isDebbug) {
-         framePts::_()->addScript('pts.js.responsive.text', PTS_JS_PATH . 'responsiveText.js');
-         framePts::_()->addScript('frontend.tables.editor.blocks_fabric.base', $this->getModule()->getModPath() . 'js/frontend.tables.editor.blocks_fabric.base.js');
-         framePts::_()->addScript('frontend.tables.editor.blocks.base', $this->getModule()->getModPath() . 'js/frontend.tables.editor.blocks.base.js');
-         framePts::_()->addScript('frontend.tables.editor.elements.base', $this->getModule()->getModPath() . 'js/frontend.tables.editor.elements.base.js');
-      } else {
-         framePts::_()->addScript('table.min', PTS_JS_PATH . 'table.min.js');
-      }
-      framePts::_()->addScript('frontend.tablesModal', $this->getModule()->getModPath() . 'js/modal.js', array(
-         'jquery'
-      ) , false, true);
+      framePts::_()->addScript('frontend.pts.base', $this->getModule()->getModPath() . 'js/frontend.pts.base.js', array('jquery'), false, true);
       if ($isPro && framePts::_()->getModule('tablepro') && is_admin()) {
          framePts::_()->addScript('admin.tablesPro', framePts::_()->getModule('tablepro')->getModPath() . 'js/admin.pro.tables.js', array(
             'jquery'
@@ -288,10 +323,7 @@ class tablesViewPts extends viewPts {
             'jquery'
          ) , false, true);
       }
-      framePts::_()->addScript('frontend.tables', $this->getModule()->getModPath() . 'js/frontend.tables.js', array(
-         'jquery'
-      ) , false, true);
-      framePts::_()->addJSVar('frontend.tables', 'ptsBuildConst', array(
+      framePts::_()->addJSVar('frontend.pts.base', 'ptsBuildConst', array(
          'standardFonts' => utilsPts::getStandardFontsList() ,
       ));
    }
@@ -318,14 +350,8 @@ class tablesViewPts extends viewPts {
       framePts::_()->getModule('templates')->loadTinyMce();
       framePts::_()->getModule('templates')->loadSlimscroll();
       framePts::_()->addScript('twig', PTS_JS_PATH . 'twig.min.js');
-      framePts::_()->addScript('icheck', PTS_JS_PATH . 'icheck.min.js');
       framePts::_()->addScript('wp.tabs', PTS_JS_PATH . 'wp.tabs.js');
-      framePts::_()->addScript('frontend.tables.editor.utils', $this->getModule()->getModPath() . 'js/frontend.tables.editor.utils.js');
-      framePts::_()->addScript('frontend.tables.editor.blocks_fabric', $this->getModule()->getModPath() . 'js/frontend.tables.editor.blocks_fabric.js');
-      framePts::_()->addScript('frontend.tables.editor.elements', $this->getModule()->getModPath() . 'js/frontend.tables.editor.elements.js');
-      framePts::_()->addScript('frontend.tables.editor.elements.menu', $this->getModule()->getModPath() . 'js/frontend.tables.editor.elements.menu.js');
-      framePts::_()->addScript('frontend.tables.editor.blocks', $this->getModule()->getModPath() . 'js/frontend.tables.editor.blocks.js');
-      framePts::_()->addScript('frontend.tables.editor', $this->getModule()->getModPath() . 'js/frontend.tables.editor.js');
+      framePts::_()->addScript('frontend.pts.editor', $this->getModule()->getModPath() . 'js/frontend.pts.editor.js');
       $ptsEditor = array();
       $ptsEditor['posts'] = array();
       global $wpdb;
@@ -344,13 +370,10 @@ class tablesViewPts extends viewPts {
             );
          }
       }
-      framePts::_()->addJSVar('frontend.tables.editor', 'ptsEditor', $ptsEditor);
+      framePts::_()->addJSVar('frontend.pts.editor', 'ptsEditor', $ptsEditor);
    }
    public function connectEditorCss($tables = array()) {
-      framePts::_()->addStyle('tables.icheck', $this->getModule()->getModPath() . 'css/jquery.icheck.css');
       framePts::_()->addStyle('frontend.tables.editor', $this->getModule()->getModPath() . 'css/frontend.tables.editor.css');
-      framePts::_()->addStyle('frontend.tables.editor.tinymce', $this->getModule()->getModPath() . 'css/frontend.tables.editor.tinymce.css');
-      framePts::_()->addStyle('frontend.tables.fonts', $this->getModule()->getModPath() . 'css/frontend.tables.fonts.css');
    }
    protected function _initTwig() {
       if (!$this->_twig) {

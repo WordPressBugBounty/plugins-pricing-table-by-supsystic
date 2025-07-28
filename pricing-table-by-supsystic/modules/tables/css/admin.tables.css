@@ -1,174 +1,230 @@
 .table-list {
-	margin-top: 40px;
+  margin-top: 40px;
 }
+
 .table-list .table-list-item {
-	max-width: 400px;
-	border: 1px solid transparent;
-	/*padding: 5px;*/
-	/*margin: 6px;*/
-	cursor: pointer;
-	display: inline-block;
-	vertical-align: top;
-	position: relative;
-	overflow: hidden;
+  max-width: 400px;
+  border: 1px solid transparent;
+  /*padding: 5px;*/
+  /*margin: 6px;*/
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  overflow: hidden;
 }
+
 .table-list .table-list-item.active,
 .table-list .table-list-item:active {
-	outline: 5px solid rgba(0, 0, 0, 0.52);
+  outline: 5px solid rgba(0, 0, 0, 0.52);
 }
+
 .table-list .table-list-item img {
-	max-width: 400px;
-	height: auto;
+  max-width: 400px;
+  height: auto;
 }
+
 .table-list .table-list-item .preset-select-btn {
-	position: absolute; 
-	top: 50%; 
-	left: 50%; 
-	transform: translate(-50%, -50%);
-	background-color: #ffffff;
-	font-size: 14px;
-	line-height: 35px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  font-size: 14px;
+  line-height: 35px;
 }
+
 .table-list .table-list-item.active .preset-select-btn,
 .table-list .table-list-item:active .preset-select-btn {
-	color: #000;
-	background-color: #4ae8ea;
+  color: #000;
+  background-color: #4ae8ea;
 }
+
 #ptsPagesTbl_cb {
-	width: 23px !important;
+  width: 23px !important;
 }
+
 .undoButtons {
-	margin-left: 30px;
-	margin-right: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
+
 .undoButtons button {
-	margin-top: 2px !important;;
+  margin-top: 2px !important;
+  ;
 }
+
 #ptsUndoProcess {
-	font-size: 16px;
-    padding-top: 8px;
-    margin-left: 20px;
+  font-size: 16px;
+  padding-top: 8px;
+  margin-left: 20px;
 }
+
 .ptsTableSettingsShell {
-	padding: 10px;
-	margin: 0 0 20px 0;
-	/*background-color: rgba(45, 34, 52, 0.96);
+  padding: 10px;
+  margin: 0 0 20px 0;
+  /*background-color: rgba(45, 34, 52, 0.96);
 	color: #fff;*/
 }
+
 /*.ptsTableSettingsShell .button {
 	color: #fff;
 	border-color: #fff !important;
 }*/
 .ptsTableSetting {
-	padding: 7px;
-	float: left;
-	min-height: 71px;
+  padding: 7px;
+  float: left;
+  min-height: 71px;
 }
+
 .ptsTableSetting,
 .ptsTableSetting p {
-	font-size: 15px;
+  font-size: 15px;
 }
+
 .ptsTableSetting .fa-question.supsystic-tooltip {
-	margin-left: 10px;
+  margin-left: 10px;
 }
+
 #ptsTableEditableLabelShell {
-	cursor: pointer;
-	color: #000;
+  cursor: pointer;
+  color: #000;
 }
+
 #ptsTableEditableLabelTxt {
-	display: none;
+  display: none;
 }
+
 #ptsTableMainControllsShell .ptsTableSaveBtn {
-	margin-right: 10px;
+  margin-right: 10px;
 }
+
 .ptsTableSettingsShell .ptsTableSetting {
-	    position: relative;
+  position: relative;
 }
+
 .ptsHeaderColorPicker {
-	position: absolute;
-    right: 0;
-    top: 70%;
-    z-index: 999;
+  position: absolute;
+  right: 0;
+  top: 70%;
+  z-index: 999;
 }
+
 .ptsHeaderColorPicker.hidden {
-	display: none;
-}
-.ptsSettingsContent > div{
-	display: none;
-}
-.ptsSettingsContent div.active{
-	display: block;
-}
-.icheckbox_minimal, .iradio_minimal{
-	display: inline-block!important;
-}
-#containerWrapper .chosen-container{
-	width:120px!important;
-}
-.ptsSettingsTabs{
-	margin-bottom: 20px;
-}
-.field-options-list .option{
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	padding-bottom: 5px;
-}
-.field-options-list .option div{
-	padding-left: 15px;
+  display: none;
 }
 
-.field-options-list .icheckbox_minimal{
-	display: inline-flex!important;
+.ptsSettingsContent>div {
+  display: none;
 }
 
-#ptsCanvas .ptsBlock  .ptsSwitchWrapper{
-	margin-bottom: 50px!important;
+.ptsSettingsContent div.active {
+  display: block;
 }
-.ptsTooltipEditWnd textarea{
-	color:black!important;
+
+#containerWrapper .chosen-container {
+  width: 120px !important;
 }
-.ptsCellEditBtnsShell *{
-	color:white!important;
+
+.ptsSettingsTabs {
+  margin-bottom: 20px;
 }
-.ptsToggle .ptsEl{
-	visibility: visible !important;
+
+.field-options-list .option {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 5px;
 }
-.ptsSwitchWrapper input[type=radio]:checked:before{
-	display: none;
+
+.field-options-list .option div {
+  padding-left: 15px;
 }
-.ptsSwitchWrapper input[type=radio]{
-	-webkit-appearance: radio!important;
+
+#ptsCanvas .ptsBlock .ptsSwitchWrapper {
+  margin-bottom: 50px !important;
 }
-.ptsActivePicker{
-	visibility: visible;
-	opacity: 1;
+
+.ptsTooltipEditWnd textarea {
+  color: black !important;
 }
-.ptsActivePicker [data-sub-panel="schedule"]{
-	display: block!important;
+
+.ptsCellEditBtnsShell * {
+  color: white !important;
 }
-.ptsActiveSchedule{
-	display: block!important;
+
+.ptsToggle .ptsEl {
+  visibility: visible !important;
 }
-#ptsOptInProWnd{
-	height: auto!important;
+
+.ptsSwitchWrapper input[type=radio]:checked:before {
+  display: none;
 }
-.ptsImportantText{
-	color: #fff;
-	background-color: #337ab7;
+
+.ptsSwitchWrapper input[type=radio] {
+  -webkit-appearance: radio !important;
 }
-.ptsNotActiveWrapper{
-	background-color: #f1f1f1;
-	opacity: 0.2;
-	pointer-events: none;
+
+.ptsActivePicker {
+  visibility: visible;
+  opacity: 1;
 }
+
+.ptsActivePicker [data-sub-panel="schedule"] {
+  display: block !important;
+}
+
+.ptsActiveSchedule {
+  display: block !important;
+}
+
+#ptsOptInProWnd {
+  height: auto !important;
+}
+
+.ptsImportantText {
+  color: #fff;
+  background-color: #337ab7;
+}
+
+.ptsNotActiveWrapper {
+  background-color: #f1f1f1;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
 /* Right-to-Left Language Styles*/
 [dir="rtl"] #ptsTableMainControllsShell {
-	float: left !important;
+  float: left !important;
 }
-#ptsRowAddHtmlAttr{
-	display:none;
+
+#ptsRowAddHtmlAttr {
+  display: none;
 }
-.ptsColSortInProgressY{
-	left: 0;
+
+.ptsColSortInProgressY {
+  left: 0;
+}
+
+/* Styles for resizable image borders */
+.ui-resizable-active {
+  border: 5px dashed #03A9F4 !important;
+  /* Visible dashed border on click/hover */
+  position: relative;
+}
+
+.ui-resizable-handle {
+  background: #03A9F4 !important;
+  /* Handle (small square) style */
+  border: 1px solid #000;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+}
+
+.ptsElArea img:hover {
+  cursor: pointer;
 }

@@ -98,14 +98,11 @@ class templatesPts extends modulePts {
       framePts::_()->addScript('jquery-ui-dialog');
       framePts::_()->addScript('jquery-ui-slider');
       framePts::_()->addScript('wp-color-picker');
-      framePts::_()->addScript('icheck', PTS_JS_PATH . 'icheck.min.js');
       $this->loadTooltipster();
    }
    public function loadCoreJs() {
       framePts::_()->addScript('jquery');
       framePts::_()->addScript('commonPts', PTS_JS_PATH . 'common.js');
-      framePts::_()->addScript('icheck', PTS_JS_PATH . 'icheck.min.js');
-      framePts::_()->addStyle('tables.icheck', PTS_CSS_PATH . 'jquery.icheck.css');
       framePts::_()->addScript('corePts', PTS_JS_PATH . 'core.js');
       $ajaxurl = admin_url('admin-ajax.php');
       $jsData = array(
@@ -154,10 +151,6 @@ class templatesPts extends modulePts {
             'for' => 'admin'
          ) ,
          'dashicons' => array(
-            'for' => 'admin'
-         ) ,
-         'icheck' => array(
-            'path' => PTS_CSS_PATH . 'jquery.icheck.css',
             'for' => 'admin'
          ) ,
          'wp-color-picker' => array(

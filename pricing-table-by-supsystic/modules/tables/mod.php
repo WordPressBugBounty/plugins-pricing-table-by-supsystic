@@ -96,7 +96,7 @@ class tablesPts extends modulePts {
    public function assignRenderedTables() {
       $tables = $this->getView()->getRenderedTables();
       if (!empty($tables)) {
-         framePts::_()->addJSVar('frontend.tables', 'ptsTables', $tables);
+         framePts::_()->addJSVar('frontend.pts.base', 'ptsTables', $tables);
       }
    }
    public function showPriceTable($params) {

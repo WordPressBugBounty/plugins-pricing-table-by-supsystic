@@ -275,7 +275,6 @@ class tablesModelPts extends modelPts {
    }
    public function generateUniqueId() {
       $uid = utilsPts::getRandStr(8);
-      error_log('generateUniqueId');
       if (framePts::_()->getTable($this->_tbl)->get('COUNT(*) AS total', array(
          'unique_id' => $uid,
          'original_id' => 0

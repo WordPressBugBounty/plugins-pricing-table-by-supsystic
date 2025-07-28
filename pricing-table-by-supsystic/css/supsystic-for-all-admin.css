@@ -1,7 +1,8 @@
 /*remove duplicated WP menu item*/
 #toplevel_page_tables-supsystic .wp-submenu.wp-submenu-wrap .wp-first-item {
-	display: none;
+  display: none;
 }
+
 .ptsDisplNone {
-	display: none;
+  display: none;
 }

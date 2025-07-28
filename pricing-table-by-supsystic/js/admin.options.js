@@ -176,8 +176,6 @@ jQuery(document).ready(function(){
 		}).trigger('change');
 	}
 	ptsInitStickyItem();
-	ptsInitCustomCheckRadio();
-	//ptsInitCustomSelect();
 
 	jQuery('.ptsFieldsetToggled').each(function(){
 		var self = this;
@@ -534,9 +532,6 @@ function ptsInitMainPromoPopup() {
 				var  isRadio = jQuery(this).attr('type') == 'radio'
 					, isCheck = jQuery(this).attr('type') == 'checkbox';
 				if (isCheck) {
-					setTimeout(function(){
-						jQuery('.ptsProOpt').closest('.icheckbox_minimal').removeClass('checked');
-					}, 10);
 				}
 				if (isRadio) {
 					jQuery('input[name="' + jQuery(this).attr('name') + '"]:first').parents('label:first').click();
