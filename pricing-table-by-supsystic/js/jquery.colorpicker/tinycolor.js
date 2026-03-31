@@ -3,7 +3,6 @@
 // Brian Grinstead, MIT License
 
 (function () {
-
   var trimLeft = /^[\s,#]+/,
     trimRight = /\s+$/,
     tinyCounter = 0,
@@ -14,8 +13,7 @@
     mathRandom = math.random;
 
   function tinycolor(color, opts) {
-
-    color = (color) ? color : '';
+    color = color ? color : '';
     opts = opts || {};
 
     // If input is already a tinycolor, return itself
@@ -28,22 +26,22 @@
     }
 
     var rgb = inputToRGB(color);
-    this._originalInput = color,
-      this._r = rgb.r,
-      this._g = rgb.g,
-      this._b = rgb.b,
-      this._a = rgb.a,
-      this._roundA = mathRound(100 * this._a) / 100,
-      this._format = opts.format || rgb.format;
+    ((this._originalInput = color), (this._r = rgb.r), (this._g = rgb.g), (this._b = rgb.b), (this._a = rgb.a), (this._roundA = mathRound(100 * this._a) / 100), (this._format = opts.format || rgb.format));
     this._gradientType = opts.gradientType;
 
     // Don't let the range of [0,255] come back in [0,1].
     // Potentially lose a little bit of precision here, but will fix issues where
     // .5 gets interpreted as half of the total, instead of half of 1
     // If it was supposed to be 128, this was already taken care of by `inputToRgb`
-    if (this._r < 1) { this._r = mathRound(this._r); }
-    if (this._g < 1) { this._g = mathRound(this._g); }
-    if (this._b < 1) { this._b = mathRound(this._b); }
+    if (this._r < 1) {
+      this._r = mathRound(this._r);
+    }
+    if (this._g < 1) {
+      this._g = mathRound(this._g);
+    }
+    if (this._b < 1) {
+      this._b = mathRound(this._b);
+    }
 
     this._ok = rgb.ok;
     this._tc_id = tinyCounter++;
@@ -81,10 +79,22 @@
       GsRGB = rgb.g / 255;
       BsRGB = rgb.b / 255;
 
-      if (RsRGB <= 0.03928) { R = RsRGB / 12.92; } else { R = Math.pow(((RsRGB + 0.055) / 1.055), 2.4); }
-      if (GsRGB <= 0.03928) { G = GsRGB / 12.92; } else { G = Math.pow(((GsRGB + 0.055) / 1.055), 2.4); }
-      if (BsRGB <= 0.03928) { B = BsRGB / 12.92; } else { B = Math.pow(((BsRGB + 0.055) / 1.055), 2.4); }
-      return (0.2126 * R) + (0.7152 * G) + (0.0722 * B);
+      if (RsRGB <= 0.03928) {
+        R = RsRGB / 12.92;
+      } else {
+        R = Math.pow((RsRGB + 0.055) / 1.055, 2.4);
+      }
+      if (GsRGB <= 0.03928) {
+        G = GsRGB / 12.92;
+      } else {
+        G = Math.pow((GsRGB + 0.055) / 1.055, 2.4);
+      }
+      if (BsRGB <= 0.03928) {
+        B = BsRGB / 12.92;
+      } else {
+        B = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
+      }
+      return 0.2126 * R + 0.7152 * G + 0.0722 * B;
     },
     setAlpha: function (value) {
       this._a = boundAlpha(value);
@@ -97,10 +107,10 @@
     },
     toHsvString: function () {
       var hsv = rgbToHsv(this._r, this._g, this._b);
-      var h = mathRound(hsv.h * 360), s = mathRound(hsv.s * 100), v = mathRound(hsv.v * 100);
-      return (this._a == 1) ?
-        "hsv(" + h + ", " + s + "%, " + v + "%)" :
-        "hsva(" + h + ", " + s + "%, " + v + "%, " + this._roundA + ")";
+      var h = mathRound(hsv.h * 360),
+        s = mathRound(hsv.s * 100),
+        v = mathRound(hsv.v * 100);
+      return this._a == 1 ? 'hsv(' + h + ', ' + s + '%, ' + v + '%)' : 'hsva(' + h + ', ' + s + '%, ' + v + '%, ' + this._roundA + ')';
     },
     toHsl: function () {
       var hsl = rgbToHsl(this._r, this._g, this._b);
@@ -108,10 +118,10 @@
     },
     toHslString: function () {
       var hsl = rgbToHsl(this._r, this._g, this._b);
-      var h = mathRound(hsl.h * 360), s = mathRound(hsl.s * 100), l = mathRound(hsl.l * 100);
-      return (this._a == 1) ?
-        "hsl(" + h + ", " + s + "%, " + l + "%)" :
-        "hsla(" + h + ", " + s + "%, " + l + "%, " + this._roundA + ")";
+      var h = mathRound(hsl.h * 360),
+        s = mathRound(hsl.s * 100),
+        l = mathRound(hsl.l * 100);
+      return this._a == 1 ? 'hsl(' + h + ', ' + s + '%, ' + l + '%)' : 'hsla(' + h + ', ' + s + '%, ' + l + '%, ' + this._roundA + ')';
     },
     toHex: function (allow3Char) {
       return rgbToHex(this._r, this._g, this._b, allow3Char);
@@ -129,21 +139,19 @@
       return { r: mathRound(this._r), g: mathRound(this._g), b: mathRound(this._b), a: this._a };
     },
     toRgbString: function () {
-      return (this._a == 1) ?
-        "rgb(" + mathRound(this._r) + ", " + mathRound(this._g) + ", " + mathRound(this._b) + ")" :
-        "rgba(" + mathRound(this._r) + ", " + mathRound(this._g) + ", " + mathRound(this._b) + ", " + this._roundA + ")";
+      return this._a == 1 ? 'rgb(' + mathRound(this._r) + ', ' + mathRound(this._g) + ', ' + mathRound(this._b) + ')' : 'rgba(' + mathRound(this._r) + ', ' + mathRound(this._g) + ', ' + mathRound(this._b) + ', ' + this._roundA + ')';
     },
     toPercentageRgb: function () {
-      return { r: mathRound(bound01(this._r, 255) * 100) + "%", g: mathRound(bound01(this._g, 255) * 100) + "%", b: mathRound(bound01(this._b, 255) * 100) + "%", a: this._a };
+      return { r: mathRound(bound01(this._r, 255) * 100) + '%', g: mathRound(bound01(this._g, 255) * 100) + '%', b: mathRound(bound01(this._b, 255) * 100) + '%', a: this._a };
     },
     toPercentageRgbString: function () {
-      return (this._a == 1) ?
-        "rgb(" + mathRound(bound01(this._r, 255) * 100) + "%, " + mathRound(bound01(this._g, 255) * 100) + "%, " + mathRound(bound01(this._b, 255) * 100) + "%)" :
-        "rgba(" + mathRound(bound01(this._r, 255) * 100) + "%, " + mathRound(bound01(this._g, 255) * 100) + "%, " + mathRound(bound01(this._b, 255) * 100) + "%, " + this._roundA + ")";
+      return this._a == 1
+        ? 'rgb(' + mathRound(bound01(this._r, 255) * 100) + '%, ' + mathRound(bound01(this._g, 255) * 100) + '%, ' + mathRound(bound01(this._b, 255) * 100) + '%)'
+        : 'rgba(' + mathRound(bound01(this._r, 255) * 100) + '%, ' + mathRound(bound01(this._g, 255) * 100) + '%, ' + mathRound(bound01(this._b, 255) * 100) + '%, ' + this._roundA + ')';
     },
     toName: function () {
       if (this._a === 0) {
-        return "transparent";
+        return 'transparent';
       }
 
       if (this._a < 1) {
@@ -155,14 +163,14 @@
     toFilter: function (secondColor) {
       var hex8String = '#' + rgbaToHex(this._r, this._g, this._b, this._a);
       var secondHex8String = hex8String;
-      var gradientType = this._gradientType ? "GradientType = 1, " : "";
+      var gradientType = this._gradientType ? 'GradientType = 1, ' : '';
 
       if (secondColor) {
         var s = tinycolor(secondColor);
         secondHex8String = s.toHex8String();
       }
 
-      return "progid:DXImageTransform.Microsoft.gradient(" + gradientType + "startColorstr=" + hex8String + ",endColorstr=" + secondHex8String + ")";
+      return 'progid:DXImageTransform.Microsoft.gradient(' + gradientType + 'startColorstr=' + hex8String + ',endColorstr=' + secondHex8String + ')';
     },
     toString: function (format) {
       var formatSet = !!format;
@@ -170,38 +178,38 @@
 
       var formattedString = false;
       var hasAlpha = this._a < 1 && this._a >= 0;
-      var needsAlphaFormat = !formatSet && hasAlpha && (format === "hex" || format === "hex6" || format === "hex3" || format === "name");
+      var needsAlphaFormat = !formatSet && hasAlpha && (format === 'hex' || format === 'hex6' || format === 'hex3' || format === 'name');
 
       if (needsAlphaFormat) {
         // Special case for "transparent", all other non-alpha formats
         // will return rgba when there is transparency.
-        if (format === "name" && this._a === 0) {
+        if (format === 'name' && this._a === 0) {
           return this.toName();
         }
         return this.toRgbString();
       }
-      if (format === "rgb") {
+      if (format === 'rgb') {
         formattedString = this.toRgbString();
       }
-      if (format === "prgb") {
+      if (format === 'prgb') {
         formattedString = this.toPercentageRgbString();
       }
-      if (format === "hex" || format === "hex6") {
+      if (format === 'hex' || format === 'hex6') {
         formattedString = this.toHexString();
       }
-      if (format === "hex3") {
+      if (format === 'hex3') {
         formattedString = this.toHexString(true);
       }
-      if (format === "hex8") {
+      if (format === 'hex8') {
         formattedString = this.toHex8String();
       }
-      if (format === "name") {
+      if (format === 'name') {
         formattedString = this.toName();
       }
-      if (format === "hsl") {
+      if (format === 'hsl') {
         formattedString = this.toHslString();
       }
-      if (format === "hsv") {
+      if (format === 'hsv') {
         formattedString = this.toHsvString();
       }
 
@@ -258,20 +266,19 @@
     },
     tetrad: function () {
       return this._applyCombination(tetrad, arguments);
-    }
+    },
   };
 
   // If input is an object, force 1 into "1.0" to handle ratios properly
   // String input requires "1.0" as input, so 1 will be treated as 1
   tinycolor.fromRatio = function (color, opts) {
-    if (typeof color == "object") {
+    if (typeof color == 'object') {
       var newColor = {};
       for (var i in color) {
         if (color.hasOwnProperty(i)) {
-          if (i === "a") {
+          if (i === 'a') {
             newColor[i] = color[i];
-          }
-          else {
+          } else {
             newColor[i] = convertToPercentage(color[i]);
           }
         }
@@ -298,38 +305,35 @@
   //     "hsv(0, 100%, 100%)" or "hsv 0 100% 100%"
   //
   function inputToRGB(color) {
-
     var rgb = { r: 0, g: 0, b: 0 };
     var a = 1;
     var ok = false;
     var format = false;
 
-    if (typeof color == "string") {
+    if (typeof color == 'string') {
       color = stringInputToObject(color);
     }
 
-    if (typeof color == "object") {
-      if (color.hasOwnProperty("r") && color.hasOwnProperty("g") && color.hasOwnProperty("b")) {
+    if (typeof color == 'object') {
+      if (color.hasOwnProperty('r') && color.hasOwnProperty('g') && color.hasOwnProperty('b')) {
         rgb = rgbToRgb(color.r, color.g, color.b);
         ok = true;
-        format = String(color.r).substr(-1) === "%" ? "prgb" : "rgb";
-      }
-      else if (color.hasOwnProperty("h") && color.hasOwnProperty("s") && color.hasOwnProperty("v")) {
+        format = String(color.r).substr(-1) === '%' ? 'prgb' : 'rgb';
+      } else if (color.hasOwnProperty('h') && color.hasOwnProperty('s') && color.hasOwnProperty('v')) {
         color.s = convertToPercentage(color.s);
         color.v = convertToPercentage(color.v);
         rgb = hsvToRgb(color.h, color.s, color.v);
         ok = true;
-        format = "hsv";
-      }
-      else if (color.hasOwnProperty("h") && color.hasOwnProperty("s") && color.hasOwnProperty("l")) {
+        format = 'hsv';
+      } else if (color.hasOwnProperty('h') && color.hasOwnProperty('s') && color.hasOwnProperty('l')) {
         color.s = convertToPercentage(color.s);
         color.l = convertToPercentage(color.l);
         rgb = hslToRgb(color.h, color.s, color.l);
         ok = true;
-        format = "hsl";
+        format = 'hsl';
       }
 
-      if (color.hasOwnProperty("a")) {
+      if (color.hasOwnProperty('a')) {
         a = color.a;
       }
     }
@@ -342,10 +346,9 @@
       r: mathMin(255, mathMax(rgb.r, 0)),
       g: mathMin(255, mathMax(rgb.g, 0)),
       b: mathMin(255, mathMax(rgb.b, 0)),
-      a: a
+      a: a,
     };
   }
-
 
   // Conversion Functions
   // --------------------
@@ -362,7 +365,7 @@
     return {
       r: bound01(r, 255) * 255,
       g: bound01(g, 255) * 255,
-      b: bound01(b, 255) * 255
+      b: bound01(b, 255) * 255,
     };
   }
 
@@ -371,24 +374,31 @@
   // *Assumes:* r, g, and b are contained in [0, 255] or [0, 1]
   // *Returns:* { h, s, l } in [0,1]
   function rgbToHsl(r, g, b) {
-
     r = bound01(r, 255);
     g = bound01(g, 255);
     b = bound01(b, 255);
 
-    var max = mathMax(r, g, b), min = mathMin(r, g, b);
-    var h, s, l = (max + min) / 2;
+    var max = mathMax(r, g, b),
+      min = mathMin(r, g, b);
+    var h,
+      s,
+      l = (max + min) / 2;
 
     if (max == min) {
       h = s = 0; // achromatic
-    }
-    else {
+    } else {
       var d = max - min;
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
       switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-        case g: h = (b - r) / d + 2; break;
-        case b: h = (r - g) / d + 4; break;
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+        case g:
+          h = (b - r) / d + 2;
+          break;
+        case b:
+          h = (r - g) / d + 4;
+          break;
       }
 
       h /= 6;
@@ -419,8 +429,7 @@
 
     if (s === 0) {
       r = g = b = l; // achromatic
-    }
-    else {
+    } else {
       var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
       var p = 2 * l - q;
       r = hue2rgb(p, q, h + 1 / 3);
@@ -436,25 +445,32 @@
   // *Assumes:* r, g, and b are contained in the set [0, 255] or [0, 1]
   // *Returns:* { h, s, v } in [0,1]
   function rgbToHsv(r, g, b) {
-
     r = bound01(r, 255);
     g = bound01(g, 255);
     b = bound01(b, 255);
 
-    var max = mathMax(r, g, b), min = mathMin(r, g, b);
-    var h, s, v = max;
+    var max = mathMax(r, g, b),
+      min = mathMin(r, g, b);
+    var h,
+      s,
+      v = max;
 
     var d = max - min;
     s = max === 0 ? 0 : d / max;
 
     if (max == min) {
       h = 0; // achromatic
-    }
-    else {
+    } else {
       switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-        case g: h = (b - r) / d + 2; break;
-        case b: h = (r - g) / d + 4; break;
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+        case g:
+          h = (b - r) / d + 2;
+          break;
+        case b:
+          h = (r - g) / d + 4;
+          break;
       }
       h /= 6;
     }
@@ -466,7 +482,6 @@
   // *Assumes:* h is contained in [0, 1] or [0, 360] and s and v are contained in [0, 1] or [0, 100]
   // *Returns:* { r, g, b } in the set [0, 255]
   function hsvToRgb(h, s, v) {
-
     h = bound01(h, 360) * 6;
     s = bound01(s, 100);
     v = bound01(v, 100);
@@ -489,19 +504,14 @@
   // Assumes r, g, and b are contained in the set [0, 255]
   // Returns a 3 or 6 character hex
   function rgbToHex(r, g, b, allow3Char) {
-
-    var hex = [
-      pad2(mathRound(r).toString(16)),
-      pad2(mathRound(g).toString(16)),
-      pad2(mathRound(b).toString(16))
-    ];
+    var hex = [pad2(mathRound(r).toString(16)), pad2(mathRound(g).toString(16)), pad2(mathRound(b).toString(16))];
 
     // Return a 3 character hex if possible
     if (allow3Char && hex[0].charAt(0) == hex[0].charAt(1) && hex[1].charAt(0) == hex[1].charAt(1) && hex[2].charAt(0) == hex[2].charAt(1)) {
       return hex[0].charAt(0) + hex[1].charAt(0) + hex[2].charAt(0);
     }
 
-    return hex.join("");
+    return hex.join('');
   }
 
   // `rgbaToHex`
@@ -509,21 +519,17 @@
   // Assumes r, g, b and a are contained in the set [0, 255]
   // Returns an 8 character hex
   function rgbaToHex(r, g, b, a) {
+    var hex = [pad2(convertDecimalToHex(a)), pad2(mathRound(r).toString(16)), pad2(mathRound(g).toString(16)), pad2(mathRound(b).toString(16))];
 
-    var hex = [
-      pad2(convertDecimalToHex(a)),
-      pad2(mathRound(r).toString(16)),
-      pad2(mathRound(g).toString(16)),
-      pad2(mathRound(b).toString(16))
-    ];
-
-    return hex.join("");
+    return hex.join('');
   }
 
   // `equals`
   // Can be called with any tinycolor input
   tinycolor.equals = function (color1, color2) {
-    if (!color1 || !color2) { return false; }
+    if (!color1 || !color2) {
+      return false;
+    }
     return tinycolor(color1).toRgbString() == tinycolor(color2).toRgbString();
   };
 
@@ -531,10 +537,9 @@
     return tinycolor.fromRatio({
       r: mathRandom(),
       g: mathRandom(),
-      b: mathRandom()
+      b: mathRandom(),
     });
   };
-
 
   // Modification Functions
   // ----------------------
@@ -542,7 +547,7 @@
   // <https://github.com/cloudhead/less.js/blob/master/lib/less/functions.js>
 
   function desaturate(color, amount) {
-    amount = (amount === 0) ? 0 : (amount || 10);
+    amount = amount === 0 ? 0 : amount || 10;
     var hsl = tinycolor(color).toHsl();
     hsl.s -= amount / 100;
     hsl.s = clamp01(hsl.s);
@@ -550,7 +555,7 @@
   }
 
   function saturate(color, amount) {
-    amount = (amount === 0) ? 0 : (amount || 10);
+    amount = amount === 0 ? 0 : amount || 10;
     var hsl = tinycolor(color).toHsl();
     hsl.s += amount / 100;
     hsl.s = clamp01(hsl.s);
@@ -562,7 +567,7 @@
   }
 
   function lighten(color, amount) {
-    amount = (amount === 0) ? 0 : (amount || 10);
+    amount = amount === 0 ? 0 : amount || 10;
     var hsl = tinycolor(color).toHsl();
     hsl.l += amount / 100;
     hsl.l = clamp01(hsl.l);
@@ -570,16 +575,16 @@
   }
 
   function brighten(color, amount) {
-    amount = (amount === 0) ? 0 : (amount || 10);
+    amount = amount === 0 ? 0 : amount || 10;
     var rgb = tinycolor(color).toRgb();
-    rgb.r = mathMax(0, mathMin(255, rgb.r - mathRound(255 * - (amount / 100))));
-    rgb.g = mathMax(0, mathMin(255, rgb.g - mathRound(255 * - (amount / 100))));
-    rgb.b = mathMax(0, mathMin(255, rgb.b - mathRound(255 * - (amount / 100))));
+    rgb.r = mathMax(0, mathMin(255, rgb.r - mathRound(255 * -(amount / 100))));
+    rgb.g = mathMax(0, mathMin(255, rgb.g - mathRound(255 * -(amount / 100))));
+    rgb.b = mathMax(0, mathMin(255, rgb.b - mathRound(255 * -(amount / 100))));
     return tinycolor(rgb);
   }
 
   function darken(color, amount) {
-    amount = (amount === 0) ? 0 : (amount || 10);
+    amount = amount === 0 ? 0 : amount || 10;
     var hsl = tinycolor(color).toHsl();
     hsl.l -= amount / 100;
     hsl.l = clamp01(hsl.l);
@@ -609,32 +614,19 @@
   function triad(color) {
     var hsl = tinycolor(color).toHsl();
     var h = hsl.h;
-    return [
-      tinycolor(color),
-      tinycolor({ h: (h + 120) % 360, s: hsl.s, l: hsl.l }),
-      tinycolor({ h: (h + 240) % 360, s: hsl.s, l: hsl.l })
-    ];
+    return [tinycolor(color), tinycolor({ h: (h + 120) % 360, s: hsl.s, l: hsl.l }), tinycolor({ h: (h + 240) % 360, s: hsl.s, l: hsl.l })];
   }
 
   function tetrad(color) {
     var hsl = tinycolor(color).toHsl();
     var h = hsl.h;
-    return [
-      tinycolor(color),
-      tinycolor({ h: (h + 90) % 360, s: hsl.s, l: hsl.l }),
-      tinycolor({ h: (h + 180) % 360, s: hsl.s, l: hsl.l }),
-      tinycolor({ h: (h + 270) % 360, s: hsl.s, l: hsl.l })
-    ];
+    return [tinycolor(color), tinycolor({ h: (h + 90) % 360, s: hsl.s, l: hsl.l }), tinycolor({ h: (h + 180) % 360, s: hsl.s, l: hsl.l }), tinycolor({ h: (h + 270) % 360, s: hsl.s, l: hsl.l })];
   }
 
   function splitcomplement(color) {
     var hsl = tinycolor(color).toHsl();
     var h = hsl.h;
-    return [
-      tinycolor(color),
-      tinycolor({ h: (h + 72) % 360, s: hsl.s, l: hsl.l }),
-      tinycolor({ h: (h + 216) % 360, s: hsl.s, l: hsl.l })
-    ];
+    return [tinycolor(color), tinycolor({ h: (h + 72) % 360, s: hsl.s, l: hsl.l }), tinycolor({ h: (h + 216) % 360, s: hsl.s, l: hsl.l })];
   }
 
   function analogous(color, results, slices) {
@@ -645,7 +637,7 @@
     var part = 360 / slices;
     var ret = [tinycolor(color)];
 
-    for (hsl.h = ((hsl.h - (part * results >> 1)) + 720) % 360; --results;) {
+    for (hsl.h = (hsl.h - ((part * results) >> 1) + 720) % 360; --results; ) {
       hsl.h = (hsl.h + part) % 360;
       ret.push(tinycolor(hsl));
     }
@@ -655,7 +647,9 @@
   function monochromatic(color, results) {
     results = results || 6;
     var hsv = tinycolor(color).toHsv();
-    var h = hsv.h, s = hsv.s, v = hsv.v;
+    var h = hsv.h,
+      s = hsv.s,
+      v = hsv.v;
     var ret = [];
     var modification = 1 / results;
 
@@ -671,7 +665,7 @@
   // ---------------------
 
   tinycolor.mix = function (color1, color2, amount) {
-    amount = (amount === 0) ? 0 : (amount || 50);
+    amount = amount === 0 ? 0 : amount || 50;
 
     var rgb1 = tinycolor(color1).toRgb();
     var rgb2 = tinycolor(color2).toRgb();
@@ -696,12 +690,11 @@
       r: rgb2.r * w1 + rgb1.r * w2,
       g: rgb2.g * w1 + rgb1.g * w2,
       b: rgb2.b * w1 + rgb1.b * w2,
-      a: rgb2.a * p + rgb1.a * (1 - p)
+      a: rgb2.a * p + rgb1.a * (1 - p),
     };
 
     return tinycolor(rgba);
   };
-
 
   // Readability Functions
   // ---------------------
@@ -733,19 +726,18 @@
 
     wcag2Parms = validateWCAG2Parms(wcag2);
     switch (wcag2Parms.level + wcag2Parms.size) {
-      case "AAsmall":
-      case "AAAlarge":
+      case 'AAsmall':
+      case 'AAAlarge':
         out = readability >= 4.5;
         break;
-      case "AAlarge":
+      case 'AAlarge':
         out = readability >= 3;
         break;
-      case "AAAsmall":
+      case 'AAAsmall':
         out = readability >= 7;
         break;
     }
     return out;
-
   };
 
   // `mostReadable`
@@ -775,174 +767,171 @@
       }
     }
 
-    if (tinycolor.isReadable(baseColor, bestColor, { "level": level, "size": size }) || !includeFallbackColors) {
+    if (tinycolor.isReadable(baseColor, bestColor, { level: level, size: size }) || !includeFallbackColors) {
       return bestColor;
-    }
-    else {
+    } else {
       args.includeFallbackColors = false;
-      return tinycolor.mostReadable(baseColor, ["#fff", "#000"], args);
+      return tinycolor.mostReadable(baseColor, ['#fff', '#000'], args);
     }
   };
-
 
   // Big List of Colors
   // ------------------
   // <http://www.w3.org/TR/css3-color/#svg-color>
-  var names = tinycolor.names = {
-    aliceblue: "f0f8ff",
-    antiquewhite: "faebd7",
-    aqua: "0ff",
-    aquamarine: "7fffd4",
-    azure: "f0ffff",
-    beige: "f5f5dc",
-    bisque: "ffe4c4",
-    black: "000",
-    blanchedalmond: "ffebcd",
-    blue: "00f",
-    blueviolet: "8a2be2",
-    brown: "a52a2a",
-    burlywood: "deb887",
-    burntsienna: "ea7e5d",
-    cadetblue: "5f9ea0",
-    chartreuse: "7fff00",
-    chocolate: "d2691e",
-    coral: "ff7f50",
-    cornflowerblue: "6495ed",
-    cornsilk: "fff8dc",
-    crimson: "dc143c",
-    cyan: "0ff",
-    darkblue: "00008b",
-    darkcyan: "008b8b",
-    darkgoldenrod: "b8860b",
-    darkgray: "a9a9a9",
-    darkgreen: "006400",
-    darkgrey: "a9a9a9",
-    darkkhaki: "bdb76b",
-    darkmagenta: "8b008b",
-    darkolivegreen: "556b2f",
-    darkorange: "ff8c00",
-    darkorchid: "9932cc",
-    darkred: "8b0000",
-    darksalmon: "e9967a",
-    darkseagreen: "8fbc8f",
-    darkslateblue: "483d8b",
-    darkslategray: "2f4f4f",
-    darkslategrey: "2f4f4f",
-    darkturquoise: "00ced1",
-    darkviolet: "9400d3",
-    deeppink: "ff1493",
-    deepskyblue: "00bfff",
-    dimgray: "696969",
-    dimgrey: "696969",
-    dodgerblue: "1e90ff",
-    firebrick: "b22222",
-    floralwhite: "fffaf0",
-    forestgreen: "228b22",
-    fuchsia: "f0f",
-    gainsboro: "dcdcdc",
-    ghostwhite: "f8f8ff",
-    gold: "ffd700",
-    goldenrod: "daa520",
-    gray: "808080",
-    green: "008000",
-    greenyellow: "adff2f",
-    grey: "808080",
-    honeydew: "f0fff0",
-    hotpink: "ff69b4",
-    indianred: "cd5c5c",
-    indigo: "4b0082",
-    ivory: "fffff0",
-    khaki: "f0e68c",
-    lavender: "e6e6fa",
-    lavenderblush: "fff0f5",
-    lawngreen: "7cfc00",
-    lemonchiffon: "fffacd",
-    lightblue: "add8e6",
-    lightcoral: "f08080",
-    lightcyan: "e0ffff",
-    lightgoldenrodyellow: "fafad2",
-    lightgray: "d3d3d3",
-    lightgreen: "90ee90",
-    lightgrey: "d3d3d3",
-    lightpink: "ffb6c1",
-    lightsalmon: "ffa07a",
-    lightseagreen: "20b2aa",
-    lightskyblue: "87cefa",
-    lightslategray: "789",
-    lightslategrey: "789",
-    lightsteelblue: "b0c4de",
-    lightyellow: "ffffe0",
-    lime: "0f0",
-    limegreen: "32cd32",
-    linen: "faf0e6",
-    magenta: "f0f",
-    maroon: "800000",
-    mediumaquamarine: "66cdaa",
-    mediumblue: "0000cd",
-    mediumorchid: "ba55d3",
-    mediumpurple: "9370db",
-    mediumseagreen: "3cb371",
-    mediumslateblue: "7b68ee",
-    mediumspringgreen: "00fa9a",
-    mediumturquoise: "48d1cc",
-    mediumvioletred: "c71585",
-    midnightblue: "191970",
-    mintcream: "f5fffa",
-    mistyrose: "ffe4e1",
-    moccasin: "ffe4b5",
-    navajowhite: "ffdead",
-    navy: "000080",
-    oldlace: "fdf5e6",
-    olive: "808000",
-    olivedrab: "6b8e23",
-    orange: "ffa500",
-    orangered: "ff4500",
-    orchid: "da70d6",
-    palegoldenrod: "eee8aa",
-    palegreen: "98fb98",
-    paleturquoise: "afeeee",
-    palevioletred: "db7093",
-    papayawhip: "ffefd5",
-    peachpuff: "ffdab9",
-    peru: "cd853f",
-    pink: "ffc0cb",
-    plum: "dda0dd",
-    powderblue: "b0e0e6",
-    purple: "800080",
-    rebeccapurple: "663399",
-    red: "f00",
-    rosybrown: "bc8f8f",
-    royalblue: "4169e1",
-    saddlebrown: "8b4513",
-    salmon: "fa8072",
-    sandybrown: "f4a460",
-    seagreen: "2e8b57",
-    seashell: "fff5ee",
-    sienna: "a0522d",
-    silver: "c0c0c0",
-    skyblue: "87ceeb",
-    slateblue: "6a5acd",
-    slategray: "708090",
-    slategrey: "708090",
-    snow: "fffafa",
-    springgreen: "00ff7f",
-    steelblue: "4682b4",
-    tan: "d2b48c",
-    teal: "008080",
-    thistle: "d8bfd8",
-    tomato: "ff6347",
-    turquoise: "40e0d0",
-    violet: "ee82ee",
-    wheat: "f5deb3",
-    white: "fff",
-    whitesmoke: "f5f5f5",
-    yellow: "ff0",
-    yellowgreen: "9acd32"
-  };
+  var names = (tinycolor.names = {
+    aliceblue: 'f0f8ff',
+    antiquewhite: 'faebd7',
+    aqua: '0ff',
+    aquamarine: '7fffd4',
+    azure: 'f0ffff',
+    beige: 'f5f5dc',
+    bisque: 'ffe4c4',
+    black: '000',
+    blanchedalmond: 'ffebcd',
+    blue: '00f',
+    blueviolet: '8a2be2',
+    brown: 'a52a2a',
+    burlywood: 'deb887',
+    burntsienna: 'ea7e5d',
+    cadetblue: '5f9ea0',
+    chartreuse: '7fff00',
+    chocolate: 'd2691e',
+    coral: 'ff7f50',
+    cornflowerblue: '6495ed',
+    cornsilk: 'fff8dc',
+    crimson: 'dc143c',
+    cyan: '0ff',
+    darkblue: '00008b',
+    darkcyan: '008b8b',
+    darkgoldenrod: 'b8860b',
+    darkgray: 'a9a9a9',
+    darkgreen: '006400',
+    darkgrey: 'a9a9a9',
+    darkkhaki: 'bdb76b',
+    darkmagenta: '8b008b',
+    darkolivegreen: '556b2f',
+    darkorange: 'ff8c00',
+    darkorchid: '9932cc',
+    darkred: '8b0000',
+    darksalmon: 'e9967a',
+    darkseagreen: '8fbc8f',
+    darkslateblue: '483d8b',
+    darkslategray: '2f4f4f',
+    darkslategrey: '2f4f4f',
+    darkturquoise: '00ced1',
+    darkviolet: '9400d3',
+    deeppink: 'ff1493',
+    deepskyblue: '00bfff',
+    dimgray: '696969',
+    dimgrey: '696969',
+    dodgerblue: '1e90ff',
+    firebrick: 'b22222',
+    floralwhite: 'fffaf0',
+    forestgreen: '228b22',
+    fuchsia: 'f0f',
+    gainsboro: 'dcdcdc',
+    ghostwhite: 'f8f8ff',
+    gold: 'ffd700',
+    goldenrod: 'daa520',
+    gray: '808080',
+    green: '008000',
+    greenyellow: 'adff2f',
+    grey: '808080',
+    honeydew: 'f0fff0',
+    hotpink: 'ff69b4',
+    indianred: 'cd5c5c',
+    indigo: '4b0082',
+    ivory: 'fffff0',
+    khaki: 'f0e68c',
+    lavender: 'e6e6fa',
+    lavenderblush: 'fff0f5',
+    lawngreen: '7cfc00',
+    lemonchiffon: 'fffacd',
+    lightblue: 'add8e6',
+    lightcoral: 'f08080',
+    lightcyan: 'e0ffff',
+    lightgoldenrodyellow: 'fafad2',
+    lightgray: 'd3d3d3',
+    lightgreen: '90ee90',
+    lightgrey: 'd3d3d3',
+    lightpink: 'ffb6c1',
+    lightsalmon: 'ffa07a',
+    lightseagreen: '20b2aa',
+    lightskyblue: '87cefa',
+    lightslategray: '789',
+    lightslategrey: '789',
+    lightsteelblue: 'b0c4de',
+    lightyellow: 'ffffe0',
+    lime: '0f0',
+    limegreen: '32cd32',
+    linen: 'faf0e6',
+    magenta: 'f0f',
+    maroon: '800000',
+    mediumaquamarine: '66cdaa',
+    mediumblue: '0000cd',
+    mediumorchid: 'ba55d3',
+    mediumpurple: '9370db',
+    mediumseagreen: '3cb371',
+    mediumslateblue: '7b68ee',
+    mediumspringgreen: '00fa9a',
+    mediumturquoise: '48d1cc',
+    mediumvioletred: 'c71585',
+    midnightblue: '191970',
+    mintcream: 'f5fffa',
+    mistyrose: 'ffe4e1',
+    moccasin: 'ffe4b5',
+    navajowhite: 'ffdead',
+    navy: '000080',
+    oldlace: 'fdf5e6',
+    olive: '808000',
+    olivedrab: '6b8e23',
+    orange: 'ffa500',
+    orangered: 'ff4500',
+    orchid: 'da70d6',
+    palegoldenrod: 'eee8aa',
+    palegreen: '98fb98',
+    paleturquoise: 'afeeee',
+    palevioletred: 'db7093',
+    papayawhip: 'ffefd5',
+    peachpuff: 'ffdab9',
+    peru: 'cd853f',
+    pink: 'ffc0cb',
+    plum: 'dda0dd',
+    powderblue: 'b0e0e6',
+    purple: '800080',
+    rebeccapurple: '663399',
+    red: 'f00',
+    rosybrown: 'bc8f8f',
+    royalblue: '4169e1',
+    saddlebrown: '8b4513',
+    salmon: 'fa8072',
+    sandybrown: 'f4a460',
+    seagreen: '2e8b57',
+    seashell: 'fff5ee',
+    sienna: 'a0522d',
+    silver: 'c0c0c0',
+    skyblue: '87ceeb',
+    slateblue: '6a5acd',
+    slategray: '708090',
+    slategrey: '708090',
+    snow: 'fffafa',
+    springgreen: '00ff7f',
+    steelblue: '4682b4',
+    tan: 'd2b48c',
+    teal: '008080',
+    thistle: 'd8bfd8',
+    tomato: 'ff6347',
+    turquoise: '40e0d0',
+    violet: 'ee82ee',
+    wheat: 'f5deb3',
+    white: 'fff',
+    whitesmoke: 'f5f5f5',
+    yellow: 'ff0',
+    yellowgreen: '9acd32',
+  });
 
   // Make it easy to access colors via `hexNames[hex]`
-  var hexNames = tinycolor.hexNames = flip(names);
-
+  var hexNames = (tinycolor.hexNames = flip(names));
 
   // Utilities
   // ---------
@@ -971,7 +960,9 @@
 
   // Take input from [0, n] and return it as [0, 1]
   function bound01(n, max) {
-    if (isOnePointZero(n)) { n = "100%"; }
+    if (isOnePointZero(n)) {
+      n = '100%';
+    }
 
     var processPercent = isPercentage(n);
     n = mathMin(max, mathMax(0, parseFloat(n)));
@@ -982,7 +973,7 @@
     }
 
     // Handle floating point rounding errors
-    if ((math.abs(n - max) < 0.000001)) {
+    if (math.abs(n - max) < 0.000001) {
       return 1;
     }
 
@@ -1003,12 +994,12 @@
   // Need to handle 1.0 as 100%, since once it is a number, there is no difference between it and 1
   // <http://stackoverflow.com/questions/7422072/javascript-how-to-detect-number-as-a-decimal-including-1-0>
   function isOnePointZero(n) {
-    return typeof n == "string" && n.indexOf('.') != -1 && parseFloat(n) === 1;
+    return typeof n == 'string' && n.indexOf('.') != -1 && parseFloat(n) === 1;
   }
 
   // Check to see if string passed in is a percentage
   function isPercentage(n) {
-    return typeof n === "string" && n.indexOf('%') != -1;
+    return typeof n === 'string' && n.indexOf('%') != -1;
   }
 
   // Force a hex value to have 2 characters
@@ -1019,7 +1010,7 @@
   // Replace a decimal with it's percentage value
   function convertToPercentage(n) {
     if (n <= 1) {
-      n = (n * 100) + "%";
+      n = n * 100 + '%';
     }
 
     return n;
@@ -1031,36 +1022,35 @@
   }
   // Converts a hex value to a decimal
   function convertHexToDecimal(h) {
-    return (parseIntFromHex(h) / 255);
+    return parseIntFromHex(h) / 255;
   }
 
   var matchers = (function () {
-
     // <http://www.w3.org/TR/css3-values/#integers>
-    var CSS_INTEGER = "[-\\+]?\\d+%?";
+    var CSS_INTEGER = '[-\\+]?\\d+%?';
 
     // <http://www.w3.org/TR/css3-values/#number-value>
-    var CSS_NUMBER = "[-\\+]?\\d*\\.\\d+%?";
+    var CSS_NUMBER = '[-\\+]?\\d*\\.\\d+%?';
 
     // Allow positive/negative integer/number.  Don't capture the either/or, just the entire outcome.
-    var CSS_UNIT = "(?:" + CSS_NUMBER + ")|(?:" + CSS_INTEGER + ")";
+    var CSS_UNIT = '(?:' + CSS_NUMBER + ')|(?:' + CSS_INTEGER + ')';
 
     // Actual matching.
     // Parentheses and commas are optional, but not required.
     // Whitespace can take the place of commas or opening paren
-    var PERMISSIVE_MATCH3 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
-    var PERMISSIVE_MATCH4 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
+    var PERMISSIVE_MATCH3 = '[\\s|\\(]+(' + CSS_UNIT + ')[,|\\s]+(' + CSS_UNIT + ')[,|\\s]+(' + CSS_UNIT + ')\\s*\\)?';
+    var PERMISSIVE_MATCH4 = '[\\s|\\(]+(' + CSS_UNIT + ')[,|\\s]+(' + CSS_UNIT + ')[,|\\s]+(' + CSS_UNIT + ')[,|\\s]+(' + CSS_UNIT + ')\\s*\\)?';
 
     return {
-      rgb: new RegExp("rgb" + PERMISSIVE_MATCH3),
-      rgba: new RegExp("rgba" + PERMISSIVE_MATCH4),
-      hsl: new RegExp("hsl" + PERMISSIVE_MATCH3),
-      hsla: new RegExp("hsla" + PERMISSIVE_MATCH4),
-      hsv: new RegExp("hsv" + PERMISSIVE_MATCH3),
-      hsva: new RegExp("hsva" + PERMISSIVE_MATCH4),
+      rgb: new RegExp('rgb' + PERMISSIVE_MATCH3),
+      rgba: new RegExp('rgba' + PERMISSIVE_MATCH4),
+      hsl: new RegExp('hsl' + PERMISSIVE_MATCH3),
+      hsla: new RegExp('hsla' + PERMISSIVE_MATCH4),
+      hsv: new RegExp('hsv' + PERMISSIVE_MATCH3),
+      hsva: new RegExp('hsva' + PERMISSIVE_MATCH4),
       hex3: /^([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
       hex6: /^([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
-      hex8: /^([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
+      hex8: /^([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
     };
   })();
 
@@ -1068,15 +1058,13 @@
   // Permissive string parsing.  Take in a number of formats, and output an object
   // based on detected format.  Returns `{ r, g, b }` or `{ h, s, l }` or `{ h, s, v}`
   function stringInputToObject(color) {
-
     color = color.replace(trimLeft, '').replace(trimRight, '').toLowerCase();
     var named = false;
     if (names[color]) {
       color = names[color];
       named = true;
-    }
-    else if (color == 'transparent') {
-      return { r: 0, g: 0, b: 0, a: 0, format: "name" };
+    } else if (color == 'transparent') {
+      return { r: 0, g: 0, b: 0, a: 0, format: 'name' };
     }
 
     // Try to match string input using regular expressions.
@@ -1108,7 +1096,7 @@
         r: parseIntFromHex(match[2]),
         g: parseIntFromHex(match[3]),
         b: parseIntFromHex(match[4]),
-        format: named ? "name" : "hex8"
+        format: named ? 'name' : 'hex8',
       };
     }
     if ((match = matchers.hex6.exec(color))) {
@@ -1116,7 +1104,7 @@
         r: parseIntFromHex(match[1]),
         g: parseIntFromHex(match[2]),
         b: parseIntFromHex(match[3]),
-        format: named ? "name" : "hex"
+        format: named ? 'name' : 'hex',
       };
     }
     if ((match = matchers.hex3.exec(color))) {
@@ -1124,7 +1112,7 @@
         r: parseIntFromHex(match[1] + '' + match[1]),
         g: parseIntFromHex(match[2] + '' + match[2]),
         b: parseIntFromHex(match[3] + '' + match[3]),
-        format: named ? "name" : "hex"
+        format: named ? 'name' : 'hex',
       };
     }
 
@@ -1135,29 +1123,30 @@
     // return valid WCAG2 parms for isReadable.
     // If input parms are invalid, return {"level":"AA", "size":"small"}
     var level, size;
-    parms = parms || { "level": "AA", "size": "small" };
-    level = (parms.level || "AA").toUpperCase();
-    size = (parms.size || "small").toLowerCase();
-    if (level !== "AA" && level !== "AAA") {
-      level = "AA";
+    parms = parms || { level: 'AA', size: 'small' };
+    level = (parms.level || 'AA').toUpperCase();
+    size = (parms.size || 'small').toLowerCase();
+    if (level !== 'AA' && level !== 'AAA') {
+      level = 'AA';
     }
-    if (size !== "small" && size !== "large") {
-      size = "small";
+    if (size !== 'small' && size !== 'large') {
+      size = 'small';
     }
-    return { "level": level, "size": size };
+    return { level: level, size: size };
   }
 
   // Node: Export function
-  if (typeof module !== "undefined" && module.exports) {
+  if (typeof module !== 'undefined' && module.exports) {
     module.exports = tinycolor;
   }
   // AMD/requirejs: Define the module
   else if (typeof define === 'function' && define.amd) {
-    define(function () { return tinycolor; });
+    define(function () {
+      return tinycolor;
+    });
   }
   // Browser: Expose to window
   else {
     window.tinycolor = tinycolor;
   }
-
 })();

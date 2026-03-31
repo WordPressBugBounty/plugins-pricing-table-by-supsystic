@@ -12,7 +12,7 @@
   font-size: 14px;
   line-height: 25px;
   background-color: #ffffff;
-  color: #4D4C4C;
+  color: #4d4c4c;
   padding-left: 10px;
 }
 
@@ -71,7 +71,7 @@
 
 .catitem .download-product-item .dp-excerpt,
 .catitem .download-product-item .dp-buttons {
-  background: #FAFAFA;
+  background: #fafafa;
 }
 
 .catitem .download-product-item .dp-buttons {
@@ -103,7 +103,7 @@
 
 .catitem .download-product-item {
   font-size: 16px;
-  border: 2px solid #4D4C4C;
+  border: 2px solid #4d4c4c;
 }
 
 .catitem .bottom-buttons a,
@@ -191,10 +191,10 @@
 }
 
 .catitem .free-product-item .fpi {
-  transition: all .3s;
-  -moz-transition: all .3s;
-  -webkit-transition: all .3s;
-  -o-transition: all .3s;
+  transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
 }
 
 .catitem .free-product-item .fpi.hover {
@@ -202,12 +202,12 @@
 }
 
 .catitem .fpi img {
-  border: 3px solid rgba(215, 219, 219, .4);
+  border: 3px solid rgba(215, 219, 219, 0.4);
   margin: -13px 0 0 -35px;
 }
 
 .catitem .bottom-buttons a {
-  color: #4D4C4C;
+  color: #4d4c4c;
   text-align: center;
   display: block;
   padding: 5px 35px 5px 5px;
@@ -227,16 +227,16 @@
 }
 
 .supsystic-plugin #supsystic-featured-plugins .btn {
-  color: #4D4C4C;
+  color: #4d4c4c;
   /*-webkit-transition-timing-function: initial;
 	transition-timing-function: initial;*/
 }
 
 .btn {
   background: transparent;
-  color: #4D4C4C;
+  color: #4d4c4c;
   text-align: center;
-  border: 2px solid #4D4C4C !important;
+  border: 2px solid #4d4c4c !important;
   border-radius: 0 !important;
   -moz-border-radius: 0 !important;
   -webkit-border-radius: 0 !important;
@@ -279,7 +279,7 @@
 }
 
 .hvr-shutter-out-horizontal:before {
-  content: "";
+  content: '';
   position: absolute;
   z-index: -1;
   top: 0;
@@ -321,7 +321,7 @@
 /* Shutter Out Horizontal End */
 /* Page Bundle Container Styles Start */
 .supsysticPageBundleContainer {
-  background-color: #56DADC;
+  background-color: #56dadc;
   padding-top: 28px;
   padding-bottom: 28px;
   display: table;
@@ -339,7 +339,7 @@
   padding: 5px 38px !important;
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
   .supsysticPageBundleContainer .bundle-btn {
     margin-top: 20px;
   }

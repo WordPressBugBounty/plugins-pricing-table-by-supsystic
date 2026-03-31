@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Plugin Name: Pricing Table by Supsystic
  * Plugin URI: https://supsystic.com/plugins/pricing-tables/
  * Description: Pricing Table generator by Supsystic allow you to create responsive pricing tables or comparison table without any programming skills
- * Version: 1.10.02
+ * Version: 1.10.03
  * Author: supsystic.com
  * Author URI: http://supsystic.com/
  * Text Domain: pricing-table-by-supsystic
@@ -12,34 +13,34 @@
 /**
  * Base config constants and functions
  */
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . "config.php";
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . "functions.php";
+require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'config.php';
+require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'functions.php';
 /**
  * Connect all required core classes
  */
-importClassPts("dbPts");
-importClassPts("installerPts");
-importClassPts("baseObjectPts");
-importClassPts("modulePts");
-importClassPts("modelPts");
-importClassPts("viewPts");
-importClassPts("controllerPts");
-importClassPts("helperPts");
-importClassPts("dispatcherPts");
-importClassPts("fieldPts");
-importClassPts("tablePts");
-importClassPts("framePts");
-importClassPts("reqPts");
-importClassPts("uriPts");
-importClassPts("htmlPts");
-importClassPts("responsePts");
-importClassPts("fieldAdapterPts");
-importClassPts("validatorPts");
-importClassPts("errorsPts");
-importClassPts("utilsPts");
-importClassPts("modInstallerPts");
-importClassPts("installerDbUpdaterPts");
-importClassPts("datePts");
+importClassPts('dbPts');
+importClassPts('installerPts');
+importClassPts('baseObjectPts');
+importClassPts('modulePts');
+importClassPts('modelPts');
+importClassPts('viewPts');
+importClassPts('controllerPts');
+importClassPts('helperPts');
+importClassPts('dispatcherPts');
+importClassPts('fieldPts');
+importClassPts('tablePts');
+importClassPts('framePts');
+importClassPts('reqPts');
+importClassPts('uriPts');
+importClassPts('htmlPts');
+importClassPts('responsePts');
+importClassPts('fieldAdapterPts');
+importClassPts('validatorPts');
+importClassPts('errorsPts');
+importClassPts('utilsPts');
+importClassPts('modInstallerPts');
+importClassPts('installerDbUpdaterPts');
+importClassPts('datePts');
 /**
  * Check plugin version - maybe we need to update database, and check global errors in request
  */

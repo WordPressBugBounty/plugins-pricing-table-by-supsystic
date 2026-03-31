@@ -201,12 +201,12 @@ html {
   -o-transform: scale(1, 1);
   -ms-transform: scale(1, 1);
   transform: scale(1, 1);
-  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
-  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
 }
 
 .tooltipster-swing {
@@ -230,12 +230,12 @@ html {
   -o-transform: rotateZ(0deg);
   -ms-transform: rotateZ(0deg);
   transform: rotateZ(0deg);
-  -webkit-transition-timing-function: cubic-bezier(0.230, 0.635, 0.495, 1);
-  -webkit-transition-timing-function: cubic-bezier(0.230, 0.635, 0.495, 2.4);
-  -moz-transition-timing-function: cubic-bezier(0.230, 0.635, 0.495, 2.4);
-  -ms-transition-timing-function: cubic-bezier(0.230, 0.635, 0.495, 2.4);
-  -o-transition-timing-function: cubic-bezier(0.230, 0.635, 0.495, 2.4);
-  transition-timing-function: cubic-bezier(0.230, 0.635, 0.495, 2.4);
+  -webkit-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
+  -moz-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
+  -ms-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
+  -o-transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
+  transition-timing-function: cubic-bezier(0.23, 0.635, 0.495, 2.4);
 }
 
 .tooltipster-fall {
@@ -245,15 +245,16 @@ html {
   -o-transition-property: top;
   -ms-transition-property: top;
   transition-property: top;
-  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
-  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
 }
 
-.tooltipster-fall-show {}
+.tooltipster-fall-show {
+}
 
 .tooltipster-fall.tooltipster-dying {
   -webkit-transition-property: all;
@@ -272,15 +273,16 @@ html {
   -o-transition-property: left;
   -ms-transition-property: left;
   transition-property: left;
-  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
-  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.15);
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -ms-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.15);
 }
 
-.tooltipster-slide.tooltipster-slide-show {}
+.tooltipster-slide.tooltipster-slide-show {
+}
 
 .tooltipster-slide.tooltipster-dying {
   -webkit-transition-property: all;

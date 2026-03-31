@@ -13,7 +13,7 @@
 
 /* caption*/
 .ui-jqgrid .ui-jqgrid-titlebar {
-  padding: .3em .2em .2em .3em;
+  padding: 0.3em 0.2em 0.2em 0.3em;
   position: relative;
   font-size: 12px;
   border-left: 0 none;
@@ -26,7 +26,7 @@
 }
 
 .ui-jqgrid .ui-jqgrid-title {
-  margin: .1em 0 .2em;
+  margin: 0.1em 0 0.2em;
 }
 
 .ui-jqgrid .ui-jqgrid-titlebar-close {
@@ -38,7 +38,6 @@
   height: 18px;
   cursor: pointer;
 }
-
 
 /* header*/
 .ui-jqgrid .ui-jqgrid-hdiv {
@@ -136,15 +135,15 @@
 .ui-jqgrid tr.ui-search-toolbar th {
   border-top-width: 1px !important;
   border-top-color: inherit !important;
-  border-top-style: ridge !important
+  border-top-style: ridge !important;
 }
 
 tr.ui-search-toolbar input {
-  margin: 1px 0 0 0
+  margin: 1px 0 0 0;
 }
 
 tr.ui-search-toolbar select {
-  margin: 1px 0 0 0
+  margin: 1px 0 0 0;
 }
 
 /* body */
@@ -325,15 +324,14 @@ tr.ui-search-toolbar select {
   float: left;
 }
 
-
 .ui-jqgrid .ui-pg-input {
   height: 13px;
-  font-size: .8em;
+  font-size: 0.8em;
   margin: 0;
 }
 
 .ui-jqgrid .ui-pg-selbox {
-  font-size: .8em;
+  font-size: 0.8em;
   line-height: 18px;
   display: block;
   height: 18px;
@@ -488,18 +486,18 @@ tr.ui-search-toolbar select {
   display: none;
   width: 300px;
   position: absolute;
-  padding: .2em;
+  padding: 0.2em;
   font-size: 11px;
   overflow: visible;
 }
 
 .ui-jqdialog .ui-jqdialog-titlebar {
-  padding: .3em .2em;
+  padding: 0.3em 0.2em;
   position: relative;
 }
 
 .ui-jqdialog .ui-jqdialog-title {
-  margin: .1em 0 .2em;
+  margin: 0.1em 0 0.2em;
 }
 
 .ui-jqdialog .ui-jqdialog-titlebar-close {
@@ -525,13 +523,13 @@ tr.ui-search-toolbar select {
 .ui-jqdialog-content,
 .ui-jqdialog .ui-jqdialog-content {
   border: 0;
-  padding: .3em .2em;
+  padding: 0.3em 0.2em;
   background: none;
   height: auto;
 }
 
 .ui-jqdialog .ui-jqconfirm {
-  padding: .4em 1em;
+  padding: 0.4em 1em;
   border-width: 3px;
   position: absolute;
   bottom: 10px;
@@ -543,14 +541,14 @@ tr.ui-search-toolbar select {
   text-align: center;
 }
 
-.ui-jqdialog>.ui-resizable-se {
+.ui-jqdialog > .ui-resizable-se {
   bottom: -3px;
-  right: -3px
+  right: -3px;
 }
 
-.ui-jqgrid>.ui-resizable-se {
+.ui-jqgrid > .ui-resizable-se {
   bottom: -3px;
-  right: -3px
+  right: -3px;
 }
 
 /* end Modal window*/
@@ -599,15 +597,15 @@ tr.ui-search-toolbar select {
 }
 
 .ui-jqdialog-content input.FormElement {
-  padding: .3em
+  padding: 0.3em;
 }
 
 .ui-jqdialog-content select.FormElement {
-  padding: .3em
+  padding: 0.3em;
 }
 
 .ui-jqdialog-content .data-line {
-  padding-top: .1em;
+  padding-top: 0.1em;
   border: 0 none;
 }
 
@@ -625,13 +623,13 @@ tr.ui-search-toolbar select {
 }
 
 .ui-jqdialog-content .form-view-data {
-  white-space: pre
+  white-space: pre;
 }
 
 .fm-button {
   display: inline-block;
   margin: 0 4px 0 0;
-  padding: .4em .5em;
+  padding: 0.4em 0.5em;
   text-decoration: none !important;
   cursor: pointer;
   position: relative;
@@ -649,7 +647,7 @@ tr.ui-search-toolbar select {
 
 .fm-button-icon-left .ui-icon {
   right: auto;
-  left: .2em;
+  left: 0.2em;
   margin-left: 0;
   position: absolute;
   top: 50%;
@@ -658,7 +656,7 @@ tr.ui-search-toolbar select {
 
 .fm-button-icon-right .ui-icon {
   left: auto;
-  right: .2em;
+  right: 0.2em;
   margin-left: 0;
   position: absolute;
   top: 50%;
@@ -736,7 +734,7 @@ div.ui-jqgrid .selected-row td {
   border-right-width: 1px;
   border-right-color: inherit;
   border-right-style: solid;
-  height: 20px
+  height: 20px;
 }
 
 /* RTL Support */
@@ -799,8 +797,8 @@ a.clearsearchclass {
   cursor: pointer;
 }
 
-.ui-jqgrid .ui-search-table .ui-search-input>input,
-.ui-jqgrid .ui-search-table .ui-search-input>select {
+.ui-jqgrid .ui-search-table .ui-search-input > input,
+.ui-jqgrid .ui-search-table .ui-search-input > select {
   display: block;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -811,5 +809,5 @@ a.clearsearchclass {
 .ui-jqgrid .ui-jqgrid-view select,
 .ui-jqgrid .ui-jqgrid-view textarea,
 .ui-jqgrid .ui-jqgrid-view button {
-  font-size: 11px
+  font-size: 11px;
 }

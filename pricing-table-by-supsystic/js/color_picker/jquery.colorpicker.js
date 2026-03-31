@@ -12,61 +12,48 @@
  * Sourcecode created from scratch by Martijn W. van der Lee.
  */
 (function (factory) {
-  if (typeof define === "function" && define.amd) {
-
+  if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define([
-      "jquery"
-    ], factory);
+    define(['jquery'], factory);
   } else {
-
     // Browser globals
     factory(jQuery);
   }
-}(function ($) {
-  "use strict";
+})(function ($) {
+  'use strict';
 
   var _colorpicker_index = 0,
-
     _container_popup = '<div class="ui-colorpicker ui-colorpicker-dialog ui-dialog ui-widget ui-widget-content ui-corner-all" style="display: none;"></div>',
     _container_inlineFrame = '<div class="ui-colorpicker ui-colorpicker-inline ui-dialog ui-widget ui-widget-content ui-corner-all"></div>',
     _container_inline = '<div class="ui-colorpicker ui-colorpicker-inline"></div>',
-
     _intToHex = function (dec) {
       var result = Math.round(dec).toString(16);
       if (result.length === 1) {
-        result = ('0' + result);
+        result = '0' + result;
       }
       return result.toLowerCase();
     },
-
     _keycode = {
       isPrint: function (keycode) {
-        return keycode == 32						// spacebar
-          || (keycode >= 48 && keycode <= 57)		// number keys
-          || (keycode >= 65 && keycode <= 90)		// letter keys
-          || (keycode >= 96 && keycode <= 111)	// numpad keys
-          || (keycode >= 186 && keycode < 192)	// ;=,-./` (in order)
-          || (keycode >= 219 && keycode < 222);	// [\]' (in order)
+        return (
+          keycode == 32 || // spacebar
+          (keycode >= 48 && keycode <= 57) || // number keys
+          (keycode >= 65 && keycode <= 90) || // letter keys
+          (keycode >= 96 && keycode <= 111) || // numpad keys
+          (keycode >= 186 && keycode < 192) || // ;=,-./` (in order)
+          (keycode >= 219 && keycode < 222)
+        ); // [\]' (in order)
       },
       isHex: function (keycode) {
-        return (keycode >= 48 && keycode <= 57)		// number keys
-          || (keycode >= 96 && keycode <= 105)	// numpad keys
-          || (keycode >= 65 && keycode <= 70);	// a-f
-      }
+        return (
+          (keycode >= 48 && keycode <= 57) || // number keys
+          (keycode >= 96 && keycode <= 105) || // numpad keys
+          (keycode >= 65 && keycode <= 70)
+        ); // a-f
+      },
     },
-
     _layoutTable = function (layout, callback) {
-      var bitmap,
-        x, y,
-        width, height,
-        columns, rows,
-        index,
-        cell,
-        html,
-        w, h,
-        colspan,
-        walked;
+      var bitmap, x, y, width, height, columns, rows, index, cell, html, w, h, colspan, walked;
 
       layout.sort(function (a, b) {
         if (a.pos[1] === b.pos[1]) {
@@ -104,7 +91,7 @@
 
       // Generate the table
       html = '';
-      cell = layout[index = 0];
+      cell = layout[(index = 0)];
       for (y = 0; y < height; ++y) {
         html += '<tr>';
         x = 0;
@@ -147,7 +134,7 @@
       return '<table cellspacing="0" cellpadding="0" border="0"><tbody>' + html + '</tbody></table>';
     };
 
-  $.colorpicker = new function () {
+  $.colorpicker = new (function () {
     this.regional = {
       '': {
         ok: 'OK',
@@ -172,16 +159,16 @@
         cmykM: 'M',
         cmykY: 'Y',
         cmykK: 'K',
-        alphaA: 'A'
-      }
+        alphaA: 'A',
+      },
     };
 
     this.swatchesNames = {
-      'html': 'HTML'
+      html: 'HTML',
     };
 
     this.swatches = {
-      'html': [
+      html: [
         { name: 'black', r: 0, g: 0, b: 0 },
         { name: 'dimgray', r: 0.4117647058823529, g: 0.4117647058823529, b: 0.4117647058823529 },
         { name: 'gray', r: 0.5019607843137255, g: 0.5019607843137255, b: 0.5019607843137255 },
@@ -321,91 +308,81 @@
         { name: 'lavenderblush', r: 1, g: 0.9411764705882353, b: 0.9607843137254902 },
         { name: 'crimson', r: 0.8627450980392157, g: 0.0784313725490196, b: 0.23529411764705882 },
         { name: 'pink', r: 1, g: 0.7529411764705882, b: 0.796078431372549 },
-        { name: 'lightpink', r: 1, g: 0.7137254901960784, b: 0.7568627450980392 }
-      ]
+        { name: 'lightpink', r: 1, g: 0.7137254901960784, b: 0.7568627450980392 },
+      ],
     };
 
     this.writers = {
       '#HEX': function (color, that) {
         return that._formatColor('#rxgxbx', color);
-      }
-      , '#HEX3': function (color, that) {
+      },
+      '#HEX3': function (color, that) {
         var hex3 = $.colorpicker.writers.HEX3(color);
         return hex3 === false ? false : '#' + hex3;
-      }
-      , 'HEX': function (color, that) {
+      },
+      HEX: function (color, that) {
         return that._formatColor('rxgxbx', color);
-      }
-      , 'HEX3': function (color, that) {
+      },
+      HEX3: function (color, that) {
         var rgb = color.getRGB(),
           r = Math.round(rgb.r * 255),
           g = Math.round(rgb.g * 255),
           b = Math.round(rgb.b * 255);
 
-        if (((r >>> 4) === (r &= 0xf))
-          && ((g >>> 4) === (g &= 0xf))
-          && ((b >>> 4) === (b &= 0xf))) {
+        if (r >>> 4 === (r &= 0xf) && g >>> 4 === (g &= 0xf) && b >>> 4 === (b &= 0xf)) {
           return r.toString(16) + g.toString(16) + b.toString(16);
         }
         return false;
-      }
-      , '#HEXA': function (color, that) {
+      },
+      '#HEXA': function (color, that) {
         return that._formatColor('#rxgxbxax', color);
-      }
-      , '#HEXA4': function (color, that) {
+      },
+      '#HEXA4': function (color, that) {
         var hexa4 = $.colorpicker.writers.HEXA4(color, that);
         return hexa4 === false ? false : '#' + hexa4;
-      }
-      , 'HEXA': function (color, that) {
+      },
+      HEXA: function (color, that) {
         return that._formatColor('rxgxbxax', color);
-      }
-      , 'HEXA4': function (color, that) {
+      },
+      HEXA4: function (color, that) {
         var a = Math.round(color.getAlpha() * 255);
 
-        if ((a >>> 4) === (a &= 0xf)) {
+        if (a >>> 4 === (a &= 0xf)) {
           return $.colorpicker.writers.HEX3(color, that) + a.toString(16);
         }
         return false;
-      }
-      , 'RGB': function (color, that) {
-        return color.getAlpha() >= 1
-          ? that._formatColor('rgb(rd,gd,bd)', color)
-          : false;
-      }
-      , 'RGBA': function (color, that) {
+      },
+      RGB: function (color, that) {
+        return color.getAlpha() >= 1 ? that._formatColor('rgb(rd,gd,bd)', color) : false;
+      },
+      RGBA: function (color, that) {
         return that._formatColor('#rxgxbxax', color);
         // return that._formatColor('rgba(rd,gd,bd,af)', color);
-      }
-      , 'RGB%': function (color, that) {
-        return color.getAlpha() >= 1
-          ? that._formatColor('rgb(rp%,gp%,bp%)', color)
-          : false;
-      }
-      , 'RGBA%': function (color, that) {
+      },
+      'RGB%': function (color, that) {
+        return color.getAlpha() >= 1 ? that._formatColor('rgb(rp%,gp%,bp%)', color) : false;
+      },
+      'RGBA%': function (color, that) {
         return that._formatColor('rgba(rp%,gp%,bp%,af)', color);
-      }
-      , 'HSL': function (color, that) {
-        return color.getAlpha() >= 1
-          ? that._formatColor('hsl(hd,sd,vd)', color)
-          : false;
-      }
-      , 'HSLA': function (color, that) {
+      },
+      HSL: function (color, that) {
+        return color.getAlpha() >= 1 ? that._formatColor('hsl(hd,sd,vd)', color) : false;
+      },
+      HSLA: function (color, that) {
         return that._formatColor('hsla(hd,sd,vd,af)', color);
-      }
-      , 'HSL%': function (color, that) {
-        return color.getAlpha() >= 1
-          ? that._formatColor('hsl(hp%,sp%,vp%)', color)
-          : false;
-      }
-      , 'HSLA%': function (color, that) {
+      },
+      'HSL%': function (color, that) {
+        return color.getAlpha() >= 1 ? that._formatColor('hsl(hp%,sp%,vp%)', color) : false;
+      },
+      'HSLA%': function (color, that) {
         return that._formatColor('hsla(hp%,sp%,vp%,af)', color);
-      }
-      , 'NAME': function (color, that) {
+      },
+      NAME: function (color, that) {
         return that._closestName(color);
-      }
-      , 'EXACT': function (color, that) {
+      },
+      EXACT: function (color, that) {
         return that._exactName(color);
-      }
+      },
     };
 
     this.parsers = {
@@ -413,14 +390,14 @@
         if (color === '') {
           return new $.colorpicker.Color();
         }
-      }
-      , 'NAME': function (color, that) {
+      },
+      NAME: function (color, that) {
         var c = that._getSwatch($.trim(color));
         if (c) {
           return new $.colorpicker.Color(c.r, c.g, c.b);
         }
-      }
-      , 'RGBA': function (color) {
+      },
+      RGBA: function (color) {
         // var m = /^rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)$/.exec(color);
         // if (m) {
         // 	return new $.colorpicker.Color(
@@ -432,150 +409,98 @@
         // }
         var m = /^#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})$/.exec(color);
         if (m) {
-          return new $.colorpicker.Color(
-            parseInt(m[1], 16) / 255,
-            parseInt(m[2], 16) / 255,
-            parseInt(m[3], 16) / 255,
-            parseInt(m[4], 16) / 255
-          );
+          return new $.colorpicker.Color(parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255, parseInt(m[4], 16) / 255);
         }
-      }
-      , 'RGBA%': function (color) {
+      },
+      'RGBA%': function (color) {
         var m = /^rgba?\(\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)$/.exec(color);
         if (m) {
-          return new $.colorpicker.Color(
-            m[1] / 100,
-            m[2] / 100,
-            m[3] / 100,
-            m[4] / 100
-          );
+          return new $.colorpicker.Color(m[1] / 100, m[2] / 100, m[3] / 100, m[4] / 100);
         }
-      }
-      , 'HSLA': function (color) {
+      },
+      HSLA: function (color) {
         var m = /^hsla?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)$/.exec(color);
         if (m) {
-          return (new $.colorpicker.Color()).setHSL(
-            m[1] / 255,
-            m[2] / 255,
-            m[3] / 255).setAlpha(parseFloat(m[4]));
+          return new $.colorpicker.Color().setHSL(m[1] / 255, m[2] / 255, m[3] / 255).setAlpha(parseFloat(m[4]));
         }
-      }
-      , 'HSLA%': function (color) {
+      },
+      'HSLA%': function (color) {
         var m = /^hsla?\(\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)$/.exec(color);
         if (m) {
-          return (new $.colorpicker.Color()).setHSL(
-            m[1] / 100,
-            m[2] / 100,
-            m[3] / 100).setAlpha(m[4] / 100);
+          return new $.colorpicker.Color().setHSL(m[1] / 100, m[2] / 100, m[3] / 100).setAlpha(m[4] / 100);
         }
-      }
-      , '#HEX': function (color) {
+      },
+      '#HEX': function (color) {
         var m = /^#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})$/.exec(color);
         if (m) {
-          return new $.colorpicker.Color(
-            parseInt(m[1], 16) / 255,
-            parseInt(m[2], 16) / 255,
-            parseInt(m[3], 16) / 255
-          );
+          return new $.colorpicker.Color(parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255);
         }
-      }
-      , '#HEX3': function (color) {
+      },
+      '#HEX3': function (color) {
         var m = /^#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])$/.exec(color);
         if (m) {
-          return new $.colorpicker.Color(
-            parseInt(String(m[1]) + m[1], 16) / 255,
-            parseInt(String(m[2]) + m[2], 16) / 255,
-            parseInt(String(m[3]) + m[3], 16) / 255
-          );
+          return new $.colorpicker.Color(parseInt(String(m[1]) + m[1], 16) / 255, parseInt(String(m[2]) + m[2], 16) / 255, parseInt(String(m[3]) + m[3], 16) / 255);
         }
-      }
-      , 'HEX': function (color) {
+      },
+      HEX: function (color) {
         var m = /^([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})$/.exec(color);
         if (m) {
-          return new $.colorpicker.Color(
-            parseInt(m[1], 16) / 255,
-            parseInt(m[2], 16) / 255,
-            parseInt(m[3], 16) / 255
-          );
+          return new $.colorpicker.Color(parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255);
         }
-      }
-      , 'HEX3': function (color) {
+      },
+      HEX3: function (color) {
         var m = /^([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])$/.exec(color);
         if (m) {
-          return new $.colorpicker.Color(
-            parseInt(String(m[1]) + m[1], 16) / 255,
-            parseInt(String(m[2]) + m[2], 16) / 255,
-            parseInt(String(m[3]) + m[3], 16) / 255
-          );
+          return new $.colorpicker.Color(parseInt(String(m[1]) + m[1], 16) / 255, parseInt(String(m[2]) + m[2], 16) / 255, parseInt(String(m[3]) + m[3], 16) / 255);
         }
-      }
-      , '#HEXA': function (color) {
+      },
+      '#HEXA': function (color) {
         var m = /^#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})$/.exec(color);
         if (m) {
-          return new $.colorpicker.Color(
-            parseInt(m[1], 16) / 255,
-            parseInt(m[2], 16) / 255,
-            parseInt(m[3], 16) / 255,
-            parseInt(m[4], 16) / 255
-          );
+          return new $.colorpicker.Color(parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255, parseInt(m[4], 16) / 255);
         }
-      }
-      , '#HEXA4': function (color) {
+      },
+      '#HEXA4': function (color) {
         var m = /^#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])$/.exec(color);
         if (m) {
-          return new $.colorpicker.Color(
-            parseInt(String(m[1]) + m[1], 16) / 255,
-            parseInt(String(m[2]) + m[2], 16) / 255,
-            parseInt(String(m[3]) + m[3], 16) / 255,
-            parseInt(String(m[4]) + m[4], 16) / 255
-          );
+          return new $.colorpicker.Color(parseInt(String(m[1]) + m[1], 16) / 255, parseInt(String(m[2]) + m[2], 16) / 255, parseInt(String(m[3]) + m[3], 16) / 255, parseInt(String(m[4]) + m[4], 16) / 255);
         }
-      }
-      , 'HEXA': function (color) {
+      },
+      HEXA: function (color) {
         var m = /^([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})$/.exec(color);
         if (m) {
-          return new $.colorpicker.Color(
-            parseInt(m[1], 16) / 255,
-            parseInt(m[2], 16) / 255,
-            parseInt(m[3], 16) / 255,
-            parseInt(m[4], 16) / 255
-          );
+          return new $.colorpicker.Color(parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255, parseInt(m[4], 16) / 255);
         }
-      }
-      , 'HEXA4': function (color) {
+      },
+      HEXA4: function (color) {
         var m = /^([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])$/.exec(color);
         if (m) {
-          return new $.colorpicker.Color(
-            parseInt(String(m[1]) + m[1], 16) / 255,
-            parseInt(String(m[2]) + m[2], 16) / 255,
-            parseInt(String(m[3]) + m[3], 16) / 255,
-            parseInt(String(m[4]) + m[4], 16) / 255
-          );
+          return new $.colorpicker.Color(parseInt(String(m[1]) + m[1], 16) / 255, parseInt(String(m[2]) + m[2], 16) / 255, parseInt(String(m[3]) + m[3], 16) / 255, parseInt(String(m[4]) + m[4], 16) / 255);
         }
-      }
+      },
     };
 
     this.partslists = {
-      'full': ['header', 'map', 'bar', 'hex', 'hsv', 'rgb', 'alpha', 'lab', 'cmyk', 'preview', 'swatches', 'footer'],
-      'popup': ['map', 'bar', 'hex', 'hsv', 'rgb', 'alpha', 'preview', 'footer'],
-      'draggable': ['header', 'map', 'bar', 'hex', 'hsv', 'rgb', 'alpha', 'preview', 'footer'],
-      'inline': ['map', 'bar', 'hex', 'hsv', 'rgb', 'alpha', 'preview']
+      full: ['header', 'map', 'bar', 'hex', 'hsv', 'rgb', 'alpha', 'lab', 'cmyk', 'preview', 'swatches', 'footer'],
+      popup: ['map', 'bar', 'hex', 'hsv', 'rgb', 'alpha', 'preview', 'footer'],
+      draggable: ['header', 'map', 'bar', 'hex', 'hsv', 'rgb', 'alpha', 'preview', 'footer'],
+      inline: ['map', 'bar', 'hex', 'hsv', 'rgb', 'alpha', 'preview'],
     };
 
     this.limits = {
-      'websafe': function (color) {
+      websafe: function (color) {
         color.limit(6);
       },
-      'nibble': function (color) {
+      nibble: function (color) {
         color.limit(16);
       },
-      'binary': function (color) {
+      binary: function (color) {
         color.limit(2);
       },
-      'name': function (color, that) {
+      name: function (color, that) {
         var swatch = that._getSwatch(that._closestName(color));
         color.setRGB(swatch.r, swatch.g, swatch.b);
-      }
+      },
     };
 
     this.parts = {
@@ -587,8 +512,7 @@
               html = '<span class="ui-dialog-title">' + title + '</span>';
 
             if (!inst.inline && inst.options.showCloseButton) {
-              html += '<a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button">'
-                + '<span class="ui-icon ui-icon-closethick">close</span></a>';
+              html += '<a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button">' + '<span class="ui-icon ui-icon-closethick">close</span></a>';
             }
 
             return '<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">' + html + '</div>';
@@ -611,7 +535,7 @@
           if (!inst.inline && inst.options.draggable) {
             var draggableOptions = {
               handle: part,
-            }
+            };
             if (inst.options.containment) {
               draggableOptions.containment = inst.options.containment;
             }
@@ -627,8 +551,15 @@
       map: function (inst) {
         var that = this,
           part = null,
-          pointer, width, height, layers = {},
-          _mousedown, _mouseup, _mousemove, _keydown, _html;
+          pointer,
+          width,
+          height,
+          layers = {},
+          _mousedown,
+          _mouseup,
+          _mousemove,
+          _keydown,
+          _html;
 
         _mousedown = function (event) {
           if (!inst.opened) {
@@ -709,36 +640,37 @@
 
         _keydown = function (event) {
           var x_channel_map = {
-            'h': 's',
-            's': 'h',
-            'v': 'h',
-            'r': 'b',
-            'g': 'b',
-            'b': 'r',
-            'a': 'h'
-          },
+              h: 's',
+              s: 'h',
+              v: 'h',
+              r: 'b',
+              g: 'b',
+              b: 'r',
+              a: 'h',
+            },
             x_change = {
               37: -1,
               39: 1,
             },
             y_channel_map = {
-              'h': 'v',
-              's': 'v',
-              'v': 's',
-              'r': 'g',
-              'g': 'r',
-              'b': 'g',
-              'a': 'v'
+              h: 'v',
+              s: 'v',
+              v: 's',
+              r: 'g',
+              g: 'r',
+              b: 'g',
+              a: 'v',
             },
             y_change = {
               38: 1,
-              40: -1
+              40: -1,
             },
             set = {
               35: 0,
-              36: 1
+              36: 1,
             },
-            change, value;
+            change,
+            value;
 
           if (typeof x_change[event.which] !== 'undefined') {
             value = inst.color.getChannel(x_channel_map[inst.mode]) * width;
@@ -768,11 +700,14 @@
         };
 
         _html = function () {
-          var html = '<div class="ui-colorpicker-map ui-colorpicker-map-' + (inst.options.part.map.size || 256) + ' ui-colorpicker-border" taonex="0">'
-            + '<span class="ui-colorpicker-map-layer-1">&nbsp;</span>'
-            + '<span class="ui-colorpicker-map-layer-2">&nbsp;</span>'
-            + (inst.options.alpha ? '<span class="ui-colorpicker-map-layer-alpha">&nbsp;</span>' : '')
-            + '<span class="ui-colorpicker-map-layer-pointer"><span class="ui-colorpicker-map-pointer"></span></span></div>';
+          var html =
+            '<div class="ui-colorpicker-map ui-colorpicker-map-' +
+            (inst.options.part.map.size || 256) +
+            ' ui-colorpicker-border" taonex="0">' +
+            '<span class="ui-colorpicker-map-layer-1">&nbsp;</span>' +
+            '<span class="ui-colorpicker-map-layer-2">&nbsp;</span>' +
+            (inst.options.alpha ? '<span class="ui-colorpicker-map-layer-alpha">&nbsp;</span>' : '') +
+            '<span class="ui-colorpicker-map-layer-pointer"><span class="ui-colorpicker-map-pointer"></span></span></div>';
           return html;
         };
 
@@ -794,39 +729,39 @@
         };
 
         this.update = function () {
-          var step = ((inst.options.part.map.size || 256) * 65 / 64);
+          var step = ((inst.options.part.map.size || 256) * 65) / 64;
 
           switch (inst.mode) {
             case 'h':
-              layers[1].css({ 'background-position': '0 0', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 0', opacity: '' }).show();
               layers[2].hide();
               break;
 
             case 's':
             case 'a':
-              layers[1].css({ 'background-position': '0 ' + (-step) + 'px', 'opacity': '' }).show();
-              layers[2].css({ 'background-position': '0 ' + (-step * 2) + 'px', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 ' + -step + 'px', opacity: '' }).show();
+              layers[2].css({ 'background-position': '0 ' + -step * 2 + 'px', opacity: '' }).show();
               break;
 
             case 'v':
               part.css('background-color', 'black');
-              layers[1].css({ 'background-position': '0 ' + (-step * 3) + 'px', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 ' + -step * 3 + 'px', opacity: '' }).show();
               layers[2].hide();
               break;
 
             case 'r':
-              layers[1].css({ 'background-position': '0 ' + (-step * 4) + 'px', 'opacity': '' }).show();
-              layers[2].css({ 'background-position': '0 ' + (-step * 5) + 'px', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 ' + -step * 4 + 'px', opacity: '' }).show();
+              layers[2].css({ 'background-position': '0 ' + -step * 5 + 'px', opacity: '' }).show();
               break;
 
             case 'g':
-              layers[1].css({ 'background-position': '0 ' + (-step * 6) + 'px', 'opacity': '' }).show();
-              layers[2].css({ 'background-position': '0 ' + (-step * 7) + 'px', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 ' + -step * 6 + 'px', opacity: '' }).show();
+              layers[2].css({ 'background-position': '0 ' + -step * 7 + 'px', opacity: '' }).show();
               break;
 
             case 'b':
-              layers[1].css({ 'background-position': '0 ' + (-step * 8) + 'px', 'opacity': '' }).show();
-              layers[2].css({ 'background-position': '0 ' + (-step * 9) + 'px', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 ' + -step * 8 + 'px', opacity: '' }).show();
+              layers[2].css({ 'background-position': '0 ' + -step * 9 + 'px', opacity: '' }).show();
               break;
           }
 
@@ -861,7 +796,7 @@
               break;
 
             case 'r':
-              var rgb = inst.color.getRGB()
+              var rgb = inst.color.getRGB();
               x = rgb.b * width;
               y = (1 - rgb.g) * width;
               layers[2].css('opacity', rgb.r);
@@ -875,7 +810,7 @@
               break;
 
             case 'b':
-              var rgb = inst.color.getRGB()
+              var rgb = inst.color.getRGB();
               x = rgb.r * width;
               y = (1 - rgb.g) * width;
               layers[2].css('opacity', rgb.b);
@@ -887,8 +822,8 @@
           }
 
           pointer.css({
-            'left': x - 7,
-            'top': y - 7
+            left: x - 7,
+            top: y - 7,
           });
         };
 
@@ -901,8 +836,15 @@
       bar: function (inst) {
         var that = this,
           part = null,
-          pointer, width, height, layers = {},
-          _mousedown, _mouseup, _mousemove, _keydown, _html;
+          pointer,
+          width,
+          height,
+          layers = {},
+          _mousedown,
+          _mouseup,
+          _mousemove,
+          _keydown,
+          _html;
 
         _mousedown = function (event) {
           if (!inst.opened) {
@@ -983,16 +925,17 @@
 
         _keydown = function (event) {
           var change = {
-            38: 1,
-            40: -1,
-            33: 10,
-            34: -10
-          },
+              38: 1,
+              40: -1,
+              33: 10,
+              34: -10,
+            },
             set = {
               35: 0,
-              36: 1
+              36: 1,
             },
-            change, value;
+            change,
+            value;
 
           if (typeof change[event.which] !== 'undefined') {
             value = inst.color.getChannel(inst.mode) * height;
@@ -1011,15 +954,17 @@
         };
 
         _html = function () {
-          var html = '<div class="ui-colorpicker-bar ui-colorpicker-bar-' + (inst.options.part.bar.size || 256) + '  ui-colorpicker-border" taonex="0">'
-            + '<span class="ui-colorpicker-bar-layer-1">&nbsp;</span>'
-            + '<span class="ui-colorpicker-bar-layer-2">&nbsp;</span>'
-            + '<span class="ui-colorpicker-bar-layer-3">&nbsp;</span>'
-            + '<span class="ui-colorpicker-bar-layer-4">&nbsp;</span>';
+          var html =
+            '<div class="ui-colorpicker-bar ui-colorpicker-bar-' +
+            (inst.options.part.bar.size || 256) +
+            '  ui-colorpicker-border" taonex="0">' +
+            '<span class="ui-colorpicker-bar-layer-1">&nbsp;</span>' +
+            '<span class="ui-colorpicker-bar-layer-2">&nbsp;</span>' +
+            '<span class="ui-colorpicker-bar-layer-3">&nbsp;</span>' +
+            '<span class="ui-colorpicker-bar-layer-4">&nbsp;</span>';
 
           if (inst.options.alpha) {
-            html += '<span class="ui-colorpicker-bar-layer-alpha">&nbsp;</span>'
-              + '<span class="ui-colorpicker-bar-layer-alphabar">&nbsp;</span>';
+            html += '<span class="ui-colorpicker-bar-layer-alpha">&nbsp;</span>' + '<span class="ui-colorpicker-bar-layer-alphabar">&nbsp;</span>';
           }
 
           html += '<span class="ui-colorpicker-bar-layer-pointer"><span class="ui-colorpicker-bar-pointer"></span></span></div>';
@@ -1048,7 +993,7 @@
         };
 
         this.update = function () {
-          var step = ((inst.options.part.bar.size || 256) * 65 / 64);
+          var step = ((inst.options.part.bar.size || 256) * 65) / 64;
 
           switch (inst.mode) {
             case 'h':
@@ -1069,45 +1014,45 @@
 
           switch (inst.mode) {
             case 'h':
-              layers[1].css({ 'background-position': '0 0', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 0', opacity: '' }).show();
               layers[2].hide();
               layers[3].hide();
               layers[4].hide();
               break;
 
             case 's':
-              layers[1].css({ 'background-position': '0 ' + (-step) + 'px', 'opacity': '' }).show();
-              layers[2].css({ 'background-position': '0 ' + (-step * 2) + 'px', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 ' + -step + 'px', opacity: '' }).show();
+              layers[2].css({ 'background-position': '0 ' + -step * 2 + 'px', opacity: '' }).show();
               layers[3].hide();
               layers[4].hide();
               break;
 
             case 'v':
-              layers[1].css({ 'background-position': '0 ' + (-step * 2) + 'px', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 ' + -step * 2 + 'px', opacity: '' }).show();
               layers[2].hide();
               layers[3].hide();
               layers[4].hide();
               break;
 
             case 'r':
-              layers[1].css({ 'background-position': '0 ' + (-step * 6) + 'px', 'opacity': '' }).show();
-              layers[2].css({ 'background-position': '0 ' + (-step * 5) + 'px', 'opacity': '' }).show();
-              layers[3].css({ 'background-position': '0 ' + (-step * 3) + 'px', 'opacity': '' }).show();
-              layers[4].css({ 'background-position': '0 ' + (-step * 4) + 'px', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 ' + -step * 6 + 'px', opacity: '' }).show();
+              layers[2].css({ 'background-position': '0 ' + -step * 5 + 'px', opacity: '' }).show();
+              layers[3].css({ 'background-position': '0 ' + -step * 3 + 'px', opacity: '' }).show();
+              layers[4].css({ 'background-position': '0 ' + -step * 4 + 'px', opacity: '' }).show();
               break;
 
             case 'g':
-              layers[1].css({ 'background-position': '0 ' + (-step * 10) + 'px', 'opacity': '' }).show();
-              layers[2].css({ 'background-position': '0 ' + (-step * 9) + 'px', 'opacity': '' }).show();
-              layers[3].css({ 'background-position': '0 ' + (-step * 7) + 'px', 'opacity': '' }).show();
-              layers[4].css({ 'background-position': '0 ' + (-step * 8) + 'px', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 ' + -step * 10 + 'px', opacity: '' }).show();
+              layers[2].css({ 'background-position': '0 ' + -step * 9 + 'px', opacity: '' }).show();
+              layers[3].css({ 'background-position': '0 ' + -step * 7 + 'px', opacity: '' }).show();
+              layers[4].css({ 'background-position': '0 ' + -step * 8 + 'px', opacity: '' }).show();
               break;
 
             case 'b':
-              layers[1].css({ 'background-position': '0 ' + (-step * 14) + 'px', 'opacity': '' }).show();
-              layers[2].css({ 'background-position': '0 ' + (-step * 13) + 'px', 'opacity': '' }).show();
-              layers[3].css({ 'background-position': '0 ' + (-step * 11) + 'px', 'opacity': '' }).show();
-              layers[4].css({ 'background-position': '0 ' + (-step * 12) + 'px', 'opacity': '' }).show();
+              layers[1].css({ 'background-position': '0 ' + -step * 14 + 'px', opacity: '' }).show();
+              layers[2].css({ 'background-position': '0 ' + -step * 13 + 'px', opacity: '' }).show();
+              layers[3].css({ 'background-position': '0 ' + -step * 11 + 'px', opacity: '' }).show();
+              layers[4].css({ 'background-position': '0 ' + -step * 12 + 'px', opacity: '' }).show();
               break;
 
             case 'a':
@@ -1144,24 +1089,24 @@
             case 'r':
               var rgb = inst.color.getRGB();
               y = (1 - rgb.r) * height;
-              layers[2].css('opacity', Math.max(0, (rgb.b - rgb.g)));
-              layers[3].css('opacity', Math.max(0, (rgb.g - rgb.b)));
+              layers[2].css('opacity', Math.max(0, rgb.b - rgb.g));
+              layers[3].css('opacity', Math.max(0, rgb.g - rgb.b));
               layers[4].css('opacity', Math.min(rgb.b, rgb.g));
               break;
 
             case 'g':
               var rgb = inst.color.getRGB();
               y = (1 - rgb.g) * height;
-              layers[2].css('opacity', Math.max(0, (rgb.b - rgb.r)));
-              layers[3].css('opacity', Math.max(0, (rgb.r - rgb.b)));
+              layers[2].css('opacity', Math.max(0, rgb.b - rgb.r));
+              layers[3].css('opacity', Math.max(0, rgb.r - rgb.b));
               layers[4].css('opacity', Math.min(rgb.r, rgb.b));
               break;
 
             case 'b':
               var rgb = inst.color.getRGB();
               y = (1 - rgb.b) * height;
-              layers[2].css('opacity', Math.max(0, (rgb.r - rgb.g)));
-              layers[3].css('opacity', Math.max(0, (rgb.g - rgb.r)));
+              layers[2].css('opacity', Math.max(0, rgb.r - rgb.g));
+              layers[3].css('opacity', Math.max(0, rgb.g - rgb.r));
               layers[4].css('opacity', Math.min(rgb.r, rgb.g));
               break;
 
@@ -1188,8 +1133,10 @@
         var that = this,
           part = null,
           both,
-          initial, initial_alpha,
-          current, current_alpha,
+          initial,
+          initial_alpha,
+          current,
+          current_alpha,
           _html,
           onclick = function () {
             inst.color = inst.currentColor.copy();
@@ -1197,10 +1144,12 @@
           };
 
         _html = function () {
-          return '<div class="ui-colorpicker-preview ui-colorpicker-border">'
-            + '<div class="ui-colorpicker-preview-initial"><div class="ui-colorpicker-preview-initial-alpha"></div></div>'
-            + '<div class="ui-colorpicker-preview-current"><div class="ui-colorpicker-preview-current-alpha"></div></div>'
-            + '</div>';
+          return (
+            '<div class="ui-colorpicker-preview ui-colorpicker-border">' +
+            '<div class="ui-colorpicker-preview-initial"><div class="ui-colorpicker-preview-initial-alpha"></div></div>' +
+            '<div class="ui-colorpicker-preview-current"><div class="ui-colorpicker-preview-current-alpha"></div></div>' +
+            '</div>'
+          );
         };
 
         this.init = function () {
@@ -1244,9 +1193,16 @@
           var html = '';
 
           if (inst.options.hsv) {
-            html += '<div class="ui-colorpicker-hsv-h"><input class="ui-colorpicker-mode" type="radio" value="h"/><label>' + inst._getRegional('hsvH') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="360" size="10"/><span class="ui-colorpicker-unit">&deg;</span></div>'
-              + '<div class="ui-colorpicker-hsv-s"><input class="ui-colorpicker-mode" type="radio" value="s"/><label>' + inst._getRegional('hsvS') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100" size="10"/><span class="ui-colorpicker-unit">%</span></div>'
-              + '<div class="ui-colorpicker-hsv-v"><input class="ui-colorpicker-mode" type="radio" value="v"/><label>' + inst._getRegional('hsvV') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100" size="10"/><span class="ui-colorpicker-unit">%</span></div>';
+            html +=
+              '<div class="ui-colorpicker-hsv-h"><input class="ui-colorpicker-mode" type="radio" value="h"/><label>' +
+              inst._getRegional('hsvH') +
+              '</label><input class="ui-colorpicker-number" type="number" min="0" max="360" size="10"/><span class="ui-colorpicker-unit">&deg;</span></div>' +
+              '<div class="ui-colorpicker-hsv-s"><input class="ui-colorpicker-mode" type="radio" value="s"/><label>' +
+              inst._getRegional('hsvS') +
+              '</label><input class="ui-colorpicker-number" type="number" min="0" max="100" size="10"/><span class="ui-colorpicker-unit">%</span></div>' +
+              '<div class="ui-colorpicker-hsv-v"><input class="ui-colorpicker-mode" type="radio" value="v"/><label>' +
+              inst._getRegional('hsvV') +
+              '</label><input class="ui-colorpicker-number" type="number" min="0" max="100" size="10"/><span class="ui-colorpicker-unit">%</span></div>';
           }
 
           return '<div class="ui-colorpicker-hsv">' + html + '</div>';
@@ -1265,11 +1221,7 @@
           inputs.v = $('.ui-colorpicker-hsv-v .ui-colorpicker-number', part);
 
           $('.ui-colorpicker-number', part).on('change keyup', function () {
-            inst.color.setHSV(
-              inputs.h.val() / 360,
-              inputs.s.val() / 100,
-              inputs.v.val() / 100
-            );
+            inst.color.setHSV(inputs.h.val() / 360, inputs.s.val() / 100, inputs.v.val() / 100);
             inst._change();
           });
         };
@@ -1304,9 +1256,16 @@
           var html = '';
 
           if (inst.options.rgb) {
-            html += '<div class="ui-colorpicker-rgb-r"><input class="ui-colorpicker-mode" type="radio" value="r"/><label>' + inst._getRegional('rgbR') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>'
-              + '<div class="ui-colorpicker-rgb-g"><input class="ui-colorpicker-mode" type="radio" value="g"/><label>' + inst._getRegional('rgbG') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>'
-              + '<div class="ui-colorpicker-rgb-b"><input class="ui-colorpicker-mode" type="radio" value="b"/><label>' + inst._getRegional('rgbB') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>';
+            html +=
+              '<div class="ui-colorpicker-rgb-r"><input class="ui-colorpicker-mode" type="radio" value="r"/><label>' +
+              inst._getRegional('rgbR') +
+              '</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>' +
+              '<div class="ui-colorpicker-rgb-g"><input class="ui-colorpicker-mode" type="radio" value="g"/><label>' +
+              inst._getRegional('rgbG') +
+              '</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>' +
+              '<div class="ui-colorpicker-rgb-b"><input class="ui-colorpicker-mode" type="radio" value="b"/><label>' +
+              inst._getRegional('rgbB') +
+              '</label><input class="ui-colorpicker-number" type="number" min="0" max="255"/></div>';
           }
 
           return '<div class="ui-colorpicker-rgb">' + html + '</div>';
@@ -1326,11 +1285,7 @@
 
           $('.ui-colorpicker-number', part).on('change keyup', function () {
             var r = $('.ui-colorpicker-rgb-r .ui-colorpicker-number', part).val();
-            inst.color.setRGB(
-              inputs.r.val() / 255,
-              inputs.g.val() / 255,
-              inputs.b.val() / 255
-            );
+            inst.color.setRGB(inputs.r.val() / 255, inputs.g.val() / 255, inputs.b.val() / 255);
 
             inst._change();
           });
@@ -1364,9 +1319,16 @@
             var html = '';
 
             if (inst.options.hsv) {
-              html += '<div class="ui-colorpicker-lab-l"><label>' + inst._getRegional('labL') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/></div>'
-                + '<div class="ui-colorpicker-lab-a"><label>' + inst._getRegional('labA') + '</label><input class="ui-colorpicker-number" type="number" min="-128" max="127"/></div>'
-                + '<div class="ui-colorpicker-lab-b"><label>' + inst._getRegional('labB') + '</label><input class="ui-colorpicker-number" type="number" min="-128" max="127"/></div>';
+              html +=
+                '<div class="ui-colorpicker-lab-l"><label>' +
+                inst._getRegional('labL') +
+                '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/></div>' +
+                '<div class="ui-colorpicker-lab-a"><label>' +
+                inst._getRegional('labA') +
+                '</label><input class="ui-colorpicker-number" type="number" min="-128" max="127"/></div>' +
+                '<div class="ui-colorpicker-lab-b"><label>' +
+                inst._getRegional('labB') +
+                '</label><input class="ui-colorpicker-number" type="number" min="-128" max="127"/></div>';
             }
 
             return '<div class="ui-colorpicker-lab">' + html + '</div>';
@@ -1382,11 +1344,7 @@
           inputs.b = $('.ui-colorpicker-lab-b .ui-colorpicker-number', part);
 
           $('.ui-colorpicker-number', part).on('change keyup', function (event) {
-            inst.color.setLAB(
-              parseInt(inputs.l.val(), 10) / 100,
-              (parseInt(inputs.a.val(), 10) + 128) / 255,
-              (parseInt(inputs.b.val(), 10) + 128) / 255
-            );
+            inst.color.setLAB(parseInt(inputs.l.val(), 10) / 100, (parseInt(inputs.a.val(), 10) + 128) / 255, (parseInt(inputs.b.val(), 10) + 128) / 255);
             inst._change();
           });
         };
@@ -1413,10 +1371,19 @@
             var html = '';
 
             if (inst.options.hsv) {
-              html += '<div class="ui-colorpicker-cmyk-c"><label>' + inst._getRegional('cmykC') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>'
-                + '<div class="ui-colorpicker-cmyk-m"><label>' + inst._getRegional('cmykM') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>'
-                + '<div class="ui-colorpicker-cmyk-y"><label>' + inst._getRegional('cmykY') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>'
-                + '<div class="ui-colorpicker-cmyk-k"><label>' + inst._getRegional('cmykK') + '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>';
+              html +=
+                '<div class="ui-colorpicker-cmyk-c"><label>' +
+                inst._getRegional('cmykC') +
+                '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>' +
+                '<div class="ui-colorpicker-cmyk-m"><label>' +
+                inst._getRegional('cmykM') +
+                '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>' +
+                '<div class="ui-colorpicker-cmyk-y"><label>' +
+                inst._getRegional('cmykY') +
+                '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>' +
+                '<div class="ui-colorpicker-cmyk-k"><label>' +
+                inst._getRegional('cmykK') +
+                '</label><input class="ui-colorpicker-number" type="number" min="0" max="100"/><span class="ui-colorpicker-unit">%</span></div>';
             }
 
             return '<div class="ui-colorpicker-cmyk">' + html + '</div>';
@@ -1431,12 +1398,7 @@
           inputs.k = $('.ui-colorpicker-cmyk-k .ui-colorpicker-number', part);
 
           $('.ui-colorpicker-number', part).on('change keyup', function (event) {
-            inst.color.setCMYK(
-              parseInt(inputs.c.val(), 10) / 100,
-              parseInt(inputs.m.val(), 10) / 100,
-              parseInt(inputs.y.val(), 10) / 100,
-              parseInt(inputs.k.val(), 10) / 100
-            );
+            inst.color.setCMYK(parseInt(inputs.c.val(), 10) / 100, parseInt(inputs.m.val(), 10) / 100, parseInt(inputs.y.val(), 10) / 100, parseInt(inputs.k.val(), 10) / 100);
             inst._change();
           });
         };
@@ -1507,29 +1469,20 @@
           part = null,
           inputs = {},
           parseHex = function (color) {
-            var c,
-              m;
+            var c, m;
 
             // {#}rgb
             m = /^#?([a-fA-F0-9]{1,3})$/.exec(color);
             if (m) {
               c = parseInt(m[1], 16);
-              return new $.colorpicker.Color(
-                ((c >> 8) & 0xF) / 15,
-                ((c >> 4) & 0xF) / 15,
-                (c & 0xF) / 15
-              );
+              return new $.colorpicker.Color(((c >> 8) & 0xf) / 15, ((c >> 4) & 0xf) / 15, (c & 0xf) / 15);
             }
 
             // {#}rrggbb
             m = /^#?([a-fA-F0-9]{1,6})$/.exec(color);
             if (m) {
               c = parseInt(m[1], 16);
-              return new $.colorpicker.Color(
-                ((c >> 16) & 0xFF) / 255,
-                ((c >> 8) & 0xFF) / 255,
-                (c & 0xFF) / 255
-              );
+              return new $.colorpicker.Color(((c >> 16) & 0xff) / 255, ((c >> 8) & 0xff) / 255, (c & 0xff) / 255);
             }
 
             return new $.colorpicker.Color();
@@ -1667,13 +1620,17 @@
         this.init = function () {
           part = $(html()).appendTo(inst.dialog);
 
-          $('.ui-colorpicker-ok', part).button().click(function () {
-            inst.close();
-          });
+          $('.ui-colorpicker-ok', part)
+            .button()
+            .click(function () {
+              inst.close();
+            });
 
-          $('.ui-colorpicker-cancel', part).button().click(function () {
-            inst.close(true);   //cancel
-          });
+          $('.ui-colorpicker-cancel', part)
+            .button()
+            .click(function () {
+              inst.close(true); //cancel
+            });
 
           $('.ui-colorpicker-buttonset', part)[$.fn.controlgroup ? 'controlgroup' : 'buttonset']();
 
@@ -1694,11 +1651,13 @@
 
         this.repaint = function () {
           $('.ui-colorpicker-special-none', part).prop('checked', !inst.color.set).button('refresh');
-          $('.ui-colorpicker-special-transparent', part).prop('checked', inst.color.set && inst.color.getAlpha() === 0).button('refresh');
+          $('.ui-colorpicker-special-transparent', part)
+            .prop('checked', inst.color.set && inst.color.getAlpha() === 0)
+            .button('refresh');
           $('.ui-colorpicker-ok', part).button(inst.changed ? 'enable' : 'disable');
         };
 
-        this.update = function () { };
+        this.update = function () {};
 
         this.disable = function (disabled) {
           $(':input, :button', part).button(disabled ? 'disable' : 'enable');
@@ -1706,19 +1665,19 @@
             $('.ui-colorpicker-ok', part).button(inst.changed ? 'enable' : 'disable');
           }
         };
-      }
+      },
     };
 
     this.Color = function () {
       var spaces = {
-        rgb: { r: 0, g: 0, b: 0 },
-        hsv: { h: 0, s: 0, v: 0 },
-        hsl: { h: 0, s: 0, l: 0 },
-        lab: { l: 0, a: 0, b: 0 },
-        cmyk: { c: 0, m: 0, y: 0, k: 1 }
-      },
+          rgb: { r: 0, g: 0, b: 0 },
+          hsv: { h: 0, s: 0, v: 0 },
+          hsl: { h: 0, s: 0, l: 0 },
+          lab: { l: 0, a: 0, b: 0 },
+          cmyk: { c: 0, m: 0, y: 0, k: 1 },
+        },
         a = 1,
-        illuminant = [0.9504285, 1, 1.0889],	// CIE-L*ab D65/2' 1931
+        illuminant = [0.9504285, 1, 1.0889], // CIE-L*ab D65/2' 1931
         args = arguments,
         _clip = function (v) {
           if (isNaN(v) || v === null) {
@@ -1738,26 +1697,26 @@
           return hexified;
         },
         _rgb_to_xyz = function (rgb) {
-          var r = (rgb.r > 0.04045) ? Math.pow((rgb.r + 0.055) / 1.055, 2.4) : rgb.r / 12.92,
-            g = (rgb.g > 0.04045) ? Math.pow((rgb.g + 0.055) / 1.055, 2.4) : rgb.g / 12.92,
-            b = (rgb.b > 0.04045) ? Math.pow((rgb.b + 0.055) / 1.055, 2.4) : rgb.b / 12.92;
+          var r = rgb.r > 0.04045 ? Math.pow((rgb.r + 0.055) / 1.055, 2.4) : rgb.r / 12.92,
+            g = rgb.g > 0.04045 ? Math.pow((rgb.g + 0.055) / 1.055, 2.4) : rgb.g / 12.92,
+            b = rgb.b > 0.04045 ? Math.pow((rgb.b + 0.055) / 1.055, 2.4) : rgb.b / 12.92;
 
           return {
             x: r * 0.4124 + g * 0.3576 + b * 0.1805,
             y: r * 0.2126 + g * 0.7152 + b * 0.0722,
-            z: r * 0.0193 + g * 0.1192 + b * 0.9505
+            z: r * 0.0193 + g * 0.1192 + b * 0.9505,
           };
         },
         _xyz_to_rgb = function (xyz) {
           var rgb = {
             r: xyz.x * 3.2406 + xyz.y * -1.5372 + xyz.z * -0.4986,
             g: xyz.x * -0.9689 + xyz.y * 1.8758 + xyz.z * 0.0415,
-            b: xyz.x * 0.0557 + xyz.y * -0.2040 + xyz.z * 1.0570
+            b: xyz.x * 0.0557 + xyz.y * -0.204 + xyz.z * 1.057,
           };
 
-          rgb.r = (rgb.r > 0.0031308) ? 1.055 * Math.pow(rgb.r, (1 / 2.4)) - 0.055 : 12.92 * rgb.r;
-          rgb.g = (rgb.g > 0.0031308) ? 1.055 * Math.pow(rgb.g, (1 / 2.4)) - 0.055 : 12.92 * rgb.g;
-          rgb.b = (rgb.b > 0.0031308) ? 1.055 * Math.pow(rgb.b, (1 / 2.4)) - 0.055 : 12.92 * rgb.b;
+          rgb.r = rgb.r > 0.0031308 ? 1.055 * Math.pow(rgb.r, 1 / 2.4) - 0.055 : 12.92 * rgb.r;
+          rgb.g = rgb.g > 0.0031308 ? 1.055 * Math.pow(rgb.g, 1 / 2.4) - 0.055 : 12.92 * rgb.g;
+          rgb.b = rgb.b > 0.0031308 ? 1.055 * Math.pow(rgb.b, 1 / 2.4) - 0.055 : 12.92 * rgb.b;
 
           return rgb;
         },
@@ -1765,11 +1724,13 @@
           var minVal = Math.min(rgb.r, rgb.g, rgb.b),
             maxVal = Math.max(rgb.r, rgb.g, rgb.b),
             delta = maxVal - minVal,
-            del_R, del_G, del_B,
+            del_R,
+            del_G,
+            del_B,
             hsv = {
               h: 0,
               s: 0,
-              v: maxVal
+              v: maxVal,
             };
 
           if (delta === 0) {
@@ -1778,16 +1739,16 @@
           } else {
             hsv.s = delta / maxVal;
 
-            del_R = (((maxVal - rgb.r) / 6) + (delta / 2)) / delta;
-            del_G = (((maxVal - rgb.g) / 6) + (delta / 2)) / delta;
-            del_B = (((maxVal - rgb.b) / 6) + (delta / 2)) / delta;
+            del_R = ((maxVal - rgb.r) / 6 + delta / 2) / delta;
+            del_G = ((maxVal - rgb.g) / 6 + delta / 2) / delta;
+            del_B = ((maxVal - rgb.b) / 6 + delta / 2) / delta;
 
             if (rgb.r === maxVal) {
               hsv.h = del_B - del_G;
             } else if (rgb.g === maxVal) {
-              hsv.h = (1 / 3) + del_R - del_B;
+              hsv.h = 1 / 3 + del_R - del_B;
             } else if (rgb.b === maxVal) {
-              hsv.h = (2 / 3) + del_G - del_R;
+              hsv.h = 2 / 3 + del_G - del_R;
             }
 
             if (hsv.h < 0) {
@@ -1801,10 +1762,10 @@
         },
         _hsv_to_rgb = function (hsv) {
           var rgb = {
-            r: 0,
-            g: 0,
-            b: 0
-          },
+              r: 0,
+              g: 0,
+              b: 0,
+            },
             var_h,
             var_i,
             var_1,
@@ -1853,11 +1814,13 @@
           var minVal = Math.min(rgb.r, rgb.g, rgb.b),
             maxVal = Math.max(rgb.r, rgb.g, rgb.b),
             delta = maxVal - minVal,
-            del_R, del_G, del_B,
+            del_R,
+            del_G,
+            del_B,
             hsl = {
               h: 0,
               s: 0,
-              l: (maxVal + minVal) / 2
+              l: (maxVal + minVal) / 2,
             };
 
           if (delta === 0) {
@@ -1866,16 +1829,16 @@
           } else {
             hsl.s = hsl.l < 0.5 ? delta / (maxVal + minVal) : delta / (2 - maxVal - minVal);
 
-            del_R = (((maxVal - rgb.r) / 6) + (delta / 2)) / delta;
-            del_G = (((maxVal - rgb.g) / 6) + (delta / 2)) / delta;
-            del_B = (((maxVal - rgb.b) / 6) + (delta / 2)) / delta;
+            del_R = ((maxVal - rgb.r) / 6 + delta / 2) / delta;
+            del_G = ((maxVal - rgb.g) / 6 + delta / 2) / delta;
+            del_B = ((maxVal - rgb.b) / 6 + delta / 2) / delta;
 
             if (rgb.r === maxVal) {
               hsl.h = del_B - del_G;
             } else if (rgb.g === maxVal) {
-              hsl.h = (1 / 3) + del_R - del_B;
+              hsl.h = 1 / 3 + del_R - del_B;
             } else if (rgb.b === maxVal) {
-              hsl.h = (2 / 3) + del_G - del_R;
+              hsl.h = 2 / 3 + del_G - del_R;
             }
 
             if (hsl.h < 0) {
@@ -1897,14 +1860,14 @@
               if (vH > 1) {
                 vH -= 1;
               }
-              if ((6 * vH) < 1) {
+              if (6 * vH < 1) {
                 return v1 + (v2 - v1) * 6 * vH;
               }
-              if ((2 * vH) < 1) {
+              if (2 * vH < 1) {
                 return v2;
               }
-              if ((3 * vH) < 2) {
-                return v1 + (v2 - v1) * ((2 / 3) - vH) * 6;
+              if (3 * vH < 2) {
+                return v1 + (v2 - v1) * (2 / 3 - vH) * 6;
               }
               return v1;
             };
@@ -1913,17 +1876,17 @@
             return {
               r: hsl.l,
               g: hsl.l,
-              b: hsl.l
+              b: hsl.l,
             };
           }
 
-          var_2 = (hsl.l < 0.5) ? hsl.l * (1 + hsl.s) : (hsl.l + hsl.s) - (hsl.s * hsl.l);
+          var_2 = hsl.l < 0.5 ? hsl.l * (1 + hsl.s) : hsl.l + hsl.s - hsl.s * hsl.l;
           var_1 = 2 * hsl.l - var_2;
 
           return {
-            r: hue_to_rgb(var_1, var_2, hsl.h + (1 / 3)),
+            r: hue_to_rgb(var_1, var_2, hsl.h + 1 / 3),
             g: hue_to_rgb(var_1, var_2, hsl.h),
-            b: hue_to_rgb(var_1, var_2, hsl.h - (1 / 3))
+            b: hue_to_rgb(var_1, var_2, hsl.h - 1 / 3),
           };
         },
         _xyz_to_lab = function (xyz) {
@@ -1931,34 +1894,34 @@
             y = xyz.y / illuminant[1],
             z = xyz.z / illuminant[2];
 
-          x = (x > 0.008856) ? Math.pow(x, (1 / 3)) : (7.787 * x) + (16 / 116);
-          y = (y > 0.008856) ? Math.pow(y, (1 / 3)) : (7.787 * y) + (16 / 116);
-          z = (z > 0.008856) ? Math.pow(z, (1 / 3)) : (7.787 * z) + (16 / 116);
+          x = x > 0.008856 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116;
+          y = y > 0.008856 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116;
+          z = z > 0.008856 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116;
 
           return {
-            l: ((116 * y) - 16) / 100,	// [0,100]
-            a: ((500 * (x - y)) + 128) / 255,	// [-128,127]
-            b: ((200 * (y - z)) + 128) / 255	// [-128,127]
+            l: (116 * y - 16) / 100, // [0,100]
+            a: (500 * (x - y) + 128) / 255, // [-128,127]
+            b: (200 * (y - z) + 128) / 255, // [-128,127]
           };
         },
         _lab_to_xyz = function (lab) {
           var lab2 = {
-            l: lab.l * 100,
-            a: (lab.a * 255) - 128,
-            b: (lab.b * 255) - 128
-          },
+              l: lab.l * 100,
+              a: lab.a * 255 - 128,
+              b: lab.b * 255 - 128,
+            },
             xyz = {
               x: 0,
               y: (lab2.l + 16) / 116,
-              z: 0
+              z: 0,
             };
 
           xyz.x = lab2.a / 500 + xyz.y;
           xyz.z = xyz.y - lab2.b / 200;
 
-          xyz.x = (Math.pow(xyz.x, 3) > 0.008856) ? Math.pow(xyz.x, 3) : (xyz.x - 16 / 116) / 7.787;
-          xyz.y = (Math.pow(xyz.y, 3) > 0.008856) ? Math.pow(xyz.y, 3) : (xyz.y - 16 / 116) / 7.787;
-          xyz.z = (Math.pow(xyz.z, 3) > 0.008856) ? Math.pow(xyz.z, 3) : (xyz.z - 16 / 116) / 7.787;
+          xyz.x = Math.pow(xyz.x, 3) > 0.008856 ? Math.pow(xyz.x, 3) : (xyz.x - 16 / 116) / 7.787;
+          xyz.y = Math.pow(xyz.y, 3) > 0.008856 ? Math.pow(xyz.y, 3) : (xyz.y - 16 / 116) / 7.787;
+          xyz.z = Math.pow(xyz.z, 3) > 0.008856 ? Math.pow(xyz.z, 3) : (xyz.z - 16 / 116) / 7.787;
 
           xyz.x *= illuminant[0];
           xyz.y *= illuminant[1];
@@ -1968,16 +1931,16 @@
         },
         _rgb_to_cmy = function (rgb) {
           return {
-            c: 1 - (rgb.r),
-            m: 1 - (rgb.g),
-            y: 1 - (rgb.b)
+            c: 1 - rgb.r,
+            m: 1 - rgb.g,
+            y: 1 - rgb.b,
           };
         },
         _cmy_to_rgb = function (cmy) {
           return {
-            r: 1 - (cmy.c),
-            g: 1 - (cmy.m),
-            b: 1 - (cmy.y)
+            r: 1 - cmy.c,
+            g: 1 - cmy.m,
+            b: 1 - cmy.y,
           };
         },
         _cmy_to_cmyk = function (cmy) {
@@ -1998,7 +1961,7 @@
               c: 0,
               m: 0,
               y: 0,
-              k: 1
+              k: 1,
             };
           }
 
@@ -2006,14 +1969,14 @@
             c: (cmy.c - K) / (1 - K),
             m: (cmy.m - K) / (1 - K),
             y: (cmy.y - K) / (1 - K),
-            k: K
+            k: K,
           };
         },
         _cmyk_to_cmy = function (cmyk) {
           return {
             c: cmyk.c * (1 - cmyk.k) + cmyk.k,
             m: cmyk.m * (1 - cmyk.k) + cmyk.k,
-            y: cmyk.y * (1 - cmyk.k) + cmyk.k
+            y: cmyk.y * (1 - cmyk.k) + cmyk.k,
           };
         };
 
@@ -2163,11 +2126,7 @@
 
       this.getRGB = function () {
         if (!spaces.rgb) {
-          spaces.rgb = spaces.lab ? _xyz_to_rgb(_lab_to_xyz(spaces.lab))
-            : spaces.hsv ? _hsv_to_rgb(spaces.hsv)
-              : spaces.hsl ? _hsl_to_rgb(spaces.hsl)
-                : spaces.cmyk ? _cmy_to_rgb(_cmyk_to_cmy(spaces.cmyk))
-                  : { r: 0, g: 0, b: 0 };
+          spaces.rgb = spaces.lab ? _xyz_to_rgb(_lab_to_xyz(spaces.lab)) : spaces.hsv ? _hsv_to_rgb(spaces.hsv) : spaces.hsl ? _hsl_to_rgb(spaces.hsl) : spaces.cmyk ? _cmy_to_rgb(_cmyk_to_cmy(spaces.cmyk)) : { r: 0, g: 0, b: 0 };
           spaces.rgb.r = _clip(spaces.rgb.r);
           spaces.rgb.g = _clip(spaces.rgb.g);
           spaces.rgb.b = _clip(spaces.rgb.b);
@@ -2177,11 +2136,7 @@
 
       this.getHSV = function () {
         if (!spaces.hsv) {
-          spaces.hsv = spaces.lab ? _rgb_to_hsv(this.getRGB())
-            : spaces.rgb ? _rgb_to_hsv(spaces.rgb)
-              : spaces.hsl ? _rgb_to_hsv(this.getRGB())
-                : spaces.cmyk ? _rgb_to_hsv(this.getRGB())
-                  : { h: 0, s: 0, v: 0 };
+          spaces.hsv = spaces.lab ? _rgb_to_hsv(this.getRGB()) : spaces.rgb ? _rgb_to_hsv(spaces.rgb) : spaces.hsl ? _rgb_to_hsv(this.getRGB()) : spaces.cmyk ? _rgb_to_hsv(this.getRGB()) : { h: 0, s: 0, v: 0 };
           spaces.hsv.h = _clip(spaces.hsv.h);
           spaces.hsv.s = _clip(spaces.hsv.s);
           spaces.hsv.v = _clip(spaces.hsv.v);
@@ -2191,11 +2146,7 @@
 
       this.getHSL = function () {
         if (!spaces.hsl) {
-          spaces.hsl = spaces.rgb ? _rgb_to_hsl(spaces.rgb)
-            : spaces.hsv ? _rgb_to_hsl(this.getRGB())
-              : spaces.cmyk ? _rgb_to_hsl(this.getRGB())
-                : spaces.hsv ? _rgb_to_hsl(this.getRGB())
-                  : { h: 0, s: 0, l: 0 };
+          spaces.hsl = spaces.rgb ? _rgb_to_hsl(spaces.rgb) : spaces.hsv ? _rgb_to_hsl(this.getRGB()) : spaces.cmyk ? _rgb_to_hsl(this.getRGB()) : spaces.hsv ? _rgb_to_hsl(this.getRGB()) : { h: 0, s: 0, l: 0 };
           spaces.hsl.h = _clip(spaces.hsl.h);
           spaces.hsl.s = _clip(spaces.hsl.s);
           spaces.hsl.l = _clip(spaces.hsl.l);
@@ -2205,11 +2156,7 @@
 
       this.getCMYK = function () {
         if (!spaces.cmyk) {
-          spaces.cmyk = spaces.rgb ? _cmy_to_cmyk(_rgb_to_cmy(spaces.rgb))
-            : spaces.hsv ? _cmy_to_cmyk(_rgb_to_cmy(this.getRGB()))
-              : spaces.hsl ? _cmy_to_cmyk(_rgb_to_cmy(this.getRGB()))
-                : spaces.lab ? _cmy_to_cmyk(_rgb_to_cmy(this.getRGB()))
-                  : { c: 0, m: 0, y: 0, k: 1 };
+          spaces.cmyk = spaces.rgb ? _cmy_to_cmyk(_rgb_to_cmy(spaces.rgb)) : spaces.hsv ? _cmy_to_cmyk(_rgb_to_cmy(this.getRGB())) : spaces.hsl ? _cmy_to_cmyk(_rgb_to_cmy(this.getRGB())) : spaces.lab ? _cmy_to_cmyk(_rgb_to_cmy(this.getRGB())) : { c: 0, m: 0, y: 0, k: 1 };
           spaces.cmyk.c = _clip(spaces.cmyk.c);
           spaces.cmyk.m = _clip(spaces.cmyk.m);
           spaces.cmyk.y = _clip(spaces.cmyk.y);
@@ -2220,11 +2167,7 @@
 
       this.getLAB = function () {
         if (!spaces.lab) {
-          spaces.lab = spaces.rgb ? _xyz_to_lab(_rgb_to_xyz(spaces.rgb))
-            : spaces.hsv ? _xyz_to_lab(_rgb_to_xyz(this.getRGB()))
-              : spaces.hsl ? _xyz_to_lab(_rgb_to_xyz(this.getRGB()))
-                : spaces.cmyk ? _xyz_to_lab(_rgb_to_xyz(this.getRGB()))
-                  : { l: 0, a: 0, b: 0 };
+          spaces.lab = spaces.rgb ? _xyz_to_lab(_rgb_to_xyz(spaces.rgb)) : spaces.hsv ? _xyz_to_lab(_rgb_to_xyz(this.getRGB())) : spaces.hsl ? _xyz_to_lab(_rgb_to_xyz(this.getRGB())) : spaces.cmyk ? _xyz_to_lab(_rgb_to_xyz(this.getRGB())) : { l: 0, a: 0, b: 0 };
           spaces.lab.l = _clip(spaces.lab.l);
           spaces.lab.a = _clip(spaces.lab.a);
           spaces.lab.b = _clip(spaces.lab.b);
@@ -2247,7 +2190,7 @@
           k: this.getCMYK().k,
           L: this.getLAB().l,
           A: this.getLAB().a,
-          B: this.getLAB().b
+          B: this.getLAB().b,
         };
       };
 
@@ -2275,11 +2218,7 @@
           var a = this.getRGB(),
             b = color.getRGB();
 
-          return this.set === color.set
-            && this.getAlpha() === color.getAlpha()
-            && a.r === b.r
-            && a.g === b.g
-            && a.b === b.b;
+          return this.set === color.set && this.getAlpha() === color.getAlpha() && a.r === b.r && a.g === b.g && a.b === b.b;
         }
         return false;
       };
@@ -2287,11 +2226,7 @@
       this.limit = function (steps) {
         steps -= 1;
         var rgb = this.getRGB();
-        this.setRGB(
-          Math.round(rgb.r * steps) / steps,
-          Math.round(rgb.g * steps) / steps,
-          Math.round(rgb.b * steps) / steps
-        );
+        this.setRGB(Math.round(rgb.r * steps) / steps, Math.round(rgb.g * steps) / steps, Math.round(rgb.b * steps) / steps);
       };
 
       this.toHex = function () {
@@ -2321,35 +2256,35 @@
         this.set = true;
       }
     };
-  }();
+  })();
 
-  $.widget("vanderlee.colorpicker", {
+  $.widget('vanderlee.colorpicker', {
     options: {
-      alpha: false,		// Show alpha controls and mode
-      altAlpha: true,		// change opacity of altField as well?
-      altField: '',			// selector for DOM elements which change background color on change.
-      altOnChange: true,		// true to update on each change, false to update only on close.
-      altProperties: 'background-color',	// comma separated list of any of 'background-color', 'color', 'border-color', 'outline-color'
-      autoOpen: false,		// Open dialog automatically upon creation
-      buttonClass: null,		// If set, the button will get this/these classname(s).
+      alpha: false, // Show alpha controls and mode
+      altAlpha: true, // change opacity of altField as well?
+      altField: '', // selector for DOM elements which change background color on change.
+      altOnChange: true, // true to update on each change, false to update only on close.
+      altProperties: 'background-color', // comma separated list of any of 'background-color', 'color', 'border-color', 'outline-color'
+      autoOpen: false, // Open dialog automatically upon creation
+      buttonClass: null, // If set, the button will get this/these classname(s).
       buttonColorize: false,
       buttonImage: 'images/ui-colorpicker.png',
       buttonImageOnly: false,
-      buttonText: null,		// Text on the button and/or title of button image.
-      closeOnEscape: true,		// Close the dialog when the escape key is pressed.
-      closeOnOutside: true,		// Close the dialog when clicking outside the dialog (not for inline)
-      color: '#00FF00',	// Initial color (for inline only)
-      colorFormat: '#HEXA',		// Format string for output color format
-      disabled: false,		// Disable or enable the colorpicker initially
-      draggable: true,		// Make popup dialog draggable if header is visible.
-      containment: null,		// Constrains dragging to within the bounds of the specified element or region.
+      buttonText: null, // Text on the button and/or title of button image.
+      closeOnEscape: true, // Close the dialog when the escape key is pressed.
+      closeOnOutside: true, // Close the dialog when clicking outside the dialog (not for inline)
+      color: '#00FF00', // Initial color (for inline only)
+      colorFormat: '#HEXA', // Format string for output color format
+      disabled: false, // Disable or enable the colorpicker initially
+      draggable: true, // Make popup dialog draggable if header is visible.
+      containment: null, // Constrains dragging to within the bounds of the specified element or region.
       duration: 'fast',
-      hideOn: 'button',	// 'focus', 'click', 'button', 'alt', 'all'
-      hsv: true,		// Show HSV controls and modes
-      inline: true,		// Show any divs as inline by default
-      inlineFrame: true,		// Show a border and background when inline.
+      hideOn: 'button', // 'focus', 'click', 'button', 'alt', 'all'
+      hsv: true, // Show HSV controls and modes
+      inline: true, // Show any divs as inline by default
+      inlineFrame: true, // Show a border and background when inline.
       layout: {
-        map: [0, 0, 1, 5],	// Left, Top, Width, Height (in table cells).
+        map: [0, 0, 1, 5], // Left, Top, Width, Height (in table cells).
         bar: [1, 0, 1, 5],
         preview: [2, 0, 1, 1],
         hsv: [2, 1, 1, 1],
@@ -2358,29 +2293,29 @@
         hex: [2, 4, 1, 1],
         lab: [3, 1, 1, 1],
         cmyk: [3, 2, 1, 2],
-        swatches: [4, 0, 1, 5]
+        swatches: [4, 0, 1, 5],
       },
-      limit: '',			// Limit color "resolution": '', 'websafe', 'nibble', 'binary', 'name'
-      modal: false,		// Modal dialog?
-      mode: 'h',		// Initial editing mode, h, s, v, r, g, b or a
-      okOnEnter: false,		// Close (with OK) when pressing the enter key
-      parts: '',			// leave empty for automatic selection
+      limit: '', // Limit color "resolution": '', 'websafe', 'nibble', 'binary', 'name'
+      modal: false, // Modal dialog?
+      mode: 'h', // Initial editing mode, h, s, v, r, g, b or a
+      okOnEnter: false, // Close (with OK) when pressing the enter key
+      parts: '', // leave empty for automatic selection
       part: {
         map: { size: 256 },
-        bar: { size: 256 }
-      },			// options per part
+        bar: { size: 256 },
+      }, // options per part
       position: null,
       regional: '',
-      revert: false,		// Revert color upon non
-      rgb: true,		// Show RGB controls and modes
+      revert: false, // Revert color upon non
+      rgb: true, // Show RGB controls and modes
       showAnim: 'fadeIn',
       showCancelButton: true,
       showNoneButton: false,
       showCloseButton: true,
-      showOn: 'focus click alt',		// 'focus', 'click', 'button', 'alt', 'all'
+      showOn: 'focus click alt', // 'focus', 'click', 'button', 'alt', 'all'
       showOptions: {},
-      swatches: null,		// null for default or kv-object or names swatches set
-      swatchesWidth: 84,			// width (in number of pixels) of swatches box.
+      swatches: null, // null for default or kv-object or names swatches set
+      swatchesWidth: 84, // width (in number of pixels) of swatches box.
       title: null,
 
       cancel: null,
@@ -2390,7 +2325,7 @@
       open: null,
       select: null,
       stop: null,
-      ready: null
+      ready: null,
     },
 
     _create: function () {
@@ -2414,7 +2349,7 @@
       that.events = {
         window_resize: null,
         document_keydown: null,
-        document_click_html: null
+        document_click_html: null,
       };
 
       that.mode = that.options.mode;
@@ -2453,9 +2388,9 @@
             text = that.options.buttonText || that._getRegional('button');
 
             that.image = $('<img/>').attr({
-              'src': that.options.buttonImage,
-              'alt': text,
-              'title': text
+              src: that.options.buttonImage,
+              alt: text,
+              title: text,
             });
             if (that.options.buttonClass) {
               that.image.attr('class', that.options.buttonClass);
@@ -2467,7 +2402,9 @@
           if (that.options.buttonImageOnly && that.image) {
             that.button = that.image;
           } else {
-            that.button = $('<button type="button"></button>').html(that.image || that.options.buttonText).button();
+            that.button = $('<button type="button"></button>')
+              .html(that.image || that.options.buttonText)
+              .button();
             that.image = that.image ? $('img', that.button).first() : null;
           }
           that.button.insertAfter(that.element).click(function () {
@@ -2495,7 +2432,6 @@
         if (that.options.autoOpen) {
           that.open();
         }
-
       } else {
         that.inline = true;
 
@@ -2534,9 +2470,10 @@
       this.dialog && this.dialog.removeClass('ui-colorpicker-disabled');
       this.options.disabled = false;
 
-      this.parts && $.each(this.parts, function (index, part) {
-        part.disable && part.disable(false);
-      });
+      this.parts &&
+        $.each(this.parts, function (index, part) {
+          part.disable && part.disable(false);
+        });
     },
 
     disable: function () {
@@ -2546,9 +2483,10 @@
       this.dialog && this.dialog.addClass('ui-colorpicker-disabled');
       this.options.disabled = true;
 
-      this.parts && $.each(this.parts, function (index, part) {
-        part.disable && part.disable(true);
-      });
+      this.parts &&
+        $.each(this.parts, function (index, part) {
+          part.disable && part.disable(true);
+        });
     },
 
     _setImageBackground: function () {
@@ -2581,8 +2519,7 @@
           }
         }
 
-        this.options.altAlpha &&
-          $(this.options.altField).css('opacity', this.color.set ? this.color.getAlpha() : '');
+        this.options.altAlpha && $(this.options.altField).css('opacity', this.color.set ? this.color.getAlpha() : '');
       }
     },
 
@@ -2618,68 +2555,77 @@
 
       // Close on clicking outside window and controls
       if (that.events.document_click_html === null) {
-        $(document).on('touchstart click', 'html', that.events.document_click_html = function (event) {
-          if (!that.opened || event.target === that.element[0] || that.overlay) {
-            return;
-          }
-
-          // Check if clicked on any part of dialog
-          if (that.dialog.is(event.target) || that.dialog.has(event.target).length > 0) {
-            that.element.blur();	// inside window!
-            return;
-          }
-
-          // Check if clicked on known external elements
-          var p,
-            parents = $(event.target).parents();
-          // add the event.target in case of buttonImageOnly and closeOnOutside both are set to true
-          parents.push(event.target);
-          for (p = 0; p <= parents.length; ++p) {
-            // button
-            if (that.button !== null && parents[p] === that.button[0]) {
+        $(document).on(
+          'touchstart click',
+          'html',
+          (that.events.document_click_html = function (event) {
+            if (!that.opened || event.target === that.element[0] || that.overlay) {
               return;
             }
-            // showOn alt
-            if (/\balt|all|both\b/.test(that.options.showOn) && $(that.options.altField).is(parents[p])) {
+
+            // Check if clicked on any part of dialog
+            if (that.dialog.is(event.target) || that.dialog.has(event.target).length > 0) {
+              that.element.blur(); // inside window!
               return;
             }
-          }
 
-          // no closeOnOutside
-          if (!that.options.closeOnOutside) {
-            return;
-          }
+            // Check if clicked on known external elements
+            var p,
+              parents = $(event.target).parents();
+            // add the event.target in case of buttonImageOnly and closeOnOutside both are set to true
+            parents.push(event.target);
+            for (p = 0; p <= parents.length; ++p) {
+              // button
+              if (that.button !== null && parents[p] === that.button[0]) {
+                return;
+              }
+              // showOn alt
+              if (/\balt|all|both\b/.test(that.options.showOn) && $(that.options.altField).is(parents[p])) {
+                return;
+              }
+            }
 
-          that.close(that.options.revert);
-        });
+            // no closeOnOutside
+            if (!that.options.closeOnOutside) {
+              return;
+            }
+
+            that.close(that.options.revert);
+          })
+        );
       }
 
       if (that.events.document_keydown === null) {
-        $(document).on('keydown', that.events.document_keydown = function (event) {
-          // close on ESC key
-          if (that.opened && event.keyCode === 27 && that.options.closeOnEscape) {
-            that.close(that.options.revert);
-          }
+        $(document).on(
+          'keydown',
+          (that.events.document_keydown = function (event) {
+            // close on ESC key
+            if (that.opened && event.keyCode === 27 && that.options.closeOnEscape) {
+              that.close(that.options.revert);
+            }
 
-          // OK on Enter key
-          if (that.opened && event.keyCode === 13 && that.options.okOnEnter) {
-            that.close();
-          }
-        });
+            // OK on Enter key
+            if (that.opened && event.keyCode === 13 && that.options.okOnEnter) {
+              that.close();
+            }
+          })
+        );
       }
 
       // Close (with OK) on tab key in element
-      that.element.keydown(function (event) {
-        if (event.keyCode === 9) {
-          that.close();
-        }
-      }).keyup(function (event) {
-        var color = that._parseColor(that.element.val());
-        if (color && !that.color.equals(color)) {
-          that.color = color;
-          that._change();
-        }
-      });
+      that.element
+        .keydown(function (event) {
+          if (event.keyCode === 9) {
+            that.close();
+          }
+        })
+        .keyup(function (event) {
+          var color = that._parseColor(that.element.val());
+          if (color && !that.color.equals(color)) {
+            that.color = color;
+            that._change();
+          }
+        });
     },
 
     _generate: function () {
@@ -2721,28 +2667,27 @@
         $.each(that.options.layout, function (part, pos) {
           if (that.parts[part]) {
             layout_parts.push({
-              'part': part,
-              'pos': pos
+              part: part,
+              pos: pos,
             });
           }
         });
 
-        table = $(_layoutTable(layout_parts, function (cell, x, y) {
-          classes = ['ui-colorpicker-' + cell.part + '-container'];
+        table = $(
+          _layoutTable(layout_parts, function (cell, x, y) {
+            classes = ['ui-colorpicker-' + cell.part + '-container'];
 
-          if (x > 0) {
-            classes.push('ui-colorpicker-padding-left');
-          }
+            if (x > 0) {
+              classes.push('ui-colorpicker-padding-left');
+            }
 
-          if (y > 0) {
-            classes.push('ui-colorpicker-padding-top');
-          }
+            if (y > 0) {
+              classes.push('ui-colorpicker-padding-top');
+            }
 
-          return '<td  class="' + classes.join(' ') + '"'
-            + (cell.pos[2] > 1 ? ' colspan="' + cell.pos[2] + '"' : '')
-            + (cell.pos[3] > 1 ? ' rowspan="' + cell.pos[3] + '"' : '')
-            + ' valign="top"></td>';
-        })).appendTo(that.dialog);
+            return '<td  class="' + classes.join(' ') + '"' + (cell.pos[2] > 1 ? ' colspan="' + cell.pos[2] + '"' : '') + (cell.pos[3] > 1 ? ' rowspan="' + cell.pos[3] + '"' : '') + ' valign="top"></td>';
+          })
+        ).appendTo(that.dialog);
         if (that.options.inlineFrame) {
           table.addClass('ui-dialog-content ui-widget-content');
         }
@@ -2759,11 +2704,7 @@
       if ($.effects && $.effects[that.options.showAnim]) {
         element[show](that.options.showAnim, that.options.showOptions, that.options.duration, callback);
       } else {
-        element[(that.options.showAnim === 'slideDown' ?
-          slide
-          : (that.options.showAnim === 'fadeIn' ?
-            fade
-            : show))]((that.options.showAnim ? that.options.duration : null), callback);
+        element[that.options.showAnim === 'slideDown' ? slide : that.options.showAnim === 'fadeIn' ? fade : show](that.options.showAnim ? that.options.duration : null, callback);
         if ($.isFunction(callback) && (!that.options.showAnim || !that.options.duration)) {
           callback();
         }
@@ -2781,9 +2722,12 @@
     open: function () {
       var that = this,
         offset,
-        bottom, right,
-        height, width,
-        x, y,
+        bottom,
+        right,
+        height,
+        width,
+        x,
+        y,
         zIndex,
         element,
         position;
@@ -2803,44 +2747,48 @@
 
         // Automatically find highest z-index.
         zIndex = 0;
-        $(that.element[0]).parents().each(function () {
-          var z = $(this).css('z-index');
-          if ((typeof (z) === 'number' || typeof (z) === 'string') && z !== '' && !isNaN(z)) {
-            if (z > zIndex) {
-              zIndex = parseInt(z, 10);
-              return false;
-            }
-          }
-          else {
-            $(this).siblings().each(function () {
-              var z = $(this).css('z-index');
-              if ((typeof (z) === 'number' || typeof (z) === 'string') && z !== '' && !isNaN(z)) {
-                if (z > zIndex) {
-                  zIndex = parseInt(z, 10);
-                }
+        $(that.element[0])
+          .parents()
+          .each(function () {
+            var z = $(this).css('z-index');
+            if ((typeof z === 'number' || typeof z === 'string') && z !== '' && !isNaN(z)) {
+              if (z > zIndex) {
+                zIndex = parseInt(z, 10);
+                return false;
               }
-            });
-          }
-        });
+            } else {
+              $(this)
+                .siblings()
+                .each(function () {
+                  var z = $(this).css('z-index');
+                  if ((typeof z === 'number' || typeof z === 'string') && z !== '' && !isNaN(z)) {
+                    if (z > zIndex) {
+                      zIndex = parseInt(z, 10);
+                    }
+                  }
+                });
+            }
+          });
 
         zIndex += 2;
         that.dialog.css('z-index', zIndex);
 
         if (that.options.modal) {
-          that.overlay = $('<div class="ui-widget-overlay"></div>').appendTo('body').css('z-index', zIndex - 1);
+          that.overlay = $('<div class="ui-widget-overlay"></div>')
+            .appendTo('body')
+            .css('z-index', zIndex - 1);
 
           if (that.events.window_resize !== null) {
             $(window).off('resize', that.events.window_resize);
           }
 
-          that.events.window_resize = function () {
+          ((that.events.window_resize = function () {
             if (that.overlay) {
               that.overlay.width($(document).width());
               that.overlay.height($(document).height());
             }
-          },
-
-            $(window).on('resize', that.events.window_resize);
+          }),
+            $(window).on('resize', that.events.window_resize));
           that.events.window_resize();
         }
 
@@ -2856,7 +2804,7 @@
             my: 'left top',
             at: 'left bottom',
             of: element,
-            collision: 'flip'
+            collision: 'flip',
           };
         }
         that.dialog.position(position);
@@ -2946,7 +2894,7 @@
       if (that.color.set) {
         data = {
           formatted: that._formatColor('#HEXA', that.color),
-          colorPicker: that
+          colorPicker: that,
         };
 
         data.hex = that.color.toHex();
@@ -2958,15 +2906,15 @@
         data.hsl = that.color.getHSL();
 
         lab = that.color.getLAB();
-        lab.a = (lab.a * 2) - 1;
-        lab.b = (lab.b * 2) - 1;
+        lab.a = lab.a * 2 - 1;
+        lab.b = lab.b * 2 - 1;
         data.lab = lab;
 
         return that._trigger(callback, null, data);
       } else {
         return that._trigger(callback, null, {
           formatted: '',
-          colorPicker: that
+          colorPicker: that,
         });
       }
     },
@@ -3038,29 +2986,31 @@
 
     // This will be deprecated by jQueryUI 1.9 widget
     _hoverable: function (e) {
-      e.hover(function () {
-        e.addClass("ui-state-hover");
-      }, function () {
-        e.removeClass("ui-state-hover");
-      });
+      e.hover(
+        function () {
+          e.addClass('ui-state-hover');
+        },
+        function () {
+          e.removeClass('ui-state-hover');
+        }
+      );
     },
 
     // This will be deprecated by jQueryUI 1.9 widget
     _focusable: function (e) {
       e.focus(function () {
-        e.addClass("ui-state-focus");
+        e.addClass('ui-state-focus');
       }).blur(function () {
-        e.removeClass("ui-state-focus");
+        e.removeClass('ui-state-focus');
       });
     },
 
     _getRegional: function (name) {
-      return $.colorpicker.regional[this.options.regional][name] !== undefined ?
-        $.colorpicker.regional[this.options.regional][name] : $.colorpicker.regional[''][name];
+      return $.colorpicker.regional[this.options.regional][name] !== undefined ? $.colorpicker.regional[this.options.regional][name] : $.colorpicker.regional[''][name];
     },
 
     _getSwatches: function () {
-      if (typeof (this.options.swatches) === 'string') {
+      if (typeof this.options.swatches === 'string') {
         return $.colorpicker.swatches[this.options.swatches];
       }
 
@@ -3096,37 +3046,53 @@
     _parseFormat: function (format, text) {
       var that = this,
         typeRegexps = {
-          x: function () { return '([0-9a-fA-F]{2})'; }
-          , d: function () { return '([12]?[0-9]{1,2})'; }
-          , f: function () { return '([0-9]*\\.?[0-9]*)'; }
-          , p: function () { return '([0-9]*\\.?[0-9]*)'; }
+          x: function () {
+            return '([0-9a-fA-F]{2})';
+          },
+          d: function () {
+            return '([12]?[0-9]{1,2})';
+          },
+          f: function () {
+            return '([0-9]*\\.?[0-9]*)';
+          },
+          p: function () {
+            return '([0-9]*\\.?[0-9]*)';
+          },
         },
         typeConverters = {
-          x: function (v) { return parseInt(v, 16) / 255.; }
-          , d: function (v) { return v / 255.; }
-          , f: function (v) { return v; }
-          , p: function (v) { return v * 0.01; }
+          x: function (v) {
+            return parseInt(v, 16) / 255;
+          },
+          d: function (v) {
+            return v / 255;
+          },
+          f: function (v) {
+            return v;
+          },
+          p: function (v) {
+            return v * 0.01;
+          },
         },
         setters = {
-          r: 'setRGB'
-          , g: 'setRGB'
-          , b: 'setRGB'
-          , h: 'setHSV'
-          , s: 'setHSV'
-          , v: 'setHSV'
-          , c: 'setCMYK'
-          , m: 'setCMYK'
-          , y: 'setCMYK'
-          , k: 'setCMYK'
-          , L: 'setLAB'
-          , A: 'setLAB'
-          , B: 'setLAB'
+          r: 'setRGB',
+          g: 'setRGB',
+          b: 'setRGB',
+          h: 'setHSV',
+          s: 'setHSV',
+          v: 'setHSV',
+          c: 'setCMYK',
+          m: 'setCMYK',
+          y: 'setCMYK',
+          k: 'setCMYK',
+          L: 'setLAB',
+          A: 'setLAB',
+          B: 'setLAB',
         },
         setterChannels = {
-          setRGB: ['r', 'g', 'b']
-          , setHSV: ['h', 's', 'v']
-          , setCMYK: ['c', 'm', 'y', 'k']
-          , setLAB: ['L', 'A', 'B']
+          setRGB: ['r', 'g', 'b'],
+          setHSV: ['h', 's', 'v'],
+          setCMYK: ['c', 'm', 'y', 'k'],
+          setLAB: ['L', 'A', 'B'],
         },
         channels = [],
         converters = [],
@@ -3138,7 +3104,6 @@
       pattern = format.replace(/[()\\^$.|?*+[\]]/g, function (m) {
         return '\\' + m;
       });
-
 
       pattern = pattern.replace(/\\?[argbhsvcmykLAB][xdfp]/g, function (variable) {
         if (variable.match(/^\\/)) {
@@ -3182,9 +3147,7 @@
       var that = this,
         color;
 
-      var formats = $.isArray(that.options.colorFormat)
-        ? that.options.colorFormat
-        : [that.options.colorFormat];
+      var formats = $.isArray(that.options.colorFormat) ? that.options.colorFormat : [that.options.colorFormat];
       that.options.colorFormat = 'HEXA';
       formats = ['HEXA'];
       $.each(formats, function (index, format) {
@@ -3239,10 +3202,11 @@
         d = color.distance(new $.colorpicker.Color(swatch.r, swatch.g, swatch.b));
         if (d < distance || distance === null) {
           name = n;
-          if (d <= 1e-20) {	// effectively 0 by maximum rounding error
-            return false;	// can't get much closer than 0
+          if (d <= 1e-20) {
+            // effectively 0 by maximum rounding error
+            return false; // can't get much closer than 0
           }
-          distance = d;	// safety net
+          distance = d; // safety net
         }
       });
 
@@ -3253,10 +3217,18 @@
       var that = this,
         text = null,
         types = {
-          'x': function (v) { return _intToHex(v * 255); }
-          , 'd': function (v) { return Math.round(v * 255); }
-          , 'f': function (v) { return v; }
-          , 'p': function (v) { return v * 100.; }
+          x: function (v) {
+            return _intToHex(v * 255);
+          },
+          d: function (v) {
+            return Math.round(v * 255);
+          },
+          f: function (v) {
+            return v;
+          },
+          p: function (v) {
+            return v * 100;
+          },
         },
         channels = color.getChannels();
 
@@ -3267,7 +3239,7 @@
       $.each(formats, function (index, format) {
         if ($.colorpicker.writers[format]) {
           text = $.colorpicker.writers[format](color, that);
-          return (text === false);
+          return text === false;
         } else {
           text = format.replace(/\\?[argbhsvcmykLAB][xdfp]/g, function (m) {
             if (m.match(/^\\/)) {
@@ -3280,8 +3252,8 @@
       });
 
       return text;
-    }
+    },
   });
 
   return $.vanderlee.colorpicker;
-}));
+});

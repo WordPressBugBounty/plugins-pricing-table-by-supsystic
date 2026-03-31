@@ -2,7 +2,7 @@
 <div id="ptsBlockMenuExl" class="ptsBlockMenu">
 	<div class="ptsBlockMenuEl" data-menu="align">
 		<div class="ptsBlockMenuElTitle ptsBlockMenuElAlignTitle">
-			<?php _e('Content align', PTS_LANG_CODE)?>
+			<?php _e('Content align', PTS_LANG_CODE); ?>
 		</div>
 		<div class="ptsBlockMenuElAlignContent row">
 			<div class="supSm4 ptsBlockMenuElElignBtn" data-align="left">
@@ -15,14 +15,14 @@
 				<i class="tables-icon tables-icon-2x icon-aligne-right"></i>
 			</div>
 		</div>
-		<?php echo htmlPts::hidden('params[align]')?>
+		<?php echo htmlPts::hidden('params[align]'); ?>
 	</div>
 	<div class="ptsBlockMenuEl" data-menu="add_slide">
 		<div class="ptsBlockMenuElAct">
 			<i class="tables-icon tables-icon-lg icon-image ptsChangeImgBtnIcon"></i>
 		</div>
 		<div class="ptsBlockMenuElTitle">
-			<?php _e('Add Slide', PTS_LANG_CODE)?>
+			<?php _e('Add Slide', PTS_LANG_CODE); ?>
 		</div>
 	</div>
 	<div class="ptsBlockMenuEl" data-menu="add_gal_item">
@@ -30,7 +30,7 @@
 			<i class="tables-icon tables-icon-lg icon-image ptsChangeImgBtnIcon"></i>
 		</div>
 		<div class="ptsBlockMenuElTitle">
-			<?php _e('Add Image', PTS_LANG_CODE)?>
+			<?php _e('Add Image', PTS_LANG_CODE); ?>
 		</div>
 	</div>
 	<div class="ptsBlockMenuEl" data-menu="add_menu_item">
@@ -38,7 +38,7 @@
 			<i class="tables-icon tables-icon-lg icon-plus-s"></i>
 		</div>
 		<div class="ptsBlockMenuElTitle">
-			<?php _e('Add Menu Item', PTS_LANG_CODE)?>
+			<?php _e('Add Menu Item', PTS_LANG_CODE); ?>
 		</div>
 	</div>
 	<div class="ptsBlockMenuEl" data-menu="edit_slides">
@@ -46,29 +46,31 @@
 			<i class="tables-icon tables-icon-lg icon-manage ptsChangeImgBtnIcon"></i>
 		</div>
 		<div class="ptsBlockMenuElTitle">
-			<?php _e('Manage Slides', PTS_LANG_CODE)?>
+			<?php _e('Manage Slides', PTS_LANG_CODE); ?>
 		</div>
 	</div>
 	<div class="ptsBlockMenuEl" data-menu="fill_color">
 		<div class="ptsBlockMenuElAct">
-			<?php echo htmlPts::checkbox('params[fill_color_enb]')?>
+			<?php echo htmlPts::checkbox('params[fill_color_enb]'); ?>
 		</div>
 		<div class="ptsBlockMenuElTitle">
-			<?php _e('Fill Color', PTS_LANG_CODE)?>
+			<?php _e('Fill Color', PTS_LANG_CODE); ?>
 		</div>
 <!--		<div class="ptsBlockMenuElRightAct">-->
-<!--            --><?php //echo htmlPts::hidden('params[fill_color]', array(
+<!--            --><?php
+//echo htmlPts::hidden('params[fill_color]', array(
 //                'attrs' => 'class="ptsColorPickInput"'
-//            ));?>
+//            ));
+?>
 <!--            <div class="ptsTear ptsColorPickInputTear"></div>-->
 <!--		</div>-->
 	</div>
 	<div class="ptsBlockMenuEl" data-menu="bg_img">
 		<div class="ptsBlockMenuElAct">
-			<?php echo htmlPts::checkbox('params[bg_img_enb]')?>
+			<?php echo htmlPts::checkbox('params[bg_img_enb]'); ?>
 		</div>
 		<div class="ptsBlockMenuElTitle">
-			<?php _e('Background Image...', PTS_LANG_CODE)?>
+			<?php _e('Background Image...', PTS_LANG_CODE); ?>
 		</div>
 		<div class="ptsBlockMenuElRightAct">
 			<i class="tables-icon tables-icon-lg icon-image"></i>
@@ -79,7 +81,7 @@
 			<i class="tables-icon tables-icon-lg icon-plus-s"></i>
 		</div>
 		<div class="ptsBlockMenuElTitle">
-			<?php _e('Add Field', PTS_LANG_CODE)?>
+			<?php _e('Add Field', PTS_LANG_CODE); ?>
 		</div>
 	</div>
 	<div class="ptsBlockMenuEl" data-menu="sub_settings">
@@ -87,7 +89,7 @@
 			<i class="glyphicon glyphicon-send"></i>
 		</div>
 		<div class="ptsBlockMenuElTitle">
-			<?php _e('Subscribe Settings', PTS_LANG_CODE)?>
+			<?php _e('Subscribe Settings', PTS_LANG_CODE); ?>
 		</div>
 	</div>
 	<div class="ptsBlockMenuEl" data-menu="add_grid_item">
@@ -95,7 +97,7 @@
 			<i class="tables-icon tables-icon-lg icon-image"></i>
 		</div>
 		<div class="ptsBlockMenuElTitle">
-			<?php _e('Add Column', PTS_LANG_CODE)?>
+			<?php _e('Add Column', PTS_LANG_CODE); ?>
 		</div>
 	</div>
 </div>
@@ -106,16 +108,16 @@
       <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsImgChangeBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
-					<?php _e('Select image', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'img']); ?>
+					<?php _e('Select image', PTS_LANG_CODE); ?>
 					<i class="glyphicon glyphicon-picture"></i>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div> 
 			<div class="ptsElMenuBtn ptsImgVideoSetBtn" data-sub-panel-show="video">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'video'))?>
-					<?php _e('Video', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'video']); ?>
+					<?php _e('Video', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
@@ -127,39 +129,39 @@
 			</div>
 			<div class="ptsElMenuBtn ptsTooltipEditBtnShell" data-sub-panel-show="tooltip">
 				<label>
-					<?php _e('Tooltip', PTS_LANG_CODE)?>
+					<?php _e('Tooltip', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="video">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('video_link')?>
+				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('video_link'); ?>
 			</label>
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="imglink">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('icon_item_link');?>
+				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('icon_item_link'); ?>
 			</label>
 			<div style="display: none;" class="ptsPostLinkDisabled" data-postlink-to=":parent label [name='icon_item_link']"></div>
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('title', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('icon_item_title');?>
+				<span class="mce-input-name-txt"><?php _e('title', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('icon_item_title'); ?>
 			</label>
 			<label class="ptsElMenuSubPanelRow">
-				<?php echo htmlPts::checkbox('icon_item_link_new_wnd')?>
-				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('open link in a new window', PTS_LANG_CODE)?></span>
+				<?php echo htmlPts::checkbox('icon_item_link_new_wnd'); ?>
+				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('open link in a new window', PTS_LANG_CODE); ?></span>
 			</label>
 			<label class="ptsElMenuSubPanelRow">
-				<?php echo htmlPts::checkbox('icon_item_link_rel_nofollow')?>
-				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('add nofollow attribute', PTS_LANG_CODE)?></span>
+				<?php echo htmlPts::checkbox('icon_item_link_rel_nofollow'); ?>
+				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('add nofollow attribute', PTS_LANG_CODE); ?></span>
 			</label>
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="tooltip">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('icon_item_tooltip')?>
+				<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('icon_item_tooltip'); ?>
 			</label>
 		</div>
 	</div>
@@ -172,42 +174,42 @@
 			<div class="ptsElMenuBtn ptsLinkBtn" data-sub-panel-show="link">
 				<label>
 					<i class="glyphicon glyphicon-link"></i>
-					<?php _e('Link', PTS_LANG_CODE)?>
+					<?php _e('Link', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTooltipEditBtnShell" data-sub-panel-show="tooltip">
 				<label>
 					
-					<?php _e('Tooltip', PTS_LANG_CODE)?>
+					<?php _e('Tooltip', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsColorBtn" data-sub-panel-show="color-pick-table-cell">
 				<label>
-					<?php _e('Color', PTS_LANG_CODE)?>
+					<?php _e('Color', PTS_LANG_CODE); ?>
 					<div class="ptsTear ptsColorPickInputTear"></div>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeTxtBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'txt'))?>
-					<?php _e('Text', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'txt']); ?>
+					<?php _e('Text', PTS_LANG_CODE); ?>
 				</label>
 			</div>
       <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeImgBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
-					<?php _e('Image / Video', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'img']); ?>
+					<?php _e('Image / Video', PTS_LANG_CODE); ?>
 				</label>
 			</div>
       <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeIconBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'icon'))?>
-					<?php _e('Icon', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'icon']); ?>
+					<?php _e('Icon', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
@@ -217,27 +219,27 @@
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="link">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('btn_item_link')?>
+				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('btn_item_link'); ?>
 			</label>
 			<div style="display: none;" class="ptsPostLinkDisabled" data-postlink-to=":parent label [name='btn_item_link']"></div>
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('title', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('btn_item_title')?>
+				<span class="mce-input-name-txt"><?php _e('title', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('btn_item_title'); ?>
 			</label>
 			<label class="ptsElMenuSubPanelRow">
-				<?php echo htmlPts::checkbox('btn_item_link_new_wnd')?>
-				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('open link in a new window', PTS_LANG_CODE)?></span>
+				<?php echo htmlPts::checkbox('btn_item_link_new_wnd'); ?>
+				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('open link in a new window', PTS_LANG_CODE); ?></span>
 			</label>
 			<label class="ptsElMenuSubPanelRow">
-				<?php echo htmlPts::checkbox('btn_item_link_rel_nofollow')?>
-				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('add nofollow attribute', PTS_LANG_CODE)?></span>
+				<?php echo htmlPts::checkbox('btn_item_link_rel_nofollow'); ?>
+				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('add nofollow attribute', PTS_LANG_CODE); ?></span>
 			</label>
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="tooltip">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('btn_item_tooltip')?>
+				<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('btn_item_tooltip'); ?>
 			</label>
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="color-pick-table-cell">
@@ -252,16 +254,16 @@
       <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsImgChangeBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
-					<?php _e('Select image', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'img']); ?>
+					<?php _e('Select image', PTS_LANG_CODE); ?>
 					<i class="glyphicon glyphicon-picture"></i>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsImgVideoSetBtn" data-sub-panel-show="video">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'video'))?>
-					<?php _e('Video', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'video']); ?>
+					<?php _e('Video', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
@@ -271,8 +273,8 @@
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="video">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('video_link')?>
+				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('video_link'); ?>
 			</label>
 		</div>
 	</div>
@@ -282,21 +284,21 @@
 	<div class="ptsElMenuContent">
 		<div class="ptsElMenuMainPanel">
 			<div class="ptsElMenuBtn">
-				<?php echo htmlPts::checkbox('enb_fill_color')?>
+				<?php echo htmlPts::checkbox('enb_fill_color'); ?>
 			</div>
 			<div class="ptsElMenuBtn ptsColorBtn" data-sub-panel-show="color-pick-table-cell">
 				<label>
-					<?php _e('Fill Color', PTS_LANG_CODE)?>
+					<?php _e('Fill Color', PTS_LANG_CODE); ?>
 					<div class="ptsTear ptsColorPickInputTear"></div>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn">
-				<?php echo htmlPts::checkbox('enb_bg_img')?>
+				<?php echo htmlPts::checkbox('enb_bg_img'); ?>
 			</div>
 			<div class="ptsElMenuBtn ptsImgChangeBtn">
 				<label>
-					<?php _e('Background Image', PTS_LANG_CODE)?>
+					<?php _e('Background Image', PTS_LANG_CODE); ?>
 					<i class="glyphicon glyphicon-picture"></i>
 				</label>
 			</div>
@@ -316,26 +318,26 @@
 		<div class="ptsElMenuMainPanel">
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn">
-				<?php echo htmlPts::checkbox('enb_fill_color')?>
+				<?php echo htmlPts::checkbox('enb_fill_color'); ?>
 			</div>
 			<div class="ptsElMenuBtn ptsColorBtn" data-sub-panel-show="color-pick-table-cell">
 				<label>
-					<?php _e('Fill Color', PTS_LANG_CODE)?>
-					<?php echo htmlPts::hidden('color', array(
-						'attrs' => 'class="ptsColorPickInput"'
-					));?>
+					<?php _e('Fill Color', PTS_LANG_CODE); ?>
+					<?php echo htmlPts::hidden('color', [
+       'attrs' => 'class="ptsColorPickInput"',
+     ]); ?>
 					<div class="ptsTear ptsColorPickInputTear"></div>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn">
-				<?php echo htmlPts::checkbox('enb_badge_col')?>
+				<?php echo htmlPts::checkbox('enb_badge_col'); ?>
 			</div>
 			<div class="ptsElMenuBtn ptsColBadgeBtn">
-				<?php _e('Badge for Column', PTS_LANG_CODE)?>
+				<?php _e('Badge for Column', PTS_LANG_CODE); ?>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
-			<div class="ptsElMenuBtn ptsScheduleColBtn" title="<?php _e('Schedule column', PTS_LANG_CODE)?>" data-sub-panel-show="schedule">
+			<div class="ptsElMenuBtn ptsScheduleColBtn" title="<?php _e('Schedule column', PTS_LANG_CODE); ?>" data-sub-panel-show="schedule">
 				<i class="fa fa-calendar ptsOptIconBtn"></i>
 			</div>
 
@@ -349,18 +351,18 @@
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="schedule">
 			<label style="display: inline-block; margin-right: 5px;">
-				<?php echo htmlPts::checkbox('enb_schedule_col')?>
-				<?php _e('Schedule', PTS_LANG_CODE)?>
+				<?php echo htmlPts::checkbox('enb_schedule_col'); ?>
+				<?php _e('Schedule', PTS_LANG_CODE); ?>
 			</label>
 			<label style="display: inline-block;">
-				<?php _e('From', PTS_LANG_CODE)?>: <?php echo htmlPts::text('schedule_date_from', array(
-					'attrs' => 'style="width: auto;"'
-				))?>
+				<?php _e('From', PTS_LANG_CODE); ?>: <?php echo htmlPts::text('schedule_date_from', [
+  'attrs' => 'style="width: auto;"',
+]); ?>
 			</label>
 			<label style="display: inline-block;">
-				<?php _e('To', PTS_LANG_CODE)?>: <?php echo htmlPts::text('schedule_date_to', array(
-					'attrs' => 'style="width: auto;"'
-				))?>
+				<?php _e('To', PTS_LANG_CODE); ?>: <?php echo htmlPts::text('schedule_date_to', [
+  'attrs' => 'style="width: auto;"',
+]); ?>
 			</label>
 			<br style="clear: both;" />
 		</div>
@@ -372,29 +374,29 @@
 		<div class="ptsElMenuMainPanel">
 			<div class="ptsElMenuBtn ptsTypeTxtBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'txt'))?>
-					<?php _e('Text', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'txt']); ?>
+					<?php _e('Text', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeImgBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
-					<?php _e('Image / Video', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'img']); ?>
+					<?php _e('Image / Video', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeIconBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'icon'))?>
-					<?php _e('Icon', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'icon']); ?>
+					<?php _e('Icon', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeButtonBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'btn'))?>
-					<?php _e('Button', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'btn']); ?>
+					<?php _e('Button', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
@@ -410,23 +412,23 @@
 		<div class="ptsElMenuMainPanel">
       <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsIconLibBtn" data-sub-panel-show="link">
-				<?php _e('Change Icon', PTS_LANG_CODE)?>
+				<?php _e('Change Icon', PTS_LANG_CODE); ?>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsColorBtn" data-sub-panel-show="color-pick-table-cell">
-				<?php _e('Color', PTS_LANG_CODE)?>
+				<?php _e('Color', PTS_LANG_CODE); ?>
 				<div class="ptsTear ptsColorPickInputTear"></div>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsLinkBtn" data-sub-panel-show="iconlink">
 				<i class="glyphicon glyphicon-link"></i>
-				<?php _e('Link', PTS_LANG_CODE)?>
+				<?php _e('Link', PTS_LANG_CODE); ?>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTooltipEditBtnShell" data-sub-panel-show="tooltip">
 				<label>
 					
-					<?php _e('Tooltip', PTS_LANG_CODE)?>
+					<?php _e('Tooltip', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
@@ -436,27 +438,27 @@
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="iconlink">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('icon_item_link');?>
+				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('icon_item_link'); ?>
 			</label>
 			<div style="display: none;" class="ptsPostLinkDisabled" data-postlink-to=":parent label [name='icon_item_link']"></div>
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('title', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('icon_item_title');?>
+				<span class="mce-input-name-txt"><?php _e('title', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('icon_item_title'); ?>
 			</label>
 			<label class="ptsElMenuSubPanelRow">
-				<?php echo htmlPts::checkbox('icon_item_link_new_wnd')?>
-				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('open link in a new window', PTS_LANG_CODE)?></span>
+				<?php echo htmlPts::checkbox('icon_item_link_new_wnd'); ?>
+				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('open link in a new window', PTS_LANG_CODE); ?></span>
 			</label>
 			<label class="ptsElMenuSubPanelRow">
-				<?php echo htmlPts::checkbox('icon_item_link_rel_nofollow')?>
-				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('add nofollow attribute', PTS_LANG_CODE)?></span>
+				<?php echo htmlPts::checkbox('icon_item_link_rel_nofollow'); ?>
+				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('add nofollow attribute', PTS_LANG_CODE); ?></span>
 			</label>
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="tooltip">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('icon_item_tooltip')?>
+				<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('icon_item_tooltip'); ?>
 			</label>
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="color-pick-table-cell">
@@ -470,51 +472,51 @@
 		<div class="ptsElMenuMainPanel">
       <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsIconLibBtn" data-sub-panel-show="link">
-				<?php _e('Change Icon', PTS_LANG_CODE)?>
+				<?php _e('Change Icon', PTS_LANG_CODE); ?>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn"  data-sub-panel-show="size">
 				<i class="glyphicon glyphicons-resize-small"></i>
-				<?php _e('Icon Size', PTS_LANG_CODE)?>
+				<?php _e('Icon Size', PTS_LANG_CODE); ?>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsColorBtn" data-sub-panel-show="color-pick-table-cell">
-				<?php _e('Color', PTS_LANG_CODE)?>
+				<?php _e('Color', PTS_LANG_CODE); ?>
 				<div class="ptsTear ptsColorPickInputTear"></div>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsLinkBtn" data-sub-panel-show="iconlink">
 				<label>
 					<i class="glyphicon glyphicon-link"></i>
-					<?php _e('Link', PTS_LANG_CODE)?>
+					<?php _e('Link', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTooltipEditBtnShell" data-sub-panel-show="tooltip">
 				<label>
 					
-					<?php _e('Tooltip', PTS_LANG_CODE)?>
+					<?php _e('Tooltip', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeTxtBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'txt'))?>
-					<?php _e('Text', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'txt']); ?>
+					<?php _e('Text', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeImgBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
-					<?php _e('Image / Video', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'img']); ?>
+					<?php _e('Image / Video', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeButtonBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'btn'))?>
-					<?php _e('Button', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'btn']); ?>
+					<?php _e('Button', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
@@ -531,27 +533,27 @@
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="iconlink">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('icon_item_link')?>
+				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('icon_item_link'); ?>
 			</label>
 			<div style="display: none;" class="ptsPostLinkDisabled" data-postlink-to=":parent label [name='icon_item_link']"></div>
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('title', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('icon_item_title')?>
+				<span class="mce-input-name-txt"><?php _e('title', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('icon_item_title'); ?>
 			</label>
 			<label class="ptsElMenuSubPanelRow">
-				<?php echo htmlPts::checkbox('icon_item_link_new_wnd')?>
-				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('open link in a new window', PTS_LANG_CODE)?></span>
+				<?php echo htmlPts::checkbox('icon_item_link_new_wnd'); ?>
+				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('open link in a new window', PTS_LANG_CODE); ?></span>
 			</label>
 			<label class="ptsElMenuSubPanelRow">
-				<?php echo htmlPts::checkbox('icon_item_link_rel_nofollow')?>
-				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('add nofollow attribute', PTS_LANG_CODE)?></span>
+				<?php echo htmlPts::checkbox('icon_item_link_rel_nofollow'); ?>
+				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('add nofollow attribute', PTS_LANG_CODE); ?></span>
 			</label>
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="tooltip">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('icon_item_tooltip')?>
+				<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('icon_item_tooltip'); ?>
 			</label>
 		</div>
 		<div class="ptsElMenuSubPanel"></div>
@@ -567,8 +569,8 @@
       <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsImgChangeBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'img'))?>
-					<?php _e('Select image', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'img']); ?>
+					<?php _e('Select image', PTS_LANG_CODE); ?>
 					<i class="glyphicon glyphicon-picture"></i>
 				</label>
 			</div>
@@ -576,42 +578,42 @@
 			<div class="ptsElMenuBtn ptsLinkBtn" data-sub-panel-show="imagelink">
 				<label>
 					<i class="glyphicon glyphicon-link"></i>
-					<?php _e('Link', PTS_LANG_CODE)?>
+					<?php _e('Link', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTooltipEditBtnShell" data-sub-panel-show="tooltip">
 				<label>
 					
-					<?php _e('Tooltip', PTS_LANG_CODE)?>
+					<?php _e('Tooltip', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsImgVideoSetBtn" data-sub-panel-show="video">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'video'))?>
-					<?php _e('Video', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'video']); ?>
+					<?php _e('Video', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeTxtBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'txt'))?>
-					<?php _e('Text', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'txt']); ?>
+					<?php _e('Text', PTS_LANG_CODE); ?>
 				</label>
 			</div>
       <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeIconBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'icon'))?>
-					<?php _e('Icon', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'icon']); ?>
+					<?php _e('Icon', PTS_LANG_CODE); ?>
 				</label>
 			</div>
       <div class="ptsElMenuBtnDelimiter"></div>
 			<div class="ptsElMenuBtn ptsTypeButtonBtn">
 				<label>
-					<?php echo htmlPts::radiobutton('type', array('value' => 'btn'))?>
-					<?php _e('Button', PTS_LANG_CODE)?>
+					<?php echo htmlPts::radiobutton('type', ['value' => 'btn']); ?>
+					<?php _e('Button', PTS_LANG_CODE); ?>
 				</label>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
@@ -621,33 +623,33 @@
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="video">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('video_link')?>
+				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('video_link'); ?>
 			</label>
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="imagelink">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('image_item_link')?>
+				<span class="mce-input-name-txt"><?php _e('link', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('image_item_link'); ?>
 			</label>
 			<div style="display: none;" class="ptsPostLinkDisabled" data-postlink-to=":parent label [name='image_item_link']"></div>
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('title', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('image_item_title')?>
+				<span class="mce-input-name-txt"><?php _e('title', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('image_item_title'); ?>
 			</label>
 			<label class="ptsElMenuSubPanelRow">
-				<?php echo htmlPts::checkbox('image_item_link_new_wnd')?>
-				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('open link in a new window', PTS_LANG_CODE)?></span>
+				<?php echo htmlPts::checkbox('image_item_link_new_wnd'); ?>
+				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('open link in a new window', PTS_LANG_CODE); ?></span>
 			</label>
 			<label class="ptsElMenuSubPanelRow">
-				<?php echo htmlPts::checkbox('image_item_link_rel_nofollow')?>
-				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('add nofollow attribute', PTS_LANG_CODE)?></span>
+				<?php echo htmlPts::checkbox('image_item_link_rel_nofollow'); ?>
+				<span class="mce-input-name-txt mce-input-name-not-first"><?php _e('add nofollow attribute', PTS_LANG_CODE); ?></span>
 			</label>
 		</div>
 		<div class="ptsElMenuSubPanel" data-sub-panel="tooltip">
 			<label class="ptsElMenuSubPanelRow">
-				<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE)?></span>
-				<?php echo htmlPts::text('image_item_tooltip')?>
+				<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE); ?></span>
+				<?php echo htmlPts::text('image_item_tooltip'); ?>
 			</label>
 		</div>
 	</div>
@@ -658,15 +660,15 @@
 		<div>
 			<div class="supDialogIcons ptsElMenuSubPanel">
 				<div id="ptsSubSettingsWndTabs">
-					<?php echo htmlPts::text('icon_search', array(
-						'attrs' => 'class="ptsIconsLibSearchTxt" placeholder="'. esc_html(__('Search, for example - pencil, music, ...', PTS_LANG_CODE)). '"',
-					))?>
+					<?php echo htmlPts::text('icon_search', [
+       'attrs' => 'class="ptsIconsLibSearchTxt" placeholder="' . esc_html(__('Search, for example - pencil, music, ...', PTS_LANG_CODE)) . '"',
+     ]); ?>
 					<div class="ptsIconsLibList row"></div>
-					<div class="ptsIconsLibEmptySearch alert alert-info" style="display: none;"><?php _e('Nothing found for <span class="ptsNothingFoundKeys"></span>, maybe try to search something else?', PTS_LANG_CODE)?></div>
+					<div class="ptsIconsLibEmptySearch alert alert-info" style="display: none;"><?php _e('Nothing found for <span class="ptsNothingFoundKeys"></span>, maybe try to search something else?', PTS_LANG_CODE); ?></div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="button-primary ptsIconsLibSaveBtn"><?php _e('Close', PTS_LANG_CODE)?></button>
+				<button type="button" class="button-primary ptsIconsLibSaveBtn"><?php _e('Close', PTS_LANG_CODE); ?></button>
 			</div>
 		</div>
 	</div>
@@ -681,11 +683,12 @@
 						<div class="supSm6">
 							<div class="ptsTableSetting row supSm12">
 								<label>
-									<?php _e('Badge Label', PTS_LANG_CODE)?>:
-									<?php echo htmlPts::text('badge_name', array('value' => __('Sale!', PTS_LANG_CODE)))?>
+									<?php _e('Badge Label', PTS_LANG_CODE); ?>:
+									<?php echo htmlPts::text('badge_name', ['value' => __('Sale!', PTS_LANG_CODE)]); ?>
 								</label>
 							</div>
-							<?php /*?><div class="ptsTableSetting row supSm12">
+							<?php
+/*?><div class="ptsTableSetting row supSm12">
 								<?php _e('Badge Type', PTS_LANG_CODE)?>:
 								<div>
 									<label>
@@ -705,24 +708,25 @@
 										<?php _e('Circle', PTS_LANG_CODE)?>
 									</label>
 								</div>
-							</div><?php */?>
+							</div><?php */
+?>
 							<div class="ptsTableSetting row supSm12">
-								<?php _e('Badge Background Color', PTS_LANG_CODE)?>:
-								<?php echo htmlPts::hidden('badge_bg_color', array(
-									'attrs' => 'class="ptsColorPickInput"',
-								));?>
+								<?php _e('Badge Background Color', PTS_LANG_CODE); ?>:
+								<?php echo htmlPts::hidden('badge_bg_color', [
+          'attrs' => 'class="ptsColorPickInput"',
+        ]); ?>
 								<div class="ptsTear ptsColorPickInputTear"></div>
 							</div>
 							<div class="ptsTableSetting row supSm12">
-								<?php _e('Badge Text Color', PTS_LANG_CODE)?>:
-								<?php echo htmlPts::hidden('badge_txt_color', array(
-									'attrs' => 'class="ptsColorPickInput"',
-								));?>
+								<?php _e('Badge Text Color', PTS_LANG_CODE); ?>:
+								<?php echo htmlPts::hidden('badge_txt_color', [
+          'attrs' => 'class="ptsColorPickInput"',
+        ]); ?>
 								<div class="ptsTear ptsColorPickInputTear"></div>
 							</div>
 							<div class="ptsTableSetting row ptsTableBadgePositionRow supSm12">
-								<?php _e('Select position for Badge', PTS_LANG_CODE)?>
-								<?php echo htmlPts::hidden('badge_pos', array('value' => 'left'))?>
+								<?php _e('Select position for Badge', PTS_LANG_CODE); ?>
+								<?php echo htmlPts::hidden('badge_pos', ['value' => 'left']); ?>
 								<div class="ptsTableBadgePositionsShell">
 									<div class="ptsTableBadgePosition active" data-pos="left"></div>
 									<div class="ptsTableBadgePosition" data-pos="left-top"></div>
@@ -743,7 +747,7 @@
 				</form>
 			</div>
 			<div class="supDialogBadges modal-footer">
-				<button type="button" class="button-primary ptsBadgesLibSaveBtn"><?php _e('Save', PTS_LANG_CODE)?></button>
+				<button type="button" class="button-primary ptsBadgesLibSaveBtn"><?php _e('Save', PTS_LANG_CODE); ?></button>
 			</div>
 		</div>
 	</div>
@@ -753,35 +757,35 @@
 	<i class="fa fa-arrows ptsOptIconBtn"></i>
 </div>
 <!--Cell move btn-->
-<div id="ptsMoveCellBtnExl" class="ptsMoveCellBtn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Move cell', PTS_LANG_CODE)?>">
+<div id="ptsMoveCellBtnExl" class="ptsMoveCellBtn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Move cell', PTS_LANG_CODE); ?>">
 	<i class="fa fa-arrows-v ptsOptIconBtn"></i>
 </div>
 <!--Add row after btn-->
-<div id="ptsAddRowAfterBtnExl" class="ptsAddRowAfterBtn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Add row after', PTS_LANG_CODE)?>">
+<div id="ptsAddRowAfterBtnExl" class="ptsAddRowAfterBtn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Add row after', PTS_LANG_CODE); ?>">
 	<i class="fa fa-plus ptsOptIconBtn" style="font-size: 10px; position: absolute; bottom: 1px; left: 4px;"></i>
 	<i class="fa fa-arrow-down ptsOptIconBtn"></i>
 </div>
 <!--Add row before btn-->
-<div id="ptsAddRowBeforeBtnExl" class="ptsAddRowBeforeBtn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Add row before', PTS_LANG_CODE)?>">
+<div id="ptsAddRowBeforeBtnExl" class="ptsAddRowBeforeBtn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Add row before', PTS_LANG_CODE); ?>">
 	<i class="fa fa-arrow-up ptsOptIconBtn"></i>
 	<i class="fa fa-plus ptsOptIconBtn" style="font-size: 10px; position: absolute; top: 2px; left: 4px;"></i>
 </div>
 
 <!-- Combining with the previous row btn-->
-<div id="ptsCombiningPrevBtnExl" class="ptsCombiningPrevBtnExl ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Combining with the previous row', PTS_LANG_CODE)?>">
+<div id="ptsCombiningPrevBtnExl" class="ptsCombiningPrevBtnExl ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Combining with the previous row', PTS_LANG_CODE); ?>">
 	<i class="fa fa-level-up ptsOptIconBtn"></i>
 </div>
 <!-- Combining with the next row row btn-->
-<div id="ptsCombiningNextBtnExl" class="ptsCombiningNextBtnExl ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Combining with the next row', PTS_LANG_CODE)?>">
+<div id="ptsCombiningNextBtnExl" class="ptsCombiningNextBtnExl ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Combining with the next row', PTS_LANG_CODE); ?>">
 	<i class="fa fa-level-down ptsOptIconBtn"></i>
 </div>
 
 <!-- Add new one cell in this column -->
-<div id="ptsAddOneCellInColumn" class="ptsAddOneCellInColumn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Add One Cell', PTS_LANG_CODE)?>">
+<div id="ptsAddOneCellInColumn" class="ptsAddOneCellInColumn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Add One Cell', PTS_LANG_CODE); ?>">
 	<i class="fa fa-plus ptsOptIconBtn"></i>
 </div>
 <!-- Add text in this cell -->
-<div id="ptsAddTextInCell" class="ptsAddTextInCell ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Add Text', PTS_LANG_CODE)?>">
+<div id="ptsAddTextInCell" class="ptsAddTextInCell ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Add Text', PTS_LANG_CODE); ?>">
 	<i class="fa fa-file-text-o ptsOptIconBtn"></i>
 </div>
 
@@ -800,7 +804,7 @@
 
 <!--Edit Tooltip cell btn-->
 <!--<div id="ptsTooltipEditBtnShellExl" class="ptsTooltipEditBtnShell">
-	<div class="ptsTooltipEditBtn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Edit Tooltip for Cell', PTS_LANG_CODE)?>">
+	<div class="ptsTooltipEditBtn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Edit Tooltip for Cell', PTS_LANG_CODE); ?>">
 		
 	</div>
 	<div class="ptsTooltipEditWnd ptsShowSmooth">
@@ -808,7 +812,7 @@
 	</div>
 </div>-->
 <!--Remove row btn-->
-<div id="ptsRemoveRowBtnExl" class="ptsRemoveRowBtn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Remove Row', PTS_LANG_CODE)?>">
+<div id="ptsRemoveRowBtnExl" class="ptsRemoveRowBtn ptsElMenuBtn ptsAddCellEditBtn" title="<?php _e('Remove Row', PTS_LANG_CODE); ?>">
 	<i class="fa fa-trash-o ptsOptIconBtn"></i>
 </div>
 <div id="ptsElementButtonDefaultTemplate" class="ptsActBtn ptsEl ptsElInput" data-el="btn">
@@ -853,7 +857,7 @@
 <div id="ptsMceSubMenyAddTooltip">
 	<div class="mce-not-inline mce-menu-item mce-menu-item-normal mce-first mce-stack-layout-item mce-link-row">
 		<label class="ptsElMenuSubPanelRow" data-id="tooltip">
-			<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE)?></span>
+			<span class="mce-input-name-txt"><?php _e('Tooltip', PTS_LANG_CODE); ?></span>
 			<input type="text" name="txt_item_tooltip" value="">
 		</label>
 	</div>

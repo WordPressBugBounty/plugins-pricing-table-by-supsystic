@@ -2,17 +2,17 @@
 	<div class="supsystic-item supsystic-panel import-export-panel">
 		<div class="supsystic-imex-tab-header">
 			<div class="supsystic-imex-tab-header-item imex-page-nav"  data-to-page=".supsystic-panel.import-export-panel .supsystic-imex-import-page">
-				<?php _e('Import', PTS_LANG_CODE)?>
+				<?php _e('Import', PTS_LANG_CODE); ?>
 			</div>
 			<div class="supsystic-imex-tab-header-item imex-page-nav active" data-to-page=".supsystic-panel.import-export-panel .supsystic-imex-export-page">
-				<?php _e('Export', PTS_LANG_CODE)?>
+				<?php _e('Export', PTS_LANG_CODE); ?>
 			</div>
 		</div>
 		<div class="supsystic-imex-tab-content">
 			<div class="supsystic-imex-export-page supsystic-imex-page">
 				<ul id="ptsPagesTblNavBtnsShell" class="supsystic-bar-controls">
-					<li title="<?php _e('Search', PTS_LANG_CODE)?>">
-						<input id="ptsPagesTblSearchTxt" type="text" name="tbl_search" placeholder="<?php _e('Search', PTS_LANG_CODE)?>">
+					<li title="<?php _e('Search', PTS_LANG_CODE); ?>">
+						<input id="ptsPagesTblSearchTxt" type="text" name="tbl_search" placeholder="<?php _e('Search', PTS_LANG_CODE); ?>">
 					</li>
 				</ul>
 				<div id="ptsPagesTblNavShell" class="supsystic-tbl-pagination-shell"></div>
@@ -24,7 +24,7 @@
 				</div>
 				<table id="ptsPagesTbl"></table>	
 				<div class="bottom-nav">
-					<button id="imex-export"><?php _e('Export', PTS_LANG_CODE)?></button>
+					<button id="imex-export"><?php _e('Export', PTS_LANG_CODE); ?></button>
 				</div>
 			</div>
 			<div class="supsystic-imex-export-json-page supsystic-imex-page">
@@ -44,12 +44,12 @@
 					</label>
 				</div>
 				<div class="wp-messages">
-					<div class="message error errorFormat"><?php _e('Incorrect data!', PTS_LANG_CODE)?></div>
-					<div class="message success successAddedTable"><?php _e('Success', PTS_LANG_CODE)?></div>
+					<div class="message error errorFormat"><?php _e('Incorrect data!', PTS_LANG_CODE); ?></div>
+					<div class="message success successAddedTable"><?php _e('Success', PTS_LANG_CODE); ?></div>
 				</div>
 				<textarea id="imex-import-json"></textarea>
 				<div class="bottom-nav">
-					<button id="imex-import"><?php _e('Import', PTS_LANG_CODE)?></button>
+					<button id="imex-import"><?php _e('Import', PTS_LANG_CODE); ?></button>
 				</div>
 			</div>
 		</div>

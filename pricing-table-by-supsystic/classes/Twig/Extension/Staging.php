@@ -20,75 +20,75 @@
  */
 class Twig_Extension_Staging extends Twig_Extension
 {
-    protected $functions = array();
-    protected $filters = array();
-    protected $visitors = array();
-    protected $tokenParsers = array();
-    protected $globals = array();
-    protected $tests = array();
+  protected $functions = [];
+  protected $filters = [];
+  protected $visitors = [];
+  protected $tokenParsers = [];
+  protected $globals = [];
+  protected $tests = [];
 
-    public function addFunction($name, $function)
-    {
-        $this->functions[$name] = $function;
-    }
+  public function addFunction($name, $function)
+  {
+    $this->functions[$name] = $function;
+  }
 
-    public function getFunctions()
-    {
-        return $this->functions;
-    }
+  public function getFunctions()
+  {
+    return $this->functions;
+  }
 
-    public function addFilter($name, $filter)
-    {
-        $this->filters[$name] = $filter;
-    }
+  public function addFilter($name, $filter)
+  {
+    $this->filters[$name] = $filter;
+  }
 
-    public function getFilters()
-    {
-        return $this->filters;
-    }
+  public function getFilters()
+  {
+    return $this->filters;
+  }
 
-    public function addNodeVisitor(Twig_NodeVisitorInterface $visitor)
-    {
-        $this->visitors[] = $visitor;
-    }
+  public function addNodeVisitor(Twig_NodeVisitorInterface $visitor)
+  {
+    $this->visitors[] = $visitor;
+  }
 
-    public function getNodeVisitors()
-    {
-        return $this->visitors;
-    }
+  public function getNodeVisitors()
+  {
+    return $this->visitors;
+  }
 
-    public function addTokenParser(Twig_TokenParserInterface $parser)
-    {
-        $this->tokenParsers[] = $parser;
-    }
+  public function addTokenParser(Twig_TokenParserInterface $parser)
+  {
+    $this->tokenParsers[] = $parser;
+  }
 
-    public function getTokenParsers()
-    {
-        return $this->tokenParsers;
-    }
+  public function getTokenParsers()
+  {
+    return $this->tokenParsers;
+  }
 
-    public function addGlobal($name, $value)
-    {
-        $this->globals[$name] = $value;
-    }
+  public function addGlobal($name, $value)
+  {
+    $this->globals[$name] = $value;
+  }
 
-    public function getGlobals()
-    {
-        return $this->globals;
-    }
+  public function getGlobals()
+  {
+    return $this->globals;
+  }
 
-    public function addTest($name, $test)
-    {
-        $this->tests[$name] = $test;
-    }
+  public function addTest($name, $test)
+  {
+    $this->tests[$name] = $test;
+  }
 
-    public function getTests()
-    {
-        return $this->tests;
-    }
+  public function getTests()
+  {
+    return $this->tests;
+  }
 
-    public function getName()
-    {
-        return 'staging';
-    }
+  public function getName()
+  {
+    return 'staging';
+  }
 }

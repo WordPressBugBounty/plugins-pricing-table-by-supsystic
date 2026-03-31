@@ -18,5 +18,5 @@
  */
 interface Twig_TestCallableInterface
 {
-    public function getCallable();
+  public function getCallable();
 }

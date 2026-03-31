@@ -10,70 +10,68 @@
  */
 abstract class Twig_Extension implements Twig_ExtensionInterface
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated since 1.23 (to be removed in 2.0), implement Twig_Extension_InitRuntimeInterace instead
-     */
-    public function initRuntime(Twig_Environment $environment)
-    {
-    }
+  /**
+   * {@inheritdoc}
+   *
+   * @deprecated since 1.23 (to be removed in 2.0), implement Twig_Extension_InitRuntimeInterace instead
+   */
+  public function initRuntime(Twig_Environment $environment) {}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTokenParsers()
-    {
-        return array();
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getTokenParsers()
+  {
+    return [];
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getNodeVisitors()
-    {
-        return array();
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getNodeVisitors()
+  {
+    return [];
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFilters()
-    {
-        return array();
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getFilters()
+  {
+    return [];
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTests()
-    {
-        return array();
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getTests()
+  {
+    return [];
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFunctions()
-    {
-        return array();
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getFunctions()
+  {
+    return [];
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOperators()
-    {
-        return array();
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getOperators()
+  {
+    return [];
+  }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated since 1.23 (to be removed in 2.0), implement Twig_Extension_GlobalsProviderInterace instead
-     */
-    public function getGlobals()
-    {
-        return array();
-    }
+  /**
+   * {@inheritdoc}
+   *
+   * @deprecated since 1.23 (to be removed in 2.0), implement Twig_Extension_GlobalsProviderInterace instead
+   */
+  public function getGlobals()
+  {
+    return [];
+  }
 }

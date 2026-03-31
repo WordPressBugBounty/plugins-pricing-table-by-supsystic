@@ -32,7 +32,8 @@
   white-space: nowrap;
 }
 
-.CodeMirror-linenumbers {}
+.CodeMirror-linenumbers {
+}
 
 .CodeMirror-linenumber {
   padding: 0 3px 0 5px;
@@ -123,7 +124,8 @@
 }
 
 /* Can style cursor different in overwrite (non-insert) mode */
-div.CodeMirror-overwrite div.CodeMirror-cursor {}
+div.CodeMirror-overwrite div.CodeMirror-cursor {
+}
 
 .cm-tab {
   display: inline-block;
@@ -156,7 +158,8 @@ div.CodeMirror-overwrite div.CodeMirror-cursor {}
 .cm-s-default .cm-variable,
 .cm-s-default .cm-punctuation,
 .cm-s-default .cm-property,
-.cm-s-default .cm-operator {}
+.cm-s-default .cm-operator {
+}
 
 .cm-s-default .cm-variable-2 {
   color: #05a;
@@ -262,7 +265,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 }
 
 .CodeMirror-matchingtag {
-  background: rgba(255, 150, 0, .3);
+  background: rgba(255, 150, 0, 0.3);
 }
 
 .CodeMirror-activeline-background {
@@ -418,7 +421,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   overflow: auto;
 }
 
-.CodeMirror-widget {}
+.CodeMirror-widget {
+}
 
 .CodeMirror-measure {
   position: absolute;
@@ -462,7 +466,7 @@ div.CodeMirror-cursors {
 
 .cm-searching {
   background: #ffa;
-  background: rgba(255, 255, 0, .4);
+  background: rgba(255, 255, 0, 0.4);
 }
 
 /* IE7 hack to prevent it from returning funny offsetTops on the spans */
@@ -472,11 +476,10 @@ div.CodeMirror-cursors {
 
 /* Used to force a border model for a node */
 .cm-force-border {
-  padding-right: .1px;
+  padding-right: 0.1px;
 }
 
 @media print {
-
   /* Hide the cursor when printing */
   .CodeMirror div.CodeMirror-cursors {
     visibility: hidden;

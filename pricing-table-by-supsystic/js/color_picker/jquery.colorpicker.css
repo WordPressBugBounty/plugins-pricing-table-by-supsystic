@@ -16,18 +16,18 @@
 
 .ui-colorpicker-buttonset {
   float: left;
-  margin-left: .4em;
+  margin-left: 0.4em;
 }
 
 .ui-colorpicker-buttonset .ui-button {
-  margin: .5em 0 .5em 0;
+  margin: 0.5em 0 0.5em 0;
   cursor: pointer;
 }
 
 .ui-colorpicker-buttonpane {
   background-image: none;
-  margin: .7em 0 0 0;
-  padding: 0 .2em;
+  margin: 0.7em 0 0 0;
+  padding: 0 0.2em;
   border-left: 0;
   border-right: 0;
   border-bottom: 0;
@@ -35,9 +35,9 @@
 
 .ui-colorpicker-buttonpane button {
   float: right;
-  margin: .5em .2em .4em;
+  margin: 0.5em 0.2em 0.4em;
   cursor: pointer;
-  padding: .2em .6em .3em .6em;
+  padding: 0.2em 0.6em 0.3em 0.6em;
   width: auto;
   overflow: visible;
 }
@@ -71,8 +71,8 @@
 }
 
 /* Bar & map */
-.ui-colorpicker-map>*,
-.ui-colorpicker-bar>* {
+.ui-colorpicker-map > *,
+.ui-colorpicker-bar > * {
   position: absolute;
   cursor: crosshair;
 }
@@ -85,7 +85,7 @@
 
 /* Map */
 .ui-colorpicker-map,
-.ui-colorpicker-map>* {
+.ui-colorpicker-map > * {
   display: block;
   width: 256px;
   height: 256px;
@@ -98,7 +98,7 @@
 }
 
 .ui-colorpicker-map-128,
-.ui-colorpicker-map-128>* {
+.ui-colorpicker-map-128 > * {
   width: 128px;
   height: 128px;
 }
@@ -121,7 +121,7 @@
 
 /* Bar */
 .ui-colorpicker-bar,
-.ui-colorpicker-bar>* {
+.ui-colorpicker-bar > * {
   display: block;
   width: 20px;
   height: 256px;
@@ -130,7 +130,7 @@
 }
 
 .ui-colorpicker-bar-128,
-.ui-colorpicker-bar-128>* {
+.ui-colorpicker-bar-128 > * {
   height: 128px;
 }
 
@@ -204,7 +204,7 @@
 }
 
 .ui-colorpicker-number {
-  margin: .1em;
+  margin: 0.1em;
   width: 4em;
 }
 
@@ -230,8 +230,8 @@
 }
 
 .ui-colorpicker-disabled {
-  opacity: .5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  opacity: 0.5;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=50)';
   filter: alpha(opacity=50);
   pointer-events: none;
 }
@@ -252,8 +252,8 @@
   height: auto;
 }
 
-.ui-dialog.ui-colorpicker input[type="text"],
-.ui-dialog.ui-colorpicker input[type="number"] {
+.ui-dialog.ui-colorpicker input[type='text'],
+.ui-dialog.ui-colorpicker input[type='number'] {
   font-size: 12px;
   border: 0px solid transparent;
   height: 20px;
@@ -262,7 +262,7 @@
   background-color: #fff !important;
 }
 
-.ui-dialog.ui-colorpicker input[type="number"] {
+.ui-dialog.ui-colorpicker input[type='number'] {
   width: 45px;
 }
 
@@ -298,7 +298,6 @@
 .ui-dialog.ui-colorpicker .ui-widget-content {
   border: 0px solid transparent !important;
   background: none !important;
-  ;
   background-color: #444 !important;
   position: initial;
   -webkit-border-radius: 0;
@@ -321,7 +320,7 @@
   height: 100%;
 }
 
-.ui-dialog.ui-colorpicker input[type=radio] {
+.ui-dialog.ui-colorpicker input[type='radio'] {
   width: 15px;
   height: 16px;
   vertical-align: middle;
@@ -338,14 +337,14 @@
   vertical-align: middle;
 }
 
-.ui-dialog.ui-colorpicker input[type=radio]:checked:before {
+.ui-dialog.ui-colorpicker input[type='radio']:checked:before {
   width: 5px;
   height: 5px;
   margin: 5px 0 0 5px;
   background-color: #333;
 }
 
-.mce-bl-colorpanel .ui-colorpicker input[type=radio]:checked:before {
+.mce-bl-colorpanel .ui-colorpicker input[type='radio']:checked:before {
   margin: 7px 0 0 7px;
 }
 
@@ -366,7 +365,7 @@
   vertical-align: middle;
 }
 
-input[type="hidden"]+.ptsTear {
+input[type='hidden'] + .ptsTear {
   margin-left: 5px;
 }
 
@@ -378,7 +377,7 @@ input[type="hidden"]+.ptsTear {
 }
 
 /****************/
-.ptsElMenuSubPanel[data-sub-panel="color-pick-table-cell"] {
+.ptsElMenuSubPanel[data-sub-panel='color-pick-table-cell'] {
   padding: 0;
   margin: 0;
 }

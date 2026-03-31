@@ -1,28 +1,29 @@
 @font-face {
-	font-family: 'OctoIcons';
-	src:url('fonts/OctoIcons.eot?-dmlixp');
-	src:url('fonts/OctoIcons.eot?#iefix-dmlixp') format('embedded-opentype'),
-		url('fonts/OctoIcons.ttf?-dmlixp') format('truetype'),
-		url('fonts/OctoIcons.woff?-dmlixp') format('woff'),
-		url('fonts/OctoIcons.svg?-dmlixp#OctoIcons') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'OctoIcons';
+  src: url('fonts/OctoIcons.eot?-dmlixp');
+  src:
+    url('fonts/OctoIcons.eot?#iefix-dmlixp') format('embedded-opentype'),
+    url('fonts/OctoIcons.ttf?-dmlixp') format('truetype'),
+    url('fonts/OctoIcons.woff?-dmlixp') format('woff'),
+    url('fonts/OctoIcons.svg?-dmlixp#OctoIcons') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .octo-icon,
 .octo-icon:before {
-	font-family: 'OctoIcons' !important;
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	font-size: inherit;
+  font-family: 'OctoIcons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: inherit;
 
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 /*close icon - some special view here*/
 /*.octo-icon.octo-icon-lg.icon-close-s {
@@ -56,71 +57,71 @@
 /*actually - icons*/
 
 .octo-icon.icon-aligne-center:before {
-	content: "\e600";
+  content: '\e600';
 }
 .octo-icon.icon-aligne-left:before {
-	content: "\e601";
+  content: '\e601';
 }
 .octo-icon.icon-aligne-right:before {
-	content: "\e602";
+  content: '\e602';
 }
 .octo-icon.icon-arrow:before {
-	content: "\e603";
+  content: '\e603';
 }
 .octo-icon.icon-back:before {
-	content: "\e604";
+  content: '\e604';
 }
 .octo-icon.icon-blus-b:before {
-	content: "\e605";
+  content: '\e605';
 }
 .octo-icon.icon-bold-style:before {
-	content: "\e606";
+  content: '\e606';
 }
 .octo-icon.icon-close-b:before {
-	content: "\e607";
+  content: '\e607';
 }
 .octo-icon.icon-close-s:before {
-	content: "\e608";
+  content: '\e608';
 }
 .octo-icon.icon-color:before {
-	content: "\e609";
+  content: '\e609';
 }
 .octo-icon.icon-genie:before {
-	content: "\e60a";
+  content: '\e60a';
 }
 .octo-icon.icon-hex:before {
-	content: "\e60b";
+  content: '\e60b';
 }
 .octo-icon.icon-image:before {
-	content: "\e60c";
+  content: '\e60c';
 }
 .octo-icon.icon-italic-style:before {
-	content: "\e60d";
+  content: '\e60d';
 }
 .octo-icon.icon-link:before {
-	content: "\e60e";
+  content: '\e60e';
 }
 .octo-icon.icon-manage:before {
-	content: "\e60f";
+  content: '\e60f';
 }
 .octo-icon.icon-options:before {
-	content: "\e610";
+  content: '\e610';
 }
 .octo-icon.icon-plus-s:before {
-	content: "\e611";
+  content: '\e611';
 }
 .octo-icon.icon-save-progress:before {
-	content: "\e612";
+  content: '\e612';
 }
 .octo-icon.icon-search:before {
-	content: "\e613";
+  content: '\e613';
 }
 .octo-icon.icon-trash:before {
-	content: "\e614";
+  content: '\e614';
 }
 .octo-icon.icon-typeface:before {
-	content: "\e615";
+  content: '\e615';
 }
 .octo-icon.icon-up-down:before {
-	content: "\e616";
+  content: '\e616';
 }

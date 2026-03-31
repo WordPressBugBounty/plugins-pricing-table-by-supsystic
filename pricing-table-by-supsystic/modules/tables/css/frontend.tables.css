@@ -65,7 +65,9 @@
 .ptsShowSmooth {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s linear 0.2s, opacity 0.2s linear;
+  transition:
+    visibility 0s linear 0.2s,
+    opacity 0.2s linear;
 }
 
 .ptsShowSmooth.active {
@@ -206,7 +208,6 @@
 .ptsColBadge.ptsColBadge-left,
 .ptsColBadge.ptsColBadge-left-top {
   left: 0;
-
 }
 
 .ptsColBadge.ptsColBadge-right,
@@ -220,7 +221,8 @@
   content: none;
 }
 
-.ptsBlock {}
+.ptsBlock {
+}
 
 .ptsTableAlign_left.ptsBlock {
   float: left;
@@ -277,7 +279,7 @@
   -o-border-radius: 35px;
   height: 54px;
   display: inline-block;
-  background: #FFFFFF;
+  background: #ffffff;
   min-width: 350px;
   width: auto;
   text-align: center;
@@ -327,21 +329,21 @@
   -moz-border-radius: 22px;
   -o-border-radius: 22px;
   z-index: 0 !important;
-  transition: left ease-in-out .4s;
-  -moz-transition: left ease-in-out .4s;
-  -webkit-transition: left ease-in-out .4s;
-  -o-transition: left ease-in-out .4s;
+  transition: left ease-in-out 0.4s;
+  -moz-transition: left ease-in-out 0.4s;
+  -webkit-transition: left ease-in-out 0.4s;
+  -o-transition: left ease-in-out 0.4s;
   font-family: Asap;
   font-size: 20px;
   font-weight: bold;
   float: left;
   width: 50%;
   height: calc(100% - 5px);
-  color: #FFFFFF;
+  color: #ffffff;
   left: 0.7%;
 }
 
-.ptsSwitchWrapper input[type=radio]:checked:before {
+.ptsSwitchWrapper input[type='radio']:checked:before {
   width: -2px !important;
 }
 
@@ -349,7 +351,7 @@
   visibility: visible !important;
 }
 
-.ptsToggle>div {
+.ptsToggle > div {
   visibility: visible !important;
 }
 
@@ -391,7 +393,7 @@
   margin-left: 12px;
 }
 
-.ptsCol[data-enb-schedule="1"] {
+.ptsCol[data-enb-schedule='1'] {
   display: none;
 }
 
@@ -428,7 +430,7 @@
   display: none;
 }
 
-.ptsBlockMobile .ptsCol[class*="ptsCol-"] {
+.ptsBlockMobile .ptsCol[class*='ptsCol-'] {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
@@ -447,7 +449,7 @@
 }
 
 .ptsToggleAjaxHeader:hover {
-  background: rgba(0, 0, 0, .1);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .ptsElArea img {

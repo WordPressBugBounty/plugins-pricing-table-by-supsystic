@@ -18,12 +18,12 @@
   width: 40%;
 }
 
-.supsystic-overview .half-page>div {
+.supsystic-overview .half-page > div {
   border-bottom: 1px solid rgba(164, 170, 172, 0.28);
   padding-bottom: 20px;
 }
 
-.supsystic-overview .half-page>div:last-child {
+.supsystic-overview .half-page > div:last-child {
   border-bottom: none;
 }
 
@@ -126,7 +126,7 @@
   outline: none;
 }
 
-.supsystic-overview .half-page>div {
+.supsystic-overview .half-page > div {
   border-bottom: 0px;
   padding-bottom: inherit;
 }
@@ -200,8 +200,8 @@
 
 .overview-section h3 {
   border-bottom: 1px solid rgba(164, 170, 172, 0.28) !important;
-  padding-bottom: .5em;
-  margin-bottom: .5em;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .contact-info-section {
@@ -285,7 +285,7 @@
   width: 100%;
 }
 
-@media (max-width:1100px) {
+@media (max-width: 1100px) {
   .supsystic-overview-flex {
     flex-direction: column;
   }
@@ -496,7 +496,6 @@ div.supsysticOverviewACFormOverlay button.button.button-hero,
   color: black !important;
 }
 
-
 .supsysticOverviewACFormRadioWrapper {
   display: flex;
   position: relative;
@@ -524,7 +523,7 @@ div.supsysticOverviewACFormOverlay button.button.button-hero,
   padding-left: 10px;
 }
 
-.supsysticOverviewACFormRadioWrapper input[type=radio]:checked:before {
+.supsysticOverviewACFormRadioWrapper input[type='radio']:checked:before {
   width: 9px;
 }
 

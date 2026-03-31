@@ -51,7 +51,6 @@
 
 .undoButtons button {
   margin-top: 2px !important;
-  ;
 }
 
 #ptsUndoProcess {
@@ -114,7 +113,7 @@
   display: none;
 }
 
-.ptsSettingsContent>div {
+.ptsSettingsContent > div {
   display: none;
 }
 
@@ -157,11 +156,11 @@
   visibility: visible !important;
 }
 
-.ptsSwitchWrapper input[type=radio]:checked:before {
+.ptsSwitchWrapper input[type='radio']:checked:before {
   display: none;
 }
 
-.ptsSwitchWrapper input[type=radio] {
+.ptsSwitchWrapper input[type='radio'] {
   -webkit-appearance: radio !important;
 }
 
@@ -170,7 +169,7 @@
   opacity: 1;
 }
 
-.ptsActivePicker [data-sub-panel="schedule"] {
+.ptsActivePicker [data-sub-panel='schedule'] {
   display: block !important;
 }
 
@@ -194,7 +193,7 @@
 }
 
 /* Right-to-Left Language Styles*/
-[dir="rtl"] #ptsTableMainControllsShell {
+[dir='rtl'] #ptsTableMainControllsShell {
   float: left !important;
 }
 
@@ -208,13 +207,13 @@
 
 /* Styles for resizable image borders */
 .ui-resizable-active {
-  border: 5px dashed #03A9F4 !important;
+  border: 5px dashed #03a9f4 !important;
   /* Visible dashed border on click/hover */
   position: relative;
 }
 
 .ui-resizable-handle {
-  background: #03A9F4 !important;
+  background: #03a9f4 !important;
   /* Handle (small square) style */
   border: 1px solid #000;
   width: 10px;

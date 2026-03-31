@@ -36,7 +36,6 @@
 .supsystic-overview .video {
   padding: 10px 20px;
   margin-bottom: 10px;
-
 }
 
 .supsystic-overview .settings-title {
@@ -89,12 +88,12 @@
   margin-left: 50px;
 }
 
-.supsystic-overview .supsistic-half-side-box>div {
+.supsystic-overview .supsistic-half-side-box > div {
   border-bottom: 1px solid rgba(164, 170, 172, 0.28);
   padding-bottom: 20px;
 }
 
-.supsystic-overview .supsistic-half-side-box>div:last-child {
+.supsystic-overview .supsistic-half-side-box > div:last-child {
   border-bottom: none;
 }
 

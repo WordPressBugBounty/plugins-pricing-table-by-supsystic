@@ -17,20 +17,20 @@
 
 .supsystic-panel.import-export-panel .supsystic-imex-tab-header .supsystic-imex-tab-header-item {
   display: inline;
-  background: #E4E4E4;
+  background: #e4e4e4;
   /* border-radius: 2px 2px 0 0; */
   color: #000;
   font-size: 14px;
   padding: 7px 15px;
   cursor: pointer;
-  transition: background .3s ease;
+  transition: background 0.3s ease;
   font-weight: 600;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
   margin: 0;
   box-sizing: border-box;
 }
 
-.supsystic-panel.import-export-panel .supsystic-imex-tab-header .supsystic-imex-tab-header-item+.supsystic-imex-tab-header-item {
+.supsystic-panel.import-export-panel .supsystic-imex-tab-header .supsystic-imex-tab-header-item + .supsystic-imex-tab-header-item {
   border-left: none;
 }
 
@@ -65,12 +65,12 @@
 }
 
 .supsystic-panel.import-export-panel .supsystic-imex-import-page .message.error {
-  background: #F75136;
+  background: #f75136;
   border-color: #dd3d36;
 }
 
 .supsystic-panel.import-export-panel .supsystic-imex-import-page .message.success {
-  background: #83AD50;
+  background: #83ad50;
   border-color: #709445;
 }
 

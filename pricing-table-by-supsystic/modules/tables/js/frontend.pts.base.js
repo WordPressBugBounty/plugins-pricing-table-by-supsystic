@@ -82,33 +82,34 @@ ptsBlockBase.prototype._initElements = function () {
   this._initElementsForArea(this._$);
 };
 ptsBlockBase.prototype._initElementsForArea = function (area) {
-  var block = this
-    , addedElements = [];
+  var block = this,
+    addedElements = [];
   var initElement = function (htmlEl) {
-    var elementCode = jQuery(htmlEl).data('el')
-      , elementClass = window['ptsElement_' + elementCode];
+    var elementCode = jQuery(htmlEl).data('el'),
+      elementClass = window['ptsElement_' + elementCode];
     if (elementClass) {
       var newElement = new elementClass(jQuery(htmlEl), block);
       newElement._setCode(elementCode);
       var newIterNum = block._elements.push(newElement);
       addedElements.push(newElement);
-      newElement.setIterNum(newIterNum - 1);	// newIterNum == new length of _elements array, iterator number for element - is new length - 1
+      newElement.setIterNum(newIterNum - 1); // newIterNum == new length of _elements array, iterator number for element - is new length - 1
     } else {
       // if (g_ptsEdit)
-        // console.log('Undefined Element [' + elementCode + '] !!!');
+      // console.log('Undefined Element [' + elementCode + '] !!!');
     }
   };
-  jQuery(area).find('.ptsEl').each(function () {
-    initElement(this);
-  });
+  jQuery(area)
+    .find('.ptsEl')
+    .each(function () {
+      initElement(this);
+    });
   if (jQuery(area).hasClass('ptsEl')) {
     initElement(area);
   }
   this._afterInitElements();
   return addedElements;
 };
-ptsBlockBase.prototype._afterInitElements = function () {
-};
+ptsBlockBase.prototype._afterInitElements = function () {};
 ptsBlockBase.prototype._resetElements = function () {
   this._clearElements();
   this._initElements();
@@ -124,9 +125,7 @@ ptsBlockBase.prototype._clearElements = function () {
 ptsBlockBase.prototype.getElements = function () {
   return this._elements;
 };
-ptsBlockBase.prototype._initHtml = function () {
-
-};
+ptsBlockBase.prototype._initHtml = function () {};
 /**
  * ID number in list of canvas elements
  * @param {numeric} iter Iterator - number in all blocks array - for this element
@@ -138,10 +137,12 @@ ptsBlockBase.prototype.showLoader = function (txt) {
   var loaderHtml = jQuery('#ptsBlockLoader');
   txt = txt ? txt : loaderHtml.data('base-txt');
   loaderHtml.find('.ptsBlockLoaderTxt').html(txt);
-  loaderHtml.css({
-    'height': this._$.height()
-    , 'top': this._$.offset().top
-  }).addClass('active');
+  loaderHtml
+    .css({
+      height: this._$.height(),
+      top: this._$.offset().top,
+    })
+    .addClass('active');
 };
 ptsBlockBase.prototype.hideLoader = function () {
   var loaderHtml = jQuery('#ptsBlockLoader');
@@ -153,12 +154,12 @@ ptsBlockBase.prototype._setFont = function (fontFamily) {
 
   if (toeInArrayPts(fontFamily, ptsBuildConst.standardFonts) === false) {
     $fontLink.attr({
-      'href': 'https://fonts.googleapis.com/css?family=' + encodeURIComponent(fontFamily)
+      href: 'https://fonts.googleapis.com/css?family=' + encodeURIComponent(fontFamily),
       //,	'data-font-family': fontFamily
     });
   }
   this._$.css({
-    'font-family': fontFamily
+    'font-family': fontFamily,
   });
   this.setParam('font_family', fontFamily);
 };
@@ -186,16 +187,16 @@ ptsBlockBase.prototype.removeElementByIterNum = function (iterNum) {
 ptsBlockBase.prototype.destroyElementByIterNum = function (iterNum, clb) {
   var element = this.getElementByIterNum(iterNum);
   if (element) {
-    element.destroy(clb);  // Pass the callback to destroy
-  } else if (clb && typeof (clb) === 'function') {
-    clb();  // If no element, still call callback
+    element.destroy(clb); // Pass the callback to destroy
+  } else if (clb && typeof clb === 'function') {
+    clb(); // If no element, still call callback
   }
 };
 /**
  * Price table block base class
  */
 function ptsBlock_price_table(blockData) {
-  this._increaseHoverFontPerc = 20;	// Increase font on hover effect, %
+  this._increaseHoverFontPerc = 20; // Increase font on hover effect, %
   this._$lastHoveredCol = null;
   this._refreshColsBinded = false;
   this._onloadHandle = false;
@@ -216,13 +217,13 @@ ptsBlock_price_table.prototype._initTooltipsForCells = function () {
     if ($tooltipstedCells && $tooltipstedCells.length) {
       // TODO: Move this to Options and make this part more flexible
       var tooltipsterSettings = {
-        contentAsHTML: true
-        , interactive: true
-        , speed: 250
-        , delay: 0
-        , animation: 'swing'
-        , maxWidth: 450
-        , position: 'top'
+        contentAsHTML: true,
+        interactive: true,
+        speed: 250,
+        delay: 0,
+        animation: 'swing',
+        maxWidth: 450,
+        position: 'top',
       };
       $tooltipstedCells.tooltipster(tooltipsterSettings);
 
@@ -238,22 +239,23 @@ ptsBlock_price_table.prototype._afterInitElements = function () {
   if (parseInt(this.getParam('enb_hover_animation')) == 1) {
     this._initHoverEffect();
   }
-  if (this.getParam('table_align'))
-    this._$.addClass('ptsTableAlign_' + this.getParam('table_align'));
-  if (this.getParam('text_align'))
-    this._$.addClass('ptsAlign_' + this.getParam('text_align'));
-  if (this.getParam('ajax'))
-    this._$.addClass('ptsAjax_' + this.getParam('ajax'));
+  if (this.getParam('table_align')) this._$.addClass('ptsTableAlign_' + this.getParam('table_align'));
+  if (this.getParam('text_align')) this._$.addClass('ptsAlign_' + this.getParam('text_align'));
+  if (this.getParam('ajax')) this._$.addClass('ptsAjax_' + this.getParam('ajax'));
   if (!this._disableContentChange) {
     this._refreshCellsHeight();
   }
   if (!this._refreshColsBinded) {
-    this._$.bind('ptsBlockContentChanged', jQuery.proxy(function () {
-      this._refreshCellsHeight();
-    }, this));
+    this._$.bind(
+      'ptsBlockContentChanged',
+      jQuery.proxy(function () {
+        this._refreshCellsHeight();
+      }, this)
+    );
     this._refreshColsBinded = true;
   }
-  if (!_ptsIsEditMode()) { // Not for edit mode unfortunatelly ....
+  if (!_ptsIsEditMode()) {
+    // Not for edit mode unfortunatelly ....
     this._initTooltipsForCells();
     /*var $tooltipstedCells = this._$.find('.ptsCell[title], .ptsColFooter[title], .ptsColHeader[title], .ptsColDesc[title]');
 
@@ -272,8 +274,8 @@ ptsBlock_price_table.prototype._afterInitElements = function () {
         $tooltipstedCells.tooltipster( tooltipsterSettings );
       }
     }*/
-    var self = this
-      , PTS_VISIBLE_SET_HEIGHT_KEY = 'PTS-VISIBLE-SET-HEIGHT-KEY';
+    var self = this,
+      PTS_VISIBLE_SET_HEIGHT_KEY = 'PTS-VISIBLE-SET-HEIGHT-KEY';
 
     this._fixResponsive();
 
@@ -287,16 +289,17 @@ ptsBlock_price_table.prototype._afterInitElements = function () {
     });
     jQuery('.ptsTableFrontedShell .ptsPreDisplayStyle').remove();
     jQuery('.ptsBlock').css({
-      'opacity': '1'
-      , 'visibility': 'visible'
+      opacity: '1',
+      visibility: 'visible',
     });
     jQuery(window).on('toggleChangeCellHeight', function () {
       self._refreshCellsHeight();
     });
     jQuery(function () {
       var isEnableLazyLoad = function () {
-        return self._$.find('img[data-lazy-src]:not(.lazyloaded)').length > 0;
-      }, checkedLazyLoadLib = false;
+          return self._$.find('img[data-lazy-src]:not(.lazyloaded)').length > 0;
+        },
+        checkedLazyLoadLib = false;
 
       if (isEnableLazyLoad()) {
         checkedLazyLoadLib = true;
@@ -343,7 +346,7 @@ ptsBlock_price_table.prototype._afterInitElements = function () {
 
       observer.observe(document.body, {
         childList: true,
-        subtree: true
+        subtree: true,
       });
 
       self.setCalcWidth();
@@ -356,7 +359,7 @@ ptsBlock_price_table.prototype._afterInitElements = function () {
 
   if (!this._onloadHandle) {
     this._onloadHandle = true;
-    jQuery(window).on("load", function () {
+    jQuery(window).on('load', function () {
       self._refreshCellsHeight();
     });
   }
@@ -368,11 +371,12 @@ ptsBlock_price_table.prototype._initHoverEffect = function () {
   // }
 
   if (parseInt(this.getParam('enb_hover_animation')) == 1) {
-    var $cols = this._getCols()
-      , self = this;
-    $cols.mouseenter((e) => {
-      self._increaseHoverFont(jQuery(e.currentTarget));
-    })
+    var $cols = this._getCols(),
+      self = this;
+    $cols
+      .mouseenter((e) => {
+        self._increaseHoverFont(jQuery(e.currentTarget));
+      })
       .mouseleave((e) => {
         self._backHoverFont(jQuery(e.currentTarget));
       })
@@ -383,25 +387,21 @@ ptsBlock_price_table.prototype._initHoverEffect = function () {
         self._backHoverFont(jQuery(e.currentTarget));
       });
   }
-
 };
 ptsBlock_price_table.prototype._increaseHoverFont = function ($col) {
   var self = this;
-  if (_ptsIsEditMode()) return;	// Not for edit mode unfortunatelly ....
+  if (_ptsIsEditMode()) return; // Not for edit mode unfortunatelly ....
   var $descCell = $col.find('.ptsColDesc');
   $col.height($col.height()); // Reset height on frontend.tables.js (listeners: window resize)
   $descCell.find('span').each(function () {
     var newFontSize = jQuery(this).data('new-font-size');
     if (!newFontSize) {
-      var prevFontSize = jQuery(this).css('font-size')
-        , fontUnits = prevFontSize.replace(/\d+/, '')
-        , fontSize = parseInt(str_replace(prevFontSize, fontUnits, ''));
+      var prevFontSize = jQuery(this).css('font-size'),
+        fontUnits = prevFontSize.replace(/\d+/, ''),
+        fontSize = parseInt(str_replace(prevFontSize, fontUnits, ''));
       if (fontSize && fontUnits) {
-        newFontSize = Math.ceil(fontSize + (self._increaseHoverFontPerc * fontSize / 100));
-        jQuery(this)
-          .data('prev-font-size', prevFontSize)
-          .data('font-units', fontUnits)
-          .data('new-font-size', newFontSize);
+        newFontSize = Math.ceil(fontSize + (self._increaseHoverFontPerc * fontSize) / 100);
+        jQuery(this).data('prev-font-size', prevFontSize).data('font-units', fontUnits).data('new-font-size', newFontSize);
       }
     }
     if (newFontSize) {
@@ -410,7 +410,6 @@ ptsBlock_price_table.prototype._increaseHoverFont = function ($col) {
   });
 
   if (this.getParam('is_horisontal_row_type') != '1') {
-
     if (!$descCell.attr('data-prev-height')) {
       var descHeight = $descCell.outerHeight();
       $descCell.attr('data-prev-height', descHeight);
@@ -418,8 +417,8 @@ ptsBlock_price_table.prototype._increaseHoverFont = function ($col) {
       descHeight = $descCell.attr('data-prev-height');
     }
     $descCell.css({
-      'min-height': descHeight
-      , 'height': 'auto'
+      'min-height': descHeight,
+      height: 'auto',
     });
   }
 
@@ -430,11 +429,11 @@ ptsBlock_price_table.prototype._increaseHoverFont = function ($col) {
       if (colElement) {
         colElement.repositeMenu();
       }
-    }, g_ptsHoverAnim);	// 300 - standard animation speed
+    }, g_ptsHoverAnim); // 300 - standard animation speed
   }
 };
 ptsBlock_price_table.prototype._backHoverFont = function ($col) {
-  if (_ptsIsEditMode()) return;	// Not for edit mode unfortunatelly ....
+  if (_ptsIsEditMode()) return; // Not for edit mode unfortunatelly ....
   $col.removeClass('hover');
   var $descCell = $col.find('.ptsColDesc');
   $descCell.find('span').each(function () {
@@ -445,25 +444,25 @@ ptsBlock_price_table.prototype._backHoverFont = function ($col) {
   });
   setTimeout(function () {
     $descCell.outerHeight($descCell.data('prev-height'));
-  }, 300);	// time is set in css styles, but it always is something around 300ms
+  }, 300); // time is set in css styles, but it always is something around 300ms
 };
 ptsBlock_price_table.prototype._disableHoverEffect = function ($cols) {
-  if (_ptsIsEditMode()) return;	// Not for edit mode unfortunatelly ....
+  if (_ptsIsEditMode()) return; // Not for edit mode unfortunatelly ....
   $cols = $cols ? $cols : this._getCols();
   //$cols.unbind('hover.animation');
 };
 ptsBlock_price_table.prototype.getColSelectors = function () {
   return {
-    header: { sel: '.ptsColHeader' }
-    , desc: { sel: '.ptsColDesc' }
-    , rows: { sel: '.ptsRows' }
-    , cells: { sel: '.ptsCell' }
-    , footer: { sel: '.ptsColFooter' }
+    header: { sel: '.ptsColHeader' },
+    desc: { sel: '.ptsColDesc' },
+    rows: { sel: '.ptsRows' },
+    cells: { sel: '.ptsCell' },
+    footer: { sel: '.ptsColFooter' },
   };
 };
 ptsBlock_price_table.prototype.getMaxColsSizes = function (widthDesc) {
-  var $cols = this._getCols(widthDesc)
-    , sizes = this.getColSelectors();
+  var $cols = this._getCols(widthDesc),
+    sizes = this.getColSelectors();
 
   $cols.each(function () {
     //fix effects from bug with large min-height in frontend #266
@@ -473,8 +472,7 @@ ptsBlock_price_table.prototype.getMaxColsSizes = function (widthDesc) {
       var $entity = jQuery(this).find(sizes[key].sel);
       if ($entity && $entity.length) {
         if (key == 'cells') {
-          if (!sizes[key].height)
-            sizes[key].height = [];
+          if (!sizes[key].height) sizes[key].height = [];
           var cellNum = 0;
           $entity.each(function () {
             var prevHeight = jQuery(this).outerHeight();
@@ -513,8 +511,8 @@ ptsBlock_price_table.prototype.getColumnWithInfo = function (strWidthAttr) {
     return null;
   }
   return new Object({
-    'num': (number.length && number.length > 0 && !isNaN(parseInt(number[0]))) ? parseInt(number[0]) : null,
-    'isPerc': isPerc === null ? false : true
+    num: number.length && number.length > 0 && !isNaN(parseInt(number[0])) ? parseInt(number[0]) : null,
+    isPerc: isPerc === null ? false : true,
   });
 };
 ptsBlock_price_table.prototype.setColsWidth = function (width, perc) {
@@ -532,7 +530,7 @@ ptsBlock_price_table.prototype.setColsWidth = function (width, perc) {
           if (colWidthObj && 'num' in colWidthObj && 'isPerc' in colWidthObj) {
             var calcColWidth = 0;
             if (colWidthObj.isPerc) {
-              calcColWidth = fixedValueTableWidth * colWidthObj.num / 100;
+              calcColWidth = (fixedValueTableWidth * colWidthObj.num) / 100;
             } else {
               calcColWidth = colWidthObj.num;
             }
@@ -586,7 +584,7 @@ ptsBlock_price_table.prototype.setColsWidth = function (width, perc) {
           width += 'px';
         }
         $cols.css({
-          'width': width
+          width: width,
         });
       }
     }
@@ -601,13 +599,13 @@ ptsBlock_price_table.prototype.columnChidrensWidthCalc = function () {
   // only for HORIZONTAL ROW
   var $cols = this._getCols(true);
   $cols.each(function (ind, oneCol) {
-    var currColumn = jQuery(oneCol)
-      , emptyChilds = currColumn.find('.ptsTableElementContent').children(':not(:has(">div")):not(".ptsColBadge")')
-      , level1Childs = currColumn.find('.ptsTableElementContent').children(':has(">div"):not(".ptsColBadge")')
-      , level1ChildRows = currColumn.find('.ptsTableElementContent').children('.ptsRows')
-      , level2ChildRows = level1ChildRows.children()
-      , allChildCount = level1Childs.length
-      , level2ChildCount = 1;
+    var currColumn = jQuery(oneCol),
+      emptyChilds = currColumn.find('.ptsTableElementContent').children(':not(:has(">div")):not(".ptsColBadge")'),
+      level1Childs = currColumn.find('.ptsTableElementContent').children(':has(">div"):not(".ptsColBadge")'),
+      level1ChildRows = currColumn.find('.ptsTableElementContent').children('.ptsRows'),
+      level2ChildRows = level1ChildRows.children(),
+      allChildCount = level1Childs.length,
+      level2ChildCount = 1;
 
     if (level1ChildRows.length > 0 && level2ChildRows.length > 0) {
       allChildCount += level2ChildRows.length - 1;
@@ -615,18 +613,18 @@ ptsBlock_price_table.prototype.columnChidrensWidthCalc = function () {
     }
     //
     emptyChilds.css({
-      'width': "0%",
-      'margin': '0',
-      'padding': '0',
+      width: '0%',
+      margin: '0',
+      padding: '0',
     });
     var oneChildWidth = Math.floor(95 / allChildCount);
 
     level1Childs.css('width', oneChildWidth + '%');
     var widthInPixel = level1Childs.css('width');
-    level1ChildRows.css('width', (level2ChildCount * oneChildWidth + 2) + '%');
+    level1ChildRows.css('width', level2ChildCount * oneChildWidth + 2 + '%');
     level2ChildRows.css('width', widthInPixel);
   });
-}
+};
 ptsBlock_price_table.prototype.checkColWidthPerc = function () {
   if (this.getParam('calc_width') === 'table') {
     this.setColWidthPerc();
@@ -649,7 +647,6 @@ ptsBlock_price_table.prototype.setTableWidth = function (width, measure) {
     measure = this.getParam('table_width_measure');
   }
   this._$.width(width + measure);
-
 };
 ptsBlock_price_table.prototype.setTableVertPadding = function (padding, measure) {
   if (padding && parseInt(padding)) {
@@ -685,8 +682,8 @@ ptsBlock_price_table.prototype.setCalcWidth = function (type) {
 };
 ptsBlock_price_table.prototype._fixResponsive = function () {
   if (this.getParam('is_horisontal_row_type') == '1') {
-    var $parent = this._$.parents('.ptsTableFrontedShell:first').parent()
-      , parentWidth = $parent.width();
+    var $parent = this._$.parents('.ptsTableFrontedShell:first').parent(),
+      parentWidth = $parent.width();
 
     if (jQuery(window).width() < 600) {
       $parent.addClass('ptsResponcive');
@@ -695,29 +692,25 @@ ptsBlock_price_table.prototype._fixResponsive = function () {
     }
     return;
   }
-  var $parent = this._$.parents('.ptsTableFrontedShell:first').parent()
-    , parentWidth = $parent.width()
-    , widthMeasure = this.getParam('table_width_measure')
-    , calcWidth = this.getParam('calc_width')
-    , includeDesc = parseInt(this.getParam('enb_desc_col'))
-    , $cols = this._getCols(includeDesc)
-    , actualTblWidth = this._$.width()
-    , criticalColWidth = isNaN(parseInt(this.getParam('resp_min_col_width'))) ? 150 : parseInt(this.getParam('resp_min_col_width'))
-    , dsblResponsive = parseInt(this.getParam('dsbl_responsive'));
+  var $parent = this._$.parents('.ptsTableFrontedShell:first').parent(),
+    parentWidth = $parent.width(),
+    widthMeasure = this.getParam('table_width_measure'),
+    calcWidth = this.getParam('calc_width'),
+    includeDesc = parseInt(this.getParam('enb_desc_col')),
+    $cols = this._getCols(includeDesc),
+    actualTblWidth = this._$.width(),
+    criticalColWidth = isNaN(parseInt(this.getParam('resp_min_col_width'))) ? 150 : parseInt(this.getParam('resp_min_col_width')),
+    dsblResponsive = parseInt(this.getParam('dsbl_responsive'));
   this._$.removeClass('ptsBlockMobile');
   switch (calcWidth) {
     case 'table':
       switch (widthMeasure) {
         case '%':
-          var self = this
-            , removeOtherDescCol = function () {
-              if (!dsblResponsive
-                && !_ptsIsEditMode()
-                && self._$.find('.ptsTableDescCol').length > 1
-                && includeDesc
-              ) {
-                var $descCols = self._$.find('.ptsTableDescCol')
-                  , firstCol = false;
+          var self = this,
+            removeOtherDescCol = function () {
+              if (!dsblResponsive && !_ptsIsEditMode() && self._$.find('.ptsTableDescCol').length > 1 && includeDesc) {
+                var $descCols = self._$.find('.ptsTableDescCol'),
+                  firstCol = false;
 
                 $descCols.each(function () {
                   var $this = jQuery(this);
@@ -736,16 +729,16 @@ ptsBlock_price_table.prototype._fixResponsive = function () {
           // There can be several desc cols - exclude those invalid numbers
           var descColNum = $cols.filter('.ptsTableDescCol').length;
 
-          var colsNum = $cols.length - (descColNum > 1 ? descColNum - 1 : 0)
-            , currWidth = actualTblWidth / colsNum;
+          var colsNum = $cols.length - (descColNum > 1 ? descColNum - 1 : 0),
+            currWidth = actualTblWidth / colsNum;
 
           if (currWidth <= criticalColWidth && !dsblResponsive) {
             $cols.css('width', '100%');
 
             if (!_ptsIsEditMode() && includeDesc) {
-              var $descColumn = this._$.find('.ptsTableDescCol').first()
-                , $columns = this._$.find('.ptsCol:not(.ptsTableDescCol)')
-                , firstCol = false;
+              var $descColumn = this._$.find('.ptsTableDescCol').first(),
+                $columns = this._$.find('.ptsCol:not(.ptsTableDescCol)'),
+                firstCol = false;
               removeOtherDescCol();
 
               var i = 0;
@@ -759,12 +752,14 @@ ptsBlock_price_table.prototype._fixResponsive = function () {
 
                 i++;
                 var $descClone = $descColumn.clone();
-                $descClone.find('.tooltipstered[data-title]').removeClass('tooltipstered').each(function () {
-                  var el = jQuery(this);
-                  el.attr('title', el.attr('data-title')).removeAttr('data-title');
-                });
+                $descClone
+                  .find('.tooltipstered[data-title]')
+                  .removeClass('tooltipstered')
+                  .each(function () {
+                    var el = jQuery(this);
+                    el.attr('title', el.attr('data-title')).removeAttr('data-title');
+                  });
                 $descClone.insertBefore($this);
-
               });
               this._initTooltipsForCells();
 
@@ -785,27 +780,27 @@ ptsBlock_price_table.prototype._fixResponsive = function () {
         case 'px':
           if (actualTblWidth > parentWidth) {
             this.setParam('went_to_responsive', this.getParam('table_width'));
-            this.setTableWidth(100, '%');	// make it 100% in this case
-            this._fixResponsive();	// Repeat - to check case '%':
+            this.setTableWidth(100, '%'); // make it 100% in this case
+            this._fixResponsive(); // Repeat - to check case '%':
           } else if (this.getParam('went_to_responsive')) {
-            this.setTableWidth(this.getParam('went_to_responsive'), 'px');	// Back to px width
+            this.setTableWidth(this.getParam('went_to_responsive'), 'px'); // Back to px width
             this.setParam('went_to_responsive', 0);
           }
           break;
       }
       break;
     case 'col':
-      var colsNum = $cols.length
-        , currWidth = parseFloat(this.getParam('col_width'));
+      var colsNum = $cols.length,
+        currWidth = parseFloat(this.getParam('col_width'));
       if (currWidth * colsNum >= parentWidth) {
         this.setParam('went_to_responsive', currWidth);
-        this.setParam('table_width', 100);	// Set table width to 100%
+        this.setParam('table_width', 100); // Set table width to 100%
         this.setParam('table_width_measure', '%');
         this.setCalcWidth('table');
-        this._fixResponsive();	// Repeat - to check case '%':
+        this._fixResponsive(); // Repeat - to check case '%':
       } else if (this.getParam('went_to_responsive')) {
         this.setCalcWidth('col');
-        this.setParam('col_width', this.getParam('went_to_responsive'));	// Back to px width
+        this.setParam('col_width', this.getParam('went_to_responsive')); // Back to px width
         this.setParam('went_to_responsive', 0);
       }
       break;
@@ -813,19 +808,18 @@ ptsBlock_price_table.prototype._fixResponsive = function () {
 };
 ptsBlock_price_table.prototype._refreshCellsHeight = function () {
   // Really important  - keep all this functionality as light as possible, as it can slow down whole builder work
-  var $cols = this._getCols(true)
-    , self = this
-    , sizes = this.getMaxColsSizes(true);
+  var $cols = this._getCols(true),
+    self = this,
+    sizes = this.getMaxColsSizes(true);
 
   $cols.each(function () {
     for (var key in sizes) {
-
       var $entity = jQuery(this).find(sizes[key].sel);
       if (self.getParam('is_horisontal_row_type') == '1') {
-        $entity.css({ 'height': 'auto' });
+        $entity.css({ height: 'auto' });
       } else {
         if (key == 'rows') {
-          $entity.css({ 'height': 'auto' });
+          $entity.css({ height: 'auto' });
           continue;
         }
         if ($entity && $entity.length) {
@@ -848,7 +842,6 @@ ptsBlock_price_table.prototype._refreshCellsHeight = function () {
   });
 };
 
-
 // ELEMENTS BASE JS
 
 function ptsElementBase(jqueryHtml, block) {
@@ -857,7 +850,7 @@ function ptsElementBase(jqueryHtml, block) {
   this._animationSpeed = g_ptsAnimationSpeed;
   this._$ = jqueryHtml;
   this._block = block;
-  if (typeof (this._menuOriginalId) === 'undefined') {
+  if (typeof this._menuOriginalId === 'undefined') {
     this._menuOriginalId = '';
   }
   this._innerImgsCount = 0;
@@ -865,7 +858,7 @@ function ptsElementBase(jqueryHtml, block) {
   //this._$menu = null;
   this._menu = null;
   this._menuClbs = {};
-  if (typeof (this._menuClass) === 'undefined') {
+  if (typeof this._menuClass === 'undefined') {
     this._menuClass = 'ptsElementMenu';
   }
   this._menuOnBottom = false;
@@ -873,15 +866,15 @@ function ptsElementBase(jqueryHtml, block) {
 
   this._initedComplete = false;
   this._editArea = null;
-  if (typeof (this._isMovable) === 'undefined') {
+  if (typeof this._isMovable === 'undefined') {
     this._isMovable = false;
   }
   this._moveHandler = null;
   this._sortInProgress = false;
-  if (typeof (this._showMenuEvent) === 'undefined') {
+  if (typeof this._showMenuEvent === 'undefined') {
     this._showMenuEvent = 'click';
   }
-  if (typeof (this._changeable) === 'undefined') {
+  if (typeof this._changeable === 'undefined') {
     this._changeable = false;
   }
   if (g_ptsEdit) {
@@ -936,17 +929,15 @@ ptsElementBase.prototype._setCode = function (code) {
 ptsElementBase.prototype._init = function () {
   this._beforeInit();
 };
-ptsElementBase.prototype._beforeInit = function () {
-
-};
-ptsElementBase.prototype.destroy = function () {
-
-};
+ptsElementBase.prototype._beforeInit = function () {};
+ptsElementBase.prototype.destroy = function () {};
 ptsElementBase.prototype.get = function (opt) {
-  return jQuery('<div/>').html(this._$.attr('data-' + opt)).text();	// not .data() - as it should be saved even after page reload, .data() will not create element attribute
+  return jQuery('<div/>')
+    .html(this._$.attr('data-' + opt))
+    .text(); // not .data() - as it should be saved even after page reload, .data() will not create element attribute
 };
 ptsElementBase.prototype.set = function (opt, val) {
-  this._$.attr('data-' + opt, jQuery('<div/>').text(val).html());	// not .data() - as it should be saved even after page reload, .data() will not create element attribute
+  this._$.attr('data-' + opt, jQuery('<div/>').text(val).html()); // not .data() - as it should be saved even after page reload, .data() will not create element attribute
 };
 ptsElementBase.prototype._getEditArea = function () {
   if (!this._editArea || this._$.attr('data-reset') == '1') {
@@ -965,7 +956,7 @@ ptsElementBase.prototype._getOverlay = function () {
  * Standart button item
  */
 function ptsElement_btn(jqueryHtml, block) {
-  if (typeof (this._menuOriginalId) === 'undefined') {
+  if (typeof this._menuOriginalId === 'undefined') {
     this._menuOriginalId = 'ptsElMenuBtnExl';
   }
   this._menuClass = 'ptsElementMenu_btn';
@@ -979,60 +970,54 @@ ptsElement_btn.prototype._onlyFirstHtmlInit = function () {
   if (ptsElement_btn.superclass._onlyFirstHtmlInit.apply(this, arguments)) {
     if (this.get('customhover-clb')) {
       var clbName = this.get('customhover-clb');
-      if (typeof (this[clbName]) === 'function') {
+      if (typeof this[clbName] === 'function') {
         var self = this;
-        this._getEditArea().hover(function () {
-          self[clbName](true, this);
-        }, function () {
-          self[clbName](false, this);
-        });
+        this._getEditArea().hover(
+          function () {
+            self[clbName](true, this);
+          },
+          function () {
+            self[clbName](false, this);
+          }
+        );
       }
     }
   }
 };
 ptsElement_btn.prototype._hoverChangeFontColor = function (hover, element) {
   if (hover) {
-    jQuery(element)
-      .data('original-color', this._getEditArea().css('color'))
-      .css('color', jQuery(element).parents('.ptsEl:first').attr('data-bgcolor'));	// Ugly, but only one way to get this value in dynamic way for now
+    jQuery(element).data('original-color', this._getEditArea().css('color')).css('color', jQuery(element).parents('.ptsEl:first').attr('data-bgcolor')); // Ugly, but only one way to get this value in dynamic way for now
   } else {
-    jQuery(element)
-      .css('color', jQuery(element).data('original-color'));
+    jQuery(element).css('color', jQuery(element).data('original-color'));
   }
 };
 ptsElement_btn.prototype._hoverChangeBgColor = function (hover, element) {
-  var parentElement = jQuery(element).parents('.ptsEl:first');	// Actual element html
+  var parentElement = jQuery(element).parents('.ptsEl:first'); // Actual element html
   if (hover) {
-    parentElement
-      .data('original-color', parentElement.css('background-color'))
-      .css('background-color', parentElement.attr('data-bgcolor'));	// Ugly, but only one way to get this value in dynamic way for now
+    parentElement.data('original-color', parentElement.css('background-color')).css('background-color', parentElement.attr('data-bgcolor')); // Ugly, but only one way to get this value in dynamic way for now
   } else {
-    parentElement
-      .css('background-color', parentElement.data('original-color'));
+    parentElement.css('background-color', parentElement.data('original-color'));
   }
 };
 ptsElement_btn.prototype._hoverBorderColor = function (hover, element) {
   //var parentElement = jQuery(element).parents('.ptsEl:first');	// Actual element html
   if (hover) {
-    jQuery(element)
-      .data('original-color', jQuery(element).css('border-color'))
-      .css('border-color', jQuery(element).parents('.ptsEl:first').attr('data-bgcolor'));	// Ugly, but only one way to get this value in dynamic way for now
+    jQuery(element).data('original-color', jQuery(element).css('border-color')).css('border-color', jQuery(element).parents('.ptsEl:first').attr('data-bgcolor')); // Ugly, but only one way to get this value in dynamic way for now
   } else {
-    jQuery(element)
-      .css('border-color', jQuery(element).data('original-color'));
+    jQuery(element).css('border-color', jQuery(element).data('original-color'));
   }
 };
 /**
  * Table column element
  */
 function ptsElement_table_col(jqueryHtml, block) {
-  if (typeof (this._menuOriginalId) === 'undefined') {
+  if (typeof this._menuOriginalId === 'undefined') {
     this._menuOriginalId = 'ptsElMenuTableColExl';
   }
-  if (typeof (this._menuClass) === 'undefined') {
+  if (typeof this._menuClass === 'undefined') {
     this._menuClass = 'ptsElementMenu_table_col';
   }
-  if (typeof (this._isMovable) === 'undefined') {
+  if (typeof this._isMovable === 'undefined') {
     this._isMovable = true;
   }
   this._showMenuEvent = 'click';
@@ -1045,7 +1030,7 @@ function ptsElement_table_col(jqueryHtml, block) {
 extendPts(ptsElement_table_col, ptsElementBase);
 ptsElement_table_col.prototype.setIterNum = function () {
   ptsElement_table_col.superclass.setIterNum.apply(this, arguments);
-  if (!g_ptsEdit && typeof (ptsScheduleCheck) !== 'undefined') {
+  if (!g_ptsEdit && typeof ptsScheduleCheck !== 'undefined') {
     ptsScheduleCheck(this);
   }
 };
@@ -1094,30 +1079,27 @@ function ptsElement_table_cell_txt(jqueryHtml, block) {
 }
 extendPts(ptsElement_table_cell_txt, ptsElementBase);
 
-
 // RESPONSIVE TEXT
 
 (function ($) {
-
   $.fn.responsiveText = function (options) {
-
     // Setup options
-    var settings = $.extend({
-      'minFontSize': Number.NEGATIVE_INFINITY,
-      'maxFontSize': Number.POSITIVE_INFINITY
-    }, options);
+    var settings = $.extend(
+      {
+        minFontSize: Number.NEGATIVE_INFINITY,
+        maxFontSize: Number.POSITIVE_INFINITY,
+      },
+      options
+    );
 
     return this.each(function () {
-
       // Store the object
       var $this = $(this),
         text = $this.get(0);
 
       if (!text) return;
 
-      $this.data('original-font-size', parseFloat(
-        window.getComputedStyle(text).fontSize
-      ), 10);
+      $this.data('original-font-size', parseFloat(window.getComputedStyle(text).fontSize), 10);
 
       // Resizer() resizes items based on the object width divided by the compressor * 10
       var resizer = function () {
@@ -1128,21 +1110,12 @@ extendPts(ptsElement_table_cell_txt, ptsElementBase);
 
         if (originalWidth == currentWidth || !size) return;
 
-        if (currentWidth != originalWidth)
-          ratio = originalWidth / currentWidth;
+        if (currentWidth != originalWidth) ratio = originalWidth / currentWidth;
 
-        if (currentWidth > originalWidth)
-          size *= ratio;
-        else
-          size /= ratio;
+        if (currentWidth > originalWidth) size *= ratio;
+        else size /= ratio;
 
-        size = Math.max(
-          Math.min(
-            size,
-            settings.maxFontSize
-          ),
-          settings.minFontSize
-        );
+        size = Math.max(Math.min(size, settings.maxFontSize), settings.minFontSize);
 
         $this.css('font-size', size + 'px');
       };
@@ -1151,17 +1124,14 @@ extendPts(ptsElement_table_cell_txt, ptsElementBase);
 
       // Call on resize. Opera debounces their resize by default.
       $(window).on('resize.responsiveText orientationchange.responsiveText', resizer);
-
     });
-
   };
-
 })(jQuery);
 // TABLES BASE
-var g_ptsEdit = false
-  , g_ptsBlockFabric = null
-  , g_ptsHoverAnim = 300	// Table hover animation lenght, ms - hardcoded for now
-  , g_ptsHoverMargin = 20;	// Table hover margin displace, px - hardcoded for now
+var g_ptsEdit = false,
+  g_ptsBlockFabric = null,
+  g_ptsHoverAnim = 300, // Table hover animation lenght, ms - hardcoded for now
+  g_ptsHoverMargin = 20; // Table hover margin displace, px - hardcoded for now
 
 //array with unique_id template that without enabled options header row
 //overlap toggle elements
@@ -1169,13 +1139,13 @@ var g_ptsUniqueIdArray = ['wnOq3v2K', 'sa0DHT4h', 'B1gpCofW', 'ptmJ4YnA', 'r0OL4
 
 jQuery(document).ready(function () {
   _ptsInitFabric();
-  if (typeof (ptsTables) !== 'undefined' && ptsTables && ptsTables.length) {
+  if (typeof ptsTables !== 'undefined' && ptsTables && ptsTables.length) {
     for (var i = 0; i < ptsTables.length; i++) {
       g_ptsBlockFabric.addFromHtml(ptsTables[i], jQuery('#' + ptsTables[i].view_id));
 
       jQuery('body').trigger('set_default_position');
       //for fix horizontal element size bugs frontend.pro.tables.js
-      if (ptsTables[i].unique_id === "7m6k5X0i") {
+      if (ptsTables[i].unique_id === '7m6k5X0i') {
         jQuery('#' + ptsTables[i].view_id).attr('data-unique_id', ptsTables[i].unique_id);
       }
 
@@ -1186,14 +1156,14 @@ jQuery(document).ready(function () {
 
         var enableHeader = '1';
         if (typeof ptsTables[i].params.enb_head_row !== 'undefined') {
-          enableHeader = typeof (ptsTables[i].params.enb_head_row.val) !== "undefined" ? '0' : '1';
+          enableHeader = typeof ptsTables[i].params.enb_head_row.val !== 'undefined' ? '0' : '1';
         }
-        jQuery(document.body).trigger("overlay_toggle", [ptsTables[i].unique_id, enableHeader]);
+        jQuery(document.body).trigger('overlay_toggle', [ptsTables[i].unique_id, enableHeader]);
       }
       //jQuery(".ptsTableFrontedShell .tooltipstered").removeAttr("title");
     }
     jQuery(window).bind('load', function () {
-      if (typeof (g_ptsAllowAddUndo) !== 'undefined') {
+      if (typeof g_ptsAllowAddUndo !== 'undefined') {
         setTimeout(function () {
           g_ptsAllowAddUndo = true;
           _ptsAddUndoBuffer();
@@ -1202,8 +1172,10 @@ jQuery(document).ready(function () {
     });
   }
 });
-jQuery(window).on("load", function () {
-  setTimeout(function () { jQuery('body').trigger('resize'); }, 500);
+jQuery(window).on('load', function () {
+  setTimeout(function () {
+    jQuery('body').trigger('resize');
+  }, 500);
 });
 //in case images are loading dynamically
 jQuery('.ptsEl.ptsCol[data-el="table_col"] img').on('load', function () {
@@ -1216,7 +1188,7 @@ function ptsGetFabric() {
   return g_ptsBlockFabric;
 }
 function _ptsIsEditMode() {
-  return (typeof (g_ptsEditMode) !== 'undefined' && g_ptsEditMode);
+  return typeof g_ptsEditMode !== 'undefined' && g_ptsEditMode;
 }
 //TABLES BASE END
 //MODAL
@@ -1225,11 +1197,14 @@ function _ptsIsEditMode() {
 
   $.fn.sModal = function (options) {
     var self = this,
-      settings = $.extend({
-        width: 640,
-        height: 480,
-        buttons: [],
-      }, options),
+      settings = $.extend(
+        {
+          width: 640,
+          height: 480,
+          buttons: [],
+        },
+        options
+      ),
       $modalOverlay,
       $modalContainer,
       $closeModalButton,
@@ -1279,7 +1254,6 @@ function _ptsIsEditMode() {
         'margin-top': '1em',
       };
 
-
     function closeModal() {
       self.trigger('close.before');
       if (jQuery('.sModal:visible').length < 2) {
@@ -1300,7 +1274,6 @@ function _ptsIsEditMode() {
         var offset = jQuery(window).height() / 2 + 40;
         jQuery('.sc-modal-container').css('top', offset);
       }
-
     }
 
     function resizeModal() {
@@ -1312,7 +1285,6 @@ function _ptsIsEditMode() {
     }
 
     function createInstance($modalTemplate) {
-
       $modalOverlay = jQuery('<div class="sc-modal-overlay" tabindex="0">').css(modalOverlayStyle);
 
       $modalContainer = jQuery('<div class="sc-modal-container">').css(modalContainerStyle);
@@ -1353,7 +1325,8 @@ function _ptsIsEditMode() {
         $modalButtons = jQuery('<div class="sc-modal-action-buttons">').css(modalButtonsStyle);
 
         for (var i = 0; i < settings.buttons.length; i++) {
-          jQuery('<button>').attr('class', settings.buttons[i].class || null)
+          jQuery('<button>')
+            .attr('class', settings.buttons[i].class || null)
             .html(settings.buttons[i].content || null)
             .on('click', $.proxy(settings.buttons[i].event, $modalTemplate))
             .appendTo($modalButtons);
@@ -1363,7 +1336,6 @@ function _ptsIsEditMode() {
 
         $modalButtons.appendTo($modalContainer);
       }
-
     }
 
     createInstance(this);
@@ -1380,11 +1352,10 @@ function _ptsIsEditMode() {
         closeModal();
         this.trigger('close.after');
         return this;
-      }
+      },
     });
 
     return this;
   };
-
 })(jQuery);
 //MODAL

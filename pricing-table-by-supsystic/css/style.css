@@ -16,11 +16,11 @@
 }
 
 .ptsDescTriangleTop,
-div:not(.ptsColDesc)>.ptsDescTriangle {
+div:not(.ptsColDesc) > .ptsDescTriangle {
   background-color: transparent !important;
 }
 
-.ui-widget-content input[type="checkbox"] {
+.ui-widget-content input[type='checkbox'] {
   width: 1rem !important;
   height: 1rem !important;
 }

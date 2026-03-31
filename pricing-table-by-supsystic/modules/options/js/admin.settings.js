@@ -5,7 +5,7 @@ jQuery(document).ready(function () {
   });
   jQuery('#ptsSettingsForm').submit(function () {
     jQuery(this).sendFormPts({
-      btn: jQuery('#ptsSettingsSaveBtn')
+      btn: jQuery('#ptsSettingsSaveBtn'),
     });
     return false;
   });

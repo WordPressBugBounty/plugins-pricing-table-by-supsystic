@@ -4,34 +4,34 @@ var ptsBlockCssEditor = (function () {
     cssField = jQuery('#ptsBbCssInp').get(0),
     editBlock = null;
   var cssEditor = CodeMirror.fromTextArea(cssField, {
-    mode: 'css'
-    , lineWrapping: true
-    , lineNumbers: true
-    , matchBrackets: true
-    , autoCloseBrackets: true
-    , autofocus: false
+    mode: 'css',
+    lineWrapping: true,
+    lineNumbers: true,
+    matchBrackets: true,
+    autoCloseBrackets: true,
+    autofocus: false,
   });
 
   cssField.CodeMirrorEditor = cssEditor;
 
   var $container = jQuery('#ptsTableInitEditCssDlg').dialog({
-    modal: true
-    , autoOpen: false
-    , width: '90%'
-    , height: (jQuery(window).height() / 10) * 8.5
-    , show: {
-      effect: "fade",
-      duration: 1000
-    }
-    , hide: {
-      effect: "fade",
-      duration: 500
-    }
-    , buttons: [
+    modal: true,
+    autoOpen: false,
+    width: '90%',
+    height: (jQuery(window).height() / 10) * 8.5,
+    show: {
+      effect: 'fade',
+      duration: 1000,
+    },
+    hide: {
+      effect: 'fade',
+      duration: 500,
+    },
+    buttons: [
       {
-        text: 'Ok'
-        , class: 'button button-sup-small'
-        , click: function () {
+        text: 'Ok',
+        class: 'button button-sup-small',
+        click: function () {
           var newCode = cssField.CodeMirrorEditor.getValue();
 
           if (editBlock != null) {
@@ -42,17 +42,17 @@ var ptsBlockCssEditor = (function () {
 
           $container.dialog('close');
           editBlock = null;
-        }
-      }
-      , {
-        text: 'Cancel'
-        , class: 'button button-sup-small'
-        , click: function () {
+        },
+      },
+      {
+        text: 'Cancel',
+        class: 'button button-sup-small',
+        click: function () {
           $container.dialog('close');
           editBlock = null;
-        }
-      }
-    ]
+        },
+      },
+    ],
   });
 
   // methods
@@ -82,34 +82,34 @@ var ptsBlockHtmlEditor = (function () {
     htmlField = jQuery('#ptsBbHtmlInp').get(0),
     editBlock = null;
   var htmlEditor = CodeMirror.fromTextArea(htmlField, {
-    mode: 'text/html'
-    , lineWrapping: true
-    , lineNumbers: true
-    , matchBrackets: true
-    , autoCloseBrackets: true
-    , autofocus: false
+    mode: 'text/html',
+    lineWrapping: true,
+    lineNumbers: true,
+    matchBrackets: true,
+    autoCloseBrackets: true,
+    autofocus: false,
   });
 
   htmlField.CodeMirrorEditor = htmlEditor;
 
   var $container = jQuery('#ptsTableInitEditHtmlDlg').dialog({
-    modal: true
-    , autoOpen: false
-    , width: '90%'
-    , height: (jQuery(window).height() / 10) * 8.5
-    , show: {
-      effect: "fade",
-      duration: 1000
-    }
-    , hide: {
-      effect: "fade",
-      duration: 500
-    }
-    , buttons: [
+    modal: true,
+    autoOpen: false,
+    width: '90%',
+    height: (jQuery(window).height() / 10) * 8.5,
+    show: {
+      effect: 'fade',
+      duration: 1000,
+    },
+    hide: {
+      effect: 'fade',
+      duration: 500,
+    },
+    buttons: [
       {
-        text: 'Ok'
-        , class: 'button button-sup-small'
-        , click: function () {
+        text: 'Ok',
+        class: 'button button-sup-small',
+        click: function () {
           var newCode = htmlField.CodeMirrorEditor.getValue();
           newCode = stripScripts(newCode);
           if (editBlock != null) {
@@ -122,17 +122,17 @@ var ptsBlockHtmlEditor = (function () {
 
           $container.dialog('close');
           editBlock = null;
-        }
-      }
-      , {
-        text: 'Cancel'
-        , class: 'button button-sup-small'
-        , click: function () {
+        },
+      },
+      {
+        text: 'Cancel',
+        class: 'button button-sup-small',
+        click: function () {
           $container.dialog('close');
           editBlock = null;
-        }
-      }
-    ]
+        },
+      },
+    ],
   });
 
   // methods
@@ -141,12 +141,10 @@ var ptsBlockHtmlEditor = (function () {
     editBlock = block;
     $container.dialog('open');
     htmlField.CodeMirrorEditor.refresh();
-
   };
 
   return object;
 })();
-
 
 jQuery(document).ready(function () {
   g_ptsTableBlock = ptsGetFabric().getBlocks()[0];
@@ -163,54 +161,49 @@ jQuery(document).ready(function () {
     //     root + ' .ptsColDesc,' +
     //     root + ' .ptsColFooter,' +
     //     root + ' .ptsColHeader', function(){
-    jQuery(root + ' .ptsCell,' +
-      root + ' .ptsColDesc,' +
-      root + ' .ptsColFooter,' +
-      root + ' .ptsColHeader').on('click', function () {
-        var self = jQuery(this);
-        // let content = $(this).children('.ptsTog').children().length;
-        // if(content === 0) {
-        //     let block;
-        //     for(let i = 0; i < ptsTables.length; i++) {
-        //         block = ptsGetFabric().getByViewId( ptsTables[i].view_id );
-        //         if(block) {
-        //             break;
-        //         }
-        //     }
-        //     block.addPtsEl(self);
-        //     self.remove();
-        // }
-        if (0 == self.children().length
-          || (self.hasClass('ptsCell') && 1 == self.children().length)) {
-
-          var block = false;
-          for (var i = 0; i < ptsTables.length; i++) {
-            block = ptsGetFabric().getByViewId(ptsTables[i].view_id);
-            if (block) {
-              break;
-            }
+    jQuery(root + ' .ptsCell,' + root + ' .ptsColDesc,' + root + ' .ptsColFooter,' + root + ' .ptsColHeader').on('click', function () {
+      var self = jQuery(this);
+      // let content = $(this).children('.ptsTog').children().length;
+      // if(content === 0) {
+      //     let block;
+      //     for(let i = 0; i < ptsTables.length; i++) {
+      //         block = ptsGetFabric().getByViewId( ptsTables[i].view_id );
+      //         if(block) {
+      //             break;
+      //         }
+      //     }
+      //     block.addPtsEl(self);
+      //     self.remove();
+      // }
+      if (0 == self.children().length || (self.hasClass('ptsCell') && 1 == self.children().length)) {
+        var block = false;
+        for (var i = 0; i < ptsTables.length; i++) {
+          block = ptsGetFabric().getByViewId(ptsTables[i].view_id);
+          if (block) {
+            break;
           }
-          block.addPtsEl(self);
-          //#212
-          if (self.hasClass('ptsColFooter')) {
-            self.prev().addClass('ptsColFooter')
-          }
-          self.remove();
         }
-      });
+        block.addPtsEl(self);
+        //#212
+        if (self.hasClass('ptsColFooter')) {
+          self.prev().addClass('ptsColFooter');
+        }
+        self.remove();
+      }
+    });
   })(jQuery);
 
   // Delete btn init
   jQuery('.ptsTableRemoveBtn').click(function () {
     if (confirm(toeLangPts('Are you sure want to remove this Table?'))) {
       jQuery.sendFormPts({
-        btn: this
-        , data: { mod: 'tables', action: 'remove', pts_nonce: PTS_NONCE['pts_nonce'], id: ptsGetFabric().getBlocks()[0].get('id') }	//[0] - we have only one block in this plugin - table block
-        , onSuccess: function (res) {
+        btn: this,
+        data: { mod: 'tables', action: 'remove', pts_nonce: PTS_NONCE['pts_nonce'], id: ptsGetFabric().getBlocks()[0].get('id') }, //[0] - we have only one block in this plugin - table block
+        onSuccess: function (res) {
           if (!res.error) {
             toeRedirect(ptsAddNewUrl);
           }
-        }
+        },
       });
     }
     return false;
@@ -221,34 +214,39 @@ jQuery(document).ready(function () {
   _ptsGetTableBlock().setParam('is_horisontal_row_type', jQuery('.ptsTableSettingsShell input[name="params[is_horisontal_row_type]"]').val());
   // Preview btn click
   jQuery('.ptsTablePreviewBtn').click(function () {
-    jQuery('html, body').animate({
-      scrollTop: jQuery("#ptsCanvas").offset().top - jQuery('#wpadminbar').height()
-    }, 1000);
+    jQuery('html, body').animate(
+      {
+        scrollTop: jQuery('#ptsCanvas').offset().top - jQuery('#wpadminbar').height(),
+      },
+      1000
+    );
     return false;
   });
   // Check old table html, if required - rebuild current right now according to old changes.
   // This required for "Change Template" functionality
   _ptsCheckOldTemplateHtml();
   // Shortcodes example switch
-  jQuery('#ptsTableShortcodeExampleSel').change(function () {
-    jQuery('#ptsTableShortcodeShell, #ptsTablePhpCodeShell').hide();
-    var showId = '';
-    switch (jQuery(this).val()) {
-      case 'shortcode':
-        showId = 'ptsTableShortcodeShell';
-        break;
-      case 'php_code':
-        showId = 'ptsTablePhpCodeShell';
-        break;
-    }
-    jQuery('#' + showId).show();
-  }).trigger('change');
+  jQuery('#ptsTableShortcodeExampleSel')
+    .change(function () {
+      jQuery('#ptsTableShortcodeShell, #ptsTablePhpCodeShell').hide();
+      var showId = '';
+      switch (jQuery(this).val()) {
+        case 'shortcode':
+          showId = 'ptsTableShortcodeShell';
+          break;
+        case 'php_code':
+          showId = 'ptsTablePhpCodeShell';
+          break;
+      }
+      jQuery('#' + showId).show();
+    })
+    .trigger('change');
   // Transform al custom chosen selects
   if (isRtl) {
     jQuery('.chosen').addClass('chosen-rtl');
   }
   jQuery('.chosen').chosen({
-    disable_search_threshold: 5
+    disable_search_threshold: 5,
   });
   _ptsTableInitSaveAsCopyDlg();
 
@@ -264,11 +262,9 @@ jQuery(document).ready(function () {
     return false;
   });
 
-
-
   jQuery('#containerWrapper .ptsSettingsTabs a').on('click', function () {
-    var tab = jQuery(this)
-      , href = tab.attr('data-href');
+    var tab = jQuery(this),
+      href = tab.attr('data-href');
     jQuery('#containerWrapper .ptsSettingsTabs a').removeClass('nav-tab-active');
     jQuery('#containerWrapper .ptsSettingsContent div').removeClass('active');
 
@@ -376,9 +372,13 @@ function _ptsInitSettings(all) {
     var aligns = ['left', 'right', 'center'];
 
     for (var i in aligns)
-      _ptsGetTableBlock().$().removeClass('ptsAlign_' + aligns[i]);
+      _ptsGetTableBlock()
+        .$()
+        .removeClass('ptsAlign_' + aligns[i]);
 
-    _ptsGetTableBlock().$().addClass('ptsAlign_' + jQuery(this).val());
+    _ptsGetTableBlock()
+      .$()
+      .addClass('ptsAlign_' + jQuery(this).val());
     _ptsGetTableBlock().setParam('text_align', jQuery(this).val());
     _ptsAddUndoBuffer(false, false, true);
   });
@@ -386,9 +386,13 @@ function _ptsInitSettings(all) {
     var options = ['disable', 'toggle_by_header'];
 
     for (var i in options)
-      _ptsGetTableBlock().$().removeClass('ptsAjax_' + options[i]);
+      _ptsGetTableBlock()
+        .$()
+        .removeClass('ptsAjax_' + options[i]);
 
-    _ptsGetTableBlock().$().addClass('ptsAjax_' + jQuery(this).val());
+    _ptsGetTableBlock()
+      .$()
+      .addClass('ptsAjax_' + jQuery(this).val());
     _ptsGetTableBlock().setParam('ajax', jQuery(this).val());
     _ptsAddUndoBuffer(false, false, true);
   });
@@ -396,9 +400,13 @@ function _ptsInitSettings(all) {
     var aligns = ['left', 'right', 'center', 'none'];
 
     for (var i in aligns)
-      _ptsGetTableBlock().$().removeClass('ptsTableAlign_' + aligns[i]);
+      _ptsGetTableBlock()
+        .$()
+        .removeClass('ptsTableAlign_' + aligns[i]);
 
-    _ptsGetTableBlock().$().addClass('ptsTableAlign_' + jQuery(this).val());
+    _ptsGetTableBlock()
+      .$()
+      .addClass('ptsTableAlign_' + jQuery(this).val());
     _ptsGetTableBlock().setParam('table_align', jQuery(this).val());
     _ptsAddUndoBuffer(false, false, true);
   });
@@ -406,8 +414,8 @@ function _ptsInitSettings(all) {
   jQuery('#ptsTableEditableLabelShell').click(function () {
     var isEdit = jQuery(this).data('edit-on');
     if (!isEdit) {
-      var $labelHtml = jQuery('#ptsTableEditableLabel')
-        , $labelTxt = jQuery('#ptsTableEditableLabelTxt');
+      var $labelHtml = jQuery('#ptsTableEditableLabel'),
+        $labelTxt = jQuery('#ptsTableEditableLabelTxt');
       $labelTxt.val($labelHtml.text());
       $labelHtml.hide(g_ptsAnimationSpeed);
       $labelTxt.show(g_ptsAnimationSpeed, function () {
@@ -416,13 +424,16 @@ function _ptsInitSettings(all) {
       jQuery(this).data('edit-on', 1);
     }
   });
-  jQuery('#ptsTableEditableLabelTxt').blur(function () {
-    ptsFinishEditTableLabel(jQuery(this).val());
-  }).keydown(function (e) {
-    if (e.keyCode == 13) {	// Enter pressed
+  jQuery('#ptsTableEditableLabelTxt')
+    .blur(function () {
       ptsFinishEditTableLabel(jQuery(this).val());
-    }
-  });
+    })
+    .keydown(function (e) {
+      if (e.keyCode == 13) {
+        // Enter pressed
+        ptsFinishEditTableLabel(jQuery(this).val());
+      }
+    });
 
   jQuery(document).ready(function () {
     _ptsGetTableBlock()._switchDescRow();
@@ -451,7 +462,7 @@ function _ptsInitSettings(all) {
     _ptsGetTableBlock()._rebuildCss();
   });
   jQuery('.ptsTableSettingsShell input[name="params[enable_switch_toggle]"]').change(function () {
-    _ptsGetTableBlock()._switchHeadRow({ state: jQuery(this).prop('checked') });	//"!" here is because option is actually for hide
+    _ptsGetTableBlock()._switchHeadRow({ state: jQuery(this).prop('checked') }); //"!" here is because option is actually for hide
     var state = jQuery(this).prop('checked') === true ? '1' : '0';
     _ptsGetTableBlock().setParam('enable_switch_toggle', state);
     setTimeout(function () {
@@ -460,7 +471,7 @@ function _ptsInitSettings(all) {
   });
   // End/dsbl Head row check
   jQuery('.ptsTableSettingsShell input[name="params[enb_head_row]"]').change(function () {
-    _ptsGetTableBlock()._switchHeadRow({ state: jQuery(this).prop('checked') });	//"!" here is because option is actually for hide
+    _ptsGetTableBlock()._switchHeadRow({ state: jQuery(this).prop('checked') }); //"!" here is because option is actually for hide
     var state = jQuery(this).prop('checked') === true ? '1' : '0';
     _ptsGetTableBlock().setParam('enb_head_row', state);
     setTimeout(function () {
@@ -469,14 +480,14 @@ function _ptsInitSettings(all) {
   });
   // End/dsbl Desc row check
   jQuery('.ptsTableSettingsShell input[name="params[enb_desc_row]"]').change(function () {
-    _ptsGetTableBlock()._switchDescRow({ state: jQuery(this).prop('checked') });	//"!" here is because option is actually for hide
+    _ptsGetTableBlock()._switchDescRow({ state: jQuery(this).prop('checked') }); //"!" here is because option is actually for hide
     setTimeout(function () {
       _ptsAddUndoBuffer();
     }, 200);
   });
   // End/dsbl Foot row check
   jQuery('.ptsTableSettingsShell input[name="params[enb_foot_row]"]').change(function () {
-    _ptsGetTableBlock()._switchFootRow({ state: jQuery(this).prop('checked') });	//"!" here is because option is actually for hide
+    _ptsGetTableBlock()._switchFootRow({ state: jQuery(this).prop('checked') }); //"!" here is because option is actually for hide
     setTimeout(function () {
       _ptsAddUndoBuffer();
     }, 200);
@@ -554,23 +565,20 @@ function _ptsInitSettings(all) {
   _ptsCreateColorPickerFrom('.ptsSwitchColorButtonTextNoactive', function (pcColor) {
     _ptsGetTableBlock().setParam('switch_color_button_text_noactive', pcColor.formatted);
   });
-
 }
 function _ptsSetResponsiveMinColWidth() {
-  var $ptsRespMinColWidthObj = jQuery(".ptsRespMinColW");
-  if (jQuery('.ptsTableSettingsShell input[name="params[enb_responsive]"]').prop("checked")) {
-    $ptsRespMinColWidthObj.removeClass("ptsDisplNone");
+  var $ptsRespMinColWidthObj = jQuery('.ptsRespMinColW');
+  if (jQuery('.ptsTableSettingsShell input[name="params[enb_responsive]"]').prop('checked')) {
+    $ptsRespMinColWidthObj.removeClass('ptsDisplNone');
   } else {
-    $ptsRespMinColWidthObj.addClass("ptsDisplNone");
+    $ptsRespMinColWidthObj.addClass('ptsDisplNone');
   }
   _ptsGetTableBlock().setParam('resp_min_col_width', jQuery('.ptsTableSettingsShell input[name="params[resp_min_col_width]"]').val());
 
   //set no responsive mode for Horizontal table
-  if (_ptsGetTableBlock().getParam('is_horisontal_row_type') == '1' &&
-    !jQuery('.ptsTableSettingsShell input[name="params[enb_responsive]"]').prop("checked")) {
+  if (_ptsGetTableBlock().getParam('is_horisontal_row_type') == '1' && !jQuery('.ptsTableSettingsShell input[name="params[enb_responsive]"]').prop('checked')) {
     var table = _ptsGetTableBlock()._$.find('.ptsCol').css('min-width', '800px');
-  } else if (_ptsGetTableBlock().getParam('is_horisontal_row_type') == '1'
-    && jQuery('.ptsTableSettingsShell input[name="params[enb_responsive]"]').prop("checked")) {
+  } else if (_ptsGetTableBlock().getParam('is_horisontal_row_type') == '1' && jQuery('.ptsTableSettingsShell input[name="params[enb_responsive]"]').prop('checked')) {
     var table = _ptsGetTableBlock()._$.find('.ptsCol').css('min-width', '100%');
   }
 }
@@ -592,27 +600,27 @@ function _ptsEnableEditButton() {
 */
 function _ptsTableInitSaveAsCopyDlg() {
   var $container = jQuery('#ptsTableSaveAsCopyWnd').dialog({
-    modal: true
-    , autoOpen: false
-    , width: 460
-    , height: 180
-    , buttons: {
+    modal: true,
+    autoOpen: false,
+    width: 460,
+    height: 180,
+    buttons: {
       OK: function () {
         jQuery('#ptsTableSaveAsCopyForm').submit();
-      }
-      , Cancel: function () {
+      },
+      Cancel: function () {
         $container.dialog('close');
-      }
-    }
+      },
+    },
   });
   jQuery('#ptsTableSaveAsCopyForm').submit(function () {
     jQuery(this).sendFormPts({
-      msgElID: 'ptsTableSaveAsCopyMsg'
-      , onSuccess: function (res) {
+      msgElID: 'ptsTableSaveAsCopyMsg',
+      onSuccess: function (res) {
         if (!res.error && res.data.edit_link) {
           toeRedirect(res.data.edit_link);
         }
-      }
+      },
     });
     return false;
   });
@@ -624,8 +632,8 @@ function _ptsTableInitSaveAsCopyDlg() {
 function _ptsCheckBgColorNotice() {
   var noticeAboutBgColorShown = parseInt(getCookiePts('pts_bg_color_notice_shown'));
   if (!noticeAboutBgColorShown) {
-    var $cols = _ptsGetTableBlock()._getCols(parseInt(_ptsGetTableBlock().getParam('enb_desc_col')))
-      , haveColsWithoutFillColor = false;
+    var $cols = _ptsGetTableBlock()._getCols(parseInt(_ptsGetTableBlock().getParam('enb_desc_col'))),
+      haveColsWithoutFillColor = false;
     if ($cols && $cols.length) {
       $cols.each(function () {
         var colEl = _ptsGetTableBlock().getElementByIterNum(jQuery(this).data('iter-num'));
@@ -638,23 +646,24 @@ function _ptsCheckBgColorNotice() {
         }
       });
     }
-    if (!haveColsWithoutFillColor) {	//So, each column have enabled bg color - tell user about this
+    if (!haveColsWithoutFillColor) {
+      //So, each column have enabled bg color - tell user about this
       jQuery('#ptsTableAllColsHaveBgColorWnd').dialog({
-        modal: true
-        , width: 460
-        , buttons: [
+        modal: true,
+        width: 460,
+        buttons: [
           {
             text: 'OK, got it!',
-            "class": 'ui-button ui-state-default',
+            class: 'ui-button ui-state-default',
             click: function () {
               jQuery('#ptsTableAllColsHaveBgColorWnd').dialog('close');
-            }
-          }
-        ]
-        , close: function () {
+            },
+          },
+        ],
+        close: function () {
           // Show all this notice - only once
-          setCookiePts('pts_bg_color_notice_shown', 1, 365);	// Set cookie for one year - why not?:)
-        }
+          setCookiePts('pts_bg_color_notice_shown', 1, 365); // Set cookie for one year - why not?:)
+        },
       });
     }
   }
@@ -664,12 +673,12 @@ function ptsFinishEditTableLabel(label) {
   if (!jQuery('#ptsTableEditableLabelTxt').data('ready')) return;
   jQuery('#ptsTableEditableLabelShell').data('sending', 1);
   jQuery.sendFormPts({
-    btn: jQuery('#ptsTableEditableLabelShell')
-    , data: { mod: 'tables', action: 'updateLabel', pts_nonce: PTS_NONCE['pts_nonce'], label: label, id: _ptsGetTableBlock().get('id') }
-    , onSuccess: function (res) {
+    btn: jQuery('#ptsTableEditableLabelShell'),
+    data: { mod: 'tables', action: 'updateLabel', pts_nonce: PTS_NONCE['pts_nonce'], label: label, id: _ptsGetTableBlock().get('id') },
+    onSuccess: function (res) {
       if (!res.error) {
-        var $labelHtml = jQuery('#ptsTableEditableLabel')
-          , $labelTxt = jQuery('#ptsTableEditableLabelTxt');
+        var $labelHtml = jQuery('#ptsTableEditableLabel'),
+          $labelTxt = jQuery('#ptsTableEditableLabelTxt');
         var labelFormattedText = jQuery.trim($labelTxt.val());
         if (/script/i.test(labelFormattedText)) {
           labelFormattedText = '';
@@ -680,7 +689,7 @@ function ptsFinishEditTableLabel(label) {
         jQuery('#ptsTableEditableLabelShell').data('edit-on', 0);
       }
       jQuery('#ptsTableEditableLabelShell').data('sending', 0);
-    }
+    },
   });
 }
 function _ptsSetColsNumSetting(block) {
@@ -699,31 +708,31 @@ function _ptsGetTableBlock() {
 function _ptsCreateColorPickerFrom(selector, callbackFunc) {
   var $input = jQuery(selector);
   var currColorPickerOpt = jQuery.extend(g_ptsVandColorPickerOptions, {
-    'altField': selector + 'Tear',
-    'select': function (event, cpColor) {
-      if (callbackFunc && typeof callbackFunc === "function") {
+    altField: selector + 'Tear',
+    select: function (event, cpColor) {
+      if (callbackFunc && typeof callbackFunc === 'function') {
         callbackFunc(cpColor);
       }
     },
-    'position': { 'my': 'center top', 'at': 'right bottom', 'of': selector + 'Tear' },
+    position: { my: 'center top', at: 'right bottom', of: selector + 'Tear' },
   });
   $input.colorpicker(currColorPickerOpt);
 }
 function _ptsCheckOldTemplateHtml() {
   var oldHtml = _ptsGetTableBlock().getParam('old_html');
   if (oldHtml && oldHtml != '') {
-    var table = _ptsGetTableBlock()
-      , $tmpDiv = jQuery('<div style="display: none;" />').appendTo('body').html(oldHtml)
-      , $oldCols = $tmpDiv.find('.ptsCol:not(.ptsTableDescCol)')
-      , oldColsNum = $oldCols.length
-      , $cols = table._getCols()
-      , colsNum = $cols.length
-      , $oldFirstCol = $oldCols.first()
-      , oldRowsNum = $oldFirstCol.find('.ptsRows .ptsCell').length
-      , rowsNum = table.getRowsNum();
+    var table = _ptsGetTableBlock(),
+      $tmpDiv = jQuery('<div style="display: none;" />').appendTo('body').html(oldHtml),
+      $oldCols = $tmpDiv.find('.ptsCol:not(.ptsTableDescCol)'),
+      oldColsNum = $oldCols.length,
+      $cols = table._getCols(),
+      colsNum = $cols.length,
+      $oldFirstCol = $oldCols.first(),
+      oldRowsNum = $oldFirstCol.find('.ptsRows .ptsCell').length,
+      rowsNum = table.getRowsNum();
     if (oldColsNum != colsNum) {
-      var i = oldColsNum - colsNum
-        , currColNum = colsNum;
+      var i = oldColsNum - colsNum,
+        currColNum = colsNum;
       while (i) {
         if (i > 0) {
           table.addColumn();
@@ -736,8 +745,8 @@ function _ptsCheckOldTemplateHtml() {
       }
     }
     if (oldRowsNum != rowsNum) {
-      var i = oldRowsNum - rowsNum
-        , currRowNum = rowsNum;
+      var i = oldRowsNum - rowsNum,
+        currRowNum = rowsNum;
       while (i) {
         if (i > 0) {
           table.addRow();
@@ -749,34 +758,42 @@ function _ptsCheckOldTemplateHtml() {
         }
       }
     }
-    var $oldColsWithDesc = $tmpDiv.find('.ptsCol')
-      , $newColsWithDesc = table._getCols(true)
-      , colSelectors = table.getColSelectors();
+    var $oldColsWithDesc = $tmpDiv.find('.ptsCol'),
+      $newColsWithDesc = table._getCols(true),
+      colSelectors = table.getColSelectors();
     $newColsWithDesc.each(function (index) {
       for (var key in colSelectors) {
-        if (key == 'rows') continue;	// Don't replace all rows, let's replace each cell - step-by-step
+        if (key == 'rows') continue; // Don't replace all rows, let's replace each cell - step-by-step
         var $newItems = jQuery(this).find(colSelectors[key].sel);
         $newItems.each(function (itemIndex) {
           var $newItem = jQuery(this);
-          $newItem.find('.ptsEl').each(function () {	// Remove all old elements
+          $newItem.find('.ptsEl').each(function () {
+            // Remove all old elements
             table.removeElementByIterNum(jQuery(this).data('iter-num'));
           });
-          $newItem.html($oldColsWithDesc.filter(':eq(' + index + ')').find(colSelectors[key].sel).filter(':eq(' + itemIndex + ')').html());
+          $newItem.html(
+            $oldColsWithDesc
+              .filter(':eq(' + index + ')')
+              .find(colSelectors[key].sel)
+              .filter(':eq(' + itemIndex + ')')
+              .html()
+          );
           table._initElementsForArea($newItem);
         });
       }
     });
-    $tmpDiv.remove();	// Goodbay old data:)
-    setTimeout(function () {	// Re-save new data
+    $tmpDiv.remove(); // Goodbay old data:)
+    setTimeout(function () {
+      // Re-save new data
       table.contentChanged();
-      table._initCellsEdit();	// Let it be here
+      table._initCellsEdit(); // Let it be here
       table._switchHeadRow();
       table._switchDescRow();
       table._switchFootRow();
       table._initCellsMovable();
       _ptsGetTableBlock().setParam('old_html');
       _ptsSaveCanvas({
-        sendData: { remove_old_html: 1 }
+        sendData: { remove_old_html: 1 },
       });
     }, g_ptsAnimationSpeed);
   }
