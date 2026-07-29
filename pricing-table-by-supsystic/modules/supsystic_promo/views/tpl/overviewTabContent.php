@@ -19,73 +19,14 @@
       </div>
       <div class="border-wrapper">
         <div class="overview-contact-form overview-section" data-section="support">
-          <h3><i class="fa fa-life-ring"></i> Support</h3>
-          <div class="contact-info-section">
-            <p><i class="fa fa-clock-o" aria-hidden="true"></i> Our official support hours are 09:00 - 18:00 GMT+02:00, Monday to Friday – excluding bank holidays and other official holidays.</p>
-            <p>The timescales listed below refer to these working hours.</p><br>
-            <p><em>Support requests are prioritized based on the type of license:</em></p>
-            <ul>
-              <li>
-                <p><em>Pro Support</em> is reserved for customers with an active Pro license. We respond to new priority support requests within 12 hours.</p>
-              </li>
-              <li>
-                <p><em>Standard Support</em> is provided to customers with an active Free license. We respond to standard support requests within 24h-48h.</p>
-              </li>
-            </ul><br>
-            <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> While we don’t guarantee that we will resolve the request in this time period, we will acknowledge it and communicate with the customer as appropriate to help resolve the issue.</p>
-          </div>
-
-          <form id="form-settings">
-            <table class="contact-form-table">
-              <?php foreach ($this->contactFields as $fName => $fData) { ?>
-              <?php
-          $htmlType = $fData['html'];
-          $id = 'contact_form_' . $fName;
-          $htmlParams = ['attrs' => 'id="' . $id . '"'];
-          if (isset($fData['placeholder'])) {
-            $htmlParams['placeholder'] = $fData['placeholder'];
-          }
-          if (isset($fData['options'])) {
-            $htmlParams['options'] = $fData['options'];
-          }
-          if (isset($fData['def'])) {
-            $htmlParams['value'] = $fData['def'];
-          }
-          if (isset($fData['valid']) && in_array('notEmpty', $fData['valid'])) {
-            $htmlParams['required'] = true;
-          }
-          ?>
-              <tr>
-                <th scope="row">
-                  <label for="<?php echo $id; ?>"><?php echo $fData['label']; ?></label>
-                </th>
-                <td>
-                  <?php echo htmlPts::$htmlType($fName, $htmlParams); ?>
-                </td>
-              </tr>
-              <?php } ?>
-              <tr>
-                <th scope="row" colspan="2">
-                  <?php echo htmlPts::hidden('mod', ['value' => 'supsystic_promo']); ?>
-                  <?php echo htmlPts::hidden('action', ['value' => 'sendContact']); ?>
-                  <button class="button button-primary button-hero" style="float: right;">
-                    <i class="fa fa-upload"></i>
-                    <?php _e('Send email', PTS_LANG_CODE); ?>
-                  </button>
-                  <div style="clear: both;"></div>
-                </th>
-              </tr>
-            </table>
-          </form>
-          <div class="clear"></div>
-        </div>
-
-        <div id="contact-form-dialog" hidden>
-          <div class="on-error" style="display:none">
-            <p>Some errors occurred while sending mail please send your message trough this contact form:</p>
-            <p><a href="https://supsystic.com/plugins/#contact" target="_blank">https://supsystic.com/plugins/#contact</a></p>
-          </div>
-          <div class="message"></div>
+            <h3><i class="fa fa-life-ring"></i> Support</h3>
+            <div class="contact-info-section">
+              <p>
+              If you are experiencing any issues with the plugin, would like to request a new feature or improvement, or have any other questions, please contact our technical support team through our website:
+              <a href="https://supsystic.com/contact-us/" target="_blank">https://supsystic.com/contact-us/</a>
+              </p>
+            </div>
+            <div class="clear"></div>
         </div>
         <div data-section="faq" class="faq-list overview-section">
           <h3><?php _e('FAQ and Documentation', PTS_LANG_CODE); ?></h3>
@@ -108,7 +49,7 @@
           <iframe type="text/html"
             width="100%"
             height="350px"
-            src="https://www.youtube.com/embed/v8h2k3vvpdM"
+            src="//www.youtube.com/embed/v8h2k3vvpdM"
             frameborder="0">
           </iframe>
           <div class="clear"></div>
@@ -118,7 +59,7 @@
           <iframe type="text/html"
             width="100%"
             height="350px"
-            src="http://www.youtube.com/embed/dKd_9g6JzfU"
+            src="//www.youtube.com/embed/dKd_9g6JzfU"
             frameborder="0">
           </iframe>
           <div class="clear"></div>

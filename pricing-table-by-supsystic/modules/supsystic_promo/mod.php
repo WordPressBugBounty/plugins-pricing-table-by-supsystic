@@ -21,8 +21,6 @@ class supsystic_promoPts extends modulePts
     }
     $this->weLoveYou();
     dispatcherPts::addFilter('mainAdminTabs', [$this, 'addAdminTab']);
-    dispatcherPts::addAction('beforeSaveOpts', [$this, 'checkSaveOpts']);
-    dispatcherPts::addAction('tableEnd', [$this, 'checkWeLoveYou']);
     dispatcherPts::addFilter('showTplsList', [$this, 'checkProTpls']);
     // dispatcherPts::addAction('discountMsg', array(
     //    $this,
@@ -85,10 +83,6 @@ class supsystic_promoPts extends modulePts
           ->get('later_' . $nKey);
         if ($later && $currTime - $later <= 2 * $day) {
           // remember each 2 days
-          unset($notices[$nKey]);
-          continue;
-        }
-        if ($nKey == 'enb_promo_link_msg' && (int) framePts::_()->getModule('options')->get('add_love_link')) {
           unset($notices[$nKey]);
           continue;
         }
@@ -230,57 +224,6 @@ class supsystic_promoPts extends modulePts
     }
     return $this->_mainLink;
   }
-  public function getContactFormFields()
-  {
-    $fields = [
-      'name' => [
-        'label' => __('Your name', PTS_LANG_CODE),
-        'valid' => 'notEmpty',
-        'html' => 'text',
-      ],
-      'email' => [
-        'label' => __('Your email', PTS_LANG_CODE),
-        'html' => 'email',
-        'valid' => ['notEmpty', 'email'],
-        'placeholder' => 'example@mail.com',
-        'def' => get_bloginfo('admin_email'),
-      ],
-      'website' => [
-        'label' => __('Website', PTS_LANG_CODE),
-        'html' => 'text',
-        'placeholder' => 'http://example.com',
-        'def' => get_bloginfo('url'),
-      ],
-      'subject' => [
-        'label' => __('Subject', PTS_LANG_CODE),
-        'valid' => 'notEmpty',
-        'html' => 'text',
-      ],
-      'category' => [
-        'label' => __('Topic', PTS_LANG_CODE),
-        'valid' => 'notEmpty',
-        'html' => 'selectbox',
-        'options' => [
-          'plugins_options' => __('Plugin options', PTS_LANG_CODE),
-          'bug' => __('Report a bug', PTS_LANG_CODE),
-          'functionality_request' => __('Require a new functionallity', PTS_LANG_CODE),
-          'other' => __('Other', PTS_LANG_CODE),
-        ],
-      ],
-      'message' => [
-        'label' => __('Message', PTS_LANG_CODE),
-        'valid' => 'notEmpty',
-        'html' => 'textarea',
-        'placeholder' => __('Hello Supsystic Team!', PTS_LANG_CODE),
-      ],
-    ];
-    foreach ($fields as $k => $v) {
-      if (isset($fields[$k]['valid']) && !is_array($fields[$k]['valid'])) {
-        $fields[$k]['valid'] = [$fields[$k]['valid']];
-      }
-    }
-    return $fields;
-  }
   public function isPro()
   {
     return framePts::_()->getModule('tablepro') ? true : false;
@@ -292,78 +235,6 @@ class supsystic_promoPts extends modulePts
       return $mainLink . (strpos($mainLink, '?') ? '&' : '?') . $params;
     }
     return $mainLink;
-  }
-  public function _checkLoveLink()
-  {
-    $apiUrl = 'https://supsystic.com/wp-admin/admin-ajax.php';
-    $reqUrl = $apiUrl . '?action=show_love_link';
-    $data = [
-      'body' => [
-        'key' => 'kJ#f3(FjkF9fasd124t5t589u9d4389r3r3R#2asdas3(#R03r#(r#t-4t5t589u9d4389r3r3R#$%lfdj',
-        'site_url' => get_bloginfo('wpurl'),
-      ],
-    ];
-    $response = wp_remote_post($reqUrl, $data);
-    $responseData = json_decode(wp_remote_retrieve_body($response), true);
-    if (!empty($responseData['data']['show'])) {
-      update_option('pts_show_love_link', true);
-    } else {
-      update_option('pts_show_love_link', false);
-    }
-  }
-  public function checkLoveLink()
-  {
-    if (!empty(get_option('pts_last_check_love_link'))) {
-      $time = time();
-      $prevSendTime = (int) get_option('pts_last_check_love_link');
-      if ($prevSendTime && $time - $prevSendTime > 24 * 60 * 60) {
-        update_option('pts_last_check_love_link', time());
-        $this->_checkLoveLink();
-      }
-    } else {
-      $this->_checkLoveLink();
-      update_option('pts_last_check_love_link', time());
-    }
-    if (!empty(get_option('pts_show_love_link'))) {
-      return true;
-    }
-    return false;
-  }
-  public function getLoveLink($show = 'hide')
-  {
-    if (!$this->checkLoveLink()) {
-      return false;
-    }
-    if (empty(get_option('supsystic_pts_love_link_title'))) {
-      $loveLinkTitles = ['WordPress Pricing Table Plugin', 'WordPress Pricing Table', 'Pricing Table WordPress Plugin', 'Pricing Table Plugin', 'Pricing Table'];
-      $randomTitle = array_rand($loveLinkTitles, 1);
-      $randomTitleVal = $loveLinkTitles[$randomTitle];
-      update_option('supsystic_pts_love_link_title', $randomTitleVal);
-    }
-    $title = get_option('supsystic_pts_love_link_title');
-    if ($show == 'show') {
-      return '<a title="' . $title . '" style="border: none; color: #26bfc1 !important; font-size: 9px; display: block; float: right; padding-right: 10px;" href="' . $this->generateMainLink('utm_medium=love_link') . '" target="_blank">' . $title . '</a>' . '<div style="clear: both;"></div>';
-    } elseif ($show == 'hide') {
-      return '<a title="' . $title . '" style="display:none;" href="' . $this->generateMainLink('utm_medium=love_link_hide') . '" target="_blank">' . $title . '</a>' . '<div style="clear: both;"></div>';
-    }
-  }
-  public function checkSaveOpts($newValues)
-  {
-    $loveLinkEnb = (int) framePts::_()->getModule('options')->get('add_love_link');
-    $loveLinkEnbNew = isset($newValues['opt_values']['add_love_link']) ? (int) $newValues['opt_values']['add_love_link'] : 0;
-    if ($loveLinkEnb != $loveLinkEnbNew) {
-      $this->getModel()->saveUsageStat('love_link.' . ($loveLinkEnbNew ? 'enb' : 'dslb'));
-    }
-  }
-  public function checkWeLoveYou()
-  {
-    if (empty(framePts::_()->getModule('options')->get('remove_love_link')) || !$this->isPro()) {
-      if (framePts::_()->getModule('options')->get('add_love_link')) {
-        echo $this->getLoveLink('show');
-      } else {
-        echo $this->getLoveLink('hide');
-      }
-    }
   }
   public function checkProTpls($list)
   {
