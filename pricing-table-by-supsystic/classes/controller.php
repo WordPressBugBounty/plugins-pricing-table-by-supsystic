@@ -97,6 +97,15 @@ abstract class controllerPts
   }
   public function __call($name, $arguments)
   {
+    // delete()/clear() wipe the entire table when called with no/null arguments,
+    // which is exactly how they get invoked here (AJAX dispatch never actually
+    // passes $arguments through). Neither is reliably listed in every controller's
+    // getPermissions(), and havePermissions() defaults to "allow" for any action
+    // name it doesn't recognize - so without this check, any visitor could delete
+    // all data in a table simply by requesting action=delete or action=clear.
+    if (in_array(strtolower($name), ['delete', 'clear'], true)) {
+      return false;
+    }
     $model = $this->getModel();
     if (method_exists($model, $name)) {
       return $model->$name($arguments[0]);
