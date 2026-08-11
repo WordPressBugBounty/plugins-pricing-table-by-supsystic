@@ -20,7 +20,7 @@ abstract class Twig_Test_NodeTestCase extends PHPUnit_Framework_TestCase
     $this->assertNodeCompilation($source, $node, $environment);
   }
 
-  public function assertNodeCompilation($source, Twig_Node $node, Twig_Environment $environment = null)
+  public function assertNodeCompilation($source, Twig_Node $node, ?Twig_Environment $environment = null)
   {
     $compiler = $this->getCompiler($environment);
     $compiler->compile($node);
@@ -28,7 +28,7 @@ abstract class Twig_Test_NodeTestCase extends PHPUnit_Framework_TestCase
     $this->assertStringMatchesFormat($source, trim($compiler->getSource()));
   }
 
-  protected function getCompiler(Twig_Environment $environment = null)
+  protected function getCompiler(?Twig_Environment $environment = null)
   {
     return new Twig_Compiler(null === $environment ? $this->getEnvironment() : $environment);
   }

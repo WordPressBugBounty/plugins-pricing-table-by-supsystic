@@ -84,6 +84,38 @@ class installerPts
         'label' => 'tables',
       ]);
     }
+    // Ensure every core module row exists and is active, regardless of the table's
+    // prior state. The block above only seeds rows the very first time the
+    // `pts_modules` table is created; on any site where the table already existed
+    // (older install, partial/failed install, manual DB edit, etc.) a core module
+    // row could end up missing or stuck with active = 0, e.g. the admin menu not
+    // being registered. Insert-if-missing / reactivate-if-present on every run
+    // instead, so this is self-healing on every activation and version update.
+    $tableName = $wpdb->prefix . 'pts_modules';
+    $coreModules = [
+      ['code' => 'adminmenu', 'type_id' => 1, 'label' => 'Admin Menu'],
+      ['code' => 'options', 'type_id' => 1, 'label' => 'Options'],
+      ['code' => 'user', 'type_id' => 1, 'label' => 'Users'],
+      ['code' => 'pages', 'type_id' => 1, 'label' => 'Pages'],
+      ['code' => 'templates', 'type_id' => 1, 'label' => 'templates'],
+      ['code' => 'supsystic_promo', 'type_id' => 1, 'label' => 'supsystic_promo'],
+      ['code' => 'admin_nav', 'type_id' => 1, 'label' => 'admin_nav'],
+      ['code' => 'mail', 'type_id' => 1, 'label' => 'mail'],
+      ['code' => 'tables', 'type_id' => 1, 'label' => 'tables'],
+    ];
+    foreach ($coreModules as $coreModule) {
+      $existingId = $wpdb->get_var($wpdb->prepare("SELECT id FROM `{$tableName}` WHERE code = %s", $coreModule['code']));
+      if (empty($existingId)) {
+        $wpdb->insert($tableName, [
+          'code' => $coreModule['code'],
+          'active' => 1,
+          'type_id' => $coreModule['type_id'],
+          'label' => $coreModule['label'],
+        ]);
+      } else {
+        $wpdb->update($tableName, ['active' => 1], ['code' => $coreModule['code']]);
+      }
+    }
     if (!dbPts::exist('pts_modules_type')) {
       dbDelta(
         dbPts::prepareQuery("CREATE TABLE IF NOT EXISTS `@__modules_type` (
@@ -126,24 +158,6 @@ class installerPts
       $wpdb->query("ALTER TABLE {$wpdb->prefix}pts_tables MODIFY html MEDIUMTEXT");
     }
     self::initBaseTables();
-    if (!dbPts::exist('pts_usage_stat')) {
-      dbDelta(
-        dbPts::prepareQuery("CREATE TABLE `@__usage_stat` (
-			  `id` int(11) NOT NULL AUTO_INCREMENT,
-			  `code` varchar(64) NOT NULL,
-			  `visits` int(11) NOT NULL DEFAULT '0',
-			  `spent_time` int(11) NOT NULL DEFAULT '0',
-			  `modify_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-			  UNIQUE INDEX `code` (`code`),
-			  PRIMARY KEY (`id`)
-			) DEFAULT CHARSET=utf8"),
-      );
-      $tableName = $wpdb->prefix . 'pts_usage_stat';
-      $wpdb->insert($tableName, [
-        'code' => 'installed',
-        'visits' => 1,
-      ]);
-    }
     installerDbUpdaterPts::runUpdate();
     if ($current_version && !self::$_firstTimeActivated) {
       self::setUsed();
@@ -163,7 +177,6 @@ class installerPts
   }
   public static function delete()
   {
-    self::_checkSendStat('delete');
     global $wpdb;
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}pts_modules");
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}pts_modules_type");
@@ -173,14 +186,6 @@ class installerPts
   }
   public static function deactivate()
   {
-    self::_checkSendStat('deactivate');
-  }
-  private static function _checkSendStat($statCode)
-  {
-    if (class_exists('framePts') && framePts::_()->getModule('supsystic_promo') && framePts::_()->getModule('options')) {
-      framePts::_()->getModule('supsystic_promo')->getModel()->saveUsageStat($statCode);
-      framePts::_()->getModule('supsystic_promo')->getModel()->checkAndSend(true);
-    }
   }
   public static function update()
   {
@@ -357,7 +362,10 @@ class installerPts
         'date_created' => $data['date_created'],
       ]);
     }
-    if ($res) {
+    // $wpdb->update()/insert() return 0/false-ish int (row count) on success, not just a plain
+    // truthy value - 0 rows changed (data already matched) is common on repeat installs/updates
+    // and must not be treated as failure. Only `false` is a real error.
+    if ($res !== false) {
       $dataId = $action == 'UPDATE' ? $id : dbPts::insertID();
       $wrongId = (int) $wpdb->get_var($wpdb->prepare("SELECT id FROM {$wpdb->prefix}pts_tables WHERE unique_id != %s AND original_id = 0 AND is_base = 1 AND label = %s", $uid, $data['label']));
       if ($wrongId) {

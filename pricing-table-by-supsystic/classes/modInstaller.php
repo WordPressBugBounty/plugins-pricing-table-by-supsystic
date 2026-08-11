@@ -140,6 +140,14 @@ class modInstallerPts
   {
     $locations = self::_getPluginLocations();
     if ($modules = self::_getExtendModules($locations)) {
+      // Resolve "license" first: activate() below only lets any other module
+      // in this extension come back on if a currently valid license exists,
+      // so license itself must already be up to date by the time we get there.
+      usort($modules, function ($a, $b) {
+        $aCode = is_array($a) ? $a['code'] ?? '' : '';
+        $bCode = is_array($b) ? $b['code'] ?? '' : '';
+        return ($bCode === 'license' ? 1 : 0) - ($aCode === 'license' ? 1 : 0);
+      });
       foreach ($modules as $m) {
         if (!empty($m)) {
           if (framePts::_()->getTable('modules')->exists($m['code'], 'code')) {
@@ -147,6 +155,8 @@ class modInstallerPts
           } else {
             if (!self::install($m, $locations['plugDir'])) {
               errorsPts::push(sprintf(__('Install %s failed'), $m['code']), errorsPts::MOD_INSTALL);
+            } else {
+              self::activate($m);
             }
           }
         }
@@ -162,6 +172,22 @@ class modInstallerPts
     return true;
   }
   public static function checkActivationMessages() {}
+  /**
+   * True only when this extension has a "license" module row and it is not
+   * currently active -- i.e. when activate() below should withhold every
+   * other module until a valid license re-enables them. Extensions that have
+   * no license concept at all (no "license" row) are unaffected. Read
+   * directly from the table (not via getModule('license'), which would
+   * require that module to already be loaded in this request) so it reflects
+   * any activation this same check() pass just performed.
+   */
+  private static function _licenseGateApplies()
+  {
+    // Query $wpdb directly - dbPts has no get() method at all.
+    global $wpdb;
+    $active = $wpdb->get_var("SELECT active FROM {$wpdb->prefix}pts_modules WHERE code = 'license'");
+    return $active !== null && (int) $active !== 1;
+  }
   public static function deactivate()
   {
     $locations = self::_getPluginLocations();
@@ -178,8 +204,10 @@ class modInstallerPts
           $data_where = [
             'id' => $id,
           ];
+          // $wpdb->update() returns 0 (falsy but not an error) when the row already
+          // had active = 0 - only `false` means the query itself failed.
           $res = $wpdb->update($tableName, $data, $data_where);
-          if (!$res) {
+          if ($res === false) {
             errorsPts::push(__('Error Deactivation module', PTS_LANG_CODE), errorsPts::MOD_INSTALL);
           }
         }
@@ -194,6 +222,21 @@ class modInstallerPts
   public static function activate($modDataArr)
   {
     if (!empty($modDataArr['code']) && !framePts::_()->moduleActive($modDataArr['code'])) {
+      // Only "license" comes back automatically just because the extension
+      // plugin itself was (re)activated. Every other of its modules must only
+      // be reactivated once a currently valid license exists -- otherwise a
+      // bare deactivate/reactivate of the plugin would silently re-enable
+      // every paid feature regardless of license state.
+      if ($modDataArr['code'] !== 'license' && self::_licenseGateApplies()) {
+        return;
+      }
+      if (!framePts::_()->getModule('options')) {
+        // 'options' is a core module of the base plugin; without it we can't
+        // reach the modules table model at all. Bail instead of fataling on a
+        // null method call.
+        errorsPts::push(__('Core "options" module is not active, cannot activate modules', PTS_LANG_CODE), errorsPts::MOD_INSTALL);
+        return;
+      }
       $res = framePts::_()
         ->getModule('options')
         ->getModel('modules')
@@ -230,15 +273,15 @@ class modInstallerPts
   public static function uninstall()
   {
     $locations = self::_getPluginLocations();
+    $optionsModule = framePts::_()->getModule('options');
     if ($modules = self::_getExtendModules($locations)) {
       foreach ($modules as $m) {
         self::_uninstallTables($m);
-        framePts::_()
-          ->getModule('options')
-          ->getModel('modules')
-          ->delete([
+        if ($optionsModule) {
+          $optionsModule->getModel('modules')->delete([
             'code' => $m['code'],
           ]);
+        }
         utilsPts::deleteDir(PTS_MODULES_DIR . $m['code']);
       }
     }

@@ -123,12 +123,6 @@ class optionsPts extends modulePts
         'general' => [
           'label' => __('General', PTS_LANG_CODE),
           'opts' => [
-            'send_stats' => [
-              'label' => __('Send usage statistics', PTS_LANG_CODE),
-              'desc' => __('Send information about what plugin options you prefer to use, this will help us to make our solution better for You.', PTS_LANG_CODE),
-              'def' => '0',
-              'html' => 'checkboxHiddenVal',
-            ],
             'access_roles' => [
               'label' => __('User with such role can use plugin', PTS_LANG_CODE),
               'desc' => __('User with the next roles will have access to the whole plugin from admin area.', PTS_LANG_CODE),

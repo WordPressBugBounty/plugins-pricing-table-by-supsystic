@@ -515,11 +515,11 @@
 															<i class="fa fa-arrows-v"></i>
 														</div>
 														<div class="option-name">
-															<input type="text" name="options" value="<?php echo $optionsArray['options']; ?>">
+															<input type="text" name="options" value="<?php echo esc_attr($optionsArray['options']); ?>">
 														</div>
 														<div class="checked-state">
 															<label class="sc-checkbox seleceted-options-state">
-																<input type="radio" name="selected_options" value="<?php echo $optionsArray['options']; ?>" <?php echo $checked; ?>>
+																<input type="radio" name="selected_options" value="<?php echo esc_attr($optionsArray['options']); ?>" <?php echo $checked; ?>>
 																<?php _e('Default selected', PTS_LANG_CODE); ?>
 															</label>
 														</div>
@@ -527,8 +527,11 @@
 															<i class="fa fa-trash-o"></i>
 														</div>
 													</div>
-												<?php } else {foreach ($optionsArray['options'] as $optionName) { ?>
-														<?php if ($selectedName === $optionName) {
+												<?php } else {foreach ($optionsArray['options'] as $option) {
+              $optionName = is_array($option) ? ($option['name'] ?? '') : $option;
+              $optionKey = is_array($option) ? ($option['key'] ?? '') : $option;
+              ?>
+														<?php if ($selectedName === $optionKey) {
                 $checked = 'checked';
               } else {
                 $checked = '';
@@ -538,17 +541,18 @@
 																<i class="fa fa-arrows-v"></i>
 															</div>
 															<div class="option-name">
-																<input type="text" name="options" value="<?php echo $optionName; ?>">
+																<input type="text" name="options" value="<?php echo esc_attr($optionName); ?>">
 															</div>
 															<div class="checked-state">
 																<label class="sc-checkbox seleceted-options-state">
-																	<input type="radio" name="selected_options" value="<?php echo $optionName; ?>" <?php echo $checked; ?>>
+																	<input type="radio" name="selected_options" value="<?php echo esc_attr($optionKey); ?>" <?php echo $checked; ?>>
 																	<?php _e('Default selected', PTS_LANG_CODE); ?>
 																</label>
 															</div>
 															<div class="remove-option">
 																<i class="fa fa-trash-o"></i>
 															</div>
+															<input type="hidden" name="option_key" value="<?php echo esc_attr($optionKey); ?>">
 														</div>
 													<?php } ?>
 												<?php } ?>

@@ -77,6 +77,112 @@ function stripScripts(s) {
   return div.innerHTML;
 }
 
+// Pretty-prints the custom HTML block's markup - block content saved via drag-drop builders
+// (or hand-typed) tends to arrive as one unbroken line. Block-level tags (div/p/table/li/etc.)
+// each get their own indented line; inline tags (span/a/b/etc.) and text stay together on one
+// line so normal paragraph flow isn't shredded into a line per word/tag.
+function ptsBeautifyHtml(html) {
+  if (!html) return html;
+  var BLOCK_TAGS = {
+    ADDRESS: 1,
+    ARTICLE: 1,
+    ASIDE: 1,
+    BLOCKQUOTE: 1,
+    DETAILS: 1,
+    DIALOG: 1,
+    DD: 1,
+    DIV: 1,
+    DL: 1,
+    DT: 1,
+    FIELDSET: 1,
+    FIGCAPTION: 1,
+    FIGURE: 1,
+    FOOTER: 1,
+    FORM: 1,
+    H1: 1,
+    H2: 1,
+    H3: 1,
+    H4: 1,
+    H5: 1,
+    H6: 1,
+    HEADER: 1,
+    HGROUP: 1,
+    HR: 1,
+    LI: 1,
+    MAIN: 1,
+    NAV: 1,
+    OL: 1,
+    P: 1,
+    PRE: 1,
+    SECTION: 1,
+    TABLE: 1,
+    UL: 1,
+    TR: 1,
+    THEAD: 1,
+    TBODY: 1,
+    TFOOT: 1,
+    TD: 1,
+    TH: 1,
+    IFRAME: 1,
+    SCRIPT: 1,
+    STYLE: 1,
+  };
+  var VOID_TAGS = { AREA: 1, BASE: 1, BR: 1, COL: 1, EMBED: 1, HR: 1, IMG: 1, INPUT: 1, LINK: 1, META: 1, PARAM: 1, SOURCE: 1, TRACK: 1, WBR: 1 };
+
+  var container = document.createElement('div');
+  container.innerHTML = html;
+
+  function attrsToString(el) {
+    var out = '';
+    for (var i = 0; i < el.attributes.length; i++) {
+      var a = el.attributes[i];
+      out += ' ' + a.name + '="' + String(a.value).replace(/"/g, '&quot;') + '"';
+    }
+    return out;
+  }
+
+  function isBlock(node) {
+    return node.nodeType === 1 && BLOCK_TAGS[node.tagName];
+  }
+
+  function render(node, depth) {
+    var pad = new Array(depth + 1).join('  '),
+      out = '',
+      lineBuf = '';
+    function flushLine() {
+      var trimmed = lineBuf.replace(/^\s+|\s+$/g, '');
+      if (trimmed) out += pad + trimmed + '\n';
+      lineBuf = '';
+    }
+    for (var i = 0; i < node.childNodes.length; i++) {
+      var child = node.childNodes[i];
+      if (child.nodeType === 3) {
+        lineBuf += child.nodeValue.replace(/\s+/g, ' ');
+      } else if (child.nodeType === 8) {
+        flushLine();
+        out += pad + '<!--' + child.nodeValue + '-->\n';
+      } else if (child.nodeType === 1) {
+        var tag = child.tagName.toLowerCase();
+        if (isBlock(child)) {
+          flushLine();
+          if (VOID_TAGS[child.tagName]) {
+            out += pad + '<' + tag + attrsToString(child) + '>\n';
+          } else {
+            out += pad + '<' + tag + attrsToString(child) + '>\n' + render(child, depth + 1) + pad + '</' + tag + '>\n';
+          }
+        } else {
+          // Inline element (or inline void element like <br>/<img>) - keep on the current line
+          lineBuf += child.outerHTML;
+        }
+      }
+    }
+    flushLine();
+    return out;
+  }
+
+  return render(container, 0).replace(/\n+$/, '');
+}
+
 var ptsBlockHtmlEditor = (function () {
   var object = {},
     htmlField = jQuery('#ptsBbHtmlInp').get(0),
@@ -112,6 +218,7 @@ var ptsBlockHtmlEditor = (function () {
         click: function () {
           var newCode = htmlField.CodeMirrorEditor.getValue();
           newCode = stripScripts(newCode);
+          newCode = ptsBeautifyHtml(newCode);
           if (editBlock != null) {
             editBlock._data.html = newCode;
             editBlock._rebuildHtml();
@@ -137,7 +244,9 @@ var ptsBlockHtmlEditor = (function () {
 
   // methods
   object.show = function (block) {
-    htmlField.CodeMirrorEditor.setValue(block._data.html);
+    // Also beautifies on open - covers HTML that was already saved unformatted (old blocks,
+    // or content dropped in from elsewhere) before the user has touched it in this dialog.
+    htmlField.CodeMirrorEditor.setValue(ptsBeautifyHtml(block._data.html));
     editBlock = block;
     $container.dialog('open');
     htmlField.CodeMirrorEditor.refresh();

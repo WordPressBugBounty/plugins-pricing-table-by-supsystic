@@ -13,17 +13,15 @@ class dispatcherPts
   }
   public static function doAction($tag)
   {
+    $allArgs = func_get_args();
     if (strpos($tag, 'PTS_') === false) {
       $tag = self::$_pref . $tag;
     }
-    $numArgs = func_num_args();
+    $numArgs = count($allArgs);
     if ($numArgs > 2) {
-      $args = [];
-      for ($i = 1; $i < $numArgs; $i++) {
-        $args[] = func_get_arg($i);
-      }
+      $args = array_slice($allArgs, 1);
     } elseif ($numArgs == 2) {
-      $args = func_get_arg(1);
+      $args = $allArgs[1];
     } else {
       $args = null;
     }
@@ -38,14 +36,13 @@ class dispatcherPts
   }
   public static function applyFilters($tag, $value)
   {
+    $allArgs = func_get_args();
     if (strpos($tag, 'PTS_') === false) {
       $tag = self::$_pref . $tag;
     }
-    if (func_num_args() > 2) {
-      $args = [$tag];
-      for ($i = 1; $i < func_num_args(); $i++) {
-        $args[] = func_get_arg($i);
-      }
+    if (count($allArgs) > 2) {
+      $args = $allArgs;
+      $args[0] = $tag;
       return call_user_func_array('apply_filters', $args);
     } else {
       return apply_filters($tag, $value);

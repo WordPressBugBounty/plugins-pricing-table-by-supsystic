@@ -1074,7 +1074,7 @@ input[type='checkbox']:checked:before {
 input[type='checkbox']:checked:before {
   content: '\f147';
   margin: -3px 0 0 -4px;
-  color: #1e8cbe;
+  color: #c5edff;
 }
 
 .sc-checkbox input[type='checkbox'],

@@ -14,7 +14,9 @@ class templatesPts extends modulePts
         $this->loadAdminCoreJs();
         $this->loadCoreCss();
         $this->loadChosenSelects();
-        framePts::_()->addScript('ptsAcPromoScript', PTS_JS_PATH . 'acPromoScript.js');
+        // acPromoStyle.css also carries shared admin layout styles (breadcrumbs, footer,
+        // panel, overview-section*, plugin-title, half-page*) despite its name - keep the
+        // stylesheet even though the AC subscribe-popup script it used to pair with is gone.
         framePts::_()->addStyle('ptsAcPromoStyle', PTS_CSS_PATH . 'acPromoStyle.css');
         framePts::_()->addScript('adminOptionsPts', PTS_JS_PATH . 'admin.options.js', [], false, true);
         add_action('admin_enqueue_scripts', [$this, 'loadMediaScripts']);
@@ -129,25 +131,6 @@ class templatesPts extends modulePts
     ];
     if (is_admin()) {
       $jsData['isPro'] = framePts::_()->getModule('supsystic_promo')->isPro();
-      $show = true;
-      $acRemind = get_option('pts_ac_remind', false);
-      if (!empty($acRemind)) {
-        $currentDate = date('Y-m-d h:i:s');
-        if ($currentDate > $acRemind) {
-          $show = true;
-        } else {
-          $show = false;
-        }
-      }
-      $acSubscribe = get_option('pts_ac_subscribe', false);
-      if (!empty($acSubscribe)) {
-        $show = false;
-      }
-      $acDisabled = get_option('pts_ac_disabled', false);
-      if (!empty($acDisabled)) {
-        $show = false;
-      }
-      $jsData['ptsAcShow'] = $show;
     }
     $jsData = dispatcherPts::applyFilters('jsInitVariables', $jsData);
     framePts::_()->addJSVar('corePts', 'PTS_DATA', $jsData);

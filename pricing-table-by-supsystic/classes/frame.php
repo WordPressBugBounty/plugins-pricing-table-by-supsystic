@@ -39,7 +39,7 @@ class framePts
         $this->_mod = $mod;
       }
       $action = reqPts::getVar('action');
-      if ($action) {
+      if ($action && preg_match('/^[A-Za-z0-9_]+$/', $action)) {
         $this->_action = $action;
       }
     }

@@ -106,26 +106,6 @@
   };
 });
 
-if (jQuery('body').find('.supsystic-admin-notice[data-code="enb_promo_link_msg"]').length > 0) {
-  var dontShowPromo = jQuery.cookie('enbPromogLinkMsg3Day');
-  if (dontShowPromo) {
-    jQuery('.supsystic-admin-notice[data-code="enb_promo_link_msg"]').hide();
-  }
-}
-jQuery('.supsystic-admin-notice[data-code="enb_promo_link_msg"] .notice-dismiss').on('click', function () {
-  jQuery.cookie('enbPromogLinkMsg3Day', true, { expires: 3 });
-});
-
-if (jQuery('body').find('.supsystic-admin-notice[data-code="check_other_plugs_msg"]').length > 0) {
-  var dontShowPromo = jQuery.cookie('checkOtherPlugsMsg3Day');
-  if (dontShowPromo) {
-    jQuery('.supsystic-admin-notice[data-code="check_other_plugs_msg"]').hide();
-  }
-}
-jQuery('.supsystic-admin-notice[data-code="check_other_plugs_msg"] .notice-dismiss').on('click', function () {
-  jQuery.cookie('checkOtherPlugsMsg3Day', true, { expires: 3 });
-});
-
 var ptsAdminFormChanged = [];
 window.onbeforeunload = function () {
   // If there are at lease one unsaved form - show message for confirnation for page leave
@@ -133,6 +113,16 @@ window.onbeforeunload = function () {
 };
 jQuery(document).ready(function () {
   ptsInitMainPromoPopup();
+  // Moved from the removed acPromoScript.js (AC subscribe-popup script) - this part is the
+  // Overview tab's own section switcher (FAQ/Video/Settings/Support/etc.), unrelated to that
+  // popup, so it still needs to run even though the popup itself is gone.
+  jQuery('.overview-section-btn').on('click', function () {
+    jQuery('.overview-section').hide();
+    jQuery(".overview-section[data-section='" + jQuery(this).data('section') + "']").show();
+    jQuery('.overview-section-btn-active').removeClass('overview-section-btn-active');
+    jQuery(this).addClass('overview-section-btn-active');
+  });
+  jQuery('.overview-section-btn').eq(0).trigger('click');
   if (typeof ptsActiveTab != 'undefined' && ptsActiveTab != 'main_page' && jQuery('#toplevel_page_tables-supsystic').hasClass('wp-has-current-submenu')) {
     var subMenus = jQuery('#toplevel_page_tables-supsystic').find('.wp-submenu li');
     subMenus.removeClass('current').each(function () {
@@ -238,8 +228,6 @@ jQuery(document).ready(function () {
     });
     cloneWidthElement.remove();
   }
-  // Check for showing review notice after a week usage
-  ptsInitPlugNotices();
 });
 function ptsInitTooltips(selector) {
   var tooltipsterSettings = {
@@ -494,35 +482,6 @@ function prepareToPlotDate(data) {
     }
   }
   return data;
-}
-function ptsInitPlugNotices() {
-  var $notices = jQuery('.supsystic-admin-notice');
-  if ($notices && $notices.length) {
-    $notices.each(function () {
-      jQuery(this)
-        .find('.notice-dismiss')
-        .click(function () {
-          var $notice = jQuery(this).parents('.supsystic-admin-notice');
-          if (!$notice.data('stats-sent')) {
-            // User closed this message - that is his choise, let's respect this and save it's saved status
-            jQuery.sendFormPts({
-              data: { mod: 'supsystic_promo', action: 'addNoticeAction', code: $notice.data('code'), choice: 'hide' },
-            });
-          }
-        });
-      jQuery(this)
-        .find('[data-statistic-code]')
-        .click(function () {
-          var href = jQuery(this).attr('href'),
-            $notice = jQuery(this).parents('.supsystic-admin-notice');
-          jQuery.sendFormPts({
-            data: { mod: 'supsystic_promo', action: 'addNoticeAction', code: $notice.data('code'), choice: jQuery(this).data('statistic-code') },
-          });
-          $notice.data('stats-sent', 1).find('.notice-dismiss').trigger('click');
-          if (!href || href === '' || href === '#') return false;
-        });
-    });
-  }
 }
 /**
  * Main promo popup will show each time user will try to modify PRO option with free version only

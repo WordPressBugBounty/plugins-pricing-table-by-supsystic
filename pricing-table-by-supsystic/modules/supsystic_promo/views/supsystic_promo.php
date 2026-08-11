@@ -1,10 +1,6 @@
 <?php
 class supsystic_promoViewPts extends viewPts
 {
-  public function displayAdminFooter()
-  {
-    parent::display('adminFooter');
-  }
   public function showWelcomePage()
   {
     $this->assign('askOptions', [
@@ -17,11 +13,6 @@ class supsystic_promoViewPts extends viewPts
     $this->assign('originalPage', uriPts::getFullUrl());
     parent::display('welcomePage');
   }
-  public function showAdditionalmainAdminShowOnOptions($popup)
-  {
-    $this->assign('promoLink', $this->getModule()->getMainLink() . '?utm_source=plugin&utm_medium=onexit&utm_campaign=pricing_table');
-    parent::display('additionalmainAdminShowOnOptions');
-  }
   public function getOverviewTabContent()
   {
     framePts::_()->getModule('templates')->loadJqueryUi();
@@ -31,16 +22,11 @@ class supsystic_promoViewPts extends viewPts
     $this->assign('mainLink', $this->getModule()->getMainLink());
     $this->assign('faqList', $this->getFaqList());
     $this->assign('serverSettings', $this->getServerSettings());
-    $this->assign('news', $this->getNewsContent());
     return parent::getContent('overviewTabContent');
   }
   public function getFaqList()
   {
     return [];
-  }
-  public function getNewsContent()
-  {
-    return ''; // For now only
   }
   public function getServerSettings()
   {
@@ -61,10 +47,4 @@ class supsystic_promoViewPts extends viewPts
       'PHP CURL Support' => ['value' => extension_loaded('curl') ? __('Yes', PTS_LANG_CODE) : __('No', PTS_LANG_CODE), 'error' => !extension_loaded('curl')],
     ];
   }
-
-  // public function getDiscountMsg($buyLink = '#') {
-  // 	$this->assign('bundlePageLink', '//supsystic.com/all-plugins/');
-  // 	$this->assign('buyLink', $buyLink);
-  // 	parent::display('discountMsg');
-  // }
 }

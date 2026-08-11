@@ -6,7 +6,6 @@ class supsystic_promoPts extends modulePts
     'from' => ['?', '&'],
     'to' => ['%', '^'],
   ];
-  private $_minDataInStatToSend = 20;
   public function __construct($d)
   {
     parent::__construct($d);
@@ -15,92 +14,8 @@ class supsystic_promoPts extends modulePts
   public function init()
   {
     parent::init();
-    add_action('admin_footer', [$this, 'displayAdminFooter'], 9);
-    if (is_admin()) {
-      $this->checkStatisticStatus();
-    }
-    $this->weLoveYou();
     dispatcherPts::addFilter('mainAdminTabs', [$this, 'addAdminTab']);
     dispatcherPts::addFilter('showTplsList', [$this, 'checkProTpls']);
-    // dispatcherPts::addAction('discountMsg', array(
-    //    $this,
-    //    'getDiscountMsg'
-    // ));
-    add_action('admin_notices', [$this, 'checkAdminPromoNotices']);
-  }
-  public function checkAdminPromoNotices()
-  {
-    if (!framePts::_()->isAdminPlugOptsPage()) {
-      return;
-    }
-    $notices = [];
-    $startUsage = (int) framePts::_()->getModule('options')->get('start_usage');
-    $currTime = time();
-    $day = 24 * 3600;
-    if ($startUsage) {
-      //  $rateMsg = sprintf(__("<h3>Hey, I noticed you just use %s over a week – that’s awesome!</h3><p>Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.</p>", PTS_LANG_CODE) , PTS_WP_PLUGIN_NAME);
-      //  $rateMsg .= '<p><a href="https://wordpress.org/support/view/plugin-reviews/pricing-table-by-supsystic?rate=5#postform" target="_blank" class="button button-primary" data-statistic-code="done">' . __('Ok, you deserve it', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="later">' . __('Nope, maybe later', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="hide">' . __('I already did', PTS_LANG_CODE) . '</a></p>';
-      //  $enbPromoLinkMsg = sprintf(__("<h3>More then eleven days with our %s plugin - Congratulations!</h3>", PTS_LANG_CODE) , PTS_WP_PLUGIN_NAME);;
-      //  $enbPromoLinkMsg .= __('<p>On behalf of the entire <a href="https://supsystic.com/" target="_blank">supsystic.com</a> company I would like to thank you for been with us, and I really hope that our software helped you.</p>', PTS_LANG_CODE);
-      //  $enbPromoLinkMsg .= __('<p>And today, if you want, - you can help us. This is really simple - you can just add small promo link to our site under your tables. This is small step for you, but a big help for us! Sure, if you don\'t want - just skip this and continue enjoy our software!</p>', PTS_LANG_CODE);
-      //  $enbPromoLinkMsg .= '<p><a href="#" class="button button-primary" data-statistic-code="done">' . __('Ok, you deserve it', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="later">' . __('Nope, maybe later', PTS_LANG_CODE) . '</a><a href="#" class="button" data-statistic-code="hide">' . __('Skip', PTS_LANG_CODE) . '</a></p>';
-      // $checkOtherPlugins = '<p>' . sprintf(__('Check out <a href="%s" target="_blank" class="button button-primary" data-statistic-code="hide">our other Plugins</a>! Years of experience in WordPress plugins developers made those list unbreakable!', PTS_LANG_CODE) , framePts::_()->getModule('options')->getTabUrl('featured-plugins')) . '</p>';
-      $notices = [
-        // 'rate_msg' => array(
-        //    'html' => $rateMsg,
-        //    'show_after' => 7 * $day
-        // ) ,
-        // 'enb_promo_link_msg' => array(
-        //    'html' => $enbPromoLinkMsg,
-        //    'show_after' => 11 * $day
-        // ) ,
-        // 'check_other_plugs_msg' => array(
-        //    'html' => $checkOtherPlugins,
-        //    'show_after' => 1 * $day
-        // ) ,
-      ];
-      foreach ($notices as $nKey => $n) {
-        if ($currTime - $startUsage <= $n['show_after']) {
-          unset($notices[$nKey]);
-          continue;
-        }
-        $done = (int) framePts::_()
-          ->getModule('options')
-          ->get('done_' . $nKey);
-        if ($done) {
-          unset($notices[$nKey]);
-          continue;
-        }
-        $hide = (int) framePts::_()
-          ->getModule('options')
-          ->get('hide_' . $nKey);
-        if ($hide) {
-          unset($notices[$nKey]);
-          continue;
-        }
-        $later = (int) framePts::_()
-          ->getModule('options')
-          ->get('later_' . $nKey);
-        if ($later && $currTime - $later <= 2 * $day) {
-          // remember each 2 days
-          unset($notices[$nKey]);
-          continue;
-        }
-      }
-    } else {
-      framePts::_()->getModule('options')->getModel()->save('start_usage', $currTime);
-    }
-    if (!empty($notices)) {
-      if (isset($notices['rate_msg']) && isset($notices['enb_promo_link_msg']) && !empty($notices['enb_promo_link_msg'])) {
-        unset($notices['rate_msg']);
-      }
-      $html = '';
-      foreach ($notices as $nKey => $n) {
-        $this->getModel()->saveUsageStat($nKey . '.' . 'show', true);
-        $html .= '<div class="updated notice is-dismissible supsystic-admin-notice" data-code="' . $nKey . '">' . $n['html'] . '</div>';
-      }
-      echo $html;
-    }
   }
   public function addAdminTab($tabs)
   {
@@ -110,15 +25,6 @@ class supsystic_promoPts extends modulePts
       'fa_icon' => 'fa-info',
       'sort_order' => 5,
     ];
-    // $tabs['featured-plugins'] = array(
-    //    'label' => __('Featured Plugins', PTS_LANG_CODE) ,
-    //    'callback' => array(
-    //       $this,
-    //       'showFeaturedPluginsPage'
-    //    ) ,
-    //    'fa_icon' => 'fa-heart',
-    //    'sort_order' => 99,
-    // );
     return $tabs;
   }
   public function getOverviewTabContent()
@@ -180,12 +86,6 @@ class supsystic_promoPts extends modulePts
   {
     $this->getView()->showWelcomePage();
   }
-  public function displayAdminFooter()
-  {
-    if (framePts::_()->isAdminPlugPage()) {
-      $this->getView()->displayAdminFooter();
-    }
-  }
   private function _preparePromoLink($link, $ref = '')
   {
     if (empty($ref)) {
@@ -193,29 +93,9 @@ class supsystic_promoPts extends modulePts
     }
     return $link;
   }
-  public function weLoveYou()
-  {
-    if (!framePts::_()->getModule(implode('', ['l', 'ic', 'e', 'ns', 'e']))) {
-    }
-  }
-  public function showAdditionalmainAdminShowOnOptions($popup)
-  {
-    $this->getView()->showAdditionalmainAdminShowOnOptions($popup);
-  }
   public function preparePromoLink($link, $ref = '')
   {
     return $this->_preparePromoLink($link, $ref);
-  }
-  public function checkStatisticStatus()
-  {
-    $canSend = (int) framePts::_()->getModule('options')->get('send_stats');
-    if ($canSend) {
-      $this->getModel()->checkAndSend();
-    }
-  }
-  public function getMinStatSend()
-  {
-    return $this->_minDataInStatToSend;
   }
   public function getMainLink()
   {
@@ -407,46 +287,5 @@ class supsystic_promoPts extends modulePts
       $list = array_merge($list, $promoList);
     }
     return $list;
-  }
-  // public function getDiscountMsg() {
-  //    if ($this->isPro() && framePts::_()->getModule('options')->getActiveTab() == 'license' && framePts::_()->getModule('license') && framePts::_()->getModule('license')->getModel()->isActive()) {
-  //       $proPluginsList = array(
-  //          'ultimate-maps-by-supsystic-pro',
-  //          'newsletters-by-supsystic-pro',
-  //          'contact-form-by-supsystic-pro',
-  //          'live-chat-pro',
-  //          'digital-publications-supsystic-pro',
-  //          'coming-soon-supsystic-pro',
-  //          'price-table-supsystic-pro',
-  //          'tables-generator-pro',
-  //          'social-share-pro',
-  //          'popup-by-supsystic-pro',
-  //          'supsystic_slider_pro',
-  //          'supsystic-gallery-pro',
-  //          'google-maps-easy-pro',
-  //          'backup-supsystic-pro',
-  //       );
-  //       $activePluginsList = get_option('active_plugins', array());
-  //       $activeProPluginsCount = 0;
-  //       foreach ($activePluginsList as $actPl) {
-  //          foreach ($proPluginsList as $proPl) {
-  //             if (strpos($actPl, $proPl) !== false) {
-  //                $activeProPluginsCount++;
-  //             }
-  //          }
-  //       }
-  //       if ($activeProPluginsCount === 1) {
-  //          $buyLink = $this->getDiscountBuyUrl();
-  //          $this->getView()->getDiscountMsg($buyLink);
-  //       }
-  //    }
-  // }
-  public function getDiscountBuyUrl()
-  {
-    $license = framePts::_()->getModule('license')->getModel()->getCredentials();
-    $license['key'] = md5($license['key']);
-    $license = urlencode(base64_encode(implode('|', $license)));
-    $plugin_code = 'pricing_tables_pro';
-    return 'http://supsystic.com/?mod=manager&pl=lms&action=applyDiscountBuyUrl&plugin_code=' . $plugin_code . '&lic=' . $license;
   }
 }

@@ -18,7 +18,7 @@ class utilsPts
   }
   public static function unserialize($data, $safe = false)
   {
-    return $safe ? @unserialize($data) : unserialize($data);
+    return $safe ? @unserialize($data, ['allowed_classes' => false]) : unserialize($data, ['allowed_classes' => false]);
   }
   public static function serialize($data)
   {

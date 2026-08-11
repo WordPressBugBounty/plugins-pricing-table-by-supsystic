@@ -37,10 +37,6 @@ class tablesModelPts extends modelPts
     if (!empty($d['label'])) {
       if (!empty($d['original_id'])) {
         $original = $this->supGetById($d['original_id']);
-        framePts::_()
-          ->getModule('supsystic_promo')
-          ->getModel()
-          ->saveUsageStat('create_from_tpl.' . strtolower(str_replace(' ', '-', $original['label'])));
         unset($original['id']);
         $original['label'] = $d['label'];
         $original['original_id'] = $d['original_id'];
@@ -369,10 +365,6 @@ class tablesModelPts extends modelPts
       if (!empty($currentTable['params']['option_name_input']['val'])) {
         $newTpl['params']['option_name_input']['val'] = $currentTable['params']['option_name_input']['val'];
       }
-      framePts::_()
-        ->getModule('supsystic_promo')
-        ->getModel()
-        ->saveUsageStat('change_to_tpl.' . strtolower(str_replace(' ', '-', $newTpl['label'])));
       $newTpl['original_id'] = $newTpl['id'];
       $newTpl['id'] = $currentTable['id'];
       $newTpl['label'] = $currentTable['label'];

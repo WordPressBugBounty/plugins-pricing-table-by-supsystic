@@ -89,12 +89,9 @@ class Twig_Lexer implements Twig_LexerInterface
    */
   public function tokenize($code, $filename = null)
   {
-    if (function_exists('mb_internal_encoding') && ((int) ini_get('mbstring.func_overload')) & 2) {
-      $mbEncoding = mb_internal_encoding();
-      mb_internal_encoding('ASCII');
-    } else {
-      $mbEncoding = null;
-    }
+    // mbstring.func_overload was deprecated in PHP 7.2 and removed in PHP 8.0,
+    // so there is no longer an overloaded mb_* string handling mode to guard against.
+    $mbEncoding = null;
 
     $this->code = str_replace(["\r\n", "\r"], "\n", $code);
     $this->filename = $filename;
