@@ -16,6 +16,43 @@ class supsystic_promoPts extends modulePts
     parent::init();
     dispatcherPts::addFilter('mainAdminTabs', [$this, 'addAdminTab']);
     dispatcherPts::addFilter('showTplsList', [$this, 'checkProTpls']);
+    add_action('admin_enqueue_scripts', [$this, 'enqueueDataTablesPromoAssets']);
+    add_action('admin_footer', [$this, 'renderDataTablesPromo']);
+  }
+  private function _isOnPluginAdminPage()
+  {
+    return isset($_GET['page']) && $_GET['page'] === framePts::_()->getModule('adminmenu')->getMainSlug();
+  }
+  public function enqueueDataTablesPromoAssets()
+  {
+    if (!$this->_isOnPluginAdminPage()) {
+      return;
+    }
+    framePts::_()->addStyle('pts-dt-promo', $this->getModPath() . 'css/admin.datatables-promo.css');
+    framePts::_()->addScript('pts-dt-promo', $this->getModPath() . 'js/admin.datatables-promo.js', ['jquery']);
+  }
+  public function renderDataTablesPromo()
+  {
+    if (!$this->_isOnPluginAdminPage()) {
+      return;
+    }
+    echo $this->getView()->getDataTablesPromoPopup();
+  }
+  public function getDataTablesLink($params = '')
+  {
+    $link = 'https://supsystic.com/plugins/wordpress-data-table-plugin/';
+    if (!empty($params)) {
+      $link .= (strpos($link, '?') !== false ? '&' : '?') . $params;
+    }
+    return $link;
+  }
+  public function getDataTablesBuyLink($pid, $couponCode, $utmParams = '')
+  {
+    $link = 'https://supsystic.com/?mod=user&addQty=1&goto=checkout&lang=en&action=addToCart&pid=' . $pid . '&coupon=' . rawurlencode($couponCode);
+    if (!empty($utmParams)) {
+      $link .= '&' . $utmParams;
+    }
+    return $link;
   }
   public function addAdminTab($tabs)
   {

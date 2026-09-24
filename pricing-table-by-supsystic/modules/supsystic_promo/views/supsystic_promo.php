@@ -24,6 +24,49 @@ class supsystic_promoViewPts extends viewPts
     $this->assign('serverSettings', $this->getServerSettings());
     return parent::getContent('overviewTabContent');
   }
+  public function getDataTablesPromoPopup()
+  {
+    $module = $this->getModule();
+    $isPro = $module->isPro();
+    $utmCampaign = $isPro ? 'pt_dt_pro_upsell' : 'pt_dt_free_upsell';
+    $couponCode = $isPro ? 'PT50' : 'PTF2P49';
+    $pidYearly = 3443;
+    $pid3Years = 22663;
+    $utmBase = 'utm_source=plugin&utm_medium=pricing_table_popup&utm_campaign=' . $utmCampaign;
+    if ($isPro) {
+      $plans = [
+        [
+          'term' => __('1 Year', PTS_LANG_CODE),
+          'priceOld' => '$79',
+          'priceNew' => '$39.50',
+          'buyUrl' => $module->getDataTablesBuyLink($pidYearly, $couponCode, $utmBase . '&utm_content=1_year'),
+        ],
+        [
+          'term' => __('3 Years', PTS_LANG_CODE),
+          'priceOld' => '$149',
+          'priceNew' => '$74.50',
+          'buyUrl' => $module->getDataTablesBuyLink($pid3Years, $couponCode, $utmBase . '&utm_content=3_years'),
+          'highlight' => true,
+        ],
+      ];
+    } else {
+      $plans = [
+        [
+          'term' => __('Personal, 1 Year', PTS_LANG_CODE),
+          'priceOld' => '$79',
+          'priceNew' => '$49',
+          'buyUrl' => $module->getDataTablesBuyLink($pidYearly, $couponCode, $utmBase . '&utm_content=1_year'),
+        ],
+      ];
+    }
+    $this->assign('isPro', $isPro);
+    $this->assign('couponCode', $couponCode);
+    $this->assign('plans', $plans);
+    $this->assign('videoUrl', $module->getModPath() . 'video/pricing-table-styles.mp4');
+    $this->assign('themesImgUrl', $module->getModPath() . 'img/datatables-themes-preview.gif');
+    $this->assign('ctaLink', $module->getDataTablesLink('utm_source=plugin&utm_medium=pricing_table_popup&utm_campaign=' . $utmCampaign . '&coupon=' . $couponCode));
+    return parent::getContent('dataTablesPromo');
+  }
   public function getFaqList()
   {
     return [];
