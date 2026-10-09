@@ -5,8 +5,7 @@ Tags: pricing table,comparison table,price chart, price plan, chart
 Tested up to: 7.1
 Requires PHP: 7.4
 License: GNU General Public License v2.0 or later
-Stable tag: 1.12.0
-
+Stable tag: 1.12.1
 Pricing Table generator by Supsystic allows you to create responsive pricing tables or comparison table without any programming skills
 
 == Description ==
@@ -167,6 +166,10 @@ Our Pricing Table plugin is a mobile-ready, means that it will render on the dev
 == Changelog ==
 
 = 2026 =
+
+= 1.12.1 — October 9, 2026 =
+
+* Maintenance release with minor stability improvements.
 
 = 1.12.0 — September 23, 2026 =
 
