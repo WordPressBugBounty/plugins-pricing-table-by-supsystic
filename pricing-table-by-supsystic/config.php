@@ -52,7 +52,7 @@ define('PTS_CURRENT', 'current');
 define('PTS_EOL', "\n");
 
 define('PTS_PLUGIN_INSTALLED', true);
-define('PTS_VERSION', '1.12.3');
+define('PTS_VERSION', '1.12.4');
 define('PTS_USER', 'user');
 
 define('PTS_CLASS_PREFIX', 'ptsc');

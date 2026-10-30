@@ -64,7 +64,8 @@
       }
     });
 
-    if (shouldShow()) {
+    // Never on top of the Spooky Sale banner: when it shows on this page load, this offer waits for the next one
+    if (shouldShow() && !document.getElementById('supsystic-spooky-sale')) {
       setTimeout(openPopup, 400);
     }
   });

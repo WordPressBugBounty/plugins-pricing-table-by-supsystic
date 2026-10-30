@@ -3,7 +3,7 @@ Contributors: supsysticcom
 Tags: pricing table, comparison table, price table, pricing plans, pricing
 Tested up to: 7.1
 Requires PHP: 7.3
-Stable tag: 1.12.3
+Stable tag: 1.12.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,10 @@ Please report security issues through the [Patchstack Vulnerability Disclosure P
 == Changelog ==
 
 = 2026 =
+
+= 1.12.4 — October 30, 2026 =
+
+* Tested up to 7.1.4 - General code improvements.
 
 = 1.12.3 — October 16, 2026 =
 

@@ -61,7 +61,7 @@ $ctaLink = $this->ctaLink;
 					</div>
 					<div class="pts-dt-promo-coupon">
 						<?php if ($isPro) { ?>
-							<?php printf(esc_html__('Code %s is applied automatically — offer valid through October 10, 2026', PTS_LANG_CODE), '<strong>' . esc_html($couponCode) . '</strong>'); ?>
+							<?php printf(esc_html__('Code %s is applied automatically', PTS_LANG_CODE), '<strong>' . esc_html($couponCode) . '</strong>'); ?>
 						<?php } else { ?>
 							<?php printf(esc_html__('Code %1$s is applied automatically · renews at %2$s/year', PTS_LANG_CODE), '<strong>' . esc_html($couponCode) . '</strong>', '$59'); ?>
 						<?php } ?>
