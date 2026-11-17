@@ -1,0 +1,434 @@
+/* Review request card at the top of the plugin pages */
+.pts-review {
+  --pts-review-navy: #263546;
+  --pts-review-teal: #149b93;
+  --pts-review-cyan: #4ae8ea;
+  --pts-review-text: #52627a;
+  --pts-review-line: #e2e8f0;
+  --pts-review-star: #ffb900;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  /* Inside the content panel of the plugin pages */
+  margin: 0 20px 18px 0;
+  padding: 22px 56px 22px 22px;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid var(--pts-review-line);
+  border-radius: 14px;
+  box-shadow: 0 14px 34px -24px rgba(38, 53, 70, .55), 0 1px 2px rgba(38, 53, 70, .06);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--pts-review-navy);
+  animation: ptsReviewIn .45s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+/* Same column as the Overview content */
+.pts-review.is-overview {
+  width: calc(100% - 20px);
+  max-width: 1200px;
+  margin: 20px auto 0;
+}
+
+.pts-review::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -90px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74, 232, 234, .16) 0%, rgba(74, 232, 234, 0) 68%);
+  pointer-events: none;
+}
+
+.pts-review::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--pts-review-cyan), var(--pts-review-teal));
+}
+
+.pts-review *,
+.pts-review *::before,
+.pts-review *::after {
+  box-sizing: border-box;
+}
+
+.pts-review.is-leaving {
+  transition: opacity .3s ease, transform .3s ease, max-height .35s ease .15s, margin .35s ease .15s, padding .35s ease .15s, border-width .35s ease .15s;
+  opacity: 0;
+  transform: translateY(-6px);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-width: 0;
+}
+
+/* Art */
+.pts-review-art {
+  position: relative;
+  flex: 0 0 72px;
+  width: 72px;
+  height: 72px;
+  margin-left: 4px;
+  border-radius: 20px;
+  background: linear-gradient(140deg, var(--pts-review-cyan) 0%, var(--pts-review-teal) 62%, #0f7f79 100%);
+  box-shadow: 0 10px 22px -12px rgba(20, 155, 147, .9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pts-review-icon {
+  display: block;
+}
+
+.pts-review-badge {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--pts-review-navy);
+  border: 3px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: ptsReviewPop .5s cubic-bezier(.3, 1.6, .5, 1) .35s both;
+}
+
+.pts-review-spark {
+  position: absolute;
+  animation: ptsReviewTwinkle 2.8s ease-in-out infinite;
+}
+
+.pts-review-spark.is-one {
+  top: -7px;
+  left: -6px;
+}
+
+.pts-review-spark.is-two {
+  top: 4px;
+  right: -9px;
+  animation-delay: .9s;
+}
+
+.pts-review-spark.is-three {
+  bottom: 10px;
+  left: -10px;
+  animation-delay: 1.7s;
+}
+
+/* Body */
+.pts-review-body {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pts-review-step[hidden] {
+  display: none !important;
+}
+
+.pts-review-step.is-active {
+  animation: ptsReviewStep .32s ease both;
+}
+
+.pts-review .pts-review-eyebrow {
+  margin: 0 0 4px;
+  padding: 0;
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--pts-review-teal);
+}
+
+.pts-review .pts-review-title {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--pts-review-navy);
+  overflow-wrap: anywhere;
+}
+
+.pts-review .pts-review-text {
+  margin: 6px 0 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--pts-review-text);
+}
+
+/* Some plugin pages turn every link of the content into a block */
+.pts-review .pts-review-inline-link {
+  display: inline;
+  margin: 0;
+  color: var(--pts-review-teal);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pts-review .pts-review-inline-link:hover,
+.pts-review .pts-review-inline-link:focus {
+  color: #0f7f79;
+  text-decoration: underline;
+}
+
+.pts-review-question {
+  margin: 16px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pts-review-navy);
+}
+
+.pts-review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* Buttons */
+.pts-review .pts-review-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  margin: 0;
+  padding: 8px 18px;
+  border: 1px solid #cdd6e1;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: none;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--pts-review-navy);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+
+.pts-review .pts-review-btn:hover {
+  border-color: #aebbc9;
+  background: #f6f8fb;
+  color: var(--pts-review-navy);
+  transform: translateY(-1px);
+}
+
+.pts-review .pts-review-btn.is-primary {
+  border-color: var(--pts-review-navy);
+  background: var(--pts-review-navy);
+  color: #fff;
+  box-shadow: 0 8px 18px -10px rgba(38, 53, 70, .9);
+}
+
+.pts-review .pts-review-btn.is-primary:hover {
+  border-color: #17222e;
+  background: #17222e;
+  color: #fff;
+  box-shadow: 0 10px 20px -10px rgba(38, 53, 70, .95);
+}
+
+.pts-review .pts-review-link {
+  display: inline-block;
+  margin: 0 0 0 4px;
+  padding: 6px 2px;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pts-review-text);
+  text-decoration: underline;
+  text-decoration-color: rgba(82, 98, 122, .35);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.pts-review .pts-review-link:hover {
+  color: var(--pts-review-navy);
+  text-decoration-color: currentColor;
+}
+
+.pts-review .pts-review-btn:focus-visible,
+.pts-review .pts-review-link:focus-visible,
+.pts-review .pts-review-inline-link:focus-visible,
+.pts-review .pts-review-close:focus-visible {
+  outline: 2px solid var(--pts-review-teal);
+  outline-offset: 2px;
+}
+
+.pts-review .pts-review-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #8a97a8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+
+.pts-review .pts-review-close:hover {
+  background: #f1f4f8;
+  color: var(--pts-review-navy);
+}
+
+/* Stars */
+.pts-review-stars {
+  display: flex;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.pts-review-star {
+  fill: var(--pts-review-star);
+  filter: drop-shadow(0 2px 3px rgba(255, 185, 0, .35));
+}
+
+.pts-review-step.is-active .pts-review-star {
+  animation: ptsReviewPop .45s cubic-bezier(.3, 1.6, .5, 1) both;
+  animation-delay: calc(var(--pts-star, 1) * 70ms + 80ms);
+}
+
+/* The yes step sits on a warm wash, the thanks step celebrates */
+.pts-review.is-step-yes::before,
+.pts-review.is-step-thanks::before {
+  background: radial-gradient(circle, rgba(255, 185, 0, .16) 0%, rgba(255, 185, 0, 0) 68%);
+}
+
+.pts-review.is-step-thanks .pts-review-art {
+  animation: ptsReviewBounce .6s cubic-bezier(.3, 1.6, .5, 1) both;
+}
+
+@keyframes ptsReviewIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ptsReviewStep {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ptsReviewPop {
+  from {
+    opacity: 0;
+    transform: scale(.3);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ptsReviewTwinkle {
+  0%, 100% {
+    opacity: .25;
+    transform: scale(.7) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotate(25deg);
+  }
+}
+
+@keyframes ptsReviewBounce {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.12) rotate(-4deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@media (max-width: 782px) {
+  .pts-review {
+    gap: 14px;
+    padding: 18px 48px 18px 18px;
+  }
+
+  .pts-review-art {
+    flex-basis: 52px;
+    width: 52px;
+    height: 52px;
+    border-radius: 15px;
+  }
+
+  .pts-review-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .pts-review .pts-review-title {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pts-review {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pts-review,
+  .pts-review *,
+  .pts-review.is-leaving {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* A plain 1px frame like the other cards: no stripe on the left */
+.pts-review::after {
+  content: none;
+  display: none;
+}
+/* In line with the content of every tab: no own side margins */
+.supsystic-plugin .pts-review,
+.supsystic-plugin .pts-review.is-overview {
+  width: auto;
+  max-width: none;
+  margin: 0 0 18px;
+}

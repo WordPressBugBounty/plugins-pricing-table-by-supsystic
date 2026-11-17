@@ -2705,13 +2705,16 @@ ptsElementMenu.prototype.reposite = function () {
   var elOffset = this._element.$().offset(),
     elWidth = this._element.$().width(),
     //,	elHeight = this._element.$().height()
-    width = this._$.width(),
+    width = this._$.outerWidth(),
     height = this._$.height(),
     left = elOffset.left - (width - elWidth) / 2,
     top = elOffset.top - height;
   if (this._element.$().hasClass('hover')) {
     top -= g_ptsHoverMargin;
   }
+  // Inside the window on the right too: a menu of an element in the last column stuck out of the page
+  var maxLeft = (document.documentElement.clientWidth || window.innerWidth) - width;
+  if (left > maxLeft) left = maxLeft;
   if (left < 0) left = 0;
   this._$.css({
     left: left + 'px',
@@ -3423,12 +3426,15 @@ ptsBlock_price_table.prototype._initCellsEdit = function ($cell) {
     }
     jQuery(this).on('click', function () {
       clearTimeout(jQuery(this).data('btn-shell-hide-timeout'));
+      // Back to its place on the right of the cell before it is measured: it goes to the left only when the window
+      // (not the whole monitor) has no room for it
+      $btnsShell.removeClass('ptsRightArrows').css({ left: '' });
       $btnsShell.addClass('active');
 
       var elementLeft = $btnsShell.offset().left,
         elementWidth = $btnsShell.outerWidth(),
         elementRight = elementLeft + elementWidth,
-        screenWidth = screen.width;
+        screenWidth = document.documentElement.clientWidth || window.innerWidth || screen.width;
 
       //off-screen element
       if (screenWidth < elementRight) {
@@ -3437,6 +3443,11 @@ ptsBlock_price_table.prototype._initCellsEdit = function ($cell) {
         $btnsShell.css({ left: -(elementWidth + 5) + 'px' });
         if (!jQuery('#ptsRightArrows').length) {
           jQuery('head').append('<style id="ptsRightArrows">.ptsCellEditBtnsShell.ptsRightArrows:before{border-left: 5px solid rgba(45, 34, 52, 0.96); border-right: none; left:' + elementWidth + 'px}</style>');
+        }
+        // A narrow window has no room on either side: keep the tools inside it on the left
+        var shellLeft = $btnsShell.offset().left;
+        if (shellLeft < 4) {
+          $btnsShell.css({ left: parseFloat($btnsShell.css('left')) + (4 - shellLeft) + 'px' });
         }
       }
 

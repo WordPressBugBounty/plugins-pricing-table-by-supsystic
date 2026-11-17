@@ -32,11 +32,12 @@
 				<?php
 //dispatcherPts::doAction('discountMsg');
 ?>
+				<?php dispatcherPts::doAction('adminContentTop'); ?>
 				<?php echo $this->content; ?>
                 <div class="clear"></div>
             </div>
             <div class="supsystic-footer-wrapper">
-              <div class="supsystic-footer-add-review">Add your <a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/popup-by-supsystic?filter=5#postform">★★★★★</a> on wordpress.org</div>
+              <div class="supsystic-footer-add-review">Add your <a target="_blank" href="https://wordpress.org/support/plugin/pricing-table-by-supsystic/reviews/#new-post">★★★★★</a> on wordpress.org</div>
               <a href="https://supsystic.com/" target="_blank"><img src="<?php echo PTS_PLUGINS_URL . '/' . PTS_PLUG_NAME; ?>/modules/supsystic_promo/img/supsystic-logo-small.png"></a>
               <div class="supsystic-footer-plugin-version">Pricing Table by Supsystic Version: <?php echo PTS_VERSION; ?></div>
             </div>

@@ -95,7 +95,15 @@ class tablesViewPts extends viewPts
     framePts::_()->addScript('admin.tables.edit', $this->getModule()->getModPath() . 'js/admin.tables.edit.js');
     framePts::_()->addJSVar('admin.tables.edit', 'ptsAddNewUrl', $ptsAddNewUrl);
     framePts::_()->addJSVar('admin.tables.edit', 'ptsMCEUrl', PTS_JS_PATH . 'tinymce');
+    // The look of the Data Tables editor: group tabs, search, cards and switches (layout only)
+    framePts::_()->addStyle('admin.tables.ui', $this->getModule()->getModPath() . 'css/admin.tables.ui.css', [], PTS_VERSION . '-ui-12');
+    framePts::_()->addScript('admin.tables.ui', $this->getModule()->getModPath() . 'js/admin.tables.ui.js', ['jquery'], PTS_VERSION . '-ui-12', true);
+    dispatcherPts::addAction('adminBreadcrumbsClassAdd', [$this, 'addEditorHeadClass']);
     return parent::getContent('tablesEditAdmin');
+  }
+  public function addEditorHeadClass()
+  {
+    echo ' pts-ed-head';
   }
   public function showTable($params)
   {

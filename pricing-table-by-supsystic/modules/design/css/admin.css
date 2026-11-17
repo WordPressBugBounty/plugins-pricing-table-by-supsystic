@@ -1,0 +1,1869 @@
+/*
+ * One look for all admin pages of Pricing Table (Design module), the same as in Data Tables and Photo Gallery.
+ * Printed after the old plugin-wide stylesheets (css/supsystic-ui.css, css/acPromoStyle.css), so the same selectors
+ * win; !important only where the old rules use it. The pricing table preview of the editor (#ptsCanvas) keeps the look
+ * of the site, so the rules for links, fields and checkboxes leave it alone.
+ */
+.supsystic-plugin,
+.ui-dialog,
+.pts-up {
+  --pts-ui-ink: #13202e;
+  --pts-ui-text: #334155;
+  --pts-ui-muted: #64748b;
+  --pts-ui-line: #e2e8f0;
+  --pts-ui-line-soft: #f1f5f9;
+  --pts-ui-field: #cbd5e1;
+  --pts-ui-surface: #f8fafc;
+  --pts-ui-accent: #0e8a93;
+  --pts-ui-accent-dark: #0b6e75;
+  --pts-ui-accent-soft: #e6f6f7;
+  --pts-ui-navy: linear-gradient(145deg, #26384c 0%, #1d2b3c 100%);
+  --pts-ui-navy-hover: #17222e;
+  --pts-ui-brand: linear-gradient(135deg, #4ae8ea 0%, #377dff 100%);
+  --pts-ui-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 16px -8px rgba(15, 23, 42, 0.1);
+  --pts-ui-radius: 8px;
+  --pts-ui-control: 34px;
+}
+
+/* ---------- Page frame ---------- */
+.supsystic-plugin {
+  color: var(--pts-ui-text);
+  font-size: 14px;
+}
+.supsystic-plugin .supsystic-content .supsystic-container {
+  min-height: 520px;
+  min-height: calc(100vh - 240px);
+  padding: 16px 0 16px 20px;
+  background: #fff;
+}
+.supsystic-plugin .supsystic-item {
+  padding: 10px 20px 20px 0;
+  background: transparent;
+}
+.supsystic-plugin .supsystic-panel.supsystic-item {
+  min-height: 0;
+}
+.supsystic-plugin .supsystic-container hr {
+  border: 0;
+  border-top: 1px solid var(--pts-ui-line);
+}
+
+/* Links of the content: the accent, not the old bright cyan (low contrast on white) */
+.supsystic-plugin .supsystic-container a:not(.button):not(:where(#ptsCanvas *)),
+.ui-dialog a:not(.button) {
+  color: var(--pts-ui-accent);
+}
+.supsystic-plugin .supsystic-container a:not(.button):not(:where(#ptsCanvas *)):hover,
+.ui-dialog a:not(.button):hover {
+  color: var(--pts-ui-accent-dark);
+}
+
+/* ---------- Navigation: the dark rail of Data Tables and Photo Gallery ---------- */
+.supsystic-plugin .supsystic-content .supsystic-navigation {
+  z-index: 20;
+  padding: 8px 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px 0 0 12px;
+  background: linear-gradient(180deg, #26384c 0%, #1d2b3c 100%);
+  box-shadow: 0 14px 34px rgba(23, 39, 55, 0.16);
+}
+.supsystic-plugin .supsystic-navigation ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  gap: 6px;
+}
+.supsystic-plugin .supsystic-navigation ul li,
+.supsystic-plugin .supsystic-navigation ul li:hover,
+.supsystic-plugin .supsystic-navigation ul li.active {
+  margin: 0;
+  padding: 0;
+  border-radius: 9px;
+  background: transparent;
+}
+.supsystic-plugin .supsystic-navigation ul li a {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  min-height: 62px;
+  padding: 8px 3px 7px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  color: #c9d5e2;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: none;
+  transition: color 0.16s ease, background-color 0.16s ease, border-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
+}
+.supsystic-plugin .supsystic-navigation ul li a:hover,
+.supsystic-plugin .supsystic-navigation ul li a:focus-visible {
+  border-color: rgba(74, 232, 234, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  outline: 0;
+  transform: translateY(-1px);
+}
+.supsystic-plugin .supsystic-navigation ul li.active a {
+  border-color: rgba(74, 232, 234, 0.3);
+  background: linear-gradient(145deg, rgba(74, 232, 234, 0.22), rgba(55, 125, 255, 0.16));
+  color: #fff;
+  box-shadow: none;
+}
+.supsystic-plugin .supsystic-navigation ul li a i {
+  display: inline-flex !important;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff !important;
+  font-size: 17px !important;
+  line-height: 1 !important;
+  transition: color 0.16s ease, background-color 0.16s ease, transform 0.16s ease;
+}
+.supsystic-plugin .supsystic-navigation ul li a i:before {
+  display: block;
+  line-height: 1;
+}
+.supsystic-plugin .supsystic-navigation ul li a:hover i,
+.supsystic-plugin .supsystic-navigation ul li a:focus-visible i,
+.supsystic-plugin .supsystic-navigation ul li.active a i {
+  background: rgba(74, 232, 234, 0.14);
+  color: #7ff8ef !important;
+}
+.supsystic-plugin .supsystic-navigation ul li a:hover i,
+.supsystic-plugin .supsystic-navigation ul li a:focus-visible i {
+  transform: scale(1.06);
+}
+@media screen and (max-width: 810px) {
+  .supsystic-plugin .supsystic-content .supsystic-container {
+    margin-left: 40px;
+  }
+  .supsystic-plugin .supsystic-content .supsystic-navigation {
+    width: 40px;
+    padding: 6px 4px;
+    border-radius: 9px 0 0 9px;
+    font-size: 0;
+  }
+  .supsystic-plugin .supsystic-navigation ul {
+    gap: 4px;
+  }
+  .supsystic-plugin .supsystic-navigation ul li a {
+    min-height: 42px;
+    padding: 5px 2px;
+    font-size: 0;
+  }
+  .supsystic-plugin .supsystic-navigation ul li a i {
+    width: 28px;
+    height: 28px;
+    font-size: 15px !important;
+  }
+  .supsystic-plugin .supsystic-breadcrumbs,
+  .supsystic-plugin .supsystic-footer-wrapper {
+    margin-left: 40px;
+  }
+}
+
+/* ---------- Header bar and footer ---------- */
+.supsystic-plugin .supsystic-breadcrumbs {
+  min-height: 44px;
+  padding: 11px 16px;
+  font-size: 14px;
+  line-height: 22px;
+}
+.supsystic-plugin .supsystic-breadcrumbs > a {
+  padding: 0;
+  font-weight: 500;
+}
+.supsystic-plugin .supsystic-breadcrumbs .breadcrumbs-separator {
+  margin: 0 8px;
+}
+.supsystic-plugin .supsystic-footer-wrapper {
+  padding: 10px 16px;
+  font-size: 13px;
+}
+.supsystic-plugin .supsystic-footer-wrapper a {
+  color: #7ff8ef;
+}
+
+/* ---------- Buttons ---------- */
+.supsystic-plugin .button:not(.wp-color-result),
+.supsystic-plugin .button-secondary:not(.wp-color-result),
+.supsystic-plugin a.button,
+.ui-dialog .ui-dialog-buttonpane .button,
+.ui-dialog .ui-dialog-buttonpane .ui-button,
+.ui-dialog .button:not(.wp-color-result) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: var(--pts-ui-control);
+  min-height: var(--pts-ui-control);
+  margin: 0;
+  padding: 0 14px;
+  border: 1px solid var(--pts-ui-line) !important;
+  border-radius: var(--pts-ui-radius) !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  color: var(--pts-ui-text) !important;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1 !important;
+  text-decoration: none;
+  text-shadow: none !important;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.supsystic-plugin .button .fa,
+.ui-dialog .button .fa {
+  width: auto;
+  margin: 0;
+  color: inherit !important;
+  font-size: 13px;
+  line-height: 1;
+}
+.supsystic-plugin .button:not(.wp-color-result):hover,
+.supsystic-plugin .button:not(.wp-color-result):focus,
+.ui-dialog .button:not(.wp-color-result):hover,
+.ui-dialog .button:not(.wp-color-result):focus,
+.ui-dialog .ui-dialog-buttonpane .ui-button:hover,
+.ui-dialog .ui-dialog-buttonpane .ui-button:focus {
+  border-color: var(--pts-ui-accent) !important;
+  background: #fff !important;
+  color: var(--pts-ui-accent) !important;
+}
+.supsystic-plugin .button:not(.wp-color-result):focus-visible,
+.ui-dialog .button:not(.wp-color-result):focus-visible {
+  box-shadow: 0 0 0 3px rgba(14, 138, 147, 0.2) !important;
+  outline: none;
+}
+/* Main action: navy */
+.supsystic-plugin .button-primary,
+.supsystic-plugin .button.button-primary,
+.ui-dialog .button-primary {
+  border-color: transparent !important;
+  background: var(--pts-ui-navy) !important;
+  color: #fff !important;
+}
+.supsystic-plugin .button-primary:hover,
+.supsystic-plugin .button-primary:focus,
+.supsystic-plugin .button.button-primary:hover,
+.supsystic-plugin .button.button-primary:focus,
+.ui-dialog .button-primary:hover,
+.ui-dialog .button-primary:focus {
+  border-color: transparent !important;
+  background: var(--pts-ui-navy-hover) !important;
+  color: #fff !important;
+}
+.supsystic-plugin .button.button-hero {
+  height: 44px;
+  min-height: 44px;
+  padding: 0 22px;
+  font-size: 14px;
+}
+.supsystic-plugin .button.button-sup-small {
+  height: 30px;
+  min-height: 30px;
+  padding: 0 11px;
+  font-size: 12px;
+}
+.supsystic-plugin .button[disabled],
+.supsystic-plugin .button:disabled,
+.supsystic-plugin .button.disabled,
+.supsystic-plugin .button-disabled {
+  border-color: var(--pts-ui-line) !important;
+  background: var(--pts-ui-surface) !important;
+  color: #a3adb9 !important;
+  cursor: default;
+}
+
+/* ---------- Fields and selects ---------- */
+.supsystic-plugin input[type='text']:not(:where(#ptsCanvas *)),
+.supsystic-plugin input[type='number']:not(:where(#ptsCanvas *)),
+.supsystic-plugin input[type='search']:not(:where(#ptsCanvas *)),
+.supsystic-plugin input[type='url']:not(:where(#ptsCanvas *)),
+.supsystic-plugin input[type='email']:not(:where(#ptsCanvas *)),
+.supsystic-plugin input[type='password']:not(:where(#ptsCanvas *)),
+.supsystic-plugin select:not(:where(#ptsCanvas *)),
+.supsystic-plugin textarea:not(:where(#ptsCanvas *)),
+.ui-dialog input[type='text'],
+.ui-dialog input[type='number'],
+.ui-dialog select,
+.ui-dialog textarea {
+  min-height: var(--pts-ui-control);
+  border: 1px solid var(--pts-ui-field);
+  border-radius: var(--pts-ui-radius);
+  background-color: #fff;
+  box-shadow: none;
+  color: var(--pts-ui-ink);
+  font-size: 13px;
+}
+.supsystic-plugin input[type='text']:not(:where(#ptsCanvas *)),
+.supsystic-plugin input[type='number']:not(:where(#ptsCanvas *)),
+.supsystic-plugin input[type='search']:not(:where(#ptsCanvas *)),
+.supsystic-plugin input[type='url']:not(:where(#ptsCanvas *)),
+.supsystic-plugin input[type='email']:not(:where(#ptsCanvas *)),
+.supsystic-plugin input[type='password']:not(:where(#ptsCanvas *)),
+.ui-dialog input[type='text'],
+.ui-dialog input[type='number'] {
+  padding: 0 10px;
+}
+.supsystic-plugin textarea:not(:where(#ptsCanvas *)),
+.ui-dialog textarea {
+  padding: 8px 10px;
+}
+.supsystic-plugin select[multiple]:not(:where(#ptsCanvas *)) {
+  padding: 4px;
+}
+.supsystic-plugin input[type='text']:not(:where(#ptsCanvas *)):focus,
+.supsystic-plugin input[type='number']:not(:where(#ptsCanvas *)):focus,
+.supsystic-plugin input[type='search']:not(:where(#ptsCanvas *)):focus,
+.supsystic-plugin select:not(:where(#ptsCanvas *)):focus,
+.supsystic-plugin textarea:not(:where(#ptsCanvas *)):focus,
+.ui-dialog input[type='text']:focus,
+.ui-dialog textarea:focus {
+  border-color: var(--pts-ui-accent);
+  box-shadow: 0 0 0 3px rgba(14, 138, 147, 0.15);
+  outline: none;
+}
+.supsystic-plugin input[readonly]:not(:where(#ptsCanvas *)) {
+  background-color: var(--pts-ui-surface);
+}
+.supsystic-plugin input::placeholder,
+.supsystic-plugin textarea::placeholder {
+  color: #94a3b8;
+}
+/* The shortcode boxes: monospace code on a light field */
+.supsystic-plugin input.ptsCopyTextCode {
+  min-width: 230px;
+  font-family: Menlo, Consolas, monospace;
+  font-size: 12px !important;
+  color: var(--pts-ui-ink) !important;
+  background: #fff !important;
+}
+
+/* Chosen selects: one frame like the other fields */
+.supsystic-plugin .chosen-container-single .chosen-single,
+.ui-dialog .chosen-container-single .chosen-single {
+  display: flex;
+  align-items: center;
+  height: var(--pts-ui-control);
+  padding: 0 28px 0 10px;
+  border: 1px solid var(--pts-ui-field);
+  border-radius: var(--pts-ui-radius);
+  background: #fff;
+  box-shadow: none;
+  color: var(--pts-ui-ink);
+  font-size: 13px;
+  line-height: var(--pts-ui-control);
+}
+.supsystic-plugin .chosen-container-single .chosen-single span {
+  margin-right: 0;
+  color: var(--pts-ui-ink) !important;
+}
+.supsystic-plugin .chosen-container-single .chosen-single div {
+  top: 50%;
+  right: 6px;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+}
+.supsystic-plugin .chosen-container-single .chosen-single div b {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4' fill='none' stroke='%2364748b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px no-repeat !important;
+}
+.supsystic-plugin .chosen-container-active .chosen-single,
+.supsystic-plugin .chosen-container-active.chosen-with-drop .chosen-single {
+  border-color: var(--pts-ui-accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(14, 138, 147, 0.15);
+}
+.supsystic-plugin .chosen-container .chosen-drop {
+  margin-top: 4px;
+  overflow: hidden;
+  border: 1px solid var(--pts-ui-line);
+  border-radius: var(--pts-ui-radius);
+  box-shadow: 0 12px 28px -12px rgba(15, 23, 42, 0.3);
+}
+.supsystic-plugin .chosen-container .chosen-results li {
+  padding: 7px 10px;
+  color: var(--pts-ui-text);
+  font-size: 13px;
+}
+.supsystic-plugin .chosen-container .chosen-results li.highlighted {
+  background: var(--pts-ui-accent-soft);
+  color: var(--pts-ui-accent-dark);
+}
+.supsystic-plugin .chosen-container-multi .chosen-choices {
+  min-height: var(--pts-ui-control);
+  padding: 3px 6px;
+  border: 1px solid var(--pts-ui-field);
+  border-radius: var(--pts-ui-radius);
+  background: #fff;
+  box-shadow: none;
+}
+.supsystic-plugin .chosen-container-multi .chosen-choices li.search-choice {
+  margin: 3px 4px 3px 0;
+  padding: 4px 22px 4px 10px;
+  border: 1px solid #bfe3e6;
+  border-radius: 999px;
+  background: var(--pts-ui-accent-soft);
+  box-shadow: none;
+  color: var(--pts-ui-accent-dark);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Help icons: a small grey circle */
+.supsystic-plugin .fa-question.supsystic-tooltip,
+.supsystic-plugin .fa-question.supsystic-tooltip-bottom,
+.supsystic-plugin .fa-question.supsystic-tooltip-left,
+.supsystic-plugin .fa-question.supsystic-tooltip-right {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  margin-top: 0;
+  padding: 0;
+  border: 1px solid var(--pts-ui-field);
+  border-radius: 50%;
+  color: var(--pts-ui-muted);
+  font-size: 10px;
+  line-height: 1;
+  vertical-align: middle;
+  cursor: help;
+}
+.supsystic-plugin .fa-question.supsystic-tooltip:hover {
+  border-color: var(--pts-ui-accent);
+  color: var(--pts-ui-accent);
+}
+
+/* ---------- Checkboxes and radios outside the table preview: one modern look ---------- */
+.supsystic-plugin #ptsSettingsForm input[type='checkbox'],
+.supsystic-plugin .ptsUpdateConfigPanel input[type='checkbox'],
+.supsystic-plugin .ui-jqgrid input[type='checkbox'],
+.supsystic-plugin .ptsTableSettingsShell input[type='radio'] {
+  position: relative;
+  flex: none;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 6px 0 0;
+  border: 1.5px solid #94a3b8;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: none;
+  vertical-align: -4px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.supsystic-plugin .ptsTableSettingsShell input[type='radio'] {
+  border-radius: 50%;
+}
+.supsystic-plugin #ptsSettingsForm input[type='checkbox']:before,
+.supsystic-plugin .ptsUpdateConfigPanel input[type='checkbox']:before,
+.supsystic-plugin .ui-jqgrid input[type='checkbox']:before,
+.supsystic-plugin .ptsTableSettingsShell input[type='radio']:before {
+  content: none;
+  display: none;
+}
+.supsystic-plugin #ptsSettingsForm input[type='checkbox']:hover,
+.supsystic-plugin .ptsUpdateConfigPanel input[type='checkbox']:hover,
+.supsystic-plugin .ui-jqgrid input[type='checkbox']:hover,
+.supsystic-plugin .ptsTableSettingsShell input[type='radio']:hover {
+  border-color: var(--pts-ui-accent);
+}
+.supsystic-plugin .ptsUpdateConfigPanel input[type='checkbox']:checked,
+.supsystic-plugin .ui-jqgrid input[type='checkbox']:checked {
+  border-color: var(--pts-ui-accent);
+  background: var(--pts-ui-accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+.supsystic-plugin .ui-jqgrid input[type='checkbox']:indeterminate {
+  border-color: var(--pts-ui-accent);
+  background: var(--pts-ui-accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8h8' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+.supsystic-plugin .ptsTableSettingsShell input[type='radio']:checked {
+  border-color: var(--pts-ui-accent);
+  background: radial-gradient(circle, var(--pts-ui-accent) 0 4px, #fff 4.5px);
+}
+.supsystic-plugin #ptsSettingsForm input[type='checkbox']:focus-visible,
+.supsystic-plugin .ui-jqgrid input[type='checkbox']:focus-visible,
+.supsystic-plugin .ptsTableSettingsShell input[type='radio']:focus-visible {
+  box-shadow: 0 0 0 3px rgba(14, 138, 147, 0.2);
+  outline: none;
+}
+
+/* Switches instead of checkboxes on the settings page (the editor has its own in admin.tables.ui.css) */
+.supsystic-plugin #ptsSettingsForm input[type='checkbox'] {
+  width: 36px !important;
+  height: 20px !important;
+  margin: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #cbd5e1;
+  vertical-align: middle;
+  transition: background-color 0.18s;
+}
+.supsystic-plugin #ptsSettingsForm input[type='checkbox']:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.3);
+  transition: transform 0.18s cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+.supsystic-plugin #ptsSettingsForm input[type='checkbox']:hover {
+  background-color: #b4c0d0;
+}
+.supsystic-plugin #ptsSettingsForm input[type='checkbox']:checked {
+  background: var(--pts-ui-brand);
+}
+.supsystic-plugin #ptsSettingsForm input[type='checkbox']:checked:after {
+  transform: translateX(16px);
+}
+
+/* ---------- Toolbars ---------- */
+.supsystic-plugin ul.supsystic-bar-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+.supsystic-plugin ul.supsystic-bar-controls > li {
+  float: none;
+  margin: 0;
+}
+
+/* ---------- Lists (jqGrid): a card with a light head, compact rows and the pager under it ---------- */
+.supsystic-plugin .ui-jqgrid {
+  overflow: hidden;
+  border: 1px solid var(--pts-ui-line) !important;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--pts-ui-shadow);
+  font-family: inherit;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-titlebar {
+  display: none;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-hdiv,
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-htable th {
+  border: 0 !important;
+  background: var(--pts-ui-surface) !important;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-htable th {
+  height: 40px;
+  padding: 0 10px !important;
+  border-bottom: 1px solid var(--pts-ui-line) !important;
+  color: var(--pts-ui-muted) !important;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-htable th div {
+  height: auto;
+  overflow: visible;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-btable td {
+  height: 46px;
+  padding: 6px 10px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--pts-ui-line-soft) !important;
+  color: var(--pts-ui-text);
+  font-size: 13px;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-btable tr.jqgrow:hover td,
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-btable tr.ui-state-hover td {
+  background: var(--pts-ui-surface) !important;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-btable tr.ui-state-highlight td {
+  background: var(--pts-ui-accent-soft) !important;
+}
+.supsystic-plugin .ui-jqgrid tr.ui-state-highlight,
+.supsystic-plugin .ui-jqgrid tr.ui-state-hover {
+  border: 0 !important;
+  background: none !important;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-btable td a:not(.button) {
+  color: var(--pts-ui-ink) !important;
+  font-weight: 600;
+  text-decoration: none;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-btable td a:not(.button):hover {
+  color: var(--pts-ui-accent) !important;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-btable td a .fa-pencil {
+  color: var(--pts-ui-muted);
+  font-size: 12px;
+}
+.supsystic-plugin .supsystic-tbl-pagination-shell {
+  margin-bottom: 12px;
+}
+.supsystic-plugin .ui-jqgrid-pager,
+.supsystic-plugin .supsystic-tbl-pagination-shell .ui-pager-control {
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--pts-ui-muted);
+  font-size: 13px;
+}
+.supsystic-plugin .ui-pg-table .ui-pg-input,
+.supsystic-plugin .ui-pg-table .ui-pg-selbox {
+  min-height: 28px !important;
+  height: 28px;
+  border-radius: 6px !important;
+}
+
+/* The toolbar of the tables list sits in the pager: actions and search on the left, pages on the right */
+.supsystic-plugin #ptsPagesTblNav .ui-pg-table.navtable,
+.supsystic-plugin #ptsPagesTblNav_left {
+  display: none;
+}
+.supsystic-plugin #ptsPagesTblNav .ui-pager-control > table > tbody > tr {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.supsystic-plugin #ptsPagesTblNav_center {
+  display: flex !important;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: auto !important;
+  padding-top: 0 !important;
+}
+.supsystic-plugin #ptsPagesTblNav_right {
+  width: auto !important;
+  white-space: nowrap;
+}
+.supsystic-plugin #ptsPagesTblNav_right .ui-paging-info {
+  margin-right: 8px;
+}
+.supsystic-plugin #ptsPagesTblSearchTxt {
+  width: 220px;
+  padding-left: 32px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='7' cy='7' r='4.6' fill='none' stroke='%2364748b' stroke-width='1.6'/%3E%3Cpath d='M10.5 10.5l3.2 3.2' stroke='%2364748b' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") 10px center / 15px no-repeat;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-btable td[aria-describedby$='_label'],
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-htable th[id$='_label'] {
+  text-align: left !important;
+}
+.supsystic-plugin .pts-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.supsystic-plugin .pts-code code {
+  padding: 4px 8px;
+  border: 1px solid var(--pts-ui-line);
+  border-radius: 6px;
+  background: var(--pts-ui-surface);
+  color: var(--pts-ui-ink);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.supsystic-plugin #ptsPagesTblEmptyMsg {
+  padding: 36px;
+  border: 1px dashed var(--pts-ui-line);
+  border-radius: 14px;
+  text-align: center;
+}
+.supsystic-plugin #ptsPagesTblEmptyMsg h3 {
+  margin: 0;
+  color: var(--pts-ui-text);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Row actions of the lists: plain outline icon buttons; delete turns red on hover */
+.supsystic-plugin .pts-row-actions {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
+.supsystic-plugin .pts-row-actions .button {
+  width: 32px;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  color: var(--pts-ui-muted) !important;
+}
+.supsystic-plugin .pts-row-actions .button.pts-act-danger:hover,
+.supsystic-plugin .pts-row-actions .button.pts-act-danger:focus {
+  border-color: #dc2626 !important;
+  color: #dc2626 !important;
+}
+.supsystic-plugin .pts-row-actions .button.is-done {
+  border-color: var(--pts-ui-accent) !important;
+  color: var(--pts-ui-accent) !important;
+}
+
+/* ---------- Old jQuery UI dialogs: rounded frame, white title, button bar; the action button dark, Cancel plain ---------- */
+body.wp-admin .ui-dialog.ui-widget {
+  padding: 0;
+  border: 1px solid var(--pts-ui-line) !important;
+  border-radius: 12px !important;
+  background: #fff;
+  box-shadow: 0 24px 48px -16px rgba(15, 23, 42, 0.35) !important;
+  font-family: inherit;
+}
+body.wp-admin .ui-dialog .ui-dialog-titlebar.ui-widget-header {
+  padding: 12px 16px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--pts-ui-line) !important;
+  border-radius: 12px 12px 0 0 !important;
+  background: #fff !important;
+  color: var(--pts-ui-ink) !important;
+  font-size: 15px;
+  font-weight: 700;
+}
+body.wp-admin .ui-dialog .ui-dialog-content {
+  padding: 16px !important;
+  color: var(--pts-ui-text);
+  font-size: 14px;
+}
+body.wp-admin .ui-dialog .ui-dialog-buttonpane {
+  margin: 0 !important;
+  padding: 10px 16px !important;
+  border-top: 1px solid var(--pts-ui-line) !important;
+  border-radius: 0 0 12px 12px;
+  background: var(--pts-ui-surface) !important;
+}
+body.wp-admin .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  float: none;
+}
+body.wp-admin .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .ui-button,
+body.wp-admin .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .button {
+  margin: 0 !important;
+}
+/* jQuery UI buttons of the dialogs: the action is navy (marked by admin.js), the closing ones are plain */
+body.wp-admin .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .ui-button.pts-dlg-main {
+  border-color: transparent !important;
+  background: var(--pts-ui-navy) !important;
+  color: #fff !important;
+}
+body.wp-admin .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .ui-button.pts-dlg-main:hover,
+body.wp-admin .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .ui-button.pts-dlg-main:focus {
+  background: var(--pts-ui-navy-hover) !important;
+  color: #fff !important;
+}
+body.wp-admin .ui-widget-overlay {
+  background: rgba(15, 23, 42, 0.45) !important;
+  opacity: 1 !important;
+}
+
+/* ---------- Template gallery (Add New Table): cards with the preview, the name under it ---------- */
+.supsystic-plugin .table-list.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+.supsystic-plugin .table-list .table-list-item {
+  float: none;
+  width: auto !important;
+  max-width: none;
+  margin: 0 !important;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--pts-ui-line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--pts-ui-shadow);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.supsystic-plugin .table-list .table-list-item:hover {
+  border-color: #9fd7db;
+  box-shadow: 0 14px 30px -18px rgba(15, 23, 42, 0.45);
+  transform: translateY(-2px);
+}
+.supsystic-plugin .table-list .table-list-item.active,
+.supsystic-plugin .table-list .table-list-item:active {
+  outline: 0;
+  border-color: var(--pts-ui-accent);
+  box-shadow: 0 0 0 3px rgba(14, 138, 147, 0.2);
+}
+/* The whole preview fits the card (contain, never cut at the sides); one height for every card, the free space above
+   and under a wide preview takes the neutral background of the card */
+/* The old supsystic-ui.css fixes .preset at 222/190/140px by width: the name under the preview was cut on phones */
+.supsystic-plugin .table-list .table-list-item.preset {
+  height: auto;
+}
+.supsystic-plugin .table-list .table-list-item img {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 190px;
+  padding: 10px;
+  border-bottom: 1px solid var(--pts-ui-line-soft);
+  background: var(--pts-ui-surface);
+  object-fit: contain;
+  object-position: center;
+}
+.supsystic-plugin .preset .preset-overlay {
+  position: static;
+  height: auto;
+  padding: 10px 14px;
+  background: #fff;
+  opacity: 1;
+}
+.supsystic-plugin .preset .preset-overlay h3 {
+  margin: 0;
+  color: var(--pts-ui-ink);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+}
+.supsystic-plugin .preset:hover img {
+  opacity: 1;
+}
+.supsystic-plugin .table-list .table-list-item .preset-select-btn {
+  top: 95px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.supsystic-plugin .table-list .table-list-item:hover .preset-select-btn,
+.supsystic-plugin .table-list .table-list-item.active .preset-select-btn,
+.supsystic-plugin .table-list .table-list-item .preset-select-btn:focus {
+  opacity: 1;
+}
+.supsystic-plugin .table-list .table-list-item.active .preset-select-btn {
+  border-color: transparent !important;
+  background: var(--pts-ui-accent) !important;
+  color: #fff !important;
+}
+
+/* ---------- General settings: a page head with Save, the options in cards (the look of Data Tables Settings) ---------- */
+.supsystic-plugin .pts-set-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 4px 20px 18px 0;
+}
+.supsystic-plugin .pts-set-head-icon,
+.supsystic-plugin .pts-set-card-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(74, 232, 234, 0.22), rgba(55, 125, 255, 0.16));
+  color: #1f5fd6;
+  font-size: 19px;
+}
+.supsystic-plugin .pts-set-head-text h2 {
+  margin: 0;
+  padding: 0;
+  color: var(--pts-ui-ink);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.supsystic-plugin .pts-set-head-text p {
+  margin: 2px 0 0;
+  color: var(--pts-ui-muted);
+  font-size: 13px;
+}
+.supsystic-plugin .pts-set-head .pts-set-actions {
+  margin-left: auto;
+}
+.supsystic-plugin .pts-set-head .pts-set-actions .button {
+  height: 40px;
+  min-height: 40px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+.supsystic-plugin .pts-set-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  align-items: start;
+  gap: 16px;
+  margin-right: 20px;
+}
+.supsystic-plugin .pts-set-card {
+  padding: 0 18px 8px;
+  border: 1px solid var(--pts-ui-line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--pts-ui-shadow);
+}
+.supsystic-plugin .pts-set-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 -18px 4px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--pts-ui-line-soft);
+}
+.supsystic-plugin .pts-set-card-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.supsystic-plugin .pts-set-card-head h3 {
+  margin: 0;
+  padding: 0;
+  color: var(--pts-ui-ink);
+  font-size: 14px;
+  font-weight: 700;
+}
+.supsystic-plugin .pts-set-card-head p {
+  margin: 2px 0 0;
+  color: var(--pts-ui-muted);
+  font-size: 12px;
+  white-space: normal;
+}
+.supsystic-plugin .pts-set-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 14px;
+  padding: 12px 0;
+}
+.supsystic-plugin .pts-set-row + .pts-set-row {
+  border-top: 1px solid var(--pts-ui-line-soft);
+}
+.supsystic-plugin .pts-set-row.is-wide .pts-set-control {
+  flex-basis: 100%;
+}
+.supsystic-plugin .pts-set-row.is-wide .pts-set-control select[multiple] {
+  width: 100%;
+  min-height: 110px;
+}
+.supsystic-plugin .pts-set-label {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.supsystic-plugin .pts-set-name {
+  color: var(--pts-ui-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+.supsystic-plugin .pts-set-changed {
+  flex-basis: 100%;
+  font-size: 11.5px;
+}
+/* The details of an option (shown by admin.options.js when it is on) take their own line */
+.supsystic-plugin .pts-set-row .ptsOptDetailsShell {
+  flex-basis: 100%;
+}
+.supsystic-plugin .pts-set-row .chosen-container-multi {
+  width: 100% !important;
+}
+.supsystic-plugin .pts-set-row.is-locked .pts-set-control {
+  opacity: 0.55;
+  pointer-events: none;
+}
+.supsystic-plugin .pts-set-card .pts-pro-note {
+  margin: 12px 0 4px;
+}
+@media (max-width: 782px) {
+  .supsystic-plugin .pts-set-head {
+    flex-wrap: wrap;
+  }
+  .supsystic-plugin .pts-set-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* PRO templates of the free version: a PRO badge on the card, a click opens the window of the templates */
+.supsystic-plugin .preset .preset-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.supsystic-plugin .preset .preset-overlay h3 br {
+  display: none;
+}
+.supsystic-plugin .pts-tpl-pro {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #4ae8ea 0%, #377dff 100%);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+.supsystic-plugin .table-list .table-list-item.sup-promo img {
+  filter: saturate(0.85);
+}
+/* The name of the new table and Save: a bar above the templates */
+.supsystic-plugin #ptsCreateTableForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.supsystic-plugin #ptsCreateTableForm label {
+  display: flex;
+  flex: 1 1 360px;
+  align-items: center;
+  gap: 10px;
+}
+.supsystic-plugin #ptsCreateTableForm label h3 {
+  float: none !important;
+  margin: 0 !important;
+  color: var(--pts-ui-ink);
+  font-size: 14px;
+  white-space: nowrap;
+}
+.supsystic-plugin #ptsCreateTableForm input[name='label'] {
+  float: none !important;
+  width: 100% !important;
+  height: 40px;
+}
+.supsystic-plugin #ptsCreateTableForm .button {
+  height: 40px;
+  min-height: 40px;
+  margin: 0 !important;
+}
+.supsystic-plugin .supsystic-bar.sticky-padd-next {
+  padding: 14px 16px;
+  border: 1px solid var(--pts-ui-line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--pts-ui-shadow);
+}
+.supsystic-plugin .supsystic-sticky-active.supsystic-bar {
+  top: 32px;
+}
+
+/* ---------- Import / Export: pills for the two pages, notes as info boxes, the action button navy ---------- */
+.supsystic-plugin .supsystic-panel.import-export-panel .supsystic-imex-tab-header {
+  display: inline-flex;
+  gap: 4px;
+  margin: 0 0 16px;
+  padding: 6px;
+  border: 1px solid var(--pts-ui-line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--pts-ui-shadow);
+}
+.supsystic-plugin .supsystic-panel.import-export-panel .supsystic-imex-tab-header .supsystic-imex-tab-header-item,
+.supsystic-plugin .supsystic-panel.import-export-panel .supsystic-imex-tab-header .supsystic-imex-tab-header-item:not(.active):hover {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 16px;
+  border: 0 !important;
+  border-radius: 10px;
+  background: none;
+  color: var(--pts-ui-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+.supsystic-plugin .supsystic-panel.import-export-panel .supsystic-imex-tab-header .supsystic-imex-tab-header-item:not(.active):hover {
+  background: var(--pts-ui-line-soft);
+}
+.supsystic-plugin .supsystic-panel.import-export-panel .supsystic-imex-tab-header .supsystic-imex-tab-header-item.active,
+.supsystic-plugin .supsystic-panel.import-export-panel .supsystic-imex-tab-header .supsystic-imex-tab-header-item.active:hover {
+  background: var(--pts-ui-navy);
+  color: #fff;
+}
+.supsystic-plugin .supsystic-panel.import-export-panel .supsystic-imex-tab-header .supsystic-imex-tab-header-item:after {
+  display: none;
+}
+.supsystic-plugin .supsystic-panel.import-export-panel .imex-description {
+  padding: 12px 14px 12px 16px;
+  border: 1px solid #cfe9eb;
+  border-radius: 10px;
+  background: var(--pts-ui-accent-soft);
+  color: #155e63;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.supsystic-plugin .supsystic-panel.import-export-panel .imex-description:after {
+  display: none;
+}
+.supsystic-plugin .supsystic-panel.import-export-panel .bottom-nav {
+  margin-top: 12px !important;
+}
+.supsystic-plugin #imex-export,
+.supsystic-plugin #imex-import {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--pts-ui-radius);
+  background: var(--pts-ui-navy);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.supsystic-plugin #imex-export:hover,
+.supsystic-plugin #imex-import:hover {
+  background: var(--pts-ui-navy-hover);
+}
+.supsystic-plugin #imex-export-json,
+.supsystic-plugin #imex-import-json {
+  font-family: Menlo, Consolas, monospace;
+  font-size: 12px;
+}
+.supsystic-plugin .ptsUpdateConfigPanel {
+  margin: 0 0 12px;
+}
+.supsystic-plugin .ptsUpdateConfigPanel label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.supsystic-plugin .ptsUpdateConfigPanel input[type='checkbox']:checked {
+  border-color: var(--pts-ui-accent);
+}
+
+/* ---------- The way to Data Tables: the button and the coupon of Data Tables Pro ---------- */
+.supsystic-plugin a.pts-dt-btn,
+.pts-up a.pts-dt-btn,
+a.pts-dt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background: #4ae8ea;
+  box-shadow: 0 12px 26px -12px rgba(74, 232, 234, 0.7);
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 2px rgba(19, 32, 46, 0.35);
+  transition: background-color 0.15s;
+}
+.supsystic-plugin a.pts-dt-btn:hover,
+.supsystic-plugin a.pts-dt-btn:focus,
+a.pts-dt-btn:hover,
+a.pts-dt-btn:focus {
+  background: #7ff8ef;
+  color: #fff !important;
+}
+a.pts-dt-btn .fa {
+  color: inherit !important;
+}
+a.pts-dt-btn.is-light {
+  background: var(--pts-ui-navy, #26384c);
+  box-shadow: none;
+  text-shadow: none;
+}
+a.pts-dt-btn.is-light:hover,
+a.pts-dt-btn.is-light:focus {
+  background: #17222e;
+}
+.pts-coupon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  padding: 12px 14px;
+  border: 1px dashed rgba(14, 138, 147, 0.45);
+  border-radius: 12px;
+  background: #f0fbfb;
+  color: #155e63;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.pts-coupon-badge {
+  flex: none;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
+.pts-coupon-text {
+  flex: 1 1 220px;
+  min-width: 0;
+  font-weight: 600;
+}
+.pts-coupon-code {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid #9fd7db;
+  border-radius: 8px;
+  background: #fff;
+}
+.pts-coupon-code code {
+  padding: 6px 10px;
+  background: none;
+  color: #13202e;
+  font-family: Menlo, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.pts-coupon-code button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 100%;
+  min-height: 32px;
+  margin: 0;
+  padding: 0 10px;
+  border: 0;
+  border-left: 1px solid #9fd7db;
+  background: #e6f6f7;
+  color: #0b6e75;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.pts-coupon-code button:hover,
+.pts-coupon-code button:focus-visible,
+.pts-coupon-code button.is-copied {
+  background: #0e8a93;
+  color: #fff;
+  outline: none;
+}
+.supsystic-plugin a.pts-coupon-buy,
+.pts-up a.pts-coupon-buy,
+a.pts-coupon-buy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #0b6e75 !important;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+a.pts-coupon-buy:hover,
+a.pts-coupon-buy:focus {
+  color: #13202e !important;
+}
+a.pts-coupon-buy .fa {
+  color: inherit !important;
+  font-size: 11px;
+}
+
+/* ---------- Polish: checkbox column of the lists, the pager and small screens ---------- */
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-htable th[id$='_cb'],
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-btable td[aria-describedby$='_cb'] {
+  padding: 0 !important;
+  text-align: center;
+}
+.supsystic-plugin .ui-jqgrid input[type='checkbox'] {
+  margin: 0 !important;
+  vertical-align: middle;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-hdiv {
+  overflow: hidden;
+}
+@media screen and (max-width: 782px) {
+  .supsystic-plugin .supsystic-content .supsystic-container {
+    padding: 14px 12px 14px 12px;
+  }
+  .supsystic-plugin .supsystic-item {
+    padding-right: 0;
+  }
+  .supsystic-plugin .pts-set-head,
+  .supsystic-plugin .pts-set-cards {
+    margin-right: 0;
+  }
+  .supsystic-plugin .pts-set-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .supsystic-plugin .pts-set-head {
+    flex-wrap: wrap;
+  }
+  .supsystic-plugin .pts-set-head .pts-set-actions {
+    margin-left: auto;
+  }
+  .supsystic-plugin #ptsPagesTblNav .ui-pager-control > table > tbody > tr,
+  .supsystic-plugin #ptsPagesTblNav_center {
+    flex-wrap: wrap;
+  }
+  .supsystic-plugin #ptsPagesTblNav_center > .ui-pg-table {
+    margin: 0 !important;
+  }
+  .supsystic-plugin #ptsPagesTblNav_right .ui-paging-info {
+    display: none;
+  }
+  .supsystic-plugin #ptsPagesTblSearchTxt {
+    width: 100%;
+    max-width: 260px;
+  }
+}
+.supsystic-plugin .pts-set-control {
+  min-width: 0;
+  max-width: 100%;
+}
+.supsystic-plugin .pts-set-row .chosen-container-multi {
+  max-width: 100%;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-btable td[aria-describedby$='_label'] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* The old rule gives chosen multi-selects min-width: 300px, wider than a card on a phone */
+.supsystic-plugin .pts-set-row .chosen-container.chosen-container-multi {
+  min-width: 0;
+}
+/* The Overview tab gives the container the class supsystic-overview, which the old acPromoStyle.css floats: the
+   container then shrank to the content and the footer jumped up beside it on wide screens */
+.supsystic-plugin .supsystic-content .supsystic-container.supsystic-overview {
+  float: none;
+  padding: 16px 0 16px 20px;
+  background: #fff;
+}
+@media screen and (max-width: 782px) {
+  .supsystic-plugin .supsystic-content .supsystic-container.supsystic-overview {
+    padding: 14px 12px;
+  }
+}
+
+/* ---------- One 1px frame, no thick stripes on the left (as in Data Tables and Photo Gallery) ---------- */
+.supsystic-plugin .supsystic-panel.import-export-panel .supsystic-imex-import-page .message {
+  padding: 10px 14px;
+  border: 1px solid;
+  border-radius: 10px;
+  font-size: 13px;
+}
+.supsystic-plugin .supsystic-panel.import-export-panel .supsystic-imex-import-page .message.error {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+.supsystic-plugin .supsystic-panel.import-export-panel .supsystic-imex-import-page .message.success {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+/* ---------- Checkbox column of the lists: the same 44px column in the head and the rows, the box in the middle ---- */
+.supsystic-plugin .ui-jqgrid th[id$='_cb'],
+.supsystic-plugin .ui-jqgrid #ptsPagesTbl_cb {
+  width: 44px !important;
+}
+.supsystic-plugin .ui-jqgrid th[id$='_cb'] > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  padding: 0 !important;
+}
+.supsystic-plugin .ui-jqgrid .ui-jqgrid-btable td[aria-describedby$='_cb'] {
+  text-align: center !important;
+  vertical-align: middle;
+}
+.supsystic-plugin .ui-jqgrid th[id$='_cb'] input[type='checkbox'],
+.supsystic-plugin .ui-jqgrid td[aria-describedby$='_cb'] input[type='checkbox'] {
+  display: inline-block !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  vertical-align: middle;
+}
+
+/* ---------- One frame for every tab, measured on Data Tables Settings: 40px from the menu rail, 20px under the
+   breadcrumbs, 30px on the right (10px from 782px down), 34px above the footer; a white page under white cards with
+   a 1px frame and a soft shadow ---------- */
+.supsystic-plugin .supsystic-content .supsystic-container,
+.supsystic-plugin .supsystic-content .supsystic-container.supsystic-overview {
+  padding: 20px 30px 34px 40px;
+  background: #fff;
+}
+.supsystic-plugin .supsystic-content .supsystic-container > .clear {
+  display: none;
+}
+.supsystic-plugin .supsystic-container .supsystic-item,
+.supsystic-plugin .supsystic-container .supsystic-item.supsystic-panel {
+  margin: 0;
+  padding: 0;
+}
+.supsystic-plugin .pts-set-head {
+  margin: 0 0 18px;
+}
+.supsystic-plugin .pts-set-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-right: 0;
+}
+@media screen and (max-width: 1100px) {
+  .supsystic-plugin .pts-set-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* Add New: the old inline width 90% and margin 40px auto of the template gallery; the title as a page head */
+.supsystic-plugin .supsystic-container.supsystic-tables_add_new #containerWrapper {
+  width: auto !important;
+  margin: 0 !important;
+}
+.supsystic-plugin .supsystic-container.supsystic-tables_add_new .supsystic-item > h3 {
+  margin: 0 0 18px;
+  padding: 0;
+  color: var(--pts-ui-ink);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.3 !important;
+}
+.supsystic-plugin .supsystic-container.supsystic-tables_add_new .supsystic-item > hr {
+  display: none;
+}
+.supsystic-plugin .supsystic-container.supsystic-tables_add_new .table-list.row {
+  margin-top: 18px;
+}
+/* The old clear div is one more grid cell: an empty row and 18px of gap above the footer */
+.supsystic-plugin .table-list.row > div[style*='clear'] {
+  display: none;
+}
+@media screen and (max-width: 782px) {
+  .supsystic-plugin .supsystic-content .supsystic-container,
+  .supsystic-plugin .supsystic-content .supsystic-container.supsystic-overview {
+    padding: 20px 10px 34px 40px;
+  }
+  /* The page head as in Data Tables: the icon beside the title, the Save button on its own line */
+  .supsystic-plugin .pts-set-head {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 14px 12px;
+  }
+  .supsystic-plugin .pts-set-head .pts-set-actions {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+}
+@media screen and (max-width: 600px) {
+  .supsystic-plugin .supsystic-footer-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+.supsystic-plugin .supsystic-tbl-pagination-shell {
+  margin-top: 0 !important;
+}
+.supsystic-plugin #ptsPagesTblNav .ui-pager-control > table > tbody > tr {
+  align-items: flex-start;
+}
+
+/* ---------- The banner about Data Tables (top of every plugin page, Free and PRO). The look of the Contact Form to CES
+   banner: a dark card with the moving mark, one button by the state of Data Tables and the code on Data Tables Pro.
+   It cannot be closed, only folded into a one-line strip. ---------- */
+.supsystic-plugin .pts-dt-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 0 0 16px;
+  padding: 20px 56px 20px 22px;
+  overflow: hidden;
+  border: 1px solid rgba(74, 232, 234, 0.28);
+  border-radius: 14px;
+  background: radial-gradient(70% 140% at 100% 0%, rgba(74, 232, 234, 0.2) 0, rgba(74, 232, 234, 0) 60%), radial-gradient(60% 120% at 0% 100%, rgba(55, 125, 255, 0.24) 0, rgba(55, 125, 255, 0) 60%), linear-gradient(160deg, #26384c 0%, #1d2b3c 100%);
+  box-shadow: 0 14px 34px -22px rgba(15, 23, 42, 0.8);
+  color: #c9d5e2;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.supsystic-plugin .pts-dt-banner *,
+.supsystic-plugin .pts-dt-banner *::before,
+.supsystic-plugin .pts-dt-banner *::after {
+  box-sizing: border-box;
+}
+.supsystic-plugin .pts-dt-banner-art {
+  position: relative;
+  flex: none;
+  width: 96px;
+  height: 96px;
+}
+.supsystic-plugin .pts-dt-banner-core {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4ae8ea 0%, #0e8a93 100%);
+  box-shadow: 0 8px 18px -8px rgba(74, 232, 234, 0.9);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.supsystic-plugin .pts-dt-banner-node {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #7ff8ef;
+  font-size: 12px;
+  animation: ptsDtNode 4s ease-in-out infinite;
+}
+.supsystic-plugin .pts-dt-banner-node .fa {
+  color: inherit !important;
+}
+.supsystic-plugin .pts-dt-banner-node.is-price { top: 0; left: 0; }
+.supsystic-plugin .pts-dt-banner-node.is-table { top: 0; right: 0; animation-delay: 1s; }
+.supsystic-plugin .pts-dt-banner-node.is-chart { right: 0; bottom: 0; animation-delay: 2s; }
+.supsystic-plugin .pts-dt-banner-node.is-shop { bottom: 0; left: 0; animation-delay: 3s; }
+@keyframes ptsDtNode {
+  0%, 70%, 100% { border-color: rgba(255, 255, 255, 0.16); background: rgba(255, 255, 255, 0.08); }
+  15%, 40% { border-color: rgba(127, 248, 239, 0.6); background: rgba(74, 232, 234, 0.2); }
+}
+.supsystic-plugin .pts-dt-banner-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.supsystic-plugin .pts-dt-banner .pts-dt-banner-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+  padding: 2px 10px;
+  border: 1px solid rgba(74, 232, 234, 0.35);
+  border-radius: 999px;
+  background: rgba(74, 232, 234, 0.12);
+  color: #7ff8ef;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+.supsystic-plugin .pts-dt-banner .pts-dt-banner-eyebrow .fa {
+  color: inherit !important;
+}
+.supsystic-plugin .pts-dt-banner .pts-dt-banner-title {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.supsystic-plugin .pts-dt-banner .pts-dt-banner-text {
+  max-width: 760px;
+  margin: 4px 0 0;
+  color: #c9d5e2;
+  font-size: 13.5px;
+  line-height: 1.55;
+  white-space: normal;
+}
+.supsystic-plugin .pts-dt-banner-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  color: #e2e9f1;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.supsystic-plugin .pts-dt-banner-bar {
+  display: block;
+  width: 160px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+}
+.supsystic-plugin .pts-dt-banner-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: #4ae8ea;
+}
+.supsystic-plugin .pts-dt-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 14px;
+}
+.supsystic-plugin .pts-dt-banner a.pts-dt-btn.is-banner {
+  height: auto;
+  min-height: 38px;
+  padding: 8px 18px;
+  line-height: 1.3;
+  border-radius: 10px;
+  background: #4ae8ea;
+  box-shadow: 0 12px 26px -12px rgba(74, 232, 234, 0.7);
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(19, 32, 46, 0.35);
+}
+.supsystic-plugin .pts-dt-banner a.pts-dt-btn.is-banner:hover,
+.supsystic-plugin .pts-dt-banner a.pts-dt-btn.is-banner:focus {
+  background: #2fd3d6;
+  color: #fff !important;
+}
+.supsystic-plugin .pts-dt-banner a.pts-dt-banner-link {
+  color: #7ff8ef !important;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.supsystic-plugin .pts-dt-banner a.pts-dt-banner-link:hover {
+  color: #fff !important;
+  text-decoration: underline;
+}
+.supsystic-plugin .pts-dt-banner .pts-dt-banner-fold {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #c9d5e2;
+  font-size: 16px;
+  cursor: pointer;
+}
+.supsystic-plugin .pts-dt-banner .pts-dt-banner-fold .fa {
+  color: inherit !important;
+}
+.supsystic-plugin .pts-dt-banner .pts-dt-banner-fold:hover,
+.supsystic-plugin .pts-dt-banner .pts-dt-banner-fold:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+/* The code on the dark banner: amber dashed frame, as the CF30 offer of Contact Form */
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner {
+  margin-top: 14px;
+  padding: 9px 12px;
+  border: 1px dashed rgba(255, 210, 122, 0.55);
+  border-radius: 10px;
+  background: rgba(255, 190, 43, 0.08);
+  color: #f6e7c8;
+}
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner .pts-coupon-badge {
+  background: #ffbe2b;
+  color: #1d2b3c;
+}
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner .pts-coupon-text {
+  flex: 0 1 auto;
+}
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner .pts-coupon-code {
+  border-color: rgba(255, 210, 122, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+}
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner .pts-coupon-code code {
+  color: #ffd27a;
+}
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner .pts-coupon-code button {
+  border-left-color: rgba(255, 210, 122, 0.5);
+  background: rgba(255, 210, 122, 0.12);
+  color: #ffd27a;
+}
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner .pts-coupon-code button .fa {
+  color: inherit !important;
+}
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner .pts-coupon-code button:hover,
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner .pts-coupon-code button:focus-visible,
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner .pts-coupon-code button.is-copied {
+  background: #ffd27a;
+  color: #1d2b3c;
+}
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner a.pts-coupon-buy {
+  margin-left: auto;
+  color: #ffd27a !important;
+}
+.supsystic-plugin .pts-dt-banner .pts-coupon.is-banner a.pts-coupon-buy:hover {
+  color: #fff !important;
+}
+/* Folded: a one-line strip with the mark, "Pricing tables are now part of Data Tables", the code and the unfold
+   button. The same strip as the Contact Form to CES banner. */
+.supsystic-plugin .pts-dt-banner.is-folded {
+  gap: 12px;
+  padding: 8px 52px 8px 12px;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-art {
+  display: block;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-node {
+  display: none;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-core {
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  font-size: 9px;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-title,
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-text,
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-progress,
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-actions,
+.supsystic-plugin .pts-dt-banner.is-folded .pts-coupon-text,
+.supsystic-plugin .pts-dt-banner.is-folded a.pts-coupon-buy {
+  display: none;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-eyebrow {
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  white-space: nowrap;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-eyebrow span {
+  overflow: hidden;
+  min-width: 0;
+  text-overflow: ellipsis;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-coupon.is-banner {
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin: 0 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-coupon-code {
+  height: 26px;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-coupon-code code {
+  padding: 0 8px;
+  line-height: 24px;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-coupon-code button {
+  min-height: 24px;
+  padding: 0 8px;
+}
+/* In the strip the code keeps only the copy icon, as the CF30 code of the Contact Form strip */
+.supsystic-plugin .pts-dt-banner.is-folded .pts-coupon-code button span {
+  display: none;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-fold {
+  top: 50%;
+  margin-top: -15px;
+}
+.supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-fold i {
+  transform: rotate(180deg);
+}
+@media screen and (max-width: 782px) {
+  .supsystic-plugin .pts-dt-banner {
+    gap: 14px;
+    padding: 16px 44px 16px 16px;
+  }
+  .supsystic-plugin .pts-dt-banner:not(.is-folded) .pts-dt-banner-art {
+    display: none;
+  }
+  .supsystic-plugin .pts-dt-banner .pts-dt-banner-title {
+    font-size: 16px;
+  }
+  .supsystic-plugin .pts-dt-banner .pts-coupon.is-banner a.pts-coupon-buy {
+    margin-left: 0;
+  }
+}
+/* Phones: the mark and the code stay in the strip, the text gives way */
+@media screen and (max-width: 600px) {
+  .supsystic-plugin .pts-dt-banner.is-folded {
+    gap: 10px;
+    padding: 8px 46px 8px 10px;
+  }
+  .supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-body {
+    gap: 10px;
+  }
+  .supsystic-plugin .pts-dt-banner.is-folded .pts-coupon-badge {
+    display: none;
+  }
+  .supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-eyebrow {
+    padding-right: 8px;
+    padding-left: 8px;
+    letter-spacing: 0.02em;
+  }
+  .supsystic-plugin .pts-dt-banner.is-folded .pts-dt-banner-eyebrow .fa {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .supsystic-plugin .pts-dt-banner-node {
+    animation: none;
+  }
+}
+
+/* Overview as in Data Tables: one column of 1200px in the middle of the area right of the menu rail (10px on the right
+   of the container, as the Data Tables Overview); the banner and the review card take its width and edges */
+.supsystic-plugin .supsystic-content .supsystic-container.supsystic-overview {
+  padding-right: 10px;
+}
+.supsystic-plugin .supsystic-container.supsystic-overview > .pts-dt-banner,
+.supsystic-plugin .supsystic-container.supsystic-overview > .pts-review {
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* The code never breaks into two lines */
+.pts-coupon-code code {
+  white-space: nowrap;
+}
+
+/* From 782px down WordPress gives .wrap no left and 12px right margin; Data Tables has 2px on the left and 20px on the
+   right there (rail 12-52, content 92-752 at 782px): the same edges for every Supsystic plugin */
+@media screen and (max-width: 782px) {
+  .supsystic-plugin {
+    width: auto;
+    margin-right: 8px;
+    margin-left: 2px;
+  }
+}

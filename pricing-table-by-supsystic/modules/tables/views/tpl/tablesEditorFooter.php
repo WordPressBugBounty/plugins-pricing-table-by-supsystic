@@ -337,8 +337,10 @@
 				<?php _e('Badge for Column', PTS_LANG_CODE); ?>
 			</div>
 			<div class="ptsElMenuBtnDelimiter"></div>
-			<div class="ptsElMenuBtn ptsScheduleColBtn" title="<?php _e('Schedule column', PTS_LANG_CODE); ?>" data-sub-panel-show="schedule">
+			<?php $ptsScheduleLocked = !framePts::_()->getModule('supsystic_promo')->isPro() && framePts::_()->getModule('upsell'); ?>
+			<div class="ptsElMenuBtn ptsScheduleColBtn" title="<?php _e('Schedule column', PTS_LANG_CODE); ?>" data-sub-panel-show="schedule"<?php echo $ptsScheduleLocked ? ' data-pts-upsell="schedule"' : ''; ?>>
 				<i class="fa fa-calendar ptsOptIconBtn"></i>
+				<?php if ($ptsScheduleLocked) { ?><span class="pts-ed-menu-pro">PRO</span><?php } ?>
 			</div>
 
 			<div class="ptsElMenuBtnDelimiter"></div>

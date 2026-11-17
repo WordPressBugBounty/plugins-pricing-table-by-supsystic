@@ -1,18 +1,18 @@
-&laquo;<span id="ptsTableEditableLabelShell" title="<?php _e('Click to Edit', PTS_LANG_CODE); ?>" style="display: inline-block;">
+<span class="pts-ed-title">&laquo;<span id="ptsTableEditableLabelShell" title="<?php _e('Click to Edit', PTS_LANG_CODE); ?>" style="display: inline-block;">
 	<span id="ptsTableEditableLabel"><?php echo $this->table['label']; ?></span>
 	<?php echo htmlPts::text('table_label', [
    'attrs' => 'id="ptsTableEditableLabelTxt"',
  ]); ?>
 	<i id="ptsTableLabelEditMsg" class="fa fa-fw fa-pencil"></i>
-</span>&raquo;&nbsp;
-<span>
+</span>&raquo;</span>
+<span class="pts-ed-code">
 	<?php echo htmlPts::selectbox('shortcode_example', [
    'options' => [
      'shortcode' => __('Shortcode', PTS_LANG_CODE),
      'php_code' => __('PHP code', PTS_LANG_CODE),
    ],
    'attrs' => 'class="chosen" style="width:100px;" id="ptsTableShortcodeExampleSel"',
- ]); ?>:
+ ]); ?>
 	<span id="ptsTableShortcodeShell" style="display: none;">
 		<?php echo htmlPts::text('ptsCopyTextCode', [
     'value' => esc_html('[' . PTS_SHORTCODE . ' id=' . $this->table['id'] . ']'),
@@ -26,7 +26,7 @@
   ]); ?>
 	</span>
 </span>
-<span id="ptsTableMainControllsShell" style="float: right; padding-right: 15px;">
+<span id="ptsTableMainControllsShell" class="pts-ed-actions">
 	<button class="button button-primary ptsTableSaveBtn" title="<?php _e('Save all changes', PTS_LANG_CODE); ?>">
 		<i class="fa fa-fw fa-save"></i>
 		<?php _e('Save', PTS_LANG_CODE); ?>

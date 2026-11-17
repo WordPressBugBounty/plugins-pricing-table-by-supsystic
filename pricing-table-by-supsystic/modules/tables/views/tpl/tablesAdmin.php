@@ -2,6 +2,12 @@
 	<div class="supsystic-item supsystic-panel">
 		<div id="containerWrapper">
 			<ul id="ptsPagesTblNavBtnsShell" class="supsystic-bar-controls">
+				<li>
+					<a class="button button-primary" href="<?php echo esc_url($this->addNewLink); ?>">
+						<i class="fa fa-fw fa-plus"></i>
+						<?php _e('Add New Table', PTS_LANG_CODE); ?>
+					</a>
+				</li>
 				<li title="<?php _e('Delete selected', PTS_LANG_CODE); ?>">
 					<button class="button" id="ptsPagesRemoveGroupBtn" disabled data-toolbar-button>
 						<i class="fa fa-fw fa-trash-o"></i>

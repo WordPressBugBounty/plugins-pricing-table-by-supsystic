@@ -1,9 +1,10 @@
 === Pricing Table by Supsystic – Responsive Pricing Plans & Comparison Tables ===
 Contributors: supsysticcom
 Tags: pricing table, comparison table, price table, pricing plans, pricing
+Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.3
-Stable tag: 1.12.4
+Stable tag: 1.13.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -147,21 +148,27 @@ Please report security issues through the [Patchstack Vulnerability Disclosure P
 
 == Screenshots ==
 
-1. A selection of pricing table templates.
-2. Switch toggle between two sets of prices (Pro).
-3. Pricing plans with a highlighted column and feature list.
-4. Comparison table with check and cross icons.
-5. Columns with badges and icons.
-6. Feature comparison with icons in every row.
-7. Table settings and colour editor in the admin area.
-8. Colour variant of the comparison table.
-9. Product comparison table with images.
-10. Columns with large icons and call-to-action buttons.
-11. Inline editor: change any text right inside the table.
+1. Pricing tables that make the right plan easy to pick, on every screen.
+2. Every setting a click away: tabs, cards and a search box in the table editor.
+3. 44 ready-made templates for SaaS, hosting, agencies, restaurants and teams.
+4. Let visitors switch the prices: a Monthly / Yearly switch above the table.
+5. Plans, comparison rows, team cards and plans with photos.
+6. Responsive pricing tables that line up neatly on phones.
+7. Edit right on the table: click any text, add columns and rows in one click.
+8. All your tables in one place: copy a shortcode, edit, clone or delete in one click.
 
 == Changelog ==
 
 = 2026 =
+
+= 1.13.0 — November 16, 2026 =
+
+* A fresh new look: the menu, lists, settings and windows are cleaner and easier to use.
+* The table editor is easier to work with: tabs, cards, a quick search for any option and simple on/off switches.
+* Copy a shortcode, edit or delete a table right from the list.
+* Every template preview is shown in full, so picking one is easier.
+* Pricing tables now live in Data Tables Generator: data tables, charts and pricing tables in one free plugin. Move your tables in one click whenever you like and get 20% off Data Tables Pro, or 50% with an active Pricing Table PRO license.
+* Your tables and settings stay exactly as they were, so updating is safe.
 
 = 1.12.4 — October 30, 2026 =
 

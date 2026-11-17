@@ -14,29 +14,11 @@ class supsystic_promoPts extends modulePts
   public function init()
   {
     parent::init();
+    $this->registerDeactivationDialog();
     dispatcherPts::addFilter('mainAdminTabs', [$this, 'addAdminTab']);
     dispatcherPts::addFilter('showTplsList', [$this, 'checkProTpls']);
-    add_action('admin_enqueue_scripts', [$this, 'enqueueDataTablesPromoAssets']);
-    add_action('admin_footer', [$this, 'renderDataTablesPromo']);
-  }
-  private function _isOnPluginAdminPage()
-  {
-    return isset($_GET['page']) && $_GET['page'] === framePts::_()->getModule('adminmenu')->getMainSlug();
-  }
-  public function enqueueDataTablesPromoAssets()
-  {
-    if (!$this->_isOnPluginAdminPage()) {
-      return;
-    }
-    framePts::_()->addStyle('pts-dt-promo', $this->getModPath() . 'css/admin.datatables-promo.css');
-    framePts::_()->addScript('pts-dt-promo', $this->getModPath() . 'js/admin.datatables-promo.js', ['jquery']);
-  }
-  public function renderDataTablesPromo()
-  {
-    if (!$this->_isOnPluginAdminPage()) {
-      return;
-    }
-    echo $this->getView()->getDataTablesPromoPopup();
+    // Since 1.13.0 the move to Data Tables is offered by the bar on top of every page (module upsell); the popup
+    // "Your Pricing Table has a bigger brother" of 1.12 is gone
   }
   public function getDataTablesLink($params = '')
   {
@@ -137,7 +119,7 @@ class supsystic_promoPts extends modulePts
   public function getMainLink()
   {
     if (empty($this->_mainLink)) {
-      $this->_mainLink = 'https://supsystic.com/plugins/pricing-tables/';
+      $this->_mainLink = 'https://supsystic.com/plugins/pricing-table/';
     }
     return $this->_mainLink;
   }
@@ -324,5 +306,31 @@ class supsystic_promoPts extends modulePts
       $list = array_merge($list, $promoList);
     }
     return $list;
+  }
+
+  /**
+   * Why the plugin is deactivated: the short dialog shared by the Supsystic plugins (deactivation-v1/deactivation.php
+   * in this folder says what is sent and when). Nothing is sent unless the user sends the answer.
+   */
+  public function registerDeactivationDialog()
+  {
+    if (!is_admin()) {
+      return;
+    }
+    require_once __DIR__ . '/deactivation-v1/deactivation.php';
+    Supsystic_Deactivation_V1::register([
+      'slug' => 'pricing-table-by-supsystic',
+      'name' => 'Pricing Table',
+      'file' => dirname(__DIR__, 2) . '/pts.php',
+      'tables' => ['pts_modules', 'pts_tables'],
+      'pro' => [
+        'slug' => 'price-table-supsystic-pro',
+        'name' => 'Pricing Table PRO',
+        'email' => function () {
+          $license = class_exists('framePts') ? framePts::_()->getModule('license') : null;
+          return $license ? (string) $license->getModel()->getEmail() : '';
+        },
+      ],
+    ]);
   }
 }

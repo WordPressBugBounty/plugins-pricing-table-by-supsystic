@@ -295,7 +295,7 @@
   cursor: pointer !important;
   z-index: 1;
   top: 2.5px;
-  font-family: Asap;
+  font-family: Asap, sans-serif; /* Asap is not loaded by the plugin: without a fallback the switch fell back to a serif font */
   font-size: 16px;
   font-weight: bold;
   float: left;
@@ -333,7 +333,7 @@
   -moz-transition: left ease-in-out 0.4s;
   -webkit-transition: left ease-in-out 0.4s;
   -o-transition: left ease-in-out 0.4s;
-  font-family: Asap;
+  font-family: Asap, sans-serif; /* Asap is not loaded by the plugin: without a fallback the switch fell back to a serif font */
   font-size: 20px;
   font-weight: bold;
   float: left;

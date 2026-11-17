@@ -102,6 +102,10 @@ class installerPts
       ['code' => 'admin_nav', 'type_id' => 1, 'label' => 'admin_nav'],
       ['code' => 'mail', 'type_id' => 1, 'label' => 'mail'],
       ['code' => 'tables', 'type_id' => 1, 'label' => 'tables'],
+      // Since 1.13.0: one look of the admin pages, PRO feature windows and the review request
+      ['code' => 'design', 'type_id' => 1, 'label' => 'design'],
+      ['code' => 'upsell', 'type_id' => 1, 'label' => 'upsell'],
+      ['code' => 'review', 'type_id' => 1, 'label' => 'review'],
     ];
     foreach ($coreModules as $coreModule) {
       $existingId = $wpdb->get_var($wpdb->prepare("SELECT id FROM `{$tableName}` WHERE code = %s", $coreModule['code']));

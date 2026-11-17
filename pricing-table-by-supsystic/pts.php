@@ -4,7 +4,7 @@
  * Plugin Name: Pricing Table by Supsystic
  * Plugin URI: https://supsystic.com/plugins/pricing-tables/
  * Description: Responsive pricing tables and comparison tables with a drag-and-drop builder. Templates, badges, icons and buttons included.
- * Version: 1.12.4
+ * Version: 1.13.0
  * Author: supsystic.com
  * Author URI: http://supsystic.com/
  * Text Domain: pricing-table-by-supsystic
